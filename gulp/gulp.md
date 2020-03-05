@@ -297,7 +297,7 @@ gulp.task('default',['htmlmin','cssmin','jsmin','copy']);
    console.log(url.parse(req.url,true))//开启第二个参数，解析参数为对象形式
    ``````
 
-   ![req.url](req.url属性.png)
+   ![req.url](req的url属性.png)
 
 3. POST请求参数
 
