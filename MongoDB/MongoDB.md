@@ -507,20 +507,27 @@ mongoose.connect('mongodb://localhost/playground',{useNewUrlParser:true})//补�
 
 #  模板引擎
 
-1. 模板引擎是node第三方模块
+1. **模板引擎是node第三方模块**
 
-2. art-template模板引擎，腾讯出品
+2. **art-template模板引擎**，腾讯出品
 
-   - npm i art-template
+   - **npm i art-template**
 
-   - const  template=require('art-template');
+   - **const  template=require('art-template');**
+
+   - **const html=template('模板路径',数据);**
+
+   - **返回值是拼接完成的html**
 
      ``````javascript
-     conset path=require('path');
+     const path=require('path');
+     const template=require('art-template')
      const views=path.join(__dirname,'views','index.art');
-     template(views,{
-         
+     const html=template(views,{
+         name:'张三',
+         age:'20'
      })
+     console.log(html);
      ``````
 
      
@@ -529,10 +536,12 @@ mongoose.connect('mongodb://localhost/playground',{useNewUrlParser:true})//补�
 
 1. 支持 标准语法和原始语法
 
-   - 标准语法，让模板更容易读写。**{{数据}}**
-   - 原始语法，具有强大的逻辑处理能力 **<%=数据%>**
+   - 标准语法，让模板**更容易读写**。**{{数据}}**
+   - 原始语法，具有**强大的逻辑处理能力** **<%=数据%>**
 
 2. 输出
+
+   **标准输出 {{ 数据}} ，原始输出，<%= 数据%>**
 
    ```javascript
    //标准语法
@@ -546,7 +555,9 @@ mongoose.connect('mongodb://localhost/playground',{useNewUrlParser:true})//补�
    <h2><%=a+b%></h2>
    ```
 
-   原始输出，
+   **开启解析html代码：**
+
+   ​	标准语法，加上@前缀  ； 原始语法,等号=改为-短杠
 
    ```html
    //标准语法，加上@前缀
@@ -561,18 +572,214 @@ mongoose.connect('mongodb://localhost/playground',{useNewUrlParser:true})//补�
 
 3. 条件判断
 
-   标准语法
+   ``````html
+   //标准语法
+   {{if 判断条件}}  ...显示内容...{{/if}}
+   {{if 判断条件1}} 显示内容1  {{else if 判断条件2}}  显示内容2{{/if}}
+   //原始语法
+   <%if(value){%> 
+       显示内容 
+   <% }%>
+       
+   <%if(value1){%> 
+       显示内容1 
+   <%} else if(value2){%> 
+       显示内容2 
+   <% }else {%>
+      显示内容3
+   <%}%>
+   ``````
 
-   ```art
+   
+
+   标准语法，
+
+   ```html
+   {{if age>20 }}
+    年龄大于20
+   {{else if age<15 }}
+    年龄小于15
+   {{else }}
+     年龄不符合要求
+   {{/if}}
+   
    
    ```
 
    原始语法
 
-   ```
+   ```javascript
+   <% if( age>18) {%> 
+       年龄大于18
    
+   <%} else if(age <15){%>
+       年龄小于15
+   <% } else {%>
+       年龄不符合要求
+   <% }%>
+       
    ```
 
    
 
-4. 
+4. 循环
+
+   **标准语法，{{each 数据}}  {{/each}}**
+
+   - ​	**$index是当前索引，$value是当前值**
+
+   ```html
+   <ul>
+       {{each users}}
+       	<li>
+               {{$value.name}}
+               {{$value.age}}
+               {{$value.sex}}
+       	</li>
+       {{/each}}
+   </ul>
+   
+   ```
+
+   **原始语法，<% for (){%>  <%}%>**
+
+   ```html
+   <ul>
+       <% for(var i=0;i<users.length;i++){ %>
+           <li>
+               <%=users[i].name %>
+               <%=users[i].age%>
+                <%=users[i].sex%>
+       	</li>
+       <% } %>
+   </ul>
+   ```
+
+   
+
+5. 子模版
+
+   - 将**公共区块抽离到单独的文件中**
+
+   - 标准语法 :  **{{include '模板路径'}}，单标记;include后有空格**
+
+     `````html
+     {{include './header.art'}}
+     `````
+
+     
+
+   - 原始语法 ：**<%include('模板路径')%>,include 是一个函数**
+
+     ``````html
+     <% include('./header.art') %>
+     ``````
+
+     
+
+6. 模板继承
+
+   ![template-inherit](template-inherit.png)
+
+   - **模板继承可以将网站HTML骨架抽离到单独的文件中，其他页面模板可以继承骨架文件**
+
+   - **block标记，预留位置。根据名称来区分不同的block标记。是一个双标签**
+
+   - **extend 标记来继承模板**
+
+     layout.art文件
+
+     ``````html
+     <head>
+         {{block 'link'}} {{/block}}
+     </head>
+     <body>
+         {{block 'content'}} {{/block}}
+     </body>
+     ``````
+
+     继承的文件
+
+     ```html
+     //继承骨架
+     {{extend './common/layout.art'}}
+     
+     //填充content的block标记
+     {{block 'content'}}
+     <p>
+         {{msg}}
+     </p>
+     {{/block}}
+     
+     //填充link的block标记
+     {{block 'link'}}
+     <link rel='stylesheet' type='text/css' href='./main.css'/>
+     {{/block}}
+     ```
+
+     
+
+7. 模板配置
+
+   - 导入变量
+
+     **template.defaults.imports.变量名=变量值;**
+
+     ```javascript
+     //安装时间模块   npm i dateformat ,导入const dateFormat=require('dateformat')
+     //dateFormat(时间,'时间的格式')
+     const template=require('art-template')
+     const path=require('path');
+     const dateFormat=require('dateformat');
+     
+     const views=path.join(__dirname,'views','index.art');
+     //导入模板变量
+     template.defaults.imports.dateFormat=dateFormat
+     const html=template(views,{
+         time:new Date()
+     })
+     console.log(html);
+     
+     ```
+
+     ```javascript
+     //调用变量
+     {{dateFormat(time,'yyyy-mm-dd')}}// 显示 ‘2019-10-10’
+     ```
+
+     
+
+   - 配置根目录
+
+     **template.defaults.root=模板目录**
+
+     配置模板后缀:     **template.defaults.extname='.art';**
+
+     ``````javascript
+     //安装时间模块   npm i dateformat ,导入const dateFormat=require('dateformat')
+     //dateFormat(时间,'时间的格式')
+     const template=require('art-template')
+     const path=require('path');
+     const dateFormat=require('dateformat');
+     //设置模板的根目录
+     template.defaults.root=path.join(__dirname,'views');
+     //导入模板变量
+     template.defaults.imports.dateFormat=dateFormat
+     //设置模板后缀
+     template.defaults.extname='.art';
+     //设置模板后缀以后，模板的名称可以省略.art或指定为其他后缀
+     const html=template('模板的名称',{
+         time:new Date()
+     })
+     console.log(html);
+     
+     ``````
+
+     
+
+8. 档案管理
+
+   - 
+
+9. 
+
