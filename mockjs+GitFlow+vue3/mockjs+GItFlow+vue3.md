@@ -2,6 +2,10 @@
 
 
 
+![](gitFlow.png)
+
+
+
 # Vue-Cli 3
 
 1. dependencies 是运行依赖
@@ -36,8 +40,10 @@
 
      ``````javascript
      //安装 npm i vue-function-api 
-     import './mock/index'
+     //import './mock/index'  //和baseUrl的实际接口互斥
      
+     
+     import * as filters from './filters/index.js'
      import Vue from 'vue'
      import App from './App.vue'
      import ElementUI from 'element-ui'
@@ -46,6 +52,13 @@
      Vue.config.productionTip=false;
      Vue.use(ELementUI);
      Vue.use(plugin)
+     
+     Object.keys(filters).forEach(key=>{
+         Vue.filter(key,filters[key])
+     })
+     
+     
+     
      new Vue({
          render:h=>h(app)
      }).$mount('#app')
@@ -60,6 +73,9 @@
      - setup()函数中没有this关键字
      - setup(props,context)：context.root是Vue实例。
      - **SSR服务器端渲染，发送请求写在mounted中，不在created中**
+     - **String.prototype.padStart(len,str),字符串的新方法，**
+       - **str.padStart(targetLength [, padString])**：**targetLength**，当前字符串需要填充到的目标长度。如果这个数值小于当前字符串的长度，则返回当前字符串本身；**padString填充字符串**。如果字符串太长，使填充后的字符串长度超过了目标长度，则只保留最左侧的部分，其他部分会被截断。此参数的缺省值为 " "（U+0020）。
+       - **str.padEnd(targetLength [, padString])**
 
      ``````vue
      <template>
@@ -146,7 +162,12 @@
            		
                      <el-table-column prop="id" label="id"></el-table-column>
                      <el-table-column prop="name" label="name"></el-table-column>
-                     <el-table-column prop="ctime" label="ctime"></el-table-column>
+                     <el-table-column prop="ctime" label="ctime">
+                         <template v-slot='scope'>
+                         {{scope.row.ctime|dateFormat}}
+                         </template>
+                         
+                         </el-table-column>
      				<el-table-column label="操作">
                          <template v-slot='scope'> 
                          <el-button type='danger' size='mini'>删除{{scope.row.id}}</el-button>
@@ -241,6 +262,7 @@
      import axios from 'axios'
      const instance=axios.create({
          //baseUrl:'',
+         //baseUrl:'http://www.liulongbin.top:3005'
          timeout:1000
      })
      export const createAPI=(url,method,data)=>{
@@ -260,9 +282,22 @@
 
      
 
-   - 
+   - filters/index.js
 
-8. 
+     ``````javascript
+     export const dateFormat=(dtstr)=>{
+         const dt=new Date(dtstr);
+         const y=dt.getFullYear()
+         const m=(dt.getMonth()+1).toString.padStart(2,'0')
+         const d=dt.getDate().toString.padStart(2,'0')
+         const hh=dt.getHours().toString.padStart(2,'0')
+         const mm=dt.getMinutes().toString.padStart(2,'0')
+         const ss=dt.getSeconds().toString.padStart(2,'0')
+         return `${y}-${m}-${d} ${hh}:${mm}:${ss}`
+     }
+     ``````
+
+     
 
    
 
@@ -343,9 +378,7 @@
 
      
 
-   - 
-
-4. 
+     
 
    
 
