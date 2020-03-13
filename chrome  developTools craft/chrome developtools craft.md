@@ -44,6 +44,14 @@
 
 ![](压缩JS和CSS.png)
 
+# JS反混淆
+
+http://jsnice.org/
+
+https://github.com/mindedsecurity/JStillery
+
+https://beautifier.io/
+
 # 页面重绘
 
 ![](页面重绘.png)
@@ -64,23 +72,36 @@ https://googlechrome.github.io/devtools-samples/jank/
 
 ![](堆栈.png)
 
+# Animations
+
+http://f2ex.cn/inspecting-animations-in-devtools/
+
 # 内存监控
 
+https://googlechrome.github.io/devtools-samples/jank/
 
+https://developers.google.com/web/tools/chrome-devtools#top_of_page
 
 # Manifest
 
-
+**application的选项卡下**
 
 # Service Workers
 
-
+1. PWA
+   - HTTPS环境部署
+   - 响应式设计，一次部署，可在移动设备和PC设备上运行，在不同浏览器下可正常访问
+   - 浏览器离线和弱网下可极速访问
+   - 把App Icon入口添加到桌面
+   - 点击Icon入口，由Native App的动画效果
+   - 热更新
+2. 
 
 # IndexedDB
 
 
 
-
+详见示例
 
 # Cache原理
 

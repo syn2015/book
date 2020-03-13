@@ -1,0 +1,1179 @@
+<!DOCTYPE html> <html lang=zh-CN><!--
+ Page saved with SingleFile 
+ url: http://www.tfan.org/using-indexeddb/ 
+ saved date: Fri Mar 13 2020 23:47:03 GMT+0800 (中国标准时间)
+--><meta charset=utf-8>
+<!-- [if IE]> <meta http-equiv="X-UA-Compatible" content="IE=Edge"/> <! [endif]-->
+<meta name=viewport content="width=device-width, initial-scale=1.0">
+<link rel=profile href=http://gmpg.org/xfn/11>
+<link rel=pingback href=http://www.tfan.org/xmlrpc.php>
+<title>使用 IndexedDB | 技术博客 – 范圣刚</title>
+<!--[if lt IE 9]>
+<script src="http://www.tfan.org/wp-content/themes/alienship/js/html5.js" type="text/javascript"></script>
+<![endif]-->
+<link rel=alternate type=application/rss+xml title="技术博客 - 范圣刚 » Feed" href=http://www.tfan.org/feed/>
+<link rel=alternate type=application/rss+xml title="技术博客 - 范圣刚 » 评论Feed" href=http://www.tfan.org/comments/feed/>
+<link rel=alternate type=application/rss+xml title="技术博客 - 范圣刚 » 使用 IndexedDB评论Feed" href=http://www.tfan.org/using-indexeddb/feed/>
+<style>article,aside,footer,header,hgroup,nav,section{display:block}html{font-size:100%;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%}a:focus{outline:thin dotted #333;outline:5px auto -webkit-focus-ring-color;outline-offset:-2px}a:hover,a:active{outline:0}img{border:0;-ms-interpolation-mode:bicubic}input,textarea{margin:0}input[type="submit"]{-webkit-appearance:button;cursor:pointer}textarea{overflow:auto}body{margin:0;font-family:"Hiragino Sans GB","Hiragino Sans GB W3",sans-serif;font-size:13px;line-height:20px;color:#333;background-color:#fff}a{color:#08c;text-decoration:none}a:hover{color:#005580;text-decoration:underline}.row-fluid{width:100%}.row-fluid:before,.row-fluid:after{display:table;content:"";line-height:0}.row-fluid:after{clear:both}.row-fluid [class*="span"]{display:block;min-height:30px;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;float:left;margin-left:2.127659574468085%}.row-fluid [class*="span"]:first-child{margin-left:0}.row-fluid .span9{width:74.46808510638297%}.row-fluid .span6{width:48.93617021276595%}.row-fluid .span5{width:40.42553191489362%}.row-fluid .span3{width:23.404255319148934%}.container{margin-right:auto;margin-left:auto}.container:before,.container:after{display:table;content:"";line-height:0}.container:after{clear:both}.container-fluid{padding-right:20px;padding-left:20px}.container-fluid:before,.container-fluid:after{display:table;content:"";line-height:0}.container-fluid:after{clear:both}p{margin:0 0 10px}strong{font-weight:bold}cite{font-style:normal}h1,h2,h3,h4{margin:10px 0;font-family:inherit;font-weight:bold;color:inherit;text-rendering:optimizelegibility}ul,ol{padding:0;margin:0 0 10px 25px}ul ul{margin-bottom:0}li{line-height:20px}code,pre{font-family:Monaco,Menlo,Consolas,"Courier New",monospace;font-size:12px;color:#333;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px}code{padding:2px 4px;color:#d14;background-color:#f7f7f9;border:1px solid #e1e1e8}pre{display:block;padding:9.5px;margin:0 0 10px;font-size:13px;line-height:20px;word-break:break-all;word-wrap:break-word;white-space:pre-wrap;background-color:#f5f5f5;border:1px solid rgba(0,0,0,0.15);-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px}form{margin:0 0 20px}label,input,textarea{font-size:14px;font-weight:normal;line-height:20px}input,textarea{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif}label{display:block;margin-bottom:5px}textarea,input[type="text"],input[type="email"],input[type="url"]{display:inline-block;height:20px;padding:4px 6px;margin-bottom:10px;font-size:14px;line-height:20px;color:#555;-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px;vertical-align:middle}input{width:206px}textarea{height:auto}textarea,input[type="text"],input[type="email"],input[type="url"]{background-color:#fff;border:1px solid #ccc;-webkit-box-shadow:inset 0 1px 1px rgba(0,0,0,0.075);-moz-box-shadow:inset 0 1px 1px rgba(0,0,0,0.075);box-shadow:inset 0 1px 1px rgba(0,0,0,0.075);-webkit-transition:border linear .2s,box-shadow linear .2s;-moz-transition:border linear .2s,box-shadow linear .2s;-o-transition:border linear .2s,box-shadow linear .2s;transition:border linear .2s,box-shadow linear .2s}textarea:focus,input[type="text"]:focus,input[type="password"]:focus,input[type="datetime"]:focus,input[type="datetime-local"]:focus,input[type="date"]:focus,input[type="month"]:focus,input[type="time"]:focus,input[type="week"]:focus,input[type="number"]:focus,input[type="email"]:focus,input[type="url"]:focus,input[type="search"]:focus,input[type="tel"]:focus,input[type="color"]:focus,.uneditable-input:focus{border-color:rgba(82,168,236,0.8);outline:0;outline:thin dotted \9;-webkit-box-shadow:inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(82,168,236,.6);-moz-box-shadow:inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(82,168,236,.6);box-shadow:inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(82,168,236,.6)}input[type="submit"]{width:auto}input::-webkit-input-placeholder,textarea::-webkit-input-placeholder{color:#999}.input-large{width:210px}input,textarea{margin-left:0}input:focus:required:invalid,textarea:focus:required:invalid,select:focus:required:invalid{color:#b94a48;border-color:#ee5f5b}input:focus:required:invalid:focus,textarea:focus:required:invalid:focus,select:focus:required:invalid:focus{border-color:#e9322d;-webkit-box-shadow:0 0 6px #f8b9b7;-moz-box-shadow:0 0 6px #f8b9b7;box-shadow:0 0 6px #f8b9b7}.input-prepend{margin-bottom:5px;font-size:0;white-space:nowrap}.input-prepend input{font-size:14px}.input-prepend input{position:relative;margin-bottom:0;vertical-align:top;-webkit-border-radius:0 4px 4px 0;-moz-border-radius:0 4px 4px 0;border-radius:0 4px 4px 0}.input-append input:focus,.input-prepend input:focus,.input-append select:focus,.input-prepend select:focus,.input-append .uneditable-input:focus,.input-prepend .uneditable-input:focus{z-index:2}.input-prepend .add-on{display:inline-block;width:auto;height:20px;min-width:16px;padding:4px 5px;font-size:14px;font-weight:normal;line-height:20px;text-align:center;text-shadow:0 1px 0 #fff;background-color:#eee;border:1px solid #ccc}.input-prepend .add-on{vertical-align:top;-webkit-border-radius:0;-moz-border-radius:0;border-radius:0}.input-prepend .add-on{margin-right:-1px}.input-prepend .add-on:first-child,.input-prepend .btn:first-child{-webkit-border-radius:4px 0 0 4px;-moz-border-radius:4px 0 0 4px;border-radius:4px 0 0 4px}input.search-query{padding-left:14px;-webkit-border-radius:15px;-moz-border-radius:15px}.control-group{margin-bottom:10px}table{max-width:100%;background-color:transparent;border-collapse:collapse;border-spacing:0}[class^="icon-"]{display:inline-block;width:14px;height:14px;line-height:14px;vertical-align:text-top;background-image:url(data:image/png;base64,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);background-position:14px 14px;background-repeat:no-repeat;margin-top:1px}.icon-envelope{background-position:-72px 0}.icon-user{background-position:-168px 0}.icon-home{background-position:0 -24px}.icon-tags{background-position:-25px -48px}.icon-calendar{background-position:-192px -120px}.icon-comment{background-position:-240px -120px}.icon-folder-open{background-position:-408px -120px;width:16px}.well{min-height:20px;padding:19px;margin-bottom:20px;background-color:#f5f5f5;border:1px solid #e3e3e3;-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px;-webkit-box-shadow:inset 0 1px 1px rgba(0,0,0,0.05);-moz-box-shadow:inset 0 1px 1px rgba(0,0,0,0.05);box-shadow:inset 0 1px 1px rgba(0,0,0,0.05)}.btn{display:inline-block;padding:4px 12px;margin-bottom:0;font-size:14px;line-height:20px;text-align:center;vertical-align:middle;background-image:-moz-linear-gradient(top,#fff,#e6e6e6);background-image:-webkit-gradient(linear,0 0,0 100%,from(#fff),to(#e6e6e6));background-image:-webkit-linear-gradient(top,#fff,#e6e6e6);background-image:-o-linear-gradient(top,#fff,#e6e6e6);border:1px solid #bbb;border-bottom-color:#a2a2a2;-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px;-webkit-box-shadow:inset 0 1px 0 rgba(255,255,255,.2),0 1px 2px rgba(0,0,0,.05);-moz-box-shadow:inset 0 1px 0 rgba(255,255,255,.2),0 1px 2px rgba(0,0,0,.05);box-shadow:inset 0 1px 0 rgba(255,255,255,.2),0 1px 2px rgba(0,0,0,.05)}.btn:hover,.btn:active,.btn.active,.btn.disabled,.btn[disabled]{color:#333;background-color:#e6e6e6;*background-color:#d9d9d9}.btn:active,.btn.active{background-color:#ccc \9}.btn:first-child{*margin-left:0}.btn:hover{color:#333;text-decoration:none;background-color:#e6e6e6;*background-color:#d9d9d9;background-position:0 -15px;-webkit-transition:background-position .1s linear;-moz-transition:background-position .1s linear;-o-transition:background-position .1s linear;transition:background-position .1s linear}.btn:focus{outline:thin dotted #333;outline:5px auto -webkit-focus-ring-color;outline-offset:-2px}.btn.active,.btn:active{background-color:#e6e6e6;background-color:#d9d9d9 \9;background-image:none;outline:0;-webkit-box-shadow:inset 0 2px 4px rgba(0,0,0,.15),0 1px 2px rgba(0,0,0,.05);-moz-box-shadow:inset 0 2px 4px rgba(0,0,0,.15),0 1px 2px rgba(0,0,0,.05);box-shadow:inset 0 2px 4px rgba(0,0,0,.15),0 1px 2px rgba(0,0,0,.05)}.btn-primary{color:#fff;text-shadow:0 -1px 0 rgba(0,0,0,0.25);background-color:#006dcc;background-image:-moz-linear-gradient(top,#08c,#04c);background-image:-webkit-gradient(linear,0 0,0 100%,from(#08c),to(#04c));background-image:-webkit-linear-gradient(top,#08c,#04c);background-image:-o-linear-gradient(top,#08c,#04c);background-image:linear-gradient(to bottom,#08c,#04c);background-repeat:repeat-x;border-color:rgba(0,0,0,0.1) rgba(0,0,0,0.1) rgba(0,0,0,0.25)}.btn-primary:hover,.btn-primary:active,.btn-primary.active,.btn-primary.disabled,.btn-primary[disabled]{color:#fff;background-color:#04c;*background-color:#003bb3}.btn-primary:active,.btn-primary.active{background-color:#039 \9}.nav{margin-left:0;margin-bottom:20px;list-style:none}.nav>li>a{display:block}.nav>li>a:hover{text-decoration:none;background-color:#eee}.navbar{overflow:visible;margin-bottom:20px}.navbar-inner{min-height:40px;padding-left:20px;padding-right:20px;background-image:-moz-linear-gradient(top,#fff,#f2f2f2);background-image:-webkit-gradient(linear,0 0,0 100%,from(#fff),to(#f2f2f2));background-image:-webkit-linear-gradient(top,#fff,#f2f2f2);background-image:-o-linear-gradient(top,#fff,#f2f2f2);border:1px solid #d4d4d4;-webkit-border-radius:4px;-moz-border-radius:4px;-webkit-box-shadow:0 1px 4px rgba(0,0,0,0.065);-moz-box-shadow:0 1px 4px rgba(0,0,0,0.065);box-shadow:0 1px 4px rgba(0,0,0,0.065)}.navbar-inner:before,.navbar-inner:after{display:table;content:"";line-height:0}.navbar-inner:after{clear:both}.navbar .container{width:auto}.navbar-search{position:relative;margin-top:5px;margin-bottom:0}.navbar-search .search-query{margin-bottom:0;padding:4px 14px;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:13px;font-weight:normal;line-height:1;-webkit-border-radius:15px;-moz-border-radius:15px;border-radius:15px}.navbar .nav{position:relative;left:0;display:block;float:left;margin:0 10px 0 0}.navbar .nav>li{float:left}.navbar .nav>li>a{float:none;padding:10px 15px 10px;text-decoration:none}.navbar .nav>li>a:focus,.navbar .nav>li>a:hover{background-color:transparent;color:#333;text-decoration:none}.navbar-inverse{color:#999}.navbar-inverse .navbar-inner{background-color:#1b1b1b;background-image:-moz-linear-gradient(top,#222,#111);background-image:-webkit-gradient(linear,0 0,0 100%,from(#222),to(#111));background-image:-webkit-linear-gradient(top,#222,#111);background-image:-o-linear-gradient(top,#222,#111);background-image:linear-gradient(to bottom,#222,#111);background-repeat:repeat-x;border-color:#252525}.navbar-inverse .nav>li>a{color:#999;text-shadow:0 -1px 0 rgba(0,0,0,0.25)}.navbar-inverse .brand:hover,.navbar-inverse .nav>li>a:hover{color:#fff}.navbar-inverse .nav>li>a:focus,.navbar-inverse .nav>li>a:hover{background-color:transparent;color:#fff}.navbar-inverse .navbar-search .search-query{color:#fff;background-color:#515151;border-color:#111;-webkit-box-shadow:inset 0 1px 2px rgba(0,0,0,.1),0 1px 0 rgba(255,255,255,.15);-moz-box-shadow:inset 0 1px 2px rgba(0,0,0,.1),0 1px 0 rgba(255,255,255,.15);box-shadow:inset 0 1px 2px rgba(0,0,0,.1),0 1px 0 rgba(255,255,255,.15);-webkit-transition:none;-moz-transition:none;-o-transition:none;transition:none}.navbar-inverse .navbar-search .search-query::-webkit-input-placeholder{color:#ccc}.navbar-inverse .navbar-search .search-query:focus,.navbar-inverse .navbar-search .search-query.focused{padding:5px 15px;color:#333;text-shadow:0 1px 0 #fff;background-color:#fff;border:0;-webkit-box-shadow:0 0 3px rgba(0,0,0,0.15);-moz-box-shadow:0 0 3px rgba(0,0,0,0.15);box-shadow:0 0 3px rgba(0,0,0,0.15);outline:0}.pager{margin:20px 0;list-style:none;text-align:center}.pager:before,.pager:after{display:table;content:"";line-height:0}.pager:after{clear:both}.pager li{display:inline}.pager li>a{display:inline-block;padding:5px 14px;background-color:#fff;border:1px solid #ddd;-webkit-border-radius:15px;-moz-border-radius:15px;border-radius:15px}.pager li>a:hover{text-decoration:none;background-color:#f5f5f5}@-webkit-keyframes progress-bar-stripes{from{background-position:40px 0}to{background-position:0 0}}@-moz-keyframes progress-bar-stripes{from{background-position:40px 0}to{background-position:0 0}}@-ms-keyframes progress-bar-stripes{from{background-position:40px 0}to{background-position:0 0}}@-o-keyframes progress-bar-stripes{from{background-position:0 0}to{background-position:40px 0}}@keyframes progress-bar-stripes{from{background-position:40px 0}to{background-position:0 0}}.pull-right{float:right}.pull-left{float:left}@media (min-width:1200px){.container{width:1170px}.row-fluid{width:100%}.row-fluid:before,.row-fluid:after{display:table;content:"";line-height:0}.row-fluid:after{clear:both}.row-fluid [class*="span"]{display:block;min-height:30px;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;float:left;margin-left:2.564102564102564%}.row-fluid [class*="span"]:first-child{margin-left:0}.row-fluid .span9{width:74.35897435897436%}.row-fluid .span6{width:48.717948717948715%}.row-fluid .span5{width:40.17094017094017%}.row-fluid .span3{width:23.076923076923077%}input,textarea{margin-left:0}}@media (min-width:768px) and (max-width:979px){.container{width:724px}.row-fluid{width:100%}.row-fluid:before,.row-fluid:after{display:table;content:"";line-height:0}.row-fluid:after{clear:both}.row-fluid [class*="span"]{display:block;min-height:30px;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;float:left;margin-left:2.7624309392265194%}.row-fluid [class*="span"]:first-child{margin-left:0}.row-fluid .span9{width:74.30939226519337%}.row-fluid .span6{width:48.61878453038674%}.row-fluid .span5{width:40.05524861878453%}.row-fluid .span3{width:22.92817679558011%}input,textarea{margin-left:0}}@media (max-width:767px){body{padding-left:20px;padding-right:20px}.container-fluid{padding:0}.container{width:auto}.row-fluid{width:100%}.row-fluid [class*="span"]{float:none;display:block;width:100%;margin-left:0;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}.input-large{display:block;width:100%;min-height:30px;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}.input-prepend input{display:inline-block;width:auto}}@media (max-width:480px){.nav-collapse{-webkit-transform:translate3d(0,0,0)}}@media (max-width:979px){body{padding-top:0}.navbar .container{width:auto;padding:0}.nav-collapse{clear:both}.nav-collapse .nav{float:none;margin:0 0 10px}.nav-collapse .nav>li{float:none}.nav-collapse .nav>li>a{margin-bottom:2px}.nav-collapse .nav>li>a{padding:9px 15px;font-weight:bold;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px}.nav-collapse .nav>li>a:hover,.nav-collapse .dropdown-menu a:hover{background-color:#f2f2f2}.navbar-inverse .nav-collapse .nav>li>a{color:#999}.navbar-inverse .nav-collapse .nav>li>a:hover,.navbar-inverse .nav-collapse .dropdown-menu a:hover{background-color:#111}.nav-collapse .navbar-search{float:none;padding:10px 15px;margin:10px 0;border-top:1px solid #f2f2f2;border-bottom:1px solid #f2f2f2;-webkit-box-shadow:inset 0 1px 0 rgba(255,255,255,.1),0 1px 0 rgba(255,255,255,.1);-moz-box-shadow:inset 0 1px 0 rgba(255,255,255,.1),0 1px 0 rgba(255,255,255,.1);box-shadow:inset 0 1px 0 rgba(255,255,255,.1),0 1px 0 rgba(255,255,255,.1)}.navbar-inverse .nav-collapse .navbar-search{border-top-color:#111;border-bottom-color:#111}.nav-collapse{overflow:hidden;height:0}}h1{font-size:28px;line-height:36px}h2{font-size:18px;line-height:27px}h3{font-size:14px}h4{font-size:12px}.navbar-inner{border-radius:0px 0px 0px 0px}.navbar-inverse .btn-navbar .icon-bar-text{color:#f5f5f5;display:block;text-align:center;text-shadow:0 0 0em;vertical-align:middle;width:auto}#comments{border-top:1px solid #eee;margin:40px 0 0 1px;padding:40px 0 0}.comment.thread-even>article{background:none repeat scroll 0 0 rgba(0,0,0,0.03);border-bottom:1px solid rgba(0,0,0,0.09)}#comments cite{font-size:15px;font-weight:bold}#comments .comment-meta{font-size:12px}.comment-reply-link{-moz-border-bottom-colors:none;-moz-border-image:none 100% 100% 100% 100% / 1 1 1 1 / 0 0 0 0 stretch stretch;-moz-border-left-colors:none;-moz-border-right-colors:none;-moz-border-top-colors:none;background-color:#f5f5f5;background-image:-moz-linear-gradient(center top,#fff,#e6e6e6);background-repeat:repeat-x;border-color:#ccc #ccc #b3b3b3;border-radius:4px 4px 4px 4px;border-style:solid;border-width:1px;box-shadow:0 1px 0 rgba(255,255,255,0.2) inset,0 1px 2px rgba(0,0,0,0.05);color:#333;cursor:pointer;display:inline-block;font-size:11px;line-height:14px;margin-bottom:0;padding:2px 6px;text-align:center;text-shadow:0 1px 1px rgba(255,255,255,0.75);vertical-align:middle}.comment-reply-link:hover{background-color:#e6e6e6;background-position:0 -15px;-moz-transition:background-position .1s linear 0s;color:#fff;text-decoration:none;text-shadow:0 -1px 0 rgba(0,0,0,0.25)}div.reply,.commentlist{padding-bottom:7px}article.comment{margin-bottom:20px;padding:7px}div.comment-author{margin-bottom:7px}div.comment-content{margin-top:7px}div.comment-author>img.avatar{background:none repeat scroll 0 0 #fff;margin-right:.846em;padding:3px;vertical-align:middle}#page{margin:0px auto;max-width:940px}#main{clear:both;margin-bottom:10px;overflow:hidden}div#content>article{clear:both;margin:0 0 18px;padding-bottom:30px;overflow:hidden}.entry-content,.entry-content p{font-size:14px;font-weight:300;line-height:1.5}.entry-content li{line-height:1.625}ol>li{margin-left:.20em}hgroup{margin-bottom:10px}header#masthead{padding-bottom:20px}p.site-title{font-size:30px;font-weight:bold;line-height:36px;margin-bottom:0}p.site-description{font-size:24px;font-weight:bold;line-height:36px;margin-bottom:0}p{margin-bottom:1.625em}img.avatar{-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px;-webkit-box-shadow:inset 0 1px 1px rgba(0,0,0,0.45);-moz-box-shadow:inset 0 1px 1px rgba(0,0,0,0.45);box-shadow:0 2px 5px rgba(0,0,0,0.45);height:auto;max-width:100%}h1,h2,h3,h4{clear:both}h3,h4{line-height:36px}.entry-content{padding:15px 0}.entry-content h2{font-weight:bold;margin:0 0 .8125em}footer.entry-meta{border-bottom:1px solid #eee;clear:both;font-size:11px;margin-bottom:7px;padding-bottom:15px;text-transform:uppercase}.colophon{border-top:solid 1px #ccc;padding:7px 0px;text-align:center}.assistive-text{clip:rect(1px,1px,1px,1px);position:absolute!important}.byline,.cat-links,.comments-link,.published-date,.tags-links{margin-right:10px}.widget{margin:0 0 1.5em}.widget li{font-size:13px;margin-bottom:2px}.widget a{line-height:21px}.widget a:hover,.footerwidget a:hover{background-color:#eee;text-decoration:none}.footerwidget{padding:0px 0px 25px 0px}input#s{padding-right:0;width:95%}@media only screen and (max-width:480px){h1{font-size:30px!important;line-height:1.3}h2{font-size:25px!important;line-height:1.3}h3{font-size:20px!important;line-height:1.3}}@media only screen and (max-width:979px){.navbar .nav>li>a{font-size:1rem;font-weight:normal;padding:15px 20px}}@media (max-width:767px){body{padding-left:0px;padding-right:0px}.navbar{margin-left:0px;margin-right:0px}#page{padding-left:10px;padding-right:10px}}@supports (-webkit-overflow-scrolling:touch){.wp-block-cover-image.has-parallax,.wp-block-cover.has-parallax{background-attachment:scroll}}@supports ((position:-webkit-sticky) or (position:sticky)){.wp-block-cover-image:after,.wp-block-cover:after{content:none}}@supports ((position:-webkit-sticky) or (position:sticky)){.blocks-gallery-grid .blocks-gallery-image figure,.blocks-gallery-grid .blocks-gallery-item figure,.wp-block-gallery .blocks-gallery-image figure,.wp-block-gallery .blocks-gallery-item figure{display:flex;align-items:flex-end;justify-content:flex-start}}@supports ((position:-webkit-sticky) or (position:sticky)){.blocks-gallery-grid .blocks-gallery-image img,.blocks-gallery-grid .blocks-gallery-item img,.wp-block-gallery .blocks-gallery-image img,.wp-block-gallery .blocks-gallery-item img{width:auto}}@supports ((position:-webkit-sticky) or (position:sticky)){.blocks-gallery-grid.is-cropped .blocks-gallery-image a,.blocks-gallery-grid.is-cropped .blocks-gallery-image img,.blocks-gallery-grid.is-cropped .blocks-gallery-item a,.blocks-gallery-grid.is-cropped .blocks-gallery-item img,.wp-block-gallery.is-cropped .blocks-gallery-image a,.wp-block-gallery.is-cropped .blocks-gallery-image img,.wp-block-gallery.is-cropped .blocks-gallery-item a,.wp-block-gallery.is-cropped .blocks-gallery-item img{height:100%;flex:1;-o-object-fit:cover;object-fit:cover}}@media (min-width:600px){@supports (-ms-ime-align:auto){.blocks-gallery-grid.columns-3 .blocks-gallery-image,.blocks-gallery-grid.columns-3 .blocks-gallery-item,.wp-block-gallery.columns-3 .blocks-gallery-image,.wp-block-gallery.columns-3 .blocks-gallery-item{width:calc((100% - 32px)/3 - 1px)}}@supports (-ms-ime-align:auto){.blocks-gallery-grid.columns-4 .blocks-gallery-image,.blocks-gallery-grid.columns-4 .blocks-gallery-item,.wp-block-gallery.columns-4 .blocks-gallery-image,.wp-block-gallery.columns-4 .blocks-gallery-item{width:calc((100% - 48px)/4 - 1px)}}@supports (-ms-ime-align:auto){.blocks-gallery-grid.columns-5 .blocks-gallery-image,.blocks-gallery-grid.columns-5 .blocks-gallery-item,.wp-block-gallery.columns-5 .blocks-gallery-image,.wp-block-gallery.columns-5 .blocks-gallery-item{width:calc((100% - 64px)/5 - 1px)}}@supports (-ms-ime-align:auto){.blocks-gallery-grid.columns-6 .blocks-gallery-image,.blocks-gallery-grid.columns-6 .blocks-gallery-item,.wp-block-gallery.columns-6 .blocks-gallery-image,.wp-block-gallery.columns-6 .blocks-gallery-item{width:calc((100% - 80px)/6 - 1px)}}@supports (-ms-ime-align:auto){.blocks-gallery-grid.columns-7 .blocks-gallery-image,.blocks-gallery-grid.columns-7 .blocks-gallery-item,.wp-block-gallery.columns-7 .blocks-gallery-image,.wp-block-gallery.columns-7 .blocks-gallery-item{width:calc((100% - 96px)/7 - 1px)}}@supports (-ms-ime-align:auto){.blocks-gallery-grid.columns-8 .blocks-gallery-image,.blocks-gallery-grid.columns-8 .blocks-gallery-item,.wp-block-gallery.columns-8 .blocks-gallery-image,.wp-block-gallery.columns-8 .blocks-gallery-item{width:calc((100% - 112px)/8 - 1px)}}}@supports ((-webkit-mask-image:none) or (mask-image:none)) or (-webkit-mask-image:none){.is-style-circle-mask img{-webkit-mask-image:url('data:image/svg+xml;utf8,<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="50"/></svg>');mask-image:url('data:image/svg+xml;utf8,<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="50"/></svg>');mask-mode:alpha;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-size:contain;mask-size:contain;-webkit-mask-position:center;mask-position:center;border-radius:none}}@supports ((position:-webkit-sticky) or (position:sticky)){.wp-block-video [poster]{-o-object-fit:cover;object-fit:cover}}#toc_container li,#toc_container ul{margin:0;padding:0}#toc_container.no_bullets ul,#toc_container.no_bullets ul li{background:0 0;list-style-type:none;list-style:none}#toc_container ul ul{margin-left:1.5em}#toc_container{background:#f9f9f9;border:1px solid #aaa;padding:10px;margin-bottom:1em;width:auto;display:table;font-size:95%}#toc_container p.toc_title{text-align:center;font-weight:700;margin:0;padding:0}#toc_container span.toc_toggle{font-weight:400;font-size:90%}#toc_container p.toc_title+ul.toc_list{margin-top:1em}#toc_container a{text-decoration:none;text-shadow:none}#toc_container a:hover{text-decoration:underline}@font-face{font-family:social-logos;src:url("data:application/font-woff;charset=utf-8;base64,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") format("woff");font-weight:400;font-style:normal}div.sharedaddy h3.sd-title:before{content:"";display:block;width:100%;min-width:30px;border-top:1px solid #ddd;margin-bottom:1em}#jp-relatedposts{padding-top:1em;margin:1em 0;position:relative;clear:both}.jp-relatedposts:after{content:'';display:block;clear:both}#jp-relatedposts h3.jp-relatedposts-headline{margin:0 0 1em 0;display:inline-block;float:left;font-size:9pt;font-weight:700;font-family:inherit}#jp-relatedposts h3.jp-relatedposts-headline em:before{content:"";display:block;width:100%;min-width:30px;border-top:1px solid #ddd;border-top:1px solid rgba(0,0,0,.2);margin-bottom:1em}#jp-relatedposts h3.jp-relatedposts-headline em{font-style:normal;font-weight:700}#jp-relatedposts .jp-relatedposts-items{clear:left}#jp-relatedposts .jp-relatedposts-items .jp-relatedposts-post{float:left;width:33%;margin:0 0 1em;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box}#jp-relatedposts .jp-relatedposts-items .jp-relatedposts-post:nth-child(3n+4),#jp-relatedposts .jp-relatedposts-items-visual .jp-relatedposts-post:nth-child(3n+4){clear:both}#jp-relatedposts .jp-relatedposts-items .jp-relatedposts-post:hover .jp-relatedposts-post-title a{text-decoration:underline}#jp-relatedposts .jp-relatedposts-items .jp-relatedposts-post:hover{-moz-opacity:1;opacity:1}#jp-relatedposts .jp-relatedposts-items p{font-size:14px;line-height:20px}#jp-relatedposts .jp-relatedposts-items p{margin-bottom:0}#jp-relatedposts .jp-relatedposts-items .jp-relatedposts-post .jp-relatedposts-post-title a{font-size:inherit;font-weight:400;text-decoration:none;-moz-opacity:1;opacity:1}#jp-relatedposts .jp-relatedposts-items .jp-relatedposts-post .jp-relatedposts-post-title a:hover{text-decoration:underline}#jp-relatedposts .jp-relatedposts-items .jp-relatedposts-post span{display:block;max-width:90%;overflow:hidden;text-overflow:ellipsis}#jp-relatedposts .jp-relatedposts-items .jp-relatedposts-post .jp-relatedposts-post-context,#jp-relatedposts .jp-relatedposts-items .jp-relatedposts-post .jp-relatedposts-post-date{opacity:.6}@media only screen and (max-width:640px){#jp-relatedposts .jp-relatedposts-items .jp-relatedposts-post{width:50%}#jp-relatedposts .jp-relatedposts-items .jp-relatedposts-post:nth-child(3n){clear:left}}@media only screen and (max-width:320px){#jp-relatedposts .jp-relatedposts-items .jp-relatedposts-post{width:100%;clear:both;margin:0 0 1em}}#main div.sharedaddy{clear:both}div.sharedaddy h3.sd-title{margin:0 0 1em 0;display:inline-block;line-height:1.2;font-size:9pt;font-weight:700}div.sharedaddy h3.sd-title:before{content:"";display:block;width:100%;min-width:30px;border-top:1px solid #ddd;margin-bottom:1em}.sd-content ul{padding:0!important;margin:0 0 .7em 0!important;list-style:none!important}.sd-content ul li{display:inline-block}.sd-social-icon .sd-content ul li a.sd-button{text-decoration:none!important;display:inline-block;font-size:12px;font-family:"Open Sans",sans-serif;font-weight:400;color:#656565!important;text-shadow:none}.sd-social-icon .sd-content ul li a.sd-button:active,.sd-social-icon .sd-content ul li a.sd-button:hover,.sd-social-icon-text .sd-content ul li a.sd-button:active,.sd-social-icon-text .sd-content ul li a.sd-button:hover,.sd-social-official .sd-content>ul>li .digg_button>a:active,.sd-social-official .sd-content>ul>li .digg_button>a:hover,.sd-social-official .sd-content>ul>li>a.sd-button:active,.sd-social-official .sd-content>ul>li>a.sd-button:hover,.sd-social-text .sd-content ul li a.sd-button:active,.sd-social-text .sd-content ul li a.sd-button:hover{color:#555;background:#fafafa;border:1px solid #999}.sd-social-icon .sd-content ul li a.sd-button:active,.sd-social-icon-text .sd-content ul li a.sd-button:active,.sd-social-official .sd-content>ul>li .digg_button>a:active,.sd-social-official .sd-content>ul>li>a.sd-button:active,.sd-social-text .sd-content ul li a.sd-button:active{box-shadow:inset 0 1px 0 rgba(0,0,0,.16)}.sd-content ul li a.sd-button:before{display:inline-block;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font:normal 18px/1 social-logos;vertical-align:top;text-align:center}@media screen and (-webkit-min-device-pixel-ratio:0){.sd-content ul li a.sd-button:before{position:relative;top:2px}}.sd-content ul li{margin:0 5px 5px 0;padding:0}@-moz-document url-prefix(){.sd-social-icon .sd-content ul li a.share-more{top:2px}}.sd-content ul li.share-twitter div.option.option-smart-off a:before,.sd-social-icon .sd-content ul li.share-twitter a:before,.sd-social-icon-text .sd-content li.share-twitter a:before,.sd-social-text .sd-content ul li.share-twitter a:before{content:'\f202'}.sd-content ul li.share-facebook div.option.option-smart-off a:before,.sd-social-icon .sd-content ul li.share-facebook a:before,.sd-social-icon-text .sd-content li.share-facebook a:before,.sd-social-text .sd-content ul li.share-facebook a:before{content:'\f203'}.sd-social-icon .sd-content ul li[class*=share-] a,.sd-social-icon .sd-content ul li[class*=share-] a:hover{border-radius:50%;-webkit-border-radius:50%;border:0;box-shadow:none;padding:7px;position:relative;top:-2px;line-height:1;width:auto;height:auto;margin-bottom:0}.sd-social-icon .sd-content ul li[class*=share-] a.sd-button>span{line-height:1}.sd-social-icon .sd-content ul li[class*=share-] a:hover,.sd-social-icon .sd-content ul li[class*=share-] div.option a:hover{border:0;opacity:.6}.sd-social-icon .sd-content ul li[class*=share-] a.sd-button:before{top:1px}.sd-social-icon .sd-content ul li[class*=share-] a.sd-button{margin-top:2px;text-indent:0}.sd-social-icon .sd-content ul li[class*=share-].share-facebook a.sd-button{background:#1877f2;color:#fff!important}.sd-social-icon .sd-content ul li[class*=share-].share-twitter a.sd-button{background:#00acee;color:#fff!important}.sharing-screen-reader-text{clip:rect(1px,1px,1px,1px);position:absolute!important;height:1px;width:1px;overflow:hidden}.sharing-screen-reader-text:active,.sharing-screen-reader-text:focus,.sharing-screen-reader-text:hover{background-color:#f1f1f1;border-radius:3px;box-shadow:0 0 2px 2px rgba(0,0,0,.6);clip:auto!important;color:#21759b;display:block;font-size:14px;font-weight:700;height:auto;left:5px;line-height:normal;padding:15px 23px 14px;text-decoration:none;top:5px;width:auto;z-index:100000}</style>
+<link rel=https://api.w.org/ href=http://www.tfan.org/wp-json/>
+<link rel=alternate type=application/json+oembed href="http://www.tfan.org/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fwww.tfan.org%2Fusing-indexeddb%2F">
+<link rel=alternate type=text/xml+oembed href="http://www.tfan.org/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fwww.tfan.org%2Fusing-indexeddb%2F&amp;format=xml">
+<meta name=generator content="Site Kit by Google 1.3.1">
+<style>#site-title,#site-description{position:absolute!important;clip:rect(1px,1px,1px,1px)}</style>
+<meta property=og:type content=article>
+<meta property=og:title content="使用 IndexedDB">
+<meta property=og:url content=http://www.tfan.org/using-indexeddb/>
+<meta property=og:description content="IndexedDB 是一种可以让你在用户的浏览器内持久化存储数据的方法。IndexedDB 为生成 Web A…">
+<meta property=article:published_time content=2012-12-18T02:19:53+00:00>
+<meta property=article:modified_time content=2013-01-05T03:36:39+00:00>
+<meta property=og:site_name content="技术博客 - 范圣刚">
+<meta property=og:image content=https://s0.wp.com/i/blank.jpg>
+<meta property=og:locale content=zh_CN>
+<meta name=twitter:text:title content="使用 IndexedDB">
+<meta name=twitter:card content=summary>
+<link type=image/vnd.microsoft.icon rel="shortcut icon" href="data:image/png;base64,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"><style>.sf-hidden{display:none!important}</style><link rel=canonical href=http://www.tfan.org/using-indexeddb/></head>
+<body class="post-template-default single single-post postid-1371 single-format-standard layout-default vsc-initialized">
+<!--[if lt IE 8]><p class="chromeframe">Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
+ <div class="navbar navbar-inverse">
+ <div class=navbar-inner>
+ <div class=container>
+ <a class="btn btn-navbar sf-hidden" data-toggle=collapse data-target=.top-menu>
+ <span></span>
+ <span class=icon-bar-text>Menu</span>
+ <span></span>
+ </a>
+ <div class="nav-collapse top-menu">
+ <form role=search class="navbar-search pull-right" action=http://www.tfan.org id=searchform>
+ <label class=assistive-text for=s>Search</label>
+ <input type=text placeholder="Search ..." value id=s name=s class=search-query>
+ <input type=submit value=Search id=searchsubmit name=submit class="btn btn-primary sf-hidden">
+ </form>
+ <ul id=menu-nav class=nav><li id=menu-item-1404 class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1404"><a href=http://www.tfan.org/>首页</a></li>
+<li id=menu-item-2703 class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-2703"><a href=http://www.tfan.org/category/linux/>Linux</a></li>
+<li id=menu-item-2702 class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-2702"><a href=http://www.tfan.org/category/cplusplus/>C/C++</a></li>
+<li id=menu-item-2771 class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-2771"><a href=http://www.tfan.org/category/ruby/>Ruby &amp; Rails</a></li>
+<li id=menu-item-1995 class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1995"><a href=http://www.tfan.org/category/node/>Node.js</a></li>
+<li id=menu-item-2729 class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-2729"><a href=http://www.tfan.org/category/front-end/>前端</a></li>
+<li id=menu-item-2813 class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-2813"><a href=http://www.tfan.org/category/side-projects/>项目</a></li>
+<li id=menu-item-2814 class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-2814"><a href=http://www.tfan.org/category/writing/>写作</a></li>
+<li id=menu-item-2741 class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2741"><a href=http://www.tfan.org/about/>关于</a></li>
+</ul> </div>
+ </div>
+ </div>
+ </div>
+ 
+ <div id=page class="container-fluid hfeed">
+ <header id=masthead role=banner>
+ <hgroup>
+ <p id=site-title class=site-title><span><a href=http://www.tfan.org/ title="技术博客 – 范圣刚" rel=home>技术博客 – 范圣刚</a></span></p>
+ <p id=site-description class=site-description></p>
+ </hgroup>
+ 
+ 
+ </header>
+ 
+ 
+ <div id=main>
+ <div id=primary>
+ <div class=row-fluid>
+ <div id=content role=main class=span9>
+ 
+ 
+ <article role=article id=post-1371 class="post-1371 post type-post status-publish format-standard hentry category-html5 tag-html5 tag-indexeddb">
+ 
+ <header class=entry-header><h1 class=entry-title>使用 IndexedDB</h1></header>
+ 
+ <div class=entry-content>
+ <p>IndexedDB 是一种可以让你在用户的浏览器内持久化存储数据的方法。IndexedDB 为生成 Web Application 提供了丰富的查询能力，使我们的应用在在线和离线时都可以正常工作。</p>
+<div id=toc_container class=no_bullets><p class=toc_title>目录 <span class=toc_toggle>[<a href=#>隐藏</a>]</span><ul class=toc_list><li><a href=#i><span class="toc_number toc_depth_1">1</span> 关于本文档</a><li><a href=#i-2><span class="toc_number toc_depth_1">2</span> 基本模式</a><li><a href=#i-3><span class="toc_number toc_depth_1">3</span> 生成和构建一个对象存储空间</a><ul><li><a href=#_IndexedDB><span class="toc_number toc_depth_2">3.1</span> 使用实验版本的 IndexedDB</a><li><a href=#i-4><span class="toc_number toc_depth_2">3.2</span> 打开数据库</a><ul><li><a href=#i-5><span class="toc_number toc_depth_3">3.2.1</span> 生成处理函数</a><li><a href=#i-6><span class="toc_number toc_depth_3">3.2.2</span> 错误处理</a></ul><li><a href=#i-7><span class="toc_number toc_depth_2">3.3</span> 创建和更新数据库版本号</a><li><a href=#i-8><span class="toc_number toc_depth_2">3.4</span> 构建数据库</a></ul><li><a href=#i-9><span class="toc_number toc_depth_1">4</span> 增加和删除数据</a><ul><li><a href=#i-10><span class="toc_number toc_depth_2">4.1</span> 向数据库中增加数据</a></ul><li><a href=#i-11><span class="toc_number toc_depth_1">5</span> 从数据库中删除数据</a><li><a href=#i-12><span class="toc_number toc_depth_1">6</span> 从数据库中获取数据</a><li><a href=#i-13><span class="toc_number toc_depth_1">7</span> 使用游标</a><ul><li><a href=#i-14><span class="toc_number toc_depth_2">7.1</span> 使用索引</a><li><a href=#i-15><span class="toc_number toc_depth_2">7.2</span> 指定游标的范围和方向</a></ul><li><a href=#_web_app><span class="toc_number toc_depth_1">8</span> 当一个 web app 在另一个标签页中被打开时的版本变更</a><li><a href=#i-16><span class="toc_number toc_depth_1">9</span> 安全</a><li><a href=#_IndexedDB-2><span class="toc_number toc_depth_1">10</span> 一个完整的 IndexedDB 示例</a><ul><li><a href=#HTML><span class="toc_number toc_depth_2">10.1</span> HTML 内容</a><li><a href=#CSS><span class="toc_number toc_depth_2">10.2</span> CSS 内容</a><li><a href=#JavaScript><span class="toc_number toc_depth_2">10.3</span> JavaScript 内容</a></ul><li><a href=#i-17><span class="toc_number toc_depth_1">11</span> 下一步</a><li><a href=#i-18><span class="toc_number toc_depth_1">12</span> 另请参阅</a><ul><li><a href=#i-19><span class="toc_number toc_depth_2">12.1</span> 共享此文章：</a><li><a href=#i-20><span class="toc_number toc_depth_2">12.2</span> 相关</a></ul></ul></div>
+<h2 id=.E5.85.B3.E4.BA.8E.E6.9C.AC.E6.96.87.E6.A1.A3><span id=i>关于本文档</span></h2>
+<p>本篇教程将教会你如何使用 IndexedDB 的异步 API。如果你对 IndexedDB 还不熟悉，你应该首先阅读<a title=https://developer.mozilla.org/en/IndexedDB/Basic_Concepts_Behind_IndexedDB href=https://developer.mozilla.org/en/IndexedDB/Basic_Concepts_Behind_IndexedDB>有关 IndexedDB 的基本概念</a>。</p>
+<p>有关 IndexedDB API 的参考手册，请参见 <a title=https://developer.mozilla.org/en/IndexedDB href=https://developer.mozilla.org/en/IndexedDB>IndexedDB</a> 这篇文章及其子页面，包括 IndexedDB 使用的对象类型，以及同步和异步 API 的方法。</p>
+<h2 id=pattern><span id=i-2>基本模式</span></h2>
+<p>IndexedDB 鼓励使用的基本模式如下所示：</p>
+<ol>
+<li>打开数据库并且开始一个事务。</li>
+<li>创建一个 object store。</li>
+<li>构建一个请求来执行一些数据库操作，像增加或提取数据等。</li>
+<li>通过监听正确类型的 DOM 事件以等待操作完成。</li>
+<li>在操作结果上进行一些操作（可以在 request 对象中找到）<span id=more-1371></span></li>
+</ol>
+<h2 id=.E7.94.9F.E6.88.90.E5.92.8C.E6.9E.84.E9.80.A0.E4.B8.80.E4.B8.AA_store><span id=i-3>生成和构建一个对象存储空间</span></h2>
+<p>由于 IndexedDB 本身的规范还在持续演进中，当前的 IndexedDB 的实现还是使用浏览器前缀。在规范更加稳定之前，浏览器厂商对于标准 IndexedDB API 可能都会有不同的实现。但是一旦大家对规范达成共识的话，厂商就会不带前缀标记地进行实现。实际上一些实现已经移除了浏览器前缀：IE 10，Firefox 16 和 Chrome 24。当使用前缀的时候，基于 Gecko 内核的浏览器使用 <code>moz</code> 前缀，基于 WebKit 内核的浏览器会使用 <code>webkit</code> 前缀。</p>
+<h3 id=Using_an_experimental_version_of_IndexedDB><span id=_IndexedDB>使用实验版本的 IndexedDB</span></h3>
+<p>如果你希望在仍旧使用前缀的浏览器中测试你的代码, 可以使用下列代码:</p>
+<pre class="brush: js">// In the following line, you should include the prefixes of implementations you want to test.
+window.indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
+// DON'T use "var indexedDB = ..." if you're not in a function.
+// Moreover, you may need references to some window.IDB* objects:
+window.IDBTransaction = window.IDBTransaction || window.webkitIDBTransaction || window.msIDBTransaction;
+window.IDBKeyRange = window.IDBKeyRange || window.webkitIDBKeyRange || window.msIDBKeyRange
+// (Mozilla has never prefixed these objects, so we don't need window.mozIDB*)
+[/pre]
+
+要注意的是使用前缀的实现可能会有问题，或者是实现的并不完整，也可能遵循的还是旧版的规范。因此不建议在生产环境中使用。我们更倾向于明确的不支持某一浏览器，而不是声称支持但是实际运行中却出问题:</pre>
+<pre class="brush: js">if (!window.indexedDB) {
+    window.alert("Your browser doesn't support a stable version of IndexedDB. Such and such feature will not be available.")
+}</pre>
+<h3 id=Opening_a_database><span id=i-4>打开数据库</span></h3>
+<p>我们像下面这样开始整个过程:</p>
+<pre class="brush: js">// 打开我们的数据库
+var request = window.indexedDB.open("MyTestDatabase");</pre>
+<p>看到了吗？ 打开数据库就像任何其他操作一样 — 你必须进行 “request”。</p>
+<p><code>IndexedDB</code><code> </code>对象只有一个单一方法，<code>open()</code>， 当这个方法被调用时，打开名为 “MyTestDatabase”的数据库。 所有 IndexedDB 数据库都按照同样的 origin 进行存储, 所以 <code>mozilla.com</code> 可能有一个名为 “binky” 的数据库，同时 <code>mozilla.org</code> 也可以有一个完全不同的名为 “binky” 的数据库。如果该数据库不存在，则会被创建；如果已经存在，则被打开。</p>
+<p>open 请求不会立即打开数据库或者开始一个事务。 对&nbsp;<code>open()</code> 函数的调用会返回一个我们可以作为事件来处理的包含 result（成功的话）或者错误值的&nbsp;<a title=/en-US/docs/IndexedDB/IDBOpenDBRequest href=http://www.tfan.org/en-US/docs/IndexedDB/IDBOpenDBRequest><code>IDBOpenDBRequest</code></a> 对象。在 IndexedDB 中的大部分异步方法做的都是同样的事情 – 返回一个包含 result 或错误的&nbsp;<a title=/en-US/docs/IndexedDB/IDBRequest href=http://www.tfan.org/en-US/docs/IndexedDB/IDBRequest><code style=font-size:14px;color:#333333>IDBRequest</code></a>&nbsp;对象。open 函数的结果是一个&nbsp;<code style=font-size:14px;color:#333333><a title=/en-US/docs/IndexedDB/IDBDatabase href=http://www.tfan.org/en-US/docs/IndexedDB/IDBDatabase>IDBDatabase</a>对象的实例。</code></p>
+<p>该 open 方法接受第二个参数，就是数据库的版本号。这样我们就可以更新数据库的 schema ，也就是说如果我们打开的数据库不是我们期望的最新版本的话，我们可以对 object store 进行创建或是删除。在这种情况下，我们实现一个 <code>onupgradeneeded</code> 处理函数，在一个允许操作 object stores 的 <code>versionchange</code> 事务中 – 我们在后面的 <a href=#Updating_the_version_of_the_database>更新数据库的版本号</a>中会提到更多有关这方面的内容。使用标明期望的版本号来打开数据库的示例如下所示：</p>
+<pre class=brush:js;>var request = indexedDB.open("MyTestDatabase", 3);</pre>
+<h4 id=Generating_handlers><span id=i-5>生成处理函数</span></h4>
+<p>几乎所有我们产生的请求我们在处理的时候首先要做的就是添加成功和失败处理函数：</p>
+<pre class="brush: js">request.onerror = function(event) {
+  // Do something with request.errorCode!
+};
+request.onsuccess = function(event) {
+  // Do something with request.result!
+};</pre>
+<p>这两个函数的哪一个，<code>onsuccess()</code> 还是 <code>onerror()</code>，会被调用呢？如果一切顺利的话，一个 success 事件（即一个 type 属性被设置成<code> "success"</code> 的 DOM&nbsp;事件）<code></code>会被触发，使用 <code>request</code> 作为它的 <code>target</code>。 一旦它被触发的话，相关 <code>request</code> 的 <code>onsuccess()</code> 函数就会被触发，使用 success 事件作为它的参数。 否则，如果不是所有事情都成功的话，一个 error 事件（即<code> type</code> 属性被设置成 <code>"error"</code> 的 DOM 事件） 会在 request 上被触发。<code></code>这将会触发使用 error 事件作为参数的 <code></code><code>onerror()</code> 方法。</p>
+<p>IndexedDB 的 API 被设计来尽可能地减少对错误处理的需求，所以你可能不会看到有很多的错误事件（起码，不会在你已经习惯了这些 API 之后！）。然而在打开数据库的情况下，还是有一些会产生错误事件的常见情况。最有可能出现的问题是用户决定不允许你的 web app 访问以创建一个数据库。IndexedDB 的主要设计目标之一就是允许大量数据可以被存储以供离线使用。（要了解关于针对每个浏览器你可以有多少存储空间的更多内容，请参见 <a title=https://developer.mozilla.org/en/IndexedDB#Storage_limits href=http://www.tfan.org/en/IndexedDB#Storage_limits>存储限制</a>）。</p>
+<p>显然，浏览器不希望允许某些广告网络或恶意网站来污染你的计算机，所以浏览器会在任意给定的 web app 首次尝试打开一个 IndexedDB 存储时对用户进行提醒。用户可以选择允许访问或者拒绝访问。还有，IndexedDB 在浏览器的隐私模式（Firefox 的 Private Browsing 模式和 Chrome 的 Incognito 模式）下是被完全禁止的。 隐私浏览的全部要点在于不留下任何足迹，所以在这种模式下打开数据库的尝试就失败了。</p>
+<p>现在，假设用户已经允许了你的要创建一个数据库的请求，同时你也已经收到了一个来触发 success 回调的 success 事件；然后呢？这里的 request 是通过调用 <code>indexedDB.open() </code>产生的， 所以 <code>request.result</code> 是一个 <code>IDBDatabase</code> 的实例，而且你肯定希望把它保存下来以供后面使用。你的代码看起来可能像这样：</p>
+<pre class="brush: js">var db;
+var request = indexedDB.open("MyTestDatabase");
+request.onerror = function(event) {
+  alert("Why didn't you allow my web app to use IndexedDB?!");
+};
+request.onsuccess = function(event) {
+  db = request.result;
+};</pre>
+<h4 id=Handling_Errors><span id=i-6>错误处理</span></h4>
+<p>如上文所述，错误事件冒泡出来。错误事件都是针对产生这些错误的请求的，然后事件冒泡到事务，然后最终到达数据库对象。如果你希望避免为所有的请求都增加错误处理程序，你可以替代性的仅对数据库对象添加一个错误处理程序，像这样：</p>
+<pre class="brush: js">db.onerror = function(event) {
+  // Generic error handler for all errors targeted at this database's
+  // requests!
+  alert("Database error: " + event.target.errorCode);
+};</pre>
+<p>在打开数据库时常见的可能出现的错误之一是 <code>VER_ERR</code>。这表明存储在磁盘上的数据库的版本高于你试图打开的版本。这是一种必须要被错误处理程序处理的一种出错情况。</p>
+<h3 id=Creating_or_updating_the_version_of_the_database><span id=i-7>创建和更新数据库版本号</span></h3>
+<p><a name=Updating_the_version_of_the_database></a>要更新数据库的 schema，也就是创建或者删除对象存储空间，需要实现<span style=line-height:21px>&nbsp;</span><code style=font-size:14px;color:#333333>onupgradeneeded</code><span style=line-height:21px>&nbsp;处理程序，这个处理程序将会作为一个允许你处理对象存储空间的&nbsp;</span><code style=font-size:14px;color:#333333>versionchange</code><span style=line-height:21px>&nbsp;事务的一部分被调用。</span></p>
+<pre class=brush:js;>// 该事件仅在较新的浏览器中被实现
+request.onupgradeneeded = function(event) { 
+   // 更新对象存储空间和索引 .... 
+};</pre>
+<p>在数据库第一次被打开时或者当指定的版本号高于当前被持久化的数据库的版本号时，这个 <code>versionchange</code> 事务将被创建。</p>
+<p>版本号是一个 <code>unsigned long long</code> 数字，这意味着它可以是一个非常大的整数。</p>
+<div class=warning>
+<p>这也意味着你不能使用浮点数，否则它会被转换成最接近的较小的整数并且事务可能不会启动，同样 <code>upgradeneeded</code> 事件也不会作为一个结果返回。例如不要使用 2.4 作为版本:</p>
+<pre class="brush: js">var request = indexedDB.open("MyTestDatabase", 2.4); // don't do this, as the version will be rounded to 2</pre>
+</div>
+<p>WebKit 支持当前版本的规范但是只有 Chrome 23 及以上才支持。其他和更旧的实现没有实现当前版本的规范，因此还不支持 <code>indexedDB.open(name, version).onupgradeneeded</code>&nbsp;签名。有关如何在较旧 Webkit 上升级数据库版本的更多信息，请参见 <a title=https://developer.mozilla.org/en/IndexedDB/IDBDatabase#setVersion()_.0A.0ADeprecated href=http://www.tfan.org/en/IndexedDB/IDBDatabase#setVersion()_.0A.0ADeprecated>IDBDatabase 参考文档</a>。</p>
+<h3 id=Structuring_the_database><span id=i-8>构建数据库</span></h3>
+<p>现在来构建数据库。IndexedDB 使用对象存储空间而不是表，并且一个单独的数据库可以包含任意数量的对象存储空间。每当一个值被存储进一个对象存储空间时，它会被和一个键相关联。键的提供可以有几种不同的方法，这取决于对象存储空间是使用 <a title=https://developer.mozilla.org/en/IndexedDB#gloss_key_path href=http://www.tfan.org/en/IndexedDB#gloss_key_path>key path</a> 还是 <a title="en/IndexedDB#gloss key generator" href=http://www.tfan.org/en/IndexedDB#gloss_key_generator>key generator</a>。</p>
+<p>下面的表格显示了几种不同的提供键的方法。</p>
+<table class=standard-table border=1 cellspacing=1 cellpadding=1>
+<thead>
+<tr>
+<th scope=col>Key Path</th>
+<th scope=col>Key Generator</th>
+<th scope=col>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>No</td>
+<td>No</td>
+<td>这种对象存储空间可以持有任意类型的值，甚至是像数字和字符串这种基本数据类型的值。每当我们想要增加一个新值的时候，必须提供一个单独的键参数。</td>
+</tr>
+<tr>
+<td>Yes</td>
+<td>No</td>
+<td>这种对象存储空间只能持有 JavaScript 对象。这些对象必须具有一个和 key path 同名的属性。</td>
+</tr>
+<tr>
+<td>No</td>
+<td>Yes</td>
+<td>这种对象存储空间可以持有任意类型的值。键会为我们自动生成，或者如果你想要使用一个特定键的话你可以提供一个单独的键参数。</td>
+</tr>
+<tr>
+<td>Yes</td>
+<td>Yes</td>
+<td>这种对象存储空间只能持有 JavaScript 对象。通常一个键被生成的同时，生成的键的值被存储在对象中的一个和 key path 同名的属性中。然而，如果这样的一个属性已经存在的话，这个属性的值被用作键而不会生成一个新的键。</td>
+</tr>
+</tbody>
+</table>
+<p>你也可以使用对象存储空间持有的对象，不是基本数据类型，在任何对象存储空间上创建索引。索引可以让你使用被存储的对象的属性的值来查找存储在对象存储空间的值，而不是用对象的键来查找。</p>
+<p>此外，索引具有对存储的数据执行简单限制的能力。通过在创建索引时设置 unique 标记，索引可以确保不会有两个具有同样索引 key path 值的对象被储存。因此，举例来说，如果你有一个用于持有一组 people 的对象存储空间，并且你想要确保不会有两个拥有同样 email 地址的 people，你可以使用一个带有 unique 标识的索引来确保这些。</p>
+<p>这听起来可能有点混乱，但下面这个简单的例子应该可以演示这些个概念：</p>
+<pre class="brush: js">// 我们的客户数据看起来像这样。
+const customerData = [
+  { ssn: "444-44-4444", name: "Bill", age: 35, email: "bill@company.com" },
+  { ssn: "555-55-5555", name: "Donna", age: 32, email: "donna@home.org" }
+];
+const dbName = "the_name";
+
+var request = indexedDB.open(dbName, 2);
+
+request.onerror = function(event) {
+  // 错误处理程序在这里。
+};
+request.onupgradeneeded = function(event) {
+  var db = event.target.result;
+
+  // 创建一个对象存储空间来持有有关我们客户的信息。
+  // 我们将使用 "ssn" 作为我们的 key path 因为它保证是唯一的。
+  var objectStore = db.createObjectStore("customers", { keyPath: "ssn" });
+
+  // 创建一个索引来通过 name 搜索客户。
+  // 可能会有重复的，因此我们不能使用 unique 索引。
+  objectStore.createIndex("name", "name", { unique: false });
+
+  // 创建一个索引来通过 email 搜索客户。
+  // 我们希望确保不会有两个客户使用相同的 email 地址，因此我们使用一个 unique 索引。
+  objectStore.createIndex("email", "email", { unique: true });
+
+  // 在新创建的对象存储空间中保存值
+  for (var i in customerData) {
+    objectStore.add(customerData[i]);
+  }
+};</pre>
+<p>正如前面提到的，<code>onupgradeneeded</code> 是我们唯一可以修改数据库结构的地方。在这里面，我们可以创建和删除对象存储空间以及构建和删除索引。</p>
+<div>对象存储空间仅调用 <code>createObjectStore()</code> 就可以创建。这个方法使用存储空间的名称，和一个对象参数。即便这个参数对象是可选的，它还是非常重要的，因为它可以让你定义重要的可选属性和完善你希望创建的对象存储空间的类型。在我们的示例中，我们请求了一个名为“customers” 的对象存储空间并且定义了一个 使得存储空间中每个单独的对象都是唯一的属性作为 key path。在这个示例中的属性是 “ssn”，因为社会安全号码被确保是唯一的。被存储在对象存储空间中的所有对象都必须存在“ssn”。</div>
+<p>我们也请求了一个名为 “name” 的着眼于存储的对象的 <code>name</code> 属性的索引。如同 <code>createObjectStore()</code>，<code>createIndex()</code> 使用了一个完善了我们希望创建的索引类型的可选的 <code>options</code> 对象。添加一个不带 <code>name</code> 属性的对象也会成功，但是这个对象不会出现在 “name” 索引中。</p>
+<p>我们现在可以使用存储的用户对象的 <code>ssn</code> 直接从对象存储空间中把它们提取出来，或者通过使用索引来使用他们的 name 进行提取。要了解这些是如何实现的，请参见 <a title="Using IndexedDB#Using an index" href=http://www.tfan.org/en/IndexedDB/Using_IndexedDB#Using_an_index>使用索引</a> 章节。</p>
+<h2 id=Adding_and_removing_data><span id=i-9>增加和删除数据</span></h2>
+<p>在你可以对新数据库做任何事情之前，你需要开始一个事务。事务来自于数据库对象，而且你必须指定你想让这个事务跨越哪些对象存储空间。另外，你需要决定你是否将要对数据库进行更改或者你只是需要从它里面进行读取。虽然事务具有三种模式（只读，读写，和版本变更），在可以的情况下你最好还是使用只读事务，因为它们可以并发运行。</p>
+<h3 id=Adding_data_to_the_database><span id=i-10>向数据库中增加数据</span></h3>
+<p>如果你刚刚创建了一个数据库，你可能想往里面写点东西。看起来会像下面这样:</p>
+<pre class=brush:js;>var transaction = db.transaction(["customers"], "readwrite");
+// 注意: 旧版实验性的实现使用不建议使用的常量 IDBTransaction.READ_WRITE 而不是 "readwrite"。
+// 如果你想支持这样的实现，你只要这样写就可以了： 
+// var transaction = db.transaction(["customers"], IDBTransaction.READ_WRITE);</pre>
+<p><code>transaction()</code> 方法接受三个参数（虽然两个是可选的）并返回一个事务对象。第一个参数是事务希望跨越的对象存储空间的列表。如果你希望事务能够跨越所有的对象存储空间你可以传入一个空数组。如果你没有为第二个参数指定任何内容，你得到的是只读事务。因为这里我们是想要写入所以我们需要传入 <code>"readwrite"</code> 标识。</p>
+<p>现在我们已经有了一个事务，我们需要理解它的生命周期。事务和事件循环的联系非常密切。如果你创建了一个事务但是并没有使用它就返回给事件循环，那么事务将变得无效。保持事务活跃的唯一方法就是在其上构建一个请求。当请求完成时你将会得到一个 DOM 事件，并且，假设请求成功了，你将会有另外一个机会在回调中来延长这个事务。如果你没有延长事务就返回到了事件循环，那么事务将会变得不活跃，依此类推。只要还有待处理的请求事务就会保持活跃。事务生命周期真的很简单但是可能需要一点时间你才能对它变得习惯。还有就是来几个例子也会有所帮助。如果你开始看到 <code>TRANSACTION_INACTIVE_ERR</code> 错误代码，那么你已经把某些事情搞乱了。</p>
+<p>事务可以接收三种不同类型的 DOM 事件： <code>error</code>，<code>abort</code>，以及<code> complete</code>。我们已经讨论过 <code>error</code>事件冒泡，所以一个事务要接收所有可能产生错误事件的请求所产生的错误事件。更微妙的一点是一个 error 的默认行为是终止发生错误的事务。除非你在 error 事件上通过调用 <code>preventDefault()</code> 处理了这个错误，整个事务被回滚了。这样的设计迫使你去思考和处理错误，但是如果细粒度的错误处理太过繁琐的话，你也可以总是对数据库添加一个总的错误处理程序。如果你不处理一个错误事件或者你在事务中调用 <code>abort()</code>，那么事务被回滚并且有关事物的一个 <code>abort</code> 事件被触发。否则，在所有的未处理请求都完成后，你将得到一个 <code>complete</code> 事件。如果你正在做大量的数据库操作，那么追踪事务而不是单个的请求当然可以帮助你进行决断。</p>
+<p>现在你有了一个事务了，你将需要从它拿到一个对象存储空间。事务只能让你拿到一个你在创建事务时已经指定过的对象存储空间。然后你可以增加所有你需要的数据。</p>
+<p>现在你有了一个事务了，你将需要从它拿到一个对象存储空间。事务只能让你拿到一个你在创建事务时已经指定过的对象存储空间。然后你可以增加你需要的所有数据。</p>
+<pre class="brush: js">// 当所有的数据都被增加到数据库时执行一些操作
+transaction.oncomplete = function(event) {
+  alert("All done!");
+};
+
+transaction.onerror = function(event) {
+  // 不要忘记进行错误处理！
+};
+
+var objectStore = transaction.objectStore("customers");
+for (var i in customerData) {
+  var request = objectStore.add(customerData[i]);
+  request.onsuccess = function(event) {
+    // event.target.result == customerData[i].ssn
+  };
+}</pre>
+<p>产生自<code> add()</code> 调用的请求的 <code>result </code>是被添加的值的键。因此在这种情况下，它应该等于被添加的对象的 <code>ssn</code> 属性， 因为对象存储空间使用 <code>ssn</code> 属性作为 key path。 注意 <code>add()</code> 函数要求数据库中不能已经有相同键的对象存在。如果你正在试图修改一个现有条目，或者你并不关心是否有一个同样的条目已经存在，使用 <code>put()</code>函数。</p>
+<h2 id=Removing_data_from_the_database><span id=i-11>从数据库中删除数据</span></h2>
+<p>删除数据是非常类似的：</p>
+<pre class="brush: js">var request = db.transaction(["customers"], "readwrite")
+                .objectStore("customers")
+                .delete("444-44-4444");
+request.onsuccess = function(event) {
+  // 删除数据成功！
+};</pre>
+<h2 id=Getting_data_from_the_database><span id=i-12>从数据库中获取数据</span></h2>
+<p>现在数据库里已经有了一些信息，你可以通过几种方法对它进行提取。首先是简单的 <code>get()</code>。你需要提供键来提取值，像这样：</p>
+<pre class="brush: js">var transaction = db.transaction(["customers"]);
+var objectStore = transaction.objectStore("customers");
+var request = objectStore.get("444-44-4444");
+request.onerror = function(event) {
+  // 错误处理!
+};
+request.onsuccess = function(event) {
+  // 对 request.result 做些操作！
+  alert("Name for SSN 444-44-4444 is " + request.result.name);
+};</pre>
+<p>对于一个“简单”的提取这里的代码有点多了。下面看我们怎么把它再缩短一点，假设你在数据库的级别上来进行的错误处理：</p>
+<pre class="brush: js">db.transaction("customers").objectStore("customers").get("444-44-4444").onsuccess = function(event) {
+  alert("Name for SSN 444-44-4444 is " + event.target.result.name);
+};</pre>
+<p>这是如何工作的呢？由于只有一个对象存储空间，你可以避免传入一个在你的事务中需要的对象存储空间的列表，而只是作为一个字符串把名字传入即可。同样，你只是在从数据库读取数据，所以你不需要一个 <code>"readwrite"</code>事务。调用一个没有指定模式的 <code>transaction()</code>将给你一个 <code>"readonly"</code>事务。这里的另外一个微妙之处在于你实际上不需要保存请求对象到一个变量。因为 DOM 事件把这个请求作为它的 target，你可以使用 event 来得到 <code>result</code> 属性。很简单，对吧？！</p>
+<h2 id=Using_a_cursor><span id=i-13>使用游标</span></h2>
+<p>使用 <code>get()</code> 要求你知道你想要检索哪一个键。如果你想要遍历对象存储空间中的所有值，那么你可以使用游标。看起来会像下面这样：</p>
+<pre class="brush: js">var objectStore = db.transaction("customers").objectStore("customers");
+
+objectStore.openCursor().onsuccess = function(event) {
+  var cursor = event.target.result;
+  if (cursor) {
+    alert("Name for SSN " + cursor.key + " is " + cursor.value.name);
+    cursor.continue();
+  }
+  else {
+    alert("No more entries!");
+  }
+};</pre>
+<p><code>openCursor()</code> 函数需要几个参数。首先，你可以使用一个 key range 对象来限制被检索的项目的范围。第二，你可以指定你希望进行迭代的方向。在上面的示例中，我们在以升序迭代所有的对象。游标成功的回调有点特别。游标对象本身是请求的 <code>result</code> （上面我们使用的是简写形式，所以是 <code>event.target.result</code>）。然后实际的 key 和 value 可以根据游标对象的 <code>key</code> 和 <code>value</code> 属性被找到。如果你想要保持继续前行，那么你必须调用游标上的 <code>continue()</code> 。当你已经到达数据的末尾时（或者没有匹配 <code>openCursor()</code> 请求的条目）你仍然会得到一个成功回调，但是 <code>result</code> 属性是 <code>undefined。</code></p>
+<p>使用游标的一种常见模式是提取出在一个对象存储空间中的所有对象然后把它们添加到一个数组中，像这样：</p>
+<pre class="brush: js">var customers = [];
+
+objectStore.openCursor().onsuccess = function(event) {
+  var cursor = event.target.result;
+  if (cursor) {
+    customers.push(cursor.value);
+    cursor.continue();
+  }
+  else {
+    alert("Got all customers: " + customers);
+  }
+};</pre>
+<div class=warning><strong>警告:</strong>&nbsp;下面的函数并不是 IndexedDB 标准的一部分！</div>
+<p>Mozilla 也已经实现了 <code>getAll()</code>来处理这种情况。它不是 IndexedDB 标准的一部分，所以它未来可能会消失。我们已经把它包含在这里是因为我们觉得它比较有用。下面的代码实现的是跟上面同样的事情：</p>
+<pre class="brush: js">objectStore.getAll().onsuccess = function(event) {
+  alert("Got all customers: " + event.target.result);
+};</pre>
+<p>查找游标的 <code>value</code>属性会引起相关的性能损耗，因为对象是被延迟创建的。当使用 <code>getAll()</code> 时，Gecko 必须立即创建所有的对象。如果你仅是对检索每个键感兴趣，举个例子，使用游标比使用 <code>getAll()</code>要高效的多。如果你试图获得一个对象存储空间内所有对象的一个数组，那么，使用<code> getAll()</code>。</p>
+<h3 id=Using_an_index><span id=i-14>使用索引</span></h3>
+<p>使用 SSN 作为键来存储客户数据是合理的，因为 SSN 唯一地标识了一个个体（对隐私来说这是否是一个好的想法是另外一个话题，不在本文的讨论范围内）。如果你想要通过姓名来查找一个客户，那么，你将需要在数据库中迭代所有的 SSN 直到你找到正确的那个。以这种方式来查找将会非常的慢，相反你可以使用索引。</p>
+<pre class="brush: js">var index = objectStore.index("name");
+index.get("Donna").onsuccess = function(event) {
+  alert("Donna's SSN is " + event.target.result.ssn);
+};</pre>
+<p>“name” 游标不是唯一的，因此 <code>name</code> 被设成 <code>"Donna"</code> 的记录可能不止一条。在这种情况下，你总是得到键值最小的那个。</p>
+<p>如果你需要访问带有给定 <code>name</code> 的所有的记录你可以使用一个游标。你可以在索引上打开两个不同类型的游标。一个常规游标映射索引属性到对象存储空间中的对象。一个键索引映射索引属性到用来存储对象存储空间中的对象的键。不同之处被展示如下：</p>
+<pre class="brush: js">index.openCursor().onsuccess = function(event) {
+  var cursor = event.target.result;
+  if (cursor) {
+    // cursor.key 是一个 name, 就像 "Bill", 然后 cursor.value 是整个对象。
+    alert("Name: " + cursor.key + ", SSN: " + cursor.value.ssn + ", email: " +&nbsp;cursor.value.email);
+    cursor.continue();
+  }
+};
+
+index.openKeyCursor().onsuccess = function(event) {
+  var cursor = event.target.result;
+  if (cursor) {
+    // cursor.key is 一个 name, 就像 "Bill", 然后 cursor.value 是那个 SSN。
+    // 没有办法可以得到存储对象的其余部分。
+    alert("Name: " + cursor.key + ", "SSN: " + cursor.value);
+    cursor.continue();
+  }
+};</pre>
+<h3 id=Specifying_the_range_and_direction_of_cursors><span id=i-15>指定游标的范围和方向</span></h3>
+<p>如果你想要限定你在游标中看到的值的范围，你可以使用一个 key range 对象然后把它作为第一个参数传给 <code>openCursor()</code> 或是 <code>openKeyCursor()</code>。你可以构造一个只允许一个单一 key 的 key range，或者一个具有下限或上限，或者一个既有上限也有下限。边界可以是闭合的（也就是说 key range 包含给定的值）或者是“开放的”（也就是说 key range 不包括给定的值）。这里是它如何工作的：</p>
+<pre class="brush: js">// 只匹配 "Donna"
+var singleKeyRange = IDBKeyRange.only("Donna");
+
+// 匹配所有在 "Bill" 前面的, 包括 "Bill"
+var lowerBoundKeyRange = IDBKeyRange.lowerBound("Bill");
+
+// 匹配所有在 “Bill” 前面的, 但是不需要包括 "Bill"
+var lowerBoundOpenKeyRange = IDBKeyRange.lowerBound("Bill", true);
+
+// Match anything up to, but not including, "Donna"
+var upperBoundOpenKeyRange = IDBKeyRange.upperBound("Donna", true);
+
+//Match anything between "Bill" and "Donna", but not including "Donna"
+var boundKeyRange = IDBKeyRange.bound("Bill", "Donna", false, true);
+
+index.openCursor(boundKeyRange).onsuccess = function(event) {
+  var cursor = event.target.result;
+  if (cursor) {
+    // Do something with the matches.
+    cursor.continue();
+  }
+};</pre>
+<p>有时候你可能想要以倒序而不是正序（所有游标的默认顺序）来遍历。切换方向是通过传递 <code>prev</code> 到 <code>openCursor()</code> 方法来实现的：</p>
+<pre class="brush: js">objectStore.openCursor(null, IDBCursor.prev).onsuccess = function(event) {
+  var cursor = event.target.result;
+  if (cursor) {
+    // Do something with the entries.
+    cursor.continue();
+  }
+};</pre>
+<p>因为 “name” 索引不是唯一的，那就有可能存在具有相同 <code>name</code> 的多条记录。要注意的是这种情况不可能发生在对象存储空间上，因为键必须永远是唯一的。如果你想要在游标在索引迭代过程中过滤出重复的，你可以传递 <code>nextunique</code>&nbsp;（或 <code>prevunique</code>&nbsp;如果你正在向后寻找）作为方向参数。 当 <code>nextunique</code> 或是 <code>prevunique</code>&nbsp;被使用时，被返回的那个总是键最小的记录。</p>
+<pre class="brush: js">index.openKeyCursor(null, IDBCursor.nextunique).onsuccess = function(event) {
+  var cursor = event.target.result;
+  if (cursor) {
+    // Do something with the entries.
+    cursor.continue();
+  }
+};</pre>
+<h2 id=Version_changes_while_a_web_app_is_open_in_another_tab><span id=_web_app>当一个 web app 在另一个标签页中被打开时的版本变更</span></h2>
+<p>当你的 web app 在这样一种方式下改变你的数据库时碰到被要求进行版本变化，你需要考虑如果用户已经在一个标签页中打开了你的应用的旧版本的数据库，然后他又在另一个标签页中加载了你的应用的新版本，这种情况下会发生什么事情。当你带着比数据库实际版本更高的版本号调用 <code>open()</code> 时，所有其他打开的数据库必须在你开始实际对数据库进行修改之前显式通知这个请求。这里是它如何工作的：</p>
+<pre class="brush: js">var openReq = mozIndexedDB.open("MyTestDatabase", 2);
+
+openReq.onblocked = function(event) {
+  // 如果其他标签页已经加载了这个数据库，那么
+  // 在我们可以继续处理之前它需要被关闭。
+  alert("Please close all other tabs with this site open!");
+};
+
+openReq.onupgradeneeded = function(event) {
+  // 所有其它数据库都已经被关掉了。Set everything up.
+  db.createObjectStore(/* ... */);
+  useDatabase(db);
+}  
+
+openReq.onsuccess = function(event) {
+  var db = event.target.result;
+  useDatabase(db);
+  return;
+}
+
+function useDatabase(db) {
+  // 确保添加一个如果另一个页面请求一个版本变化时来被通知的处理程序。
+  // 我们必须关闭这个数据库。这就允许其他页面对数据库进行升级。
+  // 如果你不这么做的话，除非用户关闭标签页否则升级就不会发生。
+ &nbsp;db.onversionchange = function(event) {
+    db.close();
+    alert("A new version of this page is ready. Please reload!");
+  };
+
+  // 其他针对数据库的处理
+}</pre>
+<h2 id=Security><span id=i-16>安全</span></h2>
+<p>IndexedDB 使用同源原则，这意味着它把存储空间绑定到了创建它的站点的源（典型情况下，就是站点的域或是子域），所以它不能被任何其他源访问。</p>
+<p>要着重指出的一点是 IndexedDB 不适用于从另一个站点加载进框架的内容 (不管是 {{ HTMLElement(“frame”) }}&nbsp;还是 {{ HTMLElement(“iframe”) }}。这是一项安全措施。为什么说这一点是很重要的，请查阅 {{ bug(595307) }}.</p>
+<h2 id=Full_IndexedDB_example><span id=_IndexedDB-2>一个完整的 IndexedDB 示例</span></h2>
+<h3 id=HTML_Content><span id=HTML>HTML 内容</span></h3>
+<pre class="brush: html">&nbsp;&nbsp;&nbsp; &lt;h1&gt;IndexedDB Demo: storing blobs, e-publications example&lt;/h1&gt;
+&nbsp;&nbsp;&nbsp; &lt;div id="msg"&gt;
+&nbsp;&nbsp;&nbsp; &lt;/div&gt;
+
+&nbsp;&nbsp;&nbsp; &lt;form id="register-form"&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;table&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;tbody&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;tr&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;td&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;label for="pub-title" class="required"&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Title:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/label&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/td&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;td&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;input type="text" id="pub-title" name="pub-title" /&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/td&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/tr&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;tr&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;td&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;label for="pub-year" class="required"&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Year:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/label&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/td&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;td&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;input type="number" id="pub-year" name="pub-year" /&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/td&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/tr&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;tr&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;td&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;label for="pub-biblioid" class="required"&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Bibliographic ID
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;span class="note"&gt;(ISBN, ISSN, etc.)&lt;/span&gt;:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/label&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/td&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;td&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;input type="text" id="pub-biblioid" name="pub-biblioid"/&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/td&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/tr&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/tbody&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;tbody&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;tr&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;td&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;label for="pub-file"&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; File image:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/label&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/td&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;td&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;input type="file" id="pub-file" accept="image/*"/&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/td&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/tr&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;tr&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;td&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;label for="pub-content-url"&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Online-file image URL:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/label&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/td&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;td&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;input type="text" id="pub-content-url" name="pub-content-url"/&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/td&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/tr&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/tbody&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/table&gt;
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;div class="button-pane"&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;input type="button" id="add-button" value="Add Publication" /&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;input type="reset" id="register-form-reset"/&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;span id="action-status"&gt;&lt;/span&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/div&gt;
+&nbsp;&nbsp;&nbsp; &lt;/form&gt;
+
+&nbsp;&nbsp;&nbsp; &lt;form id="delete-form"&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;div&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;label for="pub-biblioid-to-delete" class="required"&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Key (for example 1, 2, 3, etc.):
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/label&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;input type="text" id="pub-biblioid-to-delete"
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; name="pub-biblioid-to-delete" /&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/div&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;div class="button-pane"&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;input type="button" id="delete-button" value="Delete Publication" /&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/div&gt;
+&nbsp;&nbsp;&nbsp; &lt;/form&gt;
+
+&nbsp;&nbsp;&nbsp; &lt;form id="search-form"&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;div class="button-pane"&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;input type="button" id="search-list-button"
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; value="List database content" /&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/div&gt;
+&nbsp;&nbsp;&nbsp; &lt;/form&gt;
+
+&nbsp;&nbsp;&nbsp; &lt;div&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;div id="pub-msg"&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/div&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;ul id="pub-list"&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/ul&gt;
+&nbsp;&nbsp;&nbsp; &lt;/div&gt;</pre>
+<h3 id=CSS_Content><span id=CSS>CSS 内容</span></h3>
+<pre class="brush: css">body {
+&nbsp; font-size: 0.8em;
+&nbsp; font-family: Sans-Serif;
+}
+
+form {
+&nbsp; background-color: #cccccc;
+&nbsp; border-radius: 0.3em;
+&nbsp; display: inline-block;
+&nbsp; margin-bottom: 0.5em;
+&nbsp; padding: 1em;
+}
+
+table {
+&nbsp; border-collapse: collapse;
+}
+
+input {
+&nbsp; padding: 0.3em;
+&nbsp; border-color: #cccccc;
+&nbsp; border-radius: 0.3em;
+}
+
+.required:after {
+&nbsp; content: "*";
+&nbsp; color: red;
+}
+
+.button-pane {
+&nbsp; margin-top: 1em;
+}
+
+#documents-list {
+&nbsp; background-color: #eeeeee;
+}
+
+.action-success {
+&nbsp; margin-left: 1em;
+&nbsp; padding: 0.5em;
+&nbsp; color: #00d21e;
+&nbsp; background-color: #eeeeee;
+&nbsp; border-radius: 0.2em;
+}
+
+.action-failure {
+&nbsp; margin-left: 1em;
+&nbsp; padding: 0.5em;
+&nbsp; color: #ff1408;
+&nbsp; background-color: #eeeeee;
+&nbsp; border-radius: 0.2em;
+}
+
+.presence-no {
+&nbsp; font-style: italic;
+}
+
+.note {
+&nbsp; font-size: smaller;
+}</pre>
+<h3 id=JavaScript_Content><span id=JavaScript>JavaScript 内容</span></h3>
+<pre class="brush: js">(function () {
+&nbsp; // Works with:
+&nbsp; // * Firefox &gt;= 16.0
+&nbsp; // * Google Chrome &gt;= 24.0 (you may need to get Google Chrome Canary)
+
+&nbsp; const DB_NAME = 'mdn-demo-indexeddb-epublications';
+&nbsp; const DB_VERSION = 1; // Use a long long for this value (don't use a float)
+&nbsp; const DB_STORE_NAME = 'publications';
+
+&nbsp; var db;
+
+&nbsp; function initDb() {
+&nbsp;&nbsp;&nbsp; console.debug("initDb ...");
+&nbsp;&nbsp;&nbsp; var req = indexedDB.open(DB_NAME, DB_VERSION);
+&nbsp;&nbsp;&nbsp; req.onsuccess = function (evt) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Better use "this" than "req" to get the result to avoid problems with
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // garbage collection.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // db = req.result;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; db = this.result;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; console.debug("initDb DONE");
+&nbsp;&nbsp;&nbsp; };
+&nbsp;&nbsp;&nbsp; req.onerror = function (evt) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; console.error("initDb:", evt.target.errorCode);
+&nbsp;&nbsp;&nbsp; };
+
+&nbsp;&nbsp;&nbsp; req.onupgradeneeded = function (evt) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; console.debug("initDb.onupgradeneeded");
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var store = evt.currentTarget.result.createObjectStore(
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; DB_STORE_NAME, { keyPath: 'id', autoIncrement: true });
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; store.createIndex('biblioid', 'biblioid', { unique: true });
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; store.createIndex('title', 'title', { unique: false });
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; store.createIndex('year', 'year', { unique: false });
+&nbsp;&nbsp;&nbsp; };
+&nbsp; }
+
+&nbsp; function getFile(key, success_callback) {
+&nbsp;&nbsp;&nbsp; var tx = db.transaction(DB_STORE_NAME, 'readonly');
+&nbsp;&nbsp;&nbsp; var store = tx.objectStore(DB_STORE_NAME);
+&nbsp;&nbsp;&nbsp; var req = store.get(key);
+&nbsp;&nbsp;&nbsp; req.onsuccess = function(evt) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var value = evt.target.result;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (value)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; success_callback(value.file);
+&nbsp;&nbsp;&nbsp; };
+&nbsp; }
+
+&nbsp; function displayPubList() {
+&nbsp;&nbsp;&nbsp; console.debug("displayPubList");
+&nbsp;&nbsp;&nbsp; var pub_msg = $('#pub-msg');
+&nbsp;&nbsp;&nbsp; pub_msg.empty();
+&nbsp;&nbsp;&nbsp; var pub_list = $('#pub-list');
+&nbsp;&nbsp;&nbsp; pub_list.empty();
+
+&nbsp;&nbsp;&nbsp; var tx = db.transaction(DB_STORE_NAME, 'readonly');
+&nbsp;&nbsp;&nbsp; var store = tx.objectStore(DB_STORE_NAME);
+&nbsp;&nbsp;&nbsp; var req;
+
+&nbsp;&nbsp;&nbsp; req = store.count();
+&nbsp;&nbsp;&nbsp; // Requests are executed in the order in which they were made against the
+&nbsp;&nbsp;&nbsp; // transaction, and their results are returned in the same order.
+&nbsp;&nbsp;&nbsp; // Thus the count text below will be displayed before the actual pub list
+&nbsp;&nbsp;&nbsp; // (not that it is algorithmically important in this case).
+&nbsp;&nbsp;&nbsp; req.onsuccess = function(evt) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pub_msg.append('&lt;p&gt;There are &lt;strong&gt;' + evt.target.result +
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '&lt;/strong&gt; record(s) in the object store.&lt;/p&gt;');
+&nbsp;&nbsp;&nbsp; };
+&nbsp;&nbsp;&nbsp; req.onerror = function(evt) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; console.error("add error", this.error);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; displayActionFailure(this.error);
+&nbsp;&nbsp;&nbsp; };
+
+&nbsp;&nbsp;&nbsp; var i = 0;
+&nbsp;&nbsp;&nbsp; var img_id;
+&nbsp;&nbsp;&nbsp; var file_presence;
+&nbsp;&nbsp;&nbsp; var presence_html;
+&nbsp;&nbsp;&nbsp; req = store.openCursor();
+&nbsp;&nbsp;&nbsp; req.onsuccess = function(evt) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var cursor = evt.target.result;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (cursor) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; presence_html = "&lt;span class='presence-no'&gt;No image&lt;/span&gt;";
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; file_presence = cursor.value.file != null;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; console.debug("cursor.value:", cursor.value);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (file_presence) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; img_id = 'pub-img-' + i;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; presence_html = '&lt;img id="' + img_id + '"/&gt;';
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; getFile(cursor.key, function(file) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; console.debug("file:", file);
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Note that here it is not possible to set a link to the file to
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // make&nbsp; it possible to download it.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // The only possible options are:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // * display the file if it is an image
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // * getting text/other info from the file and display them
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var obj_url = window.URL.createObjectURL(file);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $('#' + img_id).attr('src', obj_url);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; window.URL.revokeObjectURL(obj_url);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; });
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pub_list.append('&lt;li&gt;' +
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '[' + cursor.key + '] ' +
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '(biblioid: ' + cursor.value.biblioid + ') ' +
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cursor.value.title + ' - ' +
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cursor.value.year + ' / ' +
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; presence_html +
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '&lt;/li&gt;');
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Move on to the next object in store
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cursor.continue();
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // This counter serves only to create distinct img ids
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; i++;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } else {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; console.debug("No more entries!");
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }
+&nbsp;&nbsp;&nbsp; };
+&nbsp; };
+
+&nbsp; function addPublication(biblioid, title, year, file) {
+&nbsp;&nbsp;&nbsp; console.debug("addPublication arguments:", arguments);
+&nbsp;&nbsp;&nbsp; if (!db) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; console.error("addPublication: the db is not initialized");
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return;
+&nbsp;&nbsp;&nbsp; }
+&nbsp;&nbsp;&nbsp; var tx = db.transaction(DB_STORE_NAME, 'readwrite');
+&nbsp;&nbsp;&nbsp; var store = tx.objectStore(DB_STORE_NAME);
+&nbsp;&nbsp;&nbsp; var req = store.add({ biblioid: biblioid, title: title, year: year,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; file: file });
+&nbsp;&nbsp;&nbsp; req.onsuccess = function (evt) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; console.debug("Insertion in DB successful");
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; displayPubList();
+&nbsp;&nbsp;&nbsp; };
+&nbsp;&nbsp;&nbsp; req.onerror = function() {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; console.error("add error", this.error);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; displayActionFailure(this.error);
+&nbsp;&nbsp;&nbsp; };
+&nbsp; }
+
+&nbsp; function displayActionSuccess(msg) {
+&nbsp;&nbsp;&nbsp; msg = typeof msg !== 'undefined' ? "Success: " + msg : "Success";
+&nbsp;&nbsp;&nbsp; $('#action-status').html('&lt;span class="action-success"&gt;' + msg + '&lt;/span&gt;');
+&nbsp; }
+&nbsp; function displayActionFailure(msg) {
+&nbsp;&nbsp;&nbsp; msg = typeof msg !== 'undefined' ? "Failure: " + msg : "Failure";
+&nbsp;&nbsp;&nbsp; $('#action-status').html('&lt;span class="action-failure"&gt;' + msg + '&lt;/span&gt;');
+&nbsp; }
+&nbsp; function resetActionStatus() {
+&nbsp;&nbsp;&nbsp; console.debug("resetActionStatus ...");
+&nbsp;&nbsp;&nbsp; $('#action-status').empty();
+&nbsp;&nbsp;&nbsp; console.debug("resetActionStatus DONE");
+&nbsp; }
+
+&nbsp; function addEventListeners() {
+&nbsp;&nbsp;&nbsp; console.debug("addEventListeners");
+&nbsp;&nbsp;&nbsp; initDb();
+
+&nbsp;&nbsp;&nbsp; $('#register-form-reset').click(function(evt) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; resetActionStatus();
+&nbsp;&nbsp;&nbsp; });
+
+&nbsp;&nbsp;&nbsp; $('#add-button').click(function(evt) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; console.debug("add ...");
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var title = $('#pub-title').val();
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var year = $('#pub-year').val();
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var biblioid = $('#pub-biblioid').val();
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (!title || !year || !biblioid) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; displayActionFailure("Required field(s) missing");
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var file_input = $('#pub-file');
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var selected_file = file_input.get(0).files[0];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; console.debug("selected_file:", selected_file);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; file_input.val(null);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var content_url = $('#pub-content-url').val();
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (selected_file) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; addPublication(biblioid, title, year, selected_file);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } else {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; addPublication(biblioid, title, year);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; displayActionSuccess();
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }
+
+&nbsp;&nbsp;&nbsp; });
+
+&nbsp;&nbsp;&nbsp; $('#delete-button').click(function(evt) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; console.debug("delete ...");
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var k = $('#pub-biblioid-to-delete').val();
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; console.debug("delete k:", k);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var tx = db.transaction(DB_STORE_NAME, 'readwrite');
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var store = tx.objectStore(DB_STORE_NAME);
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Warning: The exact same key used for creation needs to be passed for
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // the deletion. If the key was a Number for creation, then it needs to be
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // a Number for deletion.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; k = Number(k);
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // The code that could be nice if it worked
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // var req = store.delete(k);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // req.onsuccess = function(evt) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //&nbsp;&nbsp; var record = evt.target.result;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //&nbsp;&nbsp; console.debug("record:", record);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //&nbsp;&nbsp; if (typeof record !== 'undefined') {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //&nbsp;&nbsp;&nbsp;&nbsp; displayActionSuccess("Deletion successful");
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //&nbsp;&nbsp;&nbsp;&nbsp; displayPubList();
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //&nbsp;&nbsp; } else {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //&nbsp;&nbsp;&nbsp;&nbsp; displayActionFailure("No matching record found");
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //&nbsp;&nbsp; }
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // };
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // req.onerror = function (evt) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //&nbsp;&nbsp; console.error("delete:", evt.target.errorCode);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // };
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // The code that actually works
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // As per spec http://www.w3.org/TR/IndexedDB/#object-store-deletion-operation
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // the result of the Object Store Deletion Operation algorithm is
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // undefined, so it's not possible to know if some records were actually
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // deleted by looking at the request result.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var req = store.get(k);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; req.onsuccess = function(evt) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var record = evt.target.result;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; console.debug("record:", record);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (typeof record !== 'undefined') {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; req = store.delete(k);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; req.onsuccess = function(evt) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; console.debug("evt:", evt);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; console.debug("evt.target:", evt.target);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; console.debug("evt.target.result:", evt.target.result);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; console.debug("delete successful");
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; displayActionSuccess("Deletion successful");
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; displayPubList();
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; };
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; req.onerror = function (evt) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; console.error("delete:", evt.target.errorCode);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; };
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } else {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; displayActionFailure("No matching record found");
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; };
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; req.onerror = function (evt) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; console.error("delete:", evt.target.errorCode);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; };
+
+&nbsp;&nbsp;&nbsp; });
+
+&nbsp;&nbsp;&nbsp; var search_button = $('#search-list-button');
+&nbsp;&nbsp;&nbsp; search_button.click(function(evt) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; displayPubList();
+&nbsp;&nbsp;&nbsp; });
+
+&nbsp; }
+
+// function dbAddAndGetBlob(title, year, url) {
+//&nbsp;&nbsp; // Create XHR
+//&nbsp;&nbsp; var xhr = new XMLHttpRequest();
+//&nbsp;&nbsp; var blob;
+
+//&nbsp;&nbsp; // We can't use jQuery here because as of jQuery 1.7.2 the new "blob"
+//&nbsp;&nbsp; // responseType is not handled.
+//&nbsp;&nbsp; // http://bugs.jquery.com/ticket/7248
+//&nbsp;&nbsp; //
+//&nbsp;&nbsp; // Attention Same origin policy, the URL must come from the same origin than
+//&nbsp;&nbsp; // the web app.
+//&nbsp;&nbsp; xhr.open('GET', url, true);
+//&nbsp;&nbsp; // Set the responseType to blob
+//&nbsp;&nbsp; xhr.responseType = 'blob';
+//&nbsp;&nbsp; xhr.addEventListener("load", function () {
+//&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (xhr.status === 200) {
+//&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; console.debug("File retrieved");
+
+//&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Blob as response
+//&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; blob = xhr.response;
+//&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; console.debug("Blob:" + blob);
+
+//&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Insert the received blob into IndexedDB
+//&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; dbAdd(title, year, blob);
+//&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } else {
+//&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; console.error("loadConfigFormHtmlContent error:",
+//&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; xhr.responseText, xhr.status);
+//&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }
+//&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }, false);
+//&nbsp;&nbsp; // Send XHR
+//&nbsp;&nbsp; xhr.send();
+// }
+
+&nbsp; addEventListeners();
+})(); // Immediately-Invoked Function Expression (IIFE)</pre>
+<h2 id=Next_step><span id=i-17>下一步</span></h2>
+<p>如果你想要多试试这些 API 的用法，请跳转到 <a title=https://developer.mozilla.org/en/IndexedDB href=http://www.tfan.org/en/IndexedDB>参考手册</a> 以查看其他不同的用法。</p>
+<h2 id=See_also><span id=i-18>另请参阅</span></h2>
+<p>参考</p>
+<ul>
+<li><a title=https://developer.mozilla.org/en/IndexedDB href=http://www.tfan.org/en/IndexedDB>IndexedDB&nbsp;API&nbsp;参考</a></li>
+<li><a class=external title=http://www.w3.org/TR/IndexedDB/ href=http://www.w3.org/TR/IndexedDB/>Indexed Database API 规范</a></li>
+</ul>
+<p>教程</p>
+<ul>
+<li><a class=external title=http://www.html5rocks.com/tutorials/indexeddb/todo/ href=http://www.html5rocks.com/tutorials/indexeddb/todo/>A simple TODO&nbsp;list using HTML5 IndexedDB</a><span class=external>.&nbsp; 注意：该教程基于旧版本的规范因此无法在最新版的浏览器上正常工作-它仍然使用已经被移除的setVersion() 方法。<br>
+</span></li>
+<li><a title=http://www.html5rocks.com/en/tutorials/indexeddb/uidatabinding/ href=http://www.html5rocks.com/en/tutorials/indexeddb/uidatabinding/>Databinding UI Elements with IndexedDB</a></li>
+</ul>
+<p>相关文章</p>
+<ul>
+<li><a class=external title=http://msdn.microsoft.com/en-us/scriptjunkie/gg679063.aspx href=http://msdn.microsoft.com/en-us/scriptjunkie/gg679063.aspx>IndexedDB&nbsp;— The Store in Your Browser</a></li>
+<li><a class=external href=http://html5demos.tfan.org/storage>Storage – html5demos</a></li>
+</ul>
+<p>Firefox</p>
+<ul>
+<li>Mozilla <a class=link-https title="https://mxr.mozilla.org/mozilla-central/find?text=&amp;string=dom/indexedDB/.*\.idl&amp;regexp=1" href="https://mxr.mozilla.org/mozilla-central/find?text=&amp;string=dom%2FindexedDB%2F.*%5C.idl&amp;regexp=1">interface files</a></li>
+<li><a title=https://developer.mozilla.org/en/IndexedDB href=http://www.tfan.org/en/IndexedDB>Using JavaScript Generators in Firefox&nbsp;</a></li>
+</ul>
+<p>注：本文由范圣刚翻译自 MDN-&gt; IndexedDB -&gt; Using IndexedDB，因为水平有限，有翻译不当的地方请大家批评指正。英文原文链接：<a title="Using IndexedDB | MDN" href=https://developer.mozilla.org/en-US/docs/IndexedDB/Using_IndexedDB target=_blank>https://developer.mozilla.org/en-US/docs/IndexedDB/Using_IndexedDB</a></p>
+<div class="sharedaddy sd-sharing-enabled"><div class="robots-nocontent sd-block sd-social sd-social-icon sd-sharing"><h3 class=sd-title><span id=i-19>共享此文章：</span></h3><div class=sd-content><ul><li class=share-twitter><a rel="nofollow noopener noreferrer" data-shared=sharing-twitter-1371 class="share-twitter sd-button share-icon no-text" href="http://www.tfan.org/using-indexeddb/?share=twitter&amp;nb=1" target=_blank title="点击以在 Twitter 上共享"><span></span><span class=sharing-screen-reader-text>点击以在 Twitter 上共享（在新窗口中打开）</span></a><li class=share-facebook><a rel="nofollow noopener noreferrer" data-shared=sharing-facebook-1371 class="share-facebook sd-button share-icon no-text" href="http://www.tfan.org/using-indexeddb/?share=facebook&amp;nb=1" target=_blank title="点击以在 Facebook 上共享"><span></span><span class=sharing-screen-reader-text>点击以在 Facebook 上共享（在新窗口中打开）</span></a><li class=share-end></ul></div></div></div>
+<div id=jp-relatedposts class=jp-relatedposts style=display:block>
+ <h3 class=jp-relatedposts-headline><span id=i-20><em>相关</em></span></h3>
+<div class="jp-relatedposts-items jp-relatedposts-items-minimal jp-relatedposts-grid"><p class="jp-relatedposts-post jp-relatedposts-post0" data-post-id=1497 data-post-format=false><span class=jp-relatedposts-post-title><a class=jp-relatedposts-post-a href=http://www.tfan.org/indexeddb/ title="IndexedDB
+
+IndexedDB 是一个为了能够在客户端存储可观数量的结构化数据，并且在这些数据上使用索引进行高性…" data-origin=1371 data-position=0>IndexedDB</a></span><span class=jp-relatedposts-post-date>2013 年 1 月 5 日</span><span class=jp-relatedposts-post-context>在“HTML5”中</span><p class="jp-relatedposts-post jp-relatedposts-post1" data-post-id=2798 data-post-format=false><span class=jp-relatedposts-post-title><a class=jp-relatedposts-post-a href=http://www.tfan.org/fe-at-mar-2018/ title="2018年前端流行哪些技术？（搬运一篇我在知乎的回答）
+
+现在（2018年3月）前端流行哪些技术？或者说哪些技术是被前端同学们采用最多的？其实是有一些比较好的…" data-origin=1371 data-position=1>2018年前端流行哪些技术？（搬运一篇我在知乎的回答）</a></span><span class=jp-relatedposts-post-date>2018 年 3 月 21 日</span><span class=jp-relatedposts-post-context>在“前端”中</span><p class="jp-relatedposts-post jp-relatedposts-post2" data-post-id=1484 data-post-format=false><span class=jp-relatedposts-post-title><a class=jp-relatedposts-post-a href=http://www.tfan.org/pointer-lock-api/ title="Pointer Lock API
+
+指针锁定(以前叫做 鼠标锁定) 提供了一种输入方法，这种方法是基于鼠标随着时间推移的运动的（也就是说…" data-origin=1371 data-position=2>Pointer Lock API</a></span><span class=jp-relatedposts-post-date>2013 年 1 月 4 日</span><span class=jp-relatedposts-post-context>在“HTML5”中</span></p></div></div> </div>
+ 
+ <footer class=entry-meta>
+ <span class=published-date><i class=icon-calendar title=发布日期></i> <a href=http://www.tfan.org/using-indexeddb/ title=10:19><time class=entry-date datetime=2012-12-18T10:19:53+08:00 pubdate>2012 年 12 月 18 日</time></a></span><span class=byline><i class=icon-user></i> <span class="author vcard"><a class="url fn n" href=http://www.tfan.org/author/tfan/ title="按照 tfan 查看所有文章" rel=author>tfan</a></span></span>	<span class=cat-links><i class=icon-folder-open title=Categories></i>
+ <a href=http://www.tfan.org/category/html5/ class=cat-text>HTML5</a>
+ </span>
+<span class=tags-links><i class=icon-tags title=Tags></i>
+<a href=http://www.tfan.org/tag/html5/ rel="tag nofollow" class=tag-text>html5</a>, 
+<a href=http://www.tfan.org/tag/indexeddb/ rel="tag nofollow" class=tag-text>IndexedDB</a>
+</span>
+ <span class=comments-link><i class=icon-comment></i><a href=#comments>2s 个评论</a></span>
+ </footer>
+ </article>
+ 
+ <nav id=nav-below class="site-navigation post-navigation pager">
+ <h3 class=assistive-text>文章导航</h3>
+ 
+ <li class="nav-previous pull-left"><a href=http://www.tfan.org/no-setversion-now-onupgradeneeded/ rel=prev><span class=meta-nav>←</span> 没有 setVersion 了，现在是 onupgradeneeded !</a></li> <li class="nav-next pull-right"><a href=http://www.tfan.org/using-aircrack-ng-under-mac/ rel=next>如何在 MAC 下面使用 Aircrack-ng？ <span class=meta-nav>→</span></a></li>
+ 
+ </nav>
+ 
+ <div id=comments>
+ 
+ 
+ <h2 id=comments-title>
+ 2 个关于 “<span>使用 IndexedDB</span>” 的想法 </h2>
+ 
+ <ol class=commentlist>
+ <li class="comment even thread-even depth-1" id=li-comment-12928>
+ <article id=comment-12928 class=comment>
+ <footer>
+ <div class="comment-author vcard">
+ <img alt src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD//gA7Q1JFQVRPUjogZ2QtanBlZyB2MS4wICh1c2luZyBJSkcgSlBFRyB2NjIpLCBxdWFsaXR5ID0gOTAK/9sAQwADAgIDAgIDAwMDBAMDBAUIBQUEBAUKBwcGCAwKDAwLCgsLDQ4SEA0OEQ4LCxAWEBETFBUVFQwPFxgWFBgSFBUU/9sAQwEDBAQFBAUJBQUJFA0LDRQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQU/8AAEQgAKAAoAwEiAAIRAQMRAf/EAB8AAAEFAQEBAQEBAAAAAAAAAAABAgMEBQYHCAkKC//EALUQAAIBAwMCBAMFBQQEAAABfQECAwAEEQUSITFBBhNRYQcicRQygZGhCCNCscEVUtHwJDNicoIJChYXGBkaJSYnKCkqNDU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6g4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2drh4uPk5ebn6Onq8fLz9PX29/j5+v/EAB8BAAMBAQEBAQEBAQEAAAAAAAABAgMEBQYHCAkKC//EALURAAIBAgQEAwQHBQQEAAECdwABAgMRBAUhMQYSQVEHYXETIjKBCBRCkaGxwQkjM1LwFWJy0QoWJDThJfEXGBkaJicoKSo1Njc4OTpDREVGR0hJSlNUVVZXWFlaY2RlZmdoaWpzdHV2d3h5eoKDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uLj5OXm5+jp6vLz9PX29/j5+v/aAAwDAQACEQMRAD8A+t6KPxr0D4VeF7fVJrjUbtFmjgYJFGwyu/GSSPYY/OgDhvsFz5PnfZ5vJ6+ZsO386gr6awMY7V5N8VvC9vpklvqVoiwpO5jlRRhd+MggdsgHP0oA8+oo/GigA/CvR/hJ4hgtHudLndYmmcSQljgM2MFfrwMfjXnKIZHVEBZmOAo5JNez+DPh7aaHbR3N7EtxqLDcd4ysXsB6+/5UAdnz6V5Z8XPEMF19n0qB1laF/NmKnIVsEBfryc/hXqXHvXG+NPh7aa5bSXNlEtvqKgsNgwsvsR6+/wCdAHi/4UUroY3ZHBVlOCp4IPpRQB1Xwy05dR8WW5cBlt1afHuOB+RIP4V7hz60UUAHPrRz60UUAeH/ABN05dO8WXBQBUuEWfHucg/qCfxooooA/9k=" srcset class="avatar avatar-40 photo grav-hashed grav-hijack hoverZoomLink" height=40 width=40 id=grav-3ac009dbe4ed3e15aee7acb153c82e55-0 sizes> <cite class=name>扶苏</cite> </div>
+ 
+ <div class="comment-meta commentmetadata">
+ <a href=#comment-12928><time pubdate datetime=2018-05-23T15:49:00+08:00>
+ 2018 年 5 月 23 日 at 15:49 </time></a>
+ </div>
+ </footer>
+ <div class=comment-content><p>IDBKeyRange.lowerBound(‘Bill’)是指查找Bill后面的，而不是前面的~</p>
+</div>
+ <div class=reply>
+ <a rel=nofollow class=comment-reply-link href="http://www.tfan.org/using-indexeddb/?replytocom=12928#respond" data-commentid=12928 data-postid=1371 data-belowelement=comment-12928 data-respondelement=respond aria-label=回复给扶苏>回复</a> </div>
+ </article>
+ </li>
+ <li class="comment odd alt thread-odd thread-alt depth-1" id=li-comment-13926>
+ <article id=comment-13926 class=comment>
+ <footer>
+ <div class="comment-author vcard">
+ <img alt src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD//gA7Q1JFQVRPUjogZ2QtanBlZyB2MS4wICh1c2luZyBJSkcgSlBFRyB2NjIpLCBxdWFsaXR5ID0gOTAK/9sAQwADAgIDAgIDAwMDBAMDBAUIBQUEBAUKBwcGCAwKDAwLCgsLDQ4SEA0OEQ4LCxAWEBETFBUVFQwPFxgWFBgSFBUU/9sAQwEDBAQFBAUJBQUJFA0LDRQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQU/8AAEQgAKAAoAwEiAAIRAQMRAf/EAB8AAAEFAQEBAQEBAAAAAAAAAAABAgMEBQYHCAkKC//EALUQAAIBAwMCBAMFBQQEAAABfQECAwAEEQUSITFBBhNRYQcicRQygZGhCCNCscEVUtHwJDNicoIJChYXGBkaJSYnKCkqNDU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6g4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2drh4uPk5ebn6Onq8fLz9PX29/j5+v/EAB8BAAMBAQEBAQEBAQEAAAAAAAABAgMEBQYHCAkKC//EALURAAIBAgQEAwQHBQQEAAECdwABAgMRBAUhMQYSQVEHYXETIjKBCBRCkaGxwQkjM1LwFWJy0QoWJDThJfEXGBkaJicoKSo1Njc4OTpDREVGR0hJSlNUVVZXWFlaY2RlZmdoaWpzdHV2d3h5eoKDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uLj5OXm5+jp6vLz9PX29/j5+v/aAAwDAQACEQMRAD8A+t6KPxr0D4VeF7fVJrjUbtFmjgYJFGwyu/GSSPYY/OgDhvsFz5PnfZ5vJ6+ZsO386gr6awMY7V5N8VvC9vpklvqVoiwpO5jlRRhd+MggdsgHP0oA8+oo/GigA/CvR/hJ4hgtHudLndYmmcSQljgM2MFfrwMfjXnKIZHVEBZmOAo5JNez+DPh7aaHbR3N7EtxqLDcd4ysXsB6+/5UAdnz6V5Z8XPEMF19n0qB1laF/NmKnIVsEBfryc/hXqXHvXG+NPh7aa5bSXNlEtvqKgsNgwsvsR6+/wCdAHi/4UUroY3ZHBVlOCp4IPpRQB1Xwy05dR8WW5cBlt1afHuOB+RIP4V7hz60UUAHPrRz60UUAeH/ABN05dO8WXBQBUuEWfHucg/qCfxooooA/9k=" srcset class="avatar avatar-40 photo grav-hashed grav-hijack hoverZoomLink" height=40 width=40 id=grav-90f8943123f2675314064d0cedf4b6de-0 sizes> <cite class=name><a href=http://www.tfan.org/ rel="external nofollow ugc" class=url>Chan</a></cite> </div>
+ 
+ <div class="comment-meta commentmetadata">
+ <a href=#comment-13926><time pubdate datetime=2018-07-25T16:44:04+08:00>
+ 2018 年 7 月 25 日 at 16:44 </time></a>
+ </div>
+ </footer>
+ <div class=comment-content><p>谢谢分享，比官网文档更易理解</p>
+</div>
+ <div class=reply>
+ <a rel=nofollow class=comment-reply-link href="http://www.tfan.org/using-indexeddb/?replytocom=13926#respond" data-commentid=13926 data-postid=1371 data-belowelement=comment-13926 data-respondelement=respond aria-label=回复给Chan>回复</a> </div>
+ </article>
+ </li>
+ </ol>
+ 
+ 
+ 
+ <section id=respond>
+ <h3>回复</h3>
+ <p class=cancel-comment-reply><a rel=nofollow id=cancel-comment-reply-link href=#respond style=display:none>点击这里取消回复。</a></p>
+ <form action=http://www.tfan.org/wp-comments-post.php method=post id=commentform>
+ 
+ <label for=author class=control-label>名称（必填）</label>
+ <div class=input-prepend>
+ <span class=add-on><i class=icon-user></i> </span><input type=text class=text name=author id=author value size=22 tabindex=1 aria-required=true>
+ </div>
+ <label for=email class=control-group>电子邮件 (不会被公开)（必填）</label>
+ <div class=input-prepend>
+ <span class=add-on><i class=icon-envelope></i> </span><input type=email class=text name=email id=email value size=22 tabindex=2 aria-required=true>
+ </div>
+ <label for=url class=control-label>站点</label>
+ <div class=input-prepend>
+ <span class=add-on><i class=icon-home></i> </span><input type=url class=text name=url id=url value size=22 tabindex=3>
+ </div>
+ 
+ <label for=comment class=control-label>评论</label>
+ <div class=input-prepend>
+ <span class=add-on><i class=icon-comment></i> </span><textarea name=comment id=comment class=input-large rows=6 tabindex=4></textarea>
+ </div>
+ <input name=submit class="btn btn-primary" type=submit id=submit tabindex=5 value=提交评论>
+ 
+ <p style=display:none><p style=display:none></p></form>
+</section>
+</div>
+ 
+ </div>
+ 
+ <div id=sidebar class=span3>
+ <div id=secondary class="widget-area well" role=complementary>
+ <aside id=recent-posts-4 class="widget widget_recent_entries"> <h3 class=widget-title>近期文章</h3> <ul>
+ <li>
+ <a href=http://www.tfan.org/%e5%8f%91%e5%b8%83%e4%b8%a4%e4%b8%aa-stylelint-%e7%9a%84%e5%b0%8f%e7%a8%8b%e5%ba%8f%e9%85%8d%e7%bd%ae/>发布两个 stylelint 的小程序配置</a>
+ </li>
+ <li>
+ <a href=http://www.tfan.org/babel-preset-reactenv/>发布一个 babel preset 插件：babel-preset-reactenv</a>
+ </li>
+ <li>
+ <a href=http://www.tfan.org/less-vs-scss/>LESS 和 SCSS 有什么区别？</a>
+ </li>
+ <li>
+ <a href=http://www.tfan.org/a-javascript-coding-skill/>你见过哪些令你瞠目结舌的 JavaScript 代码技巧？</a>
+ </li>
+ <li>
+ <a href=http://www.tfan.org/fe-at-mar-2018/>2018年前端流行哪些技术？（搬运一篇我在知乎的回答）</a>
+ </li>
+ <li>
+ <a href=http://www.tfan.org/postcss-less2scss/>postcss-less2scss：将 Less 转换成 Scss 的 PostCSS 插件</a>
+ </li>
+ <li>
+ <a href=http://www.tfan.org/postcss-remove-global/>postcss-remove-global: 从代码中移除 :global 的 PostCSS 插件</a>
+ </li>
+ <li>
+ <a href=http://www.tfan.org/generator-criket/>generator-criket: 一个 Node.js 命令行项目脚手架</a>
+ </li>
+ <li>
+ <a href=http://www.tfan.org/frege/>Frege – 由 package.json 逆向生成 npm install/yarn add 安装命令的工具</a>
+ </li>
+ <li>
+ <a href=http://www.tfan.org/bower-install-ckeditor3/>bower install ckeditor3</a>
+ </li>
+ <li>
+ <a href=http://www.tfan.org/augustine/>Augustine – 一个简单的静态文件 HTTP Server</a>
+ </li>
+ <li>
+ <a href=http://www.tfan.org/mobilehtml5/>HTML5移动开发</a>
+ </li>
+ <li>
+ <a href=http://www.tfan.org/egg-offline-docs/>阿里 egg 项目离线文档</a>
+ </li>
+ <li>
+ <a href=http://www.tfan.org/shell-to-build-docker-and-export-image/>分享一个自动构建 docker 并导出 image 的 shell 脚本</a>
+ </li>
+ <li>
+ <a href=http://www.tfan.org/reactjs-offline-docs/>React.js 离线文档</a>
+ </li>
+ <li>
+ <a href=http://www.tfan.org/redux-%e7%a6%bb%e7%ba%bf%e6%96%87%e6%a1%a3/>Redux 离线文档</a>
+ </li>
+ <li>
+ <a href=http://www.tfan.org/offline-doc-webpack-js-org/>Webpack 离线文档</a>
+ </li>
+ <li>
+ <a href=http://www.tfan.org/linux-%e5%b9%b3%e5%8f%b0-llvmclang-%e6%8e%a8%e8%8d%90%e7%bc%96%e8%af%91%e9%80%89%e9%a1%b9%e5%8f%8a%e8%af%b4%e6%98%8e/>Linux 平台 LLVM+CLang 推荐编译选项及说明</a>
+ </li>
+ <li>
+ <a href=http://www.tfan.org/linux-quick-tips/>Linux(CentOS) Quick Tips</a>
+ </li>
+ <li>
+ <a href=http://www.tfan.org/second-trip-to-las-vegas/>第二次拉斯维加斯之行见闻</a>
+ </li>
+ <li>
+ <a href=http://www.tfan.org/frequently-used-mongodb-commands/>MongoDB 常用命令</a>
+ </li>
+ <li>
+ <a href=http://www.tfan.org/nodejs-in-practice-at-clouda-mobile-51cto/>演讲：Node.js 软件开发实践分享</a>
+ </li>
+ <li>
+ <a href=http://www.tfan.org/javascript-primitive-types-vs-reference-types/>JavaScript 中基本数据类型和引用类型的区别</a>
+ </li>
+ <li>
+ <a href=http://www.tfan.org/sencha-touch-2-x-faq-application-views-synta/>Sencha Touch 2.x FAQ – 多级目录下 Ext.application 中 views 的写法</a>
+ </li>
+ <li>
+ <a href=http://www.tfan.org/sencha-touch-2-x-faq-button-handler-and-controller-tap-event/>Sencha Touch 2.x FAQ – 同时定义了按钮的 handler 和 Controller 中的 tap 事件，那么当用户点击按钮时会执行哪一段处理代码？</a>
+ </li>
+ <li>
+ <a href=http://www.tfan.org/sencha-touch-2-x-faq-navigate-to-root-item/>Sencha Touch 2.x FAQ – navigationview 如何自任何节点下直接返回到根节点?</a>
+ </li>
+ <li>
+ <a href=http://www.tfan.org/sencha-touch-2-x-faq-namespacing-and-code-organization/>Sencha Touch 2.x FAQ – 把 app/view 下面的文件再用几个目录组织起来之后，程序应该相应的做什么样的修改？</a>
+ </li>
+ <li>
+ <a href=http://www.tfan.org/faq-configuration-required-to-add-view-to-tab-panel/>Sencha Touch 2.x FAQ – 增加一个 View 到 tabpanel 都需要哪些必备的配置信息 ？</a>
+ </li>
+ <li>
+ <a href=http://www.tfan.org/tips-textmate-sencha-touch-bundles/>Tips – TextMate 的 Sencha Touch bundles</a>
+ </li>
+ <li>
+ <a href=http://www.tfan.org/phonegap-bridge-principle-and-plugin/>PhoneGap 本机通信原理与插件系统</a>
+ </li>
+ <li>
+ <a href=http://www.tfan.org/wechat-on-nodejs-and-mongodb/>使用 Node.js 和 MongoDB 开发高性能微信公众平台应用</a>
+ </li>
+ <li>
+ <a href=http://www.tfan.org/using-xml2js-for-express-body-parser/>如何让 Node-express 支持 XML 形式的 POST 请求？</a>
+ </li>
+ <li>
+ <a href=http://www.tfan.org/install-activerecord-sqlserver-adapter-under-centos/>CentOS 下使 Rails 连接 SQL Server 数据库: 安装 activerecord-sqlserver-adapter gem 包</a>
+ </li>
+ <li>
+ <a href=http://www.tfan.org/node-js-express-weixin-weilearning/>Node.js + Node-express 开发的一个微信公众平台应用 – 中文和多国语言互译</a>
+ </li>
+ <li>
+ <a href=http://www.tfan.org/nodejs-running-on-port-80-with-apache/>在 CentOS 上使用 Apache 的 Proxy mode 使 Node.js 和 Apache 共用 80 端口</a>
+ </li>
+ <li>
+ <a href=http://www.tfan.org/from-sqlserver-to-mongodb-using-ruby-and-rails/>把 SQL Server 导入 MongoDB 的 Ruby 脚本</a>
+ </li>
+ <li>
+ <a href=http://www.tfan.org/update-adt-and-android-sdk-in-five-minutes/>三步升级已安装的 Android SDK 和 ADT 插件</a>
+ </li>
+ <li>
+ <a href=http://www.tfan.org/tips-npm-install-express/>Tips: Node.js 在 Mac 下 npm 安装 express 失败</a>
+ </li>
+ <li>
+ <a href=http://www.tfan.org/html5-device-access/>HTML5 设备访问入门</a>
+ </li>
+ <li>
+ <a href=http://www.tfan.org/web-storage/>Web Storage</a>
+ </li>
+ <li>
+ <a href=http://www.tfan.org/mobile-first/>Mobile First</a>
+ </li>
+ <li>
+ <a href=http://www.tfan.org/html5-offline-web-application/>HTML5 离线功能详解 – 构建 Offline Web Application</a>
+ </li>
+ <li>
+ <a href=http://www.tfan.org/manual-edit-filters-in-adblock/>Tips: 通过禁止访问被墙掉的链接来加快页面加载速度</a>
+ </li>
+ <li>
+ <a href=http://www.tfan.org/mobile-app-development-options-which-way-to-go/>移动应用开发方式的选择: Native, Hybrid, 还是 Mobile Web ?</a>
+ </li>
+ <li>
+ <a href=http://www.tfan.org/android-dashboards/>官方的 Android 平台版本及屏幕大小市场占有率统计报告</a>
+ </li>
+ </ul>
+ </aside> </div>
+ </div>
+ </div>
+ </div>
+ </div>
+ <div id=footer-container class=container-fluid>
+ <div id=footer-row class="row-fluid footerwidget">
+ </div>
+ <div id=footer2-row class="row-fluid footerwidget">
+ </div>
+ </div>
+</div>
+<footer class=colophon id=colophon role=contentinfo>
+ <div class=container-fluid>
+ <div class=row-fluid>
+ <div class=span5>
+ Copyright © 2020 技术博客 - 范圣刚. All Rights Reserved. </div>
+ <div class=span6>
+ </div>
+ </div>
+ </div>
+</footer>
+ <div style=display:none>
+ <div class=grofile-hash-map-3ac009dbe4ed3e15aee7acb153c82e55>
+ </div>
+ <div class=grofile-hash-map-90f8943123f2675314064d0cedf4b6de>
+ </div>
+ </div>
+ 
+ 
+ 
+ 
+<img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt=:) width=6 height=5 id=wpstats class=sf-hidden>
