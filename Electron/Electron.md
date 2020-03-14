@@ -450,10 +450,141 @@
 
     
 
-12. 
+12. 原生应用菜单Menu
+
+    - 一般写在渲染进程中
+
+    - Menu.buildFromTemplate(template)， `template`是一个`options`类型的数组，用于构建一个 MenuItem
+
+    - Menu.setApplicationMenu(menu)，设置在各个程序窗体的顶层，即是菜单栏
+
+      renderer.js
+
+    ``````javascript
+    const {remote}=require('electron');
+    const {Menu,MenuItem}=remote;
+    function openMenu(){
+        const template=[
+            {label:'diyige'},
+            {label:'点击测试',click:()=>{
+                console.log('点击事件触发')
+            }},
+            {rule:'undo'},
+            {rule:'ando'},
+            {label:'路由',type:'checkbox',checked:true},
+            {label:'chifa',type:'checkbox',checked:true},
+            {label:'guangjie',type:'checkbox',checked:true},
+            new MenuItem({label:'menuItem',click:()=>{
+                console.log('click menuItem')
+            }}),
+           	{
+                label:'子菜单测试',
+                submenu:[
+                {label:'子菜单1'},
+                {label:'子菜单2'},
+                {label:'子菜单3'}
+            ]}
+        ];
+        const menu=Menu.buildFromTemplate(template);
+       // Menu.setApplicationMenu(menu);
+        menu.popup();
+        
+    }
+    
+    ``````
+
+    
+
+13. net 网络
+
+    - 支持wpad协议和代理pac文件
+
+    - https请求的自动隧道
+
+    - 支持basic,digest,ntlm,kerberos或协商身份验证方案对代理进行身份验证
+
+    - 支持传输监控代理，类似fiddler代理，用于访问控制和监视
+
+    - new ClientRequest(options)对象，
+
+      renderer.js
+
+      ``````javascript
+      const {net}=require('electron').remote;
+      
+      const request=net.request('https://baidu.com');
+      
+      request.on('data',(response)=>{
+          console.log(`statusCode:+${response.statusCode}`);
+          console.log(`header:+${JSOn.stringify(response.headers)}`)
+          response.on('data',(chunk)=>{
+              console.log('接收的数据',chunk.toString());
+              
+          })
+          response.on('end',()=>{
+              console.log('数据接收完毕')
+          })
+      })
+      request.on('end')
+      ``````
+
+      
+
+      
 
     
 
 # 与高级框架集成
 
+## React
+
+```javascript
+//安装 git clone --depth 1 --single-branch https://github.com/electron-react-boilerplate/electron-react-boilerplate.git electron-react-start
+// cd electron-react-start 
+// yarn  安装依赖
+//yarn dev  开发启动
+
+```
+
+
+
+## Vue(cli 2.X)
+
+``````javascript
+// npm i vue-cli -g
+// vue init  simulatedgreg/electron-vue electron-vue-start
+//cd electron-vue-start
+// yarn  安装
+// yarn dev 
+
+//解决Windows无法编辑node-sass
+//npm i -g node-gyp
+//npm i -g --production windows-build-tools
+``````
+
+
+
+
+
 # 应用打包发布
+
+## React
+
+```javascript
+//resources文件，打包生成的exe文件所在
+//package.json文件
+//*icns是MAC的图标，*ico是window图标
+//dmg,mac的图标位置；directories，指定的生成文件夹
+```
+
+![directories.png](directories.png)
+
+![dmg](dmg.png)
+
+## Vue
+
+```javascript
+//打包yarn build
+//package.js文件
+```
+
