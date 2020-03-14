@@ -118,7 +118,7 @@ https://developers.google.com/web/tools/chrome-devtools#top_of_page
 
 # Cache原理
 
-
+[九种缓存](九种浏览器端缓存机制知多少 _ ouvenzhang的博客 ( 上午12_00_24).html)
 
 # 快速转存站点资源
 
@@ -132,8 +132,4 @@ http://ssl-checker.online-domain-tools.com/
 
 # Audit
 
-使用
-
-
-
-社区分享的YSlow
+![chrome-audit](chrome-audit.png)
