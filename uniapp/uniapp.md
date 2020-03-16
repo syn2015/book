@@ -279,13 +279,41 @@ js
 
 # 路由跳转
 
+- uni.readirecTo()重定向，不受栈最大层数的影响；
+- uni.switchTab()跳转tab页面
+- uni.navigateTo() 跳转页面，存入栈中（最大10层）
 
+```javascript
+method:{
+    
+    toPath(){
+        uni.nativateTo({
+            url:'../../page/page'
+        })
+        uni.switchTab({
+            url:'../page/page'
+        })
+    }
+}
+```
 
 
 
 # 常用组件
 
+```vue
+ 
+```
+
+
+
 # ScrollView使用
+
+```vue
+
+```
+
+
 
 # 双联动实现
 
