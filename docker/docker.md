@@ -1,10 +1,162 @@
 # docker命令
 
+```javascript
+//yum包更新到最新
+yum update
+//yum-util提供了yum-config-manager功能，另两个是devicemapper驱动所依赖的
+yum install -y yum-utils device-mapper-persistent-data lvm2
+//设置yum源
+yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+//安装
+yum install -y docker-ce
+//验证
+docker -v
+```
+
+```javascript
+//启动
+systemctl start docker
+//查看状态
+systemctl status docker
+//停止
+systemctl stop docker
+//重启
+systemctl restart docker
+//开机启动
+systemctl enable docker
+```
+
+镜像命令
+
+```javascript
+//查看
+docker images
+//查看所有ID
+docker images -q
+//搜索
+docker search 镜像文件名称
+//拉取
+docker pull 镜像文件名称:版本号
+//删除
+docker rmi 镜像文件名称或ID
+//全部删除
+docker rmi `docker images -q`
+```
+
+容器命令
+
+- docker run 参数
+
+  -i 保持容器运行；
+
+  -t 重新分配一个伪输入终端
+
+  -it 创建并进入容器中，退出则关闭容器
+
+  -d 守护模式运行容器，创建容器并后台运行
+
+  -it是交互式容器，-id是守护式容器
+
+  --name 为容器命名
+
+  
+
+```javascript
+//查看当前运行的容器
+docker ps
+//查看历史的容器
+docker ps -a
+//创建并立即进入容器，退出则容器关闭
+docker run -it --name=c1 centos:7 /bin/bash
+//创建并后台运行容器
+docker run -id --name=c1 centos:7 /bin/bash
+//进入容器
+docker exec -it 容器名称 /bin/bash
+//退出容器
+ exit
+//启动
+docker start 容器名称
+//停止
+docker stop 容器名称 
+//删除
+docker rm  容器名称或iD
+//删除
+docker rm  `docker ps -aq`
+//查看容器ID
+docker ps -aq
+//查看容器信息
+docker inspect 容器名称
+```
+
+
+
 # docker容器数据卷
+
+1. 数据卷是宿主机中的一个目录或文件
+
+2. 容器目录和数据卷目录绑定后，对方的修改会立即同步
+
+3. 一个数据卷可以被多个容器同时挂载
+
+4. 一个容器也可以被挂载多个数据卷
+
+5. 数据卷的作用
+
+   - 容器数据持久化
+   - 外部机器和容器间接通信
+   - 容器之间数据交换
+
+6. 配置数据卷
+
+   - 目录必须是绝对路径
+   - 不存在的目录会自动创建
+   - 可以挂载多个数据卷
+   - 宿主机目录可以使用~，容器目录不允许
+
+   ``````javascript
+   docker run -it --name=容器名称  -v 宿主目录：容器目录 镜像名称 /bin/bash
+   
+   //一个容器被挂载多个数据卷
+   docker run -it --name=c2 \
+    -v ~/data2:/root/data2 \
+    -v ~/data3:/root/data3 \
+    centos:7
+   //一个数据卷可以被多个容器同时挂载
+   docker run -it --name=c2 -v ~/data
+   
+   ``````
+
+   
+
+7. 数据卷容器
+
+   - 创建一个容器，挂载一个目录，让其他容器继承自该容器（--volume-from)
+
+   - 解决多容器进行数据交换
+     - 多个容器挂载同一个数据卷
+     - 使用数据卷容器
+
+   `````javascript
+   //创建数据卷容器，使用-v设置数据卷（容器目录）
+   docker run -it --name=c3 -v /volume centos:7 /bin/bash
+   //创建启动c1 c2容器，使用--volume-from 参数设置数据卷
+   docker run -it --name=c1 --volumes-from c3 centos:7 /bin/bash
+   docker run -it --name=c2 --volumes-from c3 centos:7 /bin/bash
+   
+   `````
+
+   
+
+   
 
 # docker应用部署
 
 ## mysql
+
+1. 容器内的网络服务和外部机器不能直接通信
+2. 外部机器和宿主机器可以直接通信
+3. 宿主机和容器可以通信
+4. 外部机器访问容器和宿主机的映射端口，从而简洁访问容器的服务
 
 - -p 3307：3306 ：将容器的3306端口映射到宿主机的3307端口
 - -v $PWD/conf:/etc/mysql/conf.d :将主机当前目录下的conf/my.cnf 挂载到容器的/etc/mysql/my.cnf 配置目录
@@ -15,7 +167,6 @@
 ``````javascript
 //搜索镜像
 docker search mysql
-
 //拉取镜像
 docker pull mysql:5.6
 //在/root目录下创建mysql目录用于存储mysql数据信息
@@ -34,7 +185,9 @@ mysql:5.6
 docker exec -it c_mysql /bin/bash
 ``````
 
-
+- mysql -uroot -p123456
+- show databases;
+- create database db1;
 
 ## tomcat
 
@@ -60,6 +213,82 @@ tomcat
 
 
 ## nginx
+
+
+
+```javascript
+//
+docker search nginx
+//
+docker pull nginx
+
+//端口映射，目录映射，nginx目录存储nginx数据信息
+mkdir ~/nginx
+cd ~/nginx
+mkdir conf
+cd conf/
+//创建nginx.conf文件
+vim nginx.conf
+
+
+
+```
+
+```javascript
+user  root;
+worker_processes  1;
+ 
+error_log  /var/log/nginx/error.log warn;
+pid        /var/run/nginx.pid;
+ 
+ 
+events {
+    worker_connections  1024;
+}
+ 
+ 
+http {
+    include       /etc/nginx/mime.types;
+    default_type  application/octet-stream;
+ 
+    log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+                      '$status $body_bytes_sent "$http_referer" '
+                      '"$http_user_agent" "$http_x_forwarded_for"';
+ 
+    access_log  /var/log/nginx/access.log  main;
+ 
+    sendfile        on;
+    #tcp_nopush     on;
+ 
+    keepalive_timeout  65;
+ 
+	autoindex  on;
+	
+    #gzip  on;
+ 
+    include /etc/nginx/conf.d/*.conf;
+ 
+    client_max_body_size 100M;
+ 
+    client_header_buffer_size    128k;
+    large_client_header_buffers  4  128k;
+}
+
+```
+
+
+
+```javascript
+docker run -it --name=c_nginx  \
+-p 80:80 \
+-v $PWD/conf/nginx.conf:/etc/nginx/nginx.conf  \
+-v $PWD/logs:/var/log/nginx  \
+-v $PWD/html:/usr/share/nginx/html  \
+nginx
+```
+
+- -p 80:80 容器的80端口映射到宿主机的80端口
+- -v $PWD/conf/nginx.conf:/etc/nginx/nginx.conf  \  将主机当前目录下的/conf/nginx.conf挂载到当前目录
 
 ## redis
 
