@@ -596,7 +596,7 @@ iptables -L -n
 rpm管理
 
 ``````javascript
-//查询
+//查找己安装软件包的命令
 rpm -qa|grep 关键字
 -a,全部
 -q,查询
@@ -808,7 +808,365 @@ tcpdump -i 网卡设备名
 
 # Shell
 
+```javascript
+// 更改shell解释器，可以指定用户不能登陆
+usermod -s /sbin/nologin 用户名 
 
+//#!/bin/bash ,指定解释器，#代表注释,sh为后缀； ;可加不可加，
+
+//添加执行权限 
+chmod +x 文件名.sh
+//执行
+./文件名.sh或绝对路径或/bin/bash 脚本路径
+
+//创建test2.sh文件，实现一个shelltest用户，再家目录创建文件
+
+#！/bin/bash
+useradd shelltest;
+touch /home/shelltest/try.html
+
+
+
+
+
+```
+
+
+
+
+
+1. 变量
+
+```javascript
+//使用 变量名=变量值 定义，$变量名来使用
+//等号左右不能有空格
+//双引号可以解析变量，实现转义；单引号不解析变量
+//数字和字符一起输出，需要使用引号引起来
+
+//``反引号使用外部命令
+#!/bin/bash
+dt=`date +'%F %T'`
+echo $dt
+
+//readonly 只读变量
+#！/bin/bash
+a=10
+readonly a
+a=20
+echo $a
+
+
+//接收用户输入 read -p 提示信息 变量名
+#!/bin/bash
+
+read -p '请输入文件路径：'  filepath
+
+touch $filepath
+echo '创建成功：'
+ls -l $filepath
+
+//删除变量 unset 变量名
+
+#！/bin/bash
+a=30
+echo $a
+unset a
+echo '删除变量后'
+echo $a
+echo '输出删除变量后'
+
+
+
+
+
+
+```
+
+条件判断
+
+```javascript
+//多行
+if [condition]
+
+then command1
+	 command2
+     ……
+else
+    command
+fi
+//单行
+if[condition];then command; fi
+//多条件
+if [condition1]
+then
+	command1
+elif [condition2]
+then
+	command2
+else
+    commandN
+fi
+```
+
+运算符
+
+```javascript
+//条件表达式放在方括号之间，并且有空格。
++，-，*，/，%，=，==，！=
+//表达式和运算符之间有有空格
+`expr 2 + 2`
+`expr 5 - 3`
+//*需要转义
+`expr 2 \* 25`
+`expr 3 / 2`
+`expr 5 % 2`
+`[expr 5 == 2]`
+`[expr 5 != 2`
+
+//shell 计算器
+
+//关系运算符只支持数字或值为数字的字符串
+//-eq 相等，-ne不相等，-gt,左边大于右边，-lt,右边大于左边，-ge,大于等于右边，-le小于等于右边
+//equal,not equal,great than,less than,great than or equal,less than or equal
+#!/bin/bash
+a=10,
+    b=20,
+    echo "a=$a"
+	echo "b=$b"
+if [$a -eq $b]
+then
+	echo 'a=b'
+elif [$a -ne $b]
+then
+	echo 'a -ne b'
+elif [$a -gt  $b]
+then
+	echo 'a -gt b'
+else
+    echo 'a 不等于 b'
+if
+```
+
+逻辑运算符
+
+```javascript
+//非运算 !
+[! false]
+
+//或运算-o
+[10 -lt 20 -o 10 gt 100]
+
+//与运算 -a
+[ 10 -lt 20  -a 10 gt 1000]
+```
+
+字符串运算符
+
+```javascript
+// = 相等
+[ '10' = '20' ]
+
+// != 不相等
+[ '10' != '20']
+ 
+// -z 长度是否为0
+[ -z '10' ]
+// -n 长度不为0 返回true
+[ -n '10']
+// str 是否为空
+[ '10']
+```
+
+文件测试符
+
+```
+// -b file 是否块设备
+[ -b file]
+
+//-c file 是否字符设备
+[ -c file]
+
+// -d file 是否是目录
+[ -d file ]
+
+// -f file  是否是普通文件（）
+[ -f file ]
+// -r file 是否可读
+[ -r file]
+//-w file  是否可写
+[ -w file ]
+//-x file 是否可执行
+[ -x file]
+// -s file 是否为空，文件大小为0，不为空返回true
+[ -s file]
+// -e file 目录或文件是否存在
+[ -e file ]
+```
+
+附带参数
+
+```javascript
+//$数字，表示传入的参数  数字从0开始
+```
+
+# 数据库mysql
+
+```javascript
+//确保时间准确
+
+
+//源码包
+tar -zxvf *.tar.gz
+tar -jxvf *.tar.bz2
+-z或--gzip或--ungzip:通过gzip指令处理文件
+-x或--extract或--get ：从文件中还原文件
+-v：显示操作过程
+-f或--file，指定一个文件
+-j：支持bzip2解压文件
+//cd 源码目录，配置，编译，安装
+cd  源码目录
+
+//配置 配置命令有config或configure或bootstrap
+./configure --prefix=/usr/local/ncurses
+//编译安装 make或 bootstrap  make install 或bootstrap install
+make && make install
+
+--prefix= 指定安装目录
+--with-PACKAGE 报名=需要的依赖的目录
+--without-PACKAGE 包名
+
+
+//二进制包rpm
+//查找己安装软件包的命令
+rpm -qa|grep 关键词
+//卸载软件/强制卸载
+rpm -e 关键字 [--nodeps]
+//安装软件
+rpm -ivh 完整名称
+//更新软件
+rpm -uvh 完整名称
+//查找文件属于哪个包
+rpm -qf 文件路径
+
+//lynx 命令行浏览器
+lynx --dump 网址
+
+
+
+//yum安装
+//列出已安装和可安装软件列表，需要联网
+yum list
+//搜索软件包
+yum search 软件包
+yum [-y] install 包名
+yum [-y] update 包名
+yum [-y] remove 包名
+-y, 默认全部同意，不建议加该选项
+//
+yum install firefox 
+
+
+//mysql服务端 3306端口号
+yum install mysql-server
+
+//mysql初始化
+service mysqld start
+mysql_se  然后按下tab案件
+//执行
+mysql_setpermission
+
+//数据库目录： /var/lib/mysql
+//配置文件：/etc/my.cnf
+//登陆
+mysql -u 用户名 -p 密码
+//退出
+exit
+```
+
+## 数据库操作
+
+- msyql 不区分大小写
+- 行尾加分号
+
+```javascript
+//列出所有数据库
+show databases;
+//创建数据库
+crete database 库名;
+//删除数据库
+drop database 库名;
+//切换到数据库
+use 库名;
+
+
+
+//表操作
+use 数据库名
+
+//列出所在数据库的所有表
+show tables;
+create table 表名称
+（
+	列1 数据类型 ，
+    	列1 数据类型 ，
+        	列1 数据类型 
+            ...
+            primary key(列名)
+）
+//数据类型
+int,char(定长),varchar(不定长)等
+//列的特性
+not null,auto_increment
+//查看表结构
+desc 表名;
+//删除表
+drop table [if exists] 表名;
+//创建表
+create table xg(
+	id int(11) not null auto_increment,
+    username varchar(20) ,
+        password char(32),
+            primary key(id)
+
+);
+
+//字段操作
+//插入字段
+
+insert into 表名 values (值1，值2);
+insert into 表名（列1，列2，列3） values (值1，值2，值3);
+//
+
+insert into xg(`username`,`password`) values ('zhangsan','123456');
+
+//查询记录
+select 列名称 from 表名 where 条件;
+
+//更新记录
+update 表名 set 列1=值1，列2=值2 where 列名称=值;
+update xg set password=666666,username=666666 where id>=1
+//删除记录
+delete from 表名 where 列名=值;
+delete from xg where id=2;
+ 
+
+```
+
+备份和还原:
+
+``````javascript
+//命令行下进行
+//全量备份
+mysqldump -uroot -p明文密码 -A >备份文件路径.sql
+
+//指定库备份
+mysqldump -uroot -p明文密码 库名 > 备份文件路径.sql
+
+//多个库备份
+mysqldump -uroot -p明文密码 --databases 库1 库2 >备份文件路径.sql
+//每一分钟自动备份
+
+``````
 
 
 
