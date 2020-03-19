@@ -179,7 +179,7 @@
 
    - killall 进程名称
 
-10. ipconfig
+10. ipconfig或 ip addr 
 
     -  获取网卡信息
 
@@ -283,6 +283,8 @@ killall httpd
    //vim +数字 文件    打开文件并定位指定行
    //vim +/关键字 文件  打开文件并高亮关键字
    
+   //visudo 打开sudo配置文件，输入/关键字 可以定位关键字所在行
+   
    //行首 shift+6 （^)
    //行尾 shift+4 ($)
    //首行 gg
@@ -382,9 +384,433 @@ killall httpd
    
    //保存退出，：x在没有修改的时候，文件修改时间不变
    :x
+   //：X 表示加密文件
+   ``````
+
+# linux自有服务
+
+## 运行级别
+
+1. init（initialize）进程，进程号ID是1
+
+2. 对应的配置文件  inittab(系统运行级别配置文件) ，/etc/inittab
+
+   ```javascript
+   //
+   0 关机级别
+   1 单用户模式
+   2 多用户模式，不联网
+   3 多用户模式，可联网
+   4 保留模式
+   5 X11 图形化模式
+   6 重启级别
+   //命令，临时修改
+   init 0 关机
+   init 3 切换到命令行模式
+   init 5 图形界面
+   init 6 重启电脑
+   
+   
+   
+   ```
+
+## 用户和用户组
+
+1. /etc//passwd,用户的关键信息；/etc/group,用户组的关键信息；/etc/shadow, 用户密码信息
+
+   ```javascript
+   //passwd文件
+   用户名：密码占位：用户ID：用户组ID：注释：对应的home目录 ：解释器shell
+   //用户的主组/etc/passwd文件，附加组在/etc/group文件
+   用户组名：密码占位：用户组ID：组内用户名
+   ```
+
+   
+
+2. 用户管理
+
+   ``````javascript
+   //添加用户
+   useradd 选项 用户名
+   -g，指定用户的用户主组,用户组ID或用户组名
+   -G，用户的附加组，
+   -u,用户的ID
+   -c,添加注释
+   //useradd zhangsan ;useradd -g 501 -G 500 -u 666 list;
+   //修改
+   usermod 选项 用户名
+   -g，指定用户的用户主组,用户组ID或用户组名
+   -G，用户的附加组，
+   -u, 用户的ID
+   -l，修改用户名
+   //usermod -g 500 -G 501 zhangsan; usermod -l   newwangerma zhangsan
+   
+   //设置密码
+   passwd 用户名
+   //passwd wangerma
+   //切换用户,switch user。默认切换到root用户
+   su [用户名]
+   
+   //删除用户
+   userdel 选项  用户
+   -r,删除用户的同时删除home目录
+   //userdel -r wangerma
+   //删除正在登陆的用户
+   ps -ef|grep 用户名
+   kill 删除其父进程的进程ID
+   userdel -r 用户名
    ``````
 
    
+
+3. 用户组管理
+
+   - /etc/group文件
+
+   ``````javascript
+   //用户的主组/etc/passwd文件，附加组在/etc/group文件
+   用户组名：密码占位：用户组ID：组内用户名
+   //添加
+   groupadd 选项 用户组名
+   -g ,设置用户组ID
+   //groupadd  Administrators
+   //编辑
+   groupmod 选项 用户组名
+   -g ,设置用户组ID
+   -n ,设置新的用户组名称
+   //groupmod -g 502 -n admins Administrators
+   //删除
+   groupdel 用户组名
+   //删除的组属于某个用户的主组时，需要先移除组内，再删除
+   
+   ``````
+
+## 网络设置
+
+1. /etc/sysconfig/network-scripts/   文件中，**ifcfg-网卡名称**
+
+   ``````javascript
+   //onboot,是否开机启动；bootproto,ip分配方式，hwaddr,硬件地址
+   
+   //重启网卡
+   /etc/init.d/目录，服务的快捷方式
+   
+   /etc/init.d/network restart
+   //停止网卡
+   ifdown 网卡名
+   //开启网卡
+   ifup 网卡名
+   
+   //创建软连接
+   ln -s 深目录  快捷方式
+   
+   ``````
+
+## SSH（secure shell）
+
+1. /etc/ssh/ssh_config 文件
+
+   ``````javascript
+   //服务启动/停止/重启
+   service sshd start /stop/restart
+   ``````
+
+2. pscp.exe
+
+   ``````javascript
+   //xshell工具自带文件传输
+   ``````
+
+   
+
+## 设置主机名
+
+``````javascript
+//临时主机名。切换用户之后生效
+hostname 新主机名
+su  之后生效
+//永久设置，需要重启
+/etc/sysconfig/network 文件
+ 修改hostname字段
+ //ect/hosts文件 是Linux的hosts文件
+
+``````
+
+## chkconfig
+
+``````javascript
+//开机启动服务查询 ,各个模式下的开启状态
+chkconfig --list 
+//删除服务
+chkconfig --del 服务名
+
+//添加开机启动服务
+chkconfig --add 服务名
+
+//指定开机启动再3，5模式下
+chkconfig --level 35  服务名 on或off
+//chkconfig --level 35  httpd on 
+//chkconfig --level 5 httpd off 
+
+``````
+
+## ntp 时间同步
+
+```javascript
+//同步时间
+ntpdate 时间服务器的域名或IP地址
+//设置时间同步服务
+service ntpd start  或/etc/init.d/ntpd start
+//设置开机启动
+chkconfig --list |grep ntpd
+chkconfig --level 35 ntpd on 
+//systemctl list-dependencies
+
+```
+
+防火墙
+
+``````javascript
+//centos 6 iptables
+//centos 7 firewalld
+
+///etc/init.d/iptables  start/restart/stop
+
+//chkconfig --list | grep iptables
+
+//查看iptables的状态 centos7.x是 systemctl status firewalld.service
+service iptables status
+
+//查看规则 centos7 :systemctl --list-all
+iptables -L -n
+-L,列出规则
+-n,单词表达形式改成数字形式显示
+
+//设置防火墙规则
+
+//保存规则
+/etc/init.d/iptables save
+
+``````
+
+rpm管理
+
+``````javascript
+//查询
+rpm -qa|grep 关键字
+-a,全部
+-q,查询
+
+//卸载
+rpm -e 软件名
+
+//强制卸载
+rpm -e 软件名 --nodeps
+
+//安装
+rpm -ivh 软件包完整名称
+-i ,安装
+-v ,显示进度条
+-h ,显示#进度条
+
+//查看块状设备 （list block devices ):MountPoint 挂载点
+lsblk
+//解挂载
+umount 挂载点
+//挂载
+mount 设备原始地址（统一在/dev下，依据name确定）  目标挂载点（/mnt下边）
+``````
+
+## cron/crontab计划任务
+
+- 任何用户可以创建自己的计划任务
+
+- 禁用 配置文件： /etc/cron.deny 文件
+
+  ``````javascript
+  //一行一个被禁用计划任务的用户名
+  
+  ``````
+
+- （优先级高）允许配置文件 /etc/cron.allow 文件，需要自行创建
+
+  - 一行一个允许执行计划任务的用户名
+
+``````javascript
+//列出
+crontab 选项
+-l,list,列出指定用户的计划列表
+-e,edit,编辑计划列表
+-u,user，当前用户或指定用户
+//编辑
+//一行一个计划，分 时 日 月 周  执行的命令
+0 0 * * * reboot
+//取值范围
+分：0~59，
+小时：0~23，
+日：1~31
+月：1~12
+周：0~6，0表示周日
+//四个符号
+* 表示取值范围中的每一个数字
+- 区间表达式
+/ 表示每多少个
+, 表示多个取值
+//每月1，10，22号的4：45 重启服务
+45 4 1，10，22， * * service network restart
+//每周六，周日的1：10重启服务
+10 1 * * 6，0 service network restart
+//每天18：00到23：00，每隔30分钟重启service
+*/30 18-23 * * * service network restart
+//每隔两天的上午8点到11点的第3和第15分钟执行一次重启
+3，15 8-12 */2 * * reboot
+//每1分钟 向home目录的RT.txt中输入时间信息
+*/1 * * * * date +'%F %T'>> /root/RT.txt
+*/1 * * * * ls ~>> /root/RT.txt
+
+
+``````
+
+# 权限管理
+
+1. 权限
+   - read ，列出目录机构和查看文件内容
+   - write，删除，移动，创建，移动文件夹和编辑文件
+   - execute，执行权限
+2. 身份
+   - owner，默认文件的创建者
+   - group，同文件所有者的同组用户
+   - others，撇除了文件所有者和同组用户的其他用户
+   - root，最高权限
+
+## 权限指令
+
+![ls](ls_command.jpg)
+
+![权限查看](权限查看.png)
+
+![文件类型](文件类型.png)
+
+![设置权限](设置权限.png)
+
+
+
+![数字权限](数字权限.png)
+
+``````javascript
+// 查看权限
+ls -l 等价于ll
+
+//设置权限，文件所有者或者root才能设置权限
+chmod 选项 权限模式 文档
+-R 表示递归设置权限
+
+//字幕形式设置权限
+//给文件设置权限：所有者有全部权限，同组有读和执行，其他有只读
+chmod u+x，g+rx,o+r 文件名
+或 chmod u=rwx,g=rx,o=r 文件名
+//给所有人设置
+chmod a=rwx 文件名
+//尝试一下命令
+chmod +x 文档名
+chmod a=x 文档名
+chmod a+x 文档名
+//数字模式设置权限
+//所有者可读可写可执行7，同组可读可执行5，其他可读4
+chmod 754 文件
+//不合理的权限设置，可写可执行但不可读；2和3的出现往往不合理（可写可执行，可写不可执行）
+chmod 731 文件
+
+//755 的文件夹下，有777的文件。该文件可读可写但是不能删除该文件
+
+``````
+
+- 属主和属组
+
+```javascript
+
+//修改属主
+chown 指定的属主名 文档路径
+-R 修改文件夹需要加-R
+
+//修改所属用户组
+chgrp 指定的用户组 文档路径
+-R 修改文件夹需要加-R
+
+//同时修改用户和用户组
+chown 用户名：用户组 文档路径
+-R 修改文件夹需要加-R
+
+```
+
+- 其他
+
+```javascript
+//sudo  (switch user do)
+//配置sudo文件 /etc/sudoers 文件
+
+//打开sudo文件
+visudo 
+ 
+//配置  如 root  All=(All)  All   用户组的表示  %user  All=(All)  All
+用户名 允许登陆的主机=(以某某的身份执行)  当前用户可以执行的命令
+
+//sudo规则，写命令的完整路径（which 命令）
+test All=(All)   which查出的命令1路径,which查出的命令2路径,which查出的命令3路径,!/usr/bin/passwd root
+
+//设置sudo规则后，执行命令，输入当前用户的密码
+sudo  执行的命令 
+
+//sudo之后，修改了root的密码
+test All=(All) !/usr/bin/passwd, /usr/bin/passwd [A-Za-z]*,!/usr/bin/passwd root
+
+//查看特殊权限
+sudo -l
+
+```
+
+# 网络管理
+
+- IP是32位，MAC是48位（十六进制）
+- 网络寻址地址，IP是第三层网络层，MAC是第二层数据链路层
+
+![IP](IP.png)
+
+
+
+``````javascript
+//ping命令
+ping 主机名或域名或IP
+//netstat 连接信息
+netstat -tnlp 
+
+netstat -an 
+
+
+//traceroute 查找目标主机所有网关
+traceroute 域名或IP
+//window下，tracert 敏玲
+
+
+//arp地址解析，根据IP获取物理地址的协议
+//查看本机缓存的mac地址
+arp -a 
+//删除
+arp -d 指定删除的mac地址
+
+//tcpdump 抓包
+tcpdump 协议 port 端口号
+tcpdump 协议 port 端口  host 地址
+tcpdump -i 网卡设备名
+
+
+``````
+
+# Shell
+
+
+
+
 
 vps
 
