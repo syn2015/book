@@ -1164,9 +1164,136 @@ mysqldump -uroot -p明文密码 库名 > 备份文件路径.sql
 
 //多个库备份
 mysqldump -uroot -p明文密码 --databases 库1 库2 >备份文件路径.sql
-//每一分钟自动备份
+//每一分钟自动备份一次
+#!/bin/bash
+filename='test_'`data`+'%Y%m%d%H%M%S''.sql'
+mysqldump -uroot -p密码 test>/root/$filename
+//计划任务执行脚本
+#分 时 日 月 周
+* * * * * /root/test.sh
+
+
+//还原
+
+//mysql命令行下的source，需要指定数据库use 库名或create database 库名;
+srouce < 备份文件路径
+
+//系统命令行
+mysql -uroot -p密码 库名 <备份文件路径\
+
+//设置mysql连接字符集,mysql命令行
+set names utf8;
+
+
+//远程连接mysql
+//B/C管理工具，PMA
+//C/S管理工具，navicat,mysql workbrach
+
+//允许mysql远程登陆
+use mysql
+select host,user,password from user;
+//修改其中一条记录的host为%
+update user set host='%' where host='某某';
+//刷新权限表,mysql命令行
+flush privileges;
+
 
 ``````
+
+# Nginx
+
+![zlib](zlib.png)
+
+```javascript
+//默认下载到当前目录 /usr/local/src
+wget 地址 
+//解压
+tar -zxvf 地址
+cd 目录
+//编译
+ ./configure --prefix=/usr/local/nginx
+//安装 pcre模块
+yum install pcre-devel
+.configure --prefix=/usr/local/nginx --with-pcre=pcre包路径或者不写让系统自己找
+//安装 zlib模块
+yum install zlib-devel
+//zlib源码包
+wget zlib源码包
+.configure --prefix=/usr/local/nginx --with-pcre --with-zlib=zlib源码包路径
+
+//nginx启动命令
+/usr/local/nginx/sbin/nginx 
+
+//重启nginx配置文件
+/usr/local/nginx/sbin/nginx -s reload 
+//停止nginx服务
+netstat -tunlp |grep 80
+ps -ef|grep nginx
+kill 进程号 
+//卸载编译软件，必须先停止其服务
+rm -rf 软件安装目录
+
+
+//查找是否安装gcc
+yum list installed |grep cc
+
+
+
+//端口占用
+netstat -tunlp |grep 80
+
+
+```
+
+
+
+# LAMP
+
+- LAMP:  linux + Apache +mysql+PHP
+- LNMP:  linux+nginx+mysql+php-fpm
+- LNMPA: linux+nginx+mysql+php+apache 
+
+```javascript
+//php+apache
+yun install php
+service httpd start
+//无法确定FQDN的错误，修改apache文件
+find / -name httpd.conf
+//搜索ServerName 去掉注释
+
+//默认的站点目录/var/www/html
+<?php
+phpinfo();
+
+
+
+//查看最大进程数 sysctl kernel.pid_max
+//ps -eLf | wc -l查看进程数
+//修改最大进程数后系统恢复
+//echo 1000000 > /proc/sys/kernel/pid_max
+
+//永久生效
+//echo "kernel.pid_max=1000000 " >> /etc/sysctl.conf
+//sysctl -p
+
+//mysql
+yum install mysql-server
+service mysqld start
+mysql_se 按下tab补全，回车
+//修改127的host
+update user set host='%' where host='127.0.0.1';
+//刷新权限
+flush privileges;
+//赋予权限
+chmod 777 -r  /var/www/html
+
+//安装mysqli_connect
+yum install php-mysqli
+
+//重启apache
+service httpd restart
+
+```
 
 
 
