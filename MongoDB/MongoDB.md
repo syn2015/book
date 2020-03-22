@@ -779,6 +779,83 @@ mongoose.connect('mongodb://localhost/playground',{useNewUrlParser:true})//补�
 
 8. 档案管理
 
+   - app.js
+
+     router第三方模块
+
+     - npm i router
+     - 获取路由对象
+
+     - 调用路由对象提供的方法创建路由
+
+     - 启用路由，使路由生效
+
+     - callback函数是必填参数
+
+       ``````javascript
+       //示例
+       ``````
+
+       
+
+     ``````javascript
+     
+     ``````
+
+     
+
+   - 
+
+     ``````javascript
+     
+     ``````
+
+   - model/connect.js
+
+     ``````javascript
+     
+     ``````
+
+     
+
+   - model/user.js
+
+     ``````javascript
+     
+     ``````
+
+     
+
+   - views/index.art
+
+     - serve-static 第三方模块，实现静态资源访问服务
+     - 引入serve-static模块创建服务功能
+     - 调用服务并指定服务目录
+     - 启用静态资源访服务功能
+     - serve(req,res,callback) ，回调函数是必填参数
+
+     ``````javascript
+     const serveStatic=require('serve-static')
+     //调用服务，指定服务目录public
+     const serve=serveStatic('public')
+     //服务器对象的on函数中
+     server.on('request',()=>{
+         //判断是否是静态资源
+       serve(req,res);  
+     })
+     server.listen(3000);
+     ``````
+
+     
+
+   - route/index.js
+
+     ``````javascript
+     js
+     ``````
+
+     
+
    - 
 
 9. 
