@@ -992,13 +992,13 @@ if
 
 ```javascript
 //非运算 !
-[! false]
+[ ! false ]
 
 //或运算-o
-[10 -lt 20 -o 10 gt 100]
+[ 10 -lt 20 -o 10 gt 100 ]
 
 //与运算 -a
-[ 10 -lt 20  -a 10 gt 1000]
+[ 10 -lt 20  -a 10 gt 1000 ]
 ```
 
 字符串运算符
@@ -1015,7 +1015,7 @@ if
 // -n 长度不为0 返回true
 [ -n '10']
 // str 是否为空
-[ '10']
+[ '10' ]
 ```
 
 文件测试符
@@ -1052,6 +1052,9 @@ if
 
 # 数据库mysql
 
+- 数据库目录： /var/lib/mysql
+  配置文件：/etc/my.cnf
+
 ```javascript
 //确保时间准确
 
@@ -1073,8 +1076,8 @@ cd  源码目录
 make && make install
 
 --prefix= 指定安装目录
---with-PACKAGE 报名=需要的依赖的目录
---without-PACKAGE 包名
+--with-PACKAGE包名=需要的依赖的目录
+--without-PACKAGE包名
 
 
 //二进制包rpm
@@ -1100,6 +1103,7 @@ yum list
 //搜索软件包
 yum search 软件包
 yum [-y] install 包名
+//不指定包名，默认更新全部软件
 yum [-y] update 包名
 yum [-y] remove 包名
 -y, 默认全部同意，不建议加该选项
@@ -1112,9 +1116,9 @@ yum install mysql-server
 
 //mysql初始化
 service mysqld start
-mysql_se  然后按下tab案件
+mysql_se  然后按下tab，执行mysql_secure_installation
 //执行
-mysql_setpermission
+mysql_secure_installation
 
 //数据库目录： /var/lib/mysql
 //配置文件：/etc/my.cnf
