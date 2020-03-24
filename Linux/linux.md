@@ -449,7 +449,7 @@ killall httpd
 
 ## 用户和用户组
 
-1. /etc//passwd,用户的关键信息；/etc/group,用户组的关键信息；/etc/shadow, 用户密码信息
+1. /etc/passwd,用户的关键信息；/etc/group,用户组的关键信息；/etc/shadow, 用户密码信息
 
    ```javascript
    //passwd文件
@@ -476,7 +476,8 @@ killall httpd
    -G，用户的附加组，
    -u, 用户的ID
    -l，修改用户名
-   //usermod -g 500 -G 501 zhangsan; usermod -l   newwangerma zhangsan
+   //usermod -g 500 -G 501 zhangsan; 
+   //usermod -l   newwangerma zhangsan
    
    //设置密码
    passwd 用户名
@@ -515,6 +516,7 @@ killall httpd
    //删除
    groupdel 用户组名
    //删除的组属于某个用户的主组时，需要先移除组内，再删除
+   //usermod -g 指定新的用户主组 移除的用户
    
    ``````
 
@@ -529,13 +531,15 @@ killall httpd
    /etc/init.d/目录，服务的快捷方式
    
    /etc/init.d/network restart
-   //停止网卡
+   //停止指定网卡
    ifdown 网卡名
-   //开启网卡
+   //开启指定网卡
    ifup 网卡名
    
    //创建软连接
    ln -s 深目录  快捷方式
+   //ln -s /etc/sysconfig/network-scripts/ifcfg-eth0 ~/ifcfg-eth0
+   
    
    ``````
 
@@ -573,6 +577,7 @@ su  之后生效
 
 ``````javascript
 //开机启动服务查询 ,各个模式下的开启状态
+//chkconfig --list|grep 过滤的服务名
 chkconfig --list 
 //删除服务
 chkconfig --del 服务名
@@ -620,7 +625,7 @@ iptables -L -n
 -n,单词表达形式改成数字形式显示
 
 //设置防火墙规则
-
+iptabales -A INPUT -p tcp --dport 80 -j ACCEPT
 //保存规则
 /etc/init.d/iptables save
 
@@ -675,6 +680,7 @@ crontab 选项
 -l,list,列出指定用户的计划列表
 -e,edit,编辑计划列表
 -u,user，当前用户或指定用户
+-r,remove,删除指定用户的计划任务
 //编辑
 //一行一个计划，分 时 日 月 周  执行的命令
 0 0 * * * reboot
@@ -738,7 +744,7 @@ ls -l 等价于ll
 chmod 选项 权限模式 文档
 -R 表示递归设置权限
 
-//字幕形式设置权限
+//字母形式设置权限
 //给文件设置权限：所有者有全部权限，同组有读和执行，其他有只读
 chmod u+x，g+rx,o+r 文件名
 或 chmod u=rwx,g=rx,o=r 文件名
@@ -806,6 +812,7 @@ sudo -l
 
 - IP是32位，MAC是48位（十六进制）
 - 网络寻址地址，IP是第三层网络层，MAC是第二层数据链路层
+- **网络拓扑结构图：星型，总线，环形，树形，网状，混色型，蜂窝**
 
 ![IP](IP.png)
 
@@ -820,9 +827,9 @@ netstat -tnlp
 netstat -an 
 
 
-//traceroute 查找目标主机所有网关
+//traceroute 查找目标主机所有网关，发送icmp数据包
 traceroute 域名或IP
-//window下，tracert 敏玲
+//window下，tracert 命令
 
 
 //arp地址解析，根据IP获取物理地址的协议
@@ -856,6 +863,7 @@ chmod +x 文件名.sh
 
 #！/bin/bash
 useradd shelltest;
+mkdir /home/shelltest
 touch /home/shelltest/try.html
 
 
@@ -964,15 +972,15 @@ fi
 #!/bin/bash
 a=10,
     b=20,
-    echo "a=$a"
-	echo "b=$b"
-if [$a -eq $b]
+    echo "a = $a"
+	echo "b = $b"
+if [ $a -eq $b ]
 then
 	echo 'a=b'
-elif [$a -ne $b]
+elif [ $a -ne $b ]
 then
 	echo 'a -ne b'
-elif [$a -gt  $b]
+elif [ $a -gt  $b ]
 then
 	echo 'a -gt b'
 else
