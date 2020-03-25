@@ -1,5 +1,11 @@
 # docker命令
 
+![docker架构图](docker架构图.png)
+
+- image镜像
+- container容器
+- 仓库repository
+
 ```javascript
 //yum包更新到最新
 yum update
@@ -92,26 +98,28 @@ docker inspect 容器名称
 
 # docker容器数据卷
 
-1. 数据卷是宿主机中的一个目录或文件
+![数据卷](数据卷.png)
 
-2. 容器目录和数据卷目录绑定后，对方的修改会立即同步
+1. **数据卷是宿主机中的一个目录或文件**
+
+2. **容器目录和数据卷目录绑定后，对方的修改会立即同步**
 
 3. 一个数据卷可以被多个容器同时挂载
 
 4. 一个容器也可以被挂载多个数据卷
 
-5. 数据卷的作用
+5. **数据卷的作用**
 
-   - 容器数据持久化
-   - 外部机器和容器间接通信
-   - 容器之间数据交换
+   - **容器数据持久化**
+   - **外部机器和容器间接通信**
+   - **容器之间数据交换**
 
 6. 配置数据卷
 
-   - 目录必须是绝对路径
-   - 不存在的目录会自动创建
+   - **目录必须是绝对路径**
+   - **不存在的目录会自动创建**
    - 可以挂载多个数据卷
-   - 宿主机目录可以使用~，容器目录不允许
+   - **宿主机目录可以使用~，容器目录不允许**
 
    ``````javascript
    docker run -it --name=容器名称  -v 宿主目录：容器目录 镜像名称 /bin/bash
@@ -122,7 +130,8 @@ docker inspect 容器名称
     -v ~/data3:/root/data3 \
     centos:7
    //一个数据卷可以被多个容器同时挂载
-   docker run -it --name=c2 -v ~/data
+   docker run -it --name=c3 -v ~/data:/root/data centos:7
+   docker run -it --name=c4 -v ~/data:/root/data centos:7
    
    ``````
 
@@ -130,33 +139,35 @@ docker inspect 容器名称
 
 7. 数据卷容器
 
+   ![数据卷容器](数据卷容器.png)
+
    - 创建一个容器，挂载一个目录，让其他容器继承自该容器（--volume-from)
-
+   
    - 解决多容器进行数据交换
-     - 多个容器挂载同一个数据卷
+  - 多个容器挂载同一个数据卷
      - 使用数据卷容器
-
+   
    `````javascript
    //创建数据卷容器，使用-v设置数据卷（容器目录）
    docker run -it --name=c3 -v /volume centos:7 /bin/bash
    //创建启动c1 c2容器，使用--volume-from 参数设置数据卷
    docker run -it --name=c1 --volumes-from c3 centos:7 /bin/bash
    docker run -it --name=c2 --volumes-from c3 centos:7 /bin/bash
-   
+
    `````
 
    
-
+   
    
 
 # docker应用部署
 
 ## mysql
 
-1. 容器内的网络服务和外部机器不能直接通信
+1. **容器内的网络服务和外部机器不能直接通信**
 2. 外部机器和宿主机器可以直接通信
 3. 宿主机和容器可以通信
-4. 外部机器访问容器和宿主机的映射端口，从而简洁访问容器的服务
+4. **外部机器访问容器和宿主机的映射端口，从而简洁访问容器的服务**
 
 - -p 3307：3306 ：将容器的3306端口映射到宿主机的3307端口
 - -v $PWD/conf:/etc/mysql/conf.d :将主机当前目录下的conf/my.cnf 挂载到容器的/etc/mysql/my.cnf 配置目录
