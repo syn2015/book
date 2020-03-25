@@ -1211,7 +1211,7 @@ mysqldump -uroot -p明文密码 库名 > 备份文件路径.sql
 mysqldump -uroot -p明文密码 --databases 库1 库2 >备份文件路径.sql
 //每一分钟自动备份一次
 #!/bin/bash
-filename='test_'`data`+'%Y%m%d%H%M%S''.sql'
+filename='test_'`data +'%Y%m%d%H%M%S'`'.sql'
 mysqldump -uroot -p密码 test>/root/$filename
 //计划任务执行脚本
 #分 时 日 月 周
@@ -1221,7 +1221,8 @@ mysqldump -uroot -p密码 test>/root/$filename
 //还原
 
 //mysql命令行下的source，需要指定数据库use 库名或create database 库名;
-srouce < 备份文件路径
+use 数据库名;
+srouce < 备份文件路径;
 
 //系统命令行
 mysql -uroot -p密码 库名 <备份文件路径\
@@ -1262,9 +1263,9 @@ yum install pcre-devel
 .configure --prefix=/usr/local/nginx --with-pcre=pcre包路径或者不写让系统自己找
 //安装 zlib模块
 yum install zlib-devel
-//zlib源码包
+//zlib源码包,一般安装在/usr/lib
 wget zlib源码包
-.configure --prefix=/usr/local/nginx --with-pcre --with-zlib=zlib源码包路径
+.configure --prefix=/usr/local/nginx --with-pcre --with-zlib=/usr/local/src/zlib源码包路径
 
 //nginx启动命令
 /usr/local/nginx/sbin/nginx 
@@ -1297,10 +1298,12 @@ netstat -tunlp |grep 80
 - LAMP:  linux + Apache +mysql+PHP
 - LNMP:  linux+nginx+mysql+php-fpm
 - LNMPA: linux+nginx+mysql+php+apache 
+- nginx，处理静态页面优于apache
+- apache,处理动态页面优于nginx
 
 ```javascript
-//php+apache
-yun install php
+//php+apache systemctl status httpd.service
+yum install php
 service httpd start
 //无法确定FQDN的错误，修改apache文件
 find / -name httpd.conf
