@@ -214,7 +214,7 @@ docker pull tomcat
 mkdir ~/tomcat
 cd ~/tomcat
 //
-docker run -it --name=c_tomcat  \
+docker run -id --name=c_tomcat  \
 -p 8080:8080  \
 -v $PWD:/usr/local/tomcat/webapps  \
 tomcat
@@ -290,7 +290,7 @@ http {
 
 
 ```javascript
-docker run -it --name=c_nginx  \
+docker run -id --name=c_nginx  \
 -p 80:80 \
 -v $PWD/conf/nginx.conf:/etc/nginx/nginx.conf  \
 -v $PWD/logs:/var/log/nginx  \
@@ -303,32 +303,97 @@ nginx
 
 ## redis
 
+```javascript
+//搜索
+docker search redis
+//
+docker pull redis:5.0
+//创建容器，设置端口映射
+docker run -id --name=c_redis -p 6379:6379 redis:5.0
+//使用外部机器连接redis
+./redis-cli.exe -h ip地址 -p 6379
+```
+
+
+
 # dockerfile
+
+
 
 1. 镜像制作
 
+   - **数据卷形式的挂载文件不会保留**
+
    ```javascript
    //创建新镜像
-   dicker commit 容器ID 镜像名称：版本号
-   //压缩文件
-   dicker save -o 压缩文件名称 镜像名称：版本号
-   //另一个镜像
-   dicker load -i 压缩文件名称
+   docker commit 容器ID 镜像名称：版本号
+   //转为压缩文件
+   docker save -o 压缩文件名称.tar  镜像名称：版本号
+   //测试人员还原，另一个镜像
+   docker load -i 压缩文件名称
    ```
 
    
 
-2. dockerfile
+2. dockerfile,制作镜像
 
-   - dockerfile是一个文本文件
+   - **dockerfile是一个文本文件**
    - 包含了一条条的指令
-   - 每一条指令构建一层，基于基础镜像，最后构建出一个新的镜像
-   - 对于开发：为开发团队提供了一个完全一致的开发环境
-   - 对于测试：可以直接拿开发时所构建的镜像或者通过Dockerfile文件创建一个新的镜像开始工作了
-   - 对于运维：在部署时，可以实现应用的无缝移植
+   - **每一条指令构建一层，基于基础镜像，最后构建出一个新的镜像**
+   - 对于开发：为开发团队提供了一个**完全一致的开发环境**
+   - 对于测试：可以直接**拿开发时所构建的镜像或者通过Dockerfile文件创建一个新的镜像**开始工作了
+   - 对于运维：**在部署时，可以实现应用的无缝移植**
 
    ``````javascript
    //dockerfile关键字
+   FROM
+   指定基础镜像，当前新镜像是基于哪个镜像的。其中，scratch是个空镜像，这个镜像是虚拟的概念,并不实际存在,它表示一个空白的镜像，当前镜像没有依赖于其他镜像
+   FROM scratch
+   
+   MAINTAINER
+   镜像维护者的姓名和邮箱地址
+   MAINTAINER Sixah <sixah@163.com>
+       
+   RUN
+   容器构建时需要运行的命令
+   RUN echo 'Hello, Docker!'
+   
+   EXPOSE
+   当前容器对外暴露出的端口
+   EXPOSE 8080
+   
+   WORKDIR
+   指定在创建容器后，终端默认登陆进来的工作目录，一个落脚点
+   WORKDIR /go/src/app
+   
+   ENV
+   用来在构建镜像过程中设置环境变量
+   例如，ENV MY_PATH /usr/mytest
+   这个环境变量可以在后续的任何RUN指令中使用，这就如同在命令前面指定了环境变量前缀一样;当然，也可以在其他指令中直接使用这些环境变量，比如：WORKDIR $MY_PATH
+   
+   ADD
+   将宿主机目录下的文件拷贝进镜像且ADD命令会自动处理URL和解压tar压缩包
+   ADD Linux_amd64.tar.gz
+   
+   COPY
+   类似于ADD，拷贝文件和目录到镜像中，将从构建上下文目录中<源路径>的文件/目录复制到新的一层镜像内的<目标路径>位置
+   COPY . /go/src/app
+   
+   VOLUME
+   容器数据卷，用于数据保存和持久化工作
+   VOLUME /data
+   
+   CMD
+   指定一个容器启动时要运行的命令。Dockerfile中可以有多个CMD指令，但只有最后一个生效，CMD会被docker run之后的参数替换
+   CMD ["/bin/bash"]
+   
+   ENTRYPOINT
+   指定一个容器启动是要运行的命令。ENTRYPOINT的目的和CMD一样，都是在指定容器启动程序及参数
+   
+   ONBUILD
+   当构建一个被继承的Dockerfile时运行的命令，父镜像在被子镜像继承后，父镜像的ONBUILD指令被触发
+   
+   
    ``````
 
    
@@ -354,8 +419,7 @@ nginx
      
      ```
 
-     - docker build -f  目录 -t   路径
-     - 
+     - **docker build -f  dockerfile文件目录  -t   新镜像的名称:版本号  .（寻址路径）**
 
 4. 部署 springboot项目
 
@@ -364,20 +428,20 @@ nginx
    定义作者信息：MAINTAINER it <it@gmail.com>
    将jar包添加到容器并改名：Add springboot.jar app.jar
    定义容器启动执行的命令：CMD java -jar app.jar
-   通过dockersfile构建镜像：docker build -f dockerfile的文件路径 -t 镜像名称：版本
+   通过dockersfile构建镜像：docker build -f dockerfile的文件路径 -t 镜像名称：版本 . (寻址路径)
    ``````
 
    - 映射端口：**docker run -id -p 9000:8080 app**
 
 # docker 服务编排
 
-1. 使用场景：
+1. **使用场景：**
 
-   - 从dockerfile build image或者dockerhub拉取image
-   - 创建多个container
-   - 管理container（启动停止删除）
+   - **从dockerfile build image或者dockerhub拉取image**
+   - **创建多个container**
+   - **管理container（启动停止删除）**
 
-2. 服务编排：按照一定的业务规则批量管理容器
+2. 服务编排：**按照一定的业务规则批量管理容器**
 
 3. Docker Compose工具
 
@@ -386,8 +450,8 @@ nginx
    - 包括服务构建，启动和停止
    - 步骤
      - 利用dockerfile定义运行环境镜像
-     - 使用docker-compose.yml定义组成应用的各服务
-     - 运行docker-compose up 启动应用
+     - 使用**docker-compose.yml**定义组成应用的各服务
+     - 运行**docker-compose up** 启动应用
 
 4. 使用docker compose
 
@@ -419,7 +483,7 @@ nginx
      nginx:
       image: nginx
       ports:
-   	- 80: 80
+   	- 80:80
       links:
    	 -app
       volumes:
@@ -480,7 +544,7 @@ nginx
 
    ```javascript
    //标记镜像为私有仓库的镜像
-   docker tag centos:7 私有仓库的IP：5000/centos:7
+   docker tag centos:7 私有仓库的IP:5000/centos:7
    //上传标记的镜像
    docker push 私有仓库的IP：5000/centos:7
    ```
@@ -490,13 +554,12 @@ nginx
 3. 拉取镜像
 
    ```javascript
-   //标记镜像为私有仓库的镜像
-   docker tag centos:7 私有仓库ip:5000/centos:7
-   //上传标记的镜像
-   docker push 私有仓库IP:5000/centos:7
-   ```
-
    
+   //上传标记的镜像
+   docker pull 私有仓库IP:5000/centos:7
+   ```
+   
+
 
 # docker 相关概念
 
