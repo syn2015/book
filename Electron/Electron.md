@@ -3,7 +3,7 @@
 # 基础
 
 1. 跨平台window，mac，Linux。上手简单
-2. chromium和Nodejs合并到一个运行时环境中，打包为各个系统的应用。
+2. **chromium和Nodejs合并到一个运行时环境中，打包为各个系统的应用。**
 3. **npm config set ELECTRON_MIRROR https://npm.taobao.org/mirrors/electron/**
 
 # 调式技巧
@@ -81,10 +81,10 @@
 
 1. app常用事件
 
-   - **ready**，当Electron完成初始化时被触发
+   - **ready**，当Electron完成**初始化时被触发**
    - **window-all-closed**：所有窗口被关闭
-   - **before-quit** :  应用开始关闭窗口前触发
-   - **will-quit** : 所有窗口已经关闭并且应用程序将要退出时发出
+   - **before-quit** :  应用开始**关闭窗口前触发**
+   - **will-quit** : **所有窗口已经关闭并且应用程序将要退出时发出**
    - **quit**  : 应用程序退出时发出
 
 2. webcontents常用事件
@@ -93,12 +93,15 @@
 
    - **dom-ready** : 框架中的文本加载完成后触发该事件
 
+     ``````javascript
+     //执行顺序
+     app ready事件
+     webcontents dom-ready事件
+     webcontents did-finish-load 事件
+     app window-all-closed 事件
      ``````
-     ready事件
-     dom-ready事件
-     did-finish-load 事件
-     window-all-closed 事件
-     ``````
+     
+     
 
 3. 常用api进程对象
 
@@ -134,42 +137,44 @@
 
 4. 常用File文档对象
 
-   -  
+   
 
-     ``````html
-     <doby>
-     	<div class="for_file_drag">
-             <h2>
-                 file对象
-             </h2>
-             <span>
-             	往这里拖文件
-             </span>
-             
-             
-         </div>
-     
-     </doby>
-     <script>
-         const fs=require('fs');
-     	  const dragWrapper=document.getElementById('drag_test')
-           dragWrapper.addEventListener('drap',(e)=>{
-               e.preventDefault();
-               const files=e.dataTransfer.files;
-               if(files&&files.length>0){
-                   const path=files[0].path;
-                   const content=fs.readFileSync(path);
-                   console.log(content.toString());
-               }
-           })
-         dragWrapper.addEventLister('dragover',(e)=>{
+   ``````html
+   <doby>
+   	<div class="for_file_drag">
+           <h2>
+               file对象
+           </h2>
+           <span>
+           	往这里拖文件
+           </span>
+           
+           
+       </div>
+   
+   </doby>
+   <script>
+       const fs=require('fs');
+   	  const dragWrapper=document.getElementById('drag_test')
+         dragWrapper.addEventListener('drap',(e)=>{
+             //阻止默认行为
              e.preventDefault();
+             const files=e.dataTransfer.files;
+             if(files&&files.length>0){
+                 const path=files[0].path;
+                 const content=fs.readFileSync(path);
+                 //arraybuffer转为string
+                 console.log(content.toString());
+             }
          })
-     
-     </script>
-     ``````
+       dragWrapper.addEventLister('dragover',(e)=>{
+           e.preventDefault();
+       })
+   
+   </script>
+   ``````
 
-     
+   
 
 5. webview标签
 
@@ -195,7 +200,7 @@
 
    - did-stop-loading函数，停止加载时触发
 
-   - nodeintegration属性，拥有可以使用系统底层的资源，例如 `require` 和 `process` .默认禁用
+   - **nodeintegration属性，拥有可以使用系统底层的资源，例如 `require` 和 `process` .默认禁用**
 
    - plugins属性，使用浏览器插件。默认禁用
 
@@ -212,26 +217,31 @@
      <span id="loading"></span>  
    const wb=document.querySelector('#wb');
    const loading=document.querySelector('#loading')
+   //开始加载时
    wb.addEventListener('did-start-loading',()=>{
        console.log("did-start-loading")
        loading.innerHtml='---loading---'
    })
+   //停止加载时
    wb.addEventListener('did-stop-loading',()=>{
        console.log("did-stop-loading")
        loading.innerHtml='---stop---'
    })
    //webview/index.js
    setTimeout(()=>{
+       //获取元素的src属性值
        alert(document.querySelector('.index-logo.src').src);
        document.querySelector('#su').onclick=(()=>{
            alert('点击了')
        })
    }，3000)
+   //注入css
    wb.insertCSS(`
    #su:{
    	background:red;!important
    }
    `)
+   //注入js
    wb.executeJavaScript(
    `
    setTimeout(()=>{
@@ -250,9 +260,9 @@
 
 6. window.open函数
 
-   - 三个参数：url，子窗口名称，BrowserWindow中的功能字段.并返回一个BrowserWindowProxy对象
-   - BrowserWindowProxy对象的方法：blur，close等
-   - window.opener.postMessage(message,targetOrigin); 向父窗口传递消息
+   - 三个参数：子窗口url，子窗口名称，**BrowserWindow中的功能字段.并返回一个BrowserWindowProxy对象**
+   - **BrowserWindowProxy对象的方法：blur，close等**
+   - window.opener.postMessage(message,targetOrigin); 子窗口向父窗口传递消息
 
    - renders.js函数
 
@@ -285,10 +295,10 @@
 
 7. BrowserWindow对象
 
-   - frame:false ,表示无边框的窗口
-   - modal:true，表示模态窗口
+   - **frame:false** ,表示无边框的窗口
+   - modal，表示模态窗口
 
-   - ready-to-show事件，进程第一次完成绘制时触发事件，此事件后显示窗口没有视觉闪烁
+   - **ready-to-show事件，进程第一次完成绘制时触发事件，此事件后显示窗口没有视觉闪烁**
    - minwindow.once()，代表事件仅响应一次。
    - new BrowserWindow({parent:top})，指定父窗口
    - new BrowserWindow({x:0,y:0}) ,指定弹出位置
@@ -309,8 +319,9 @@
        }
        })
    }
+   //mainWindow.once()事件仅仅响应一次
    mainWindow.once('ready-to-show',()=>{
-       mainwindow.show();
+       mainWindow.show();
    })
    child=new BrowserWindow({
        parent:mainWindow，
@@ -322,7 +333,7 @@
 
 8. BrowserView 创建和控制视图
 
-   - destroy() 关闭视图
+   - **destroy() 关闭视图**
 
    ``````javascript
    const {BrowserView}=require('electron');
@@ -342,9 +353,9 @@
 
 9. dialog对话框
 
-   - 主进程上打开，require('electron')
+   - **主进程上打开，require('electron')**
 
-   - 渲染器进程上打开，require('electron').remote
+   - **渲染器进程上打开，require('electron').remote**
 
    - showOpenDialogSync()函数，打开窗口
 
@@ -352,17 +363,18 @@
 
    - showMessageBoxSync()函数，消息提示窗口
 
-     renderer.js
+     **renderer.js**
 
    ``````javascript
    const {dialog}=require('electron').remote;
    const fs=require('fs');
    function openDialog(){
+       //异步方法
        dialog.showOpenDialog({
            title:'请选择',
            buttonLabel:'已确认',
            filters:[
-               {name:Image',extensions:['jpd','png']}
+               {name:Image',extensions:['jpg','png']}
            ]
        },result=>{
            console.log(result);//打印路径
@@ -386,7 +398,7 @@
 
 10. 系统快捷键
 
-    快捷键是全局的，即使没有键盘焦点；再ready事件之前不应使用此模块
+    **快捷键是全局的，即使没有键盘焦点；在ready事件之前不应使用此模块**
 
     - 主进程快捷键
 
@@ -433,7 +445,7 @@
 
       
 
-11. 进程通信：ipcMain和ipcRenderer
+11. **进程通信：ipcMain和ipcRenderer**
 
     - event.returnValue
     - event.reply
@@ -442,26 +454,32 @@
     ``````javascript
     // 在主进程中.
     const { ipcMain } = require('electron')
+    //主进程监听-异步
     ipcMain.on('asynchronous-message', (event, arg) => {
       console.log(arg) // prints "ping"
+       //主进程发送
       event.reply('asynchronous-reply', 'pong')
     })
-    
+    //主进程监听-同步
     ipcMain.on('synchronous-message', (event, arg) => {
       console.log(arg) // prints "ping"
       event.returnValue = 'pong'
     })
+    //主动向渲染进程通信
+    main.Window.webContents.send('send-message-to-renderer-test','发送的消息')
     
     ``````
 
     ``````javascript
     //在渲染器进程 (网页) 中。
     const { ipcRenderer } = require('electron')
+    //渲染进程发送-同步
     console.log(ipcRenderer.sendSync('synchronous-message', 'ping')) // prints "pong"
-    
+    //渲染进程监听-异步
     ipcRenderer.on('asynchronous-reply', (event, arg) => {
       console.log(arg) // prints "pong"
     })
+    //渲染进程发送-异步
     ipcRenderer.send('asynchronous-message', 'ping')
     
     ``````
@@ -470,11 +488,11 @@
 
 12. 原生应用菜单Menu
 
-    - 一般写在渲染进程中
+    - **一般写在渲染进程中**
 
-    - Menu.buildFromTemplate(template)， `template`是一个`options`类型的数组，用于构建一个 MenuItem
+    - **Menu.buildFromTemplate(template)**， `template`是一个`options`类型的数组，用于构建一个 MenuItem
 
-    - Menu.setApplicationMenu(menu)，设置在各个程序窗体的顶层，即是菜单栏
+    - **Menu.setApplicationMenu(menu)**，设置在各个程序窗体的顶层，即是菜单栏
 
       renderer.js
 
@@ -482,13 +500,14 @@
     const {remote}=require('electron');
     const {Menu,MenuItem}=remote;
     function openMenu(){
+        //menuitem对象数组
         const template=[
             {label:'diyige'},
             {label:'点击测试',click:()=>{
                 console.log('点击事件触发')
             }},
-            {rule:'undo'},
-            {rule:'ando'},
+            {role:'undo'},
+            {role:'redo'},
             {label:'路由',type:'checkbox',checked:true},
             {label:'chifa',type:'checkbox',checked:true},
             {label:'guangjie',type:'checkbox',checked:true},
@@ -503,8 +522,11 @@
                 {label:'子菜单3'}
             ]}
         ];
+        //构建菜单对象menu
         const menu=Menu.buildFromTemplate(template);
+        //菜单栏菜单
        // Menu.setApplicationMenu(menu);
+        //弹出菜单
         menu.popup();
         
     }
@@ -515,7 +537,7 @@
 
 13. net 网络
 
-    - 支持wpad协议和代理pac文件
+    - 系统代理设置自动管理，支持wpad协议和代理pac文件
 
     - https请求的自动隧道
 
@@ -532,24 +554,27 @@
       
       const request=net.request('https://baidu.com');
       
-      request.on('data',(response)=>{
+      request.on('response',(response)=>{
           console.log(`statusCode:+${response.statusCode}`);
-          console.log(`header:+${JSOn.stringify(response.headers)}`)
+          //JSON.stringify，json对象转为js对象
+          console.log(`header:+${JSON.stringify(response.headers)}`)
           response.on('data',(chunk)=>{
               console.log('接收的数据',chunk.toString());
               
           })
+          //接收数据结束
           response.on('end',()=>{
               console.log('数据接收完毕')
           })
       })
+//请求结束
       request.on('end')
-      ``````
-
+``````
       
-
+  
       
-
+      
+    
     
 
 # 与高级框架集成
@@ -574,6 +599,17 @@
 //cd electron-vue-start
 // yarn  安装
 // yarn dev 
+//卸载全局的包
+//npm uninstall -g 软件包
+//查看全局的包
+//npm list -g --depth 0
+//安装插件指定版本
+npm install 插件名称@2.9.6 --save
+
+//查看需要安装插件的版本记录
+npm view 插件名称 versions --json
+//查看模块的历史版本和当前版本
+ npm view 模块名 versions
 
 //解决Windows无法编辑node-sass
 //npm i -g node-gyp
