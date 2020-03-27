@@ -2,13 +2,13 @@
 
 # Gulp
 
-1. 基于Node平台开发的前端构建工具
-   - 将机械化操作编写成任务，执行命令自动执行任务
+1. **基于Node平台开发的前端构建工具**
+   - **将机械化操作编写成任务，执行命令自动执行任务**
 2. 作用
-   - 项目上线时，HTML，CSS，JS文件压缩合并
-   - 语法转换（es6,less...)
-   - 公共文件抽离
-   - 修改文件浏览器自动刷新
+   - 项目上线时，**HTML，CSS，JS文件压缩合并**
+   - **语法转换（es6,less...)**
+   - **公共文件抽离**
+   - **修改文件浏览器自动刷新**
 
 # 使用Gulp
 
@@ -26,7 +26,7 @@
 
 ## gulp.dest(文件路径)
 
-1. 输出文件
+1. 输出文件,不存在的文件会被创建
 2. **.pipe(将要处理的代码)**
 
 ## gulp.task(任务的名称,callback)
@@ -42,6 +42,8 @@
 1. 安装  npm i gulp-cli -G
 
 2. 执行  gulp 任务名称
+
+3. .pipe() 管道处理
 
    ``````javascript
    const gulp=require('gulp')
@@ -65,7 +67,7 @@ npm i --save gulp-htmlmin
 const htmlmin=require('gulp-htmlmin')
 gulp.task('htmlmin',()=>{
     gulp.src('./src/*.html')
-    .pipe('htmlmin({collapseWhitespace:true})')
+    .pipe(htmlmin({collapseWhitespace:true}))
     .pipe(gulp.dest('dist'));
 })
 ``````
@@ -105,6 +107,8 @@ gulp.task('jsmin',()=>{
 
 **gulp-less**  less语法转换
 
+- 先转换语法再压缩
+
 ``````javascript
 npm i gulp-less
 npm i gulp-csso
@@ -143,7 +147,7 @@ const htmlmin=require('gulp-htmlmin')
 gulp.task('htmlmin',()=>{
     gulp.src('./src/*.html')
     .pipe(fileinclude())
-    .pipe('htmlmin({collapseWhitespace:true})')
+    .pipe(htmlmin({collapseWhitespace:true}))
     .pipe(gulp.dest('dist'));
 })
 
@@ -172,6 +176,11 @@ build构建任务
 
 ``````javascript
 gulp.task('default',['htmlmin','cssmin','jsmin','copy']);
+//gulp4
+gulp.task('default', gulp.series('htmlmin', 'cssmin', 'jsmin', 'copy', function (done) {
+    // Do something after a, b, and c are finished.
+    done();
+}));
 ``````
 
 - default名称的任务，默认执行
@@ -182,7 +191,7 @@ gulp.task('default',['htmlmin','cssmin','jsmin','copy']);
 
    **npm init -y ** 生成
 
-2. **项目依赖**，记录在**dependencies**中。服务器环境下，**npm i  --production**
+2. **项目依赖**，记录在**dependencies**中。服务器环境下下载项目依赖，**npm i  --production**
 
 3. **开发依赖**，使用**--save-dev**参数，并记录在**devDependencies**字段中
 
@@ -211,12 +220,12 @@ gulp.task('default',['htmlmin','cssmin','jsmin','copy']);
 
 ## IP 域名 端口
 
-1. IP，internet protocol address简称
-2. 端口，计算机和外界通讯交流的出口，区分服务器电脑中提供的不同的服务
+1. IP，**internet protocol address**简称
+2. **端口，计算机和外界通讯交流的出口，区分服务器电脑中提供的不同的服务**
 
 ## url
 
-1. 统一资源定位符，unifrom resource locator
+1. 统一资源定位符，**unifrom resource locator**
 
    ``````javascript
    传输协议://服务器IP或域名:端口/资源所在位置标识
@@ -231,11 +240,15 @@ gulp.task('default',['htmlmin','cssmin','jsmin','copy']);
 1.  
 
    ``````javascript
-   //
+   //http模块
    const http=require('http')
+   //web服务器
    const app=http.createServer()
    //事件驱动
    app.on('request',(req,res)=>{
+       res.writeHead(200,{
+           'content-type':'text/html'
+       })
        res.end('<h2>hello user</h2>')
    })
    app.listen(3000);//监听端口
@@ -252,6 +265,8 @@ gulp.task('default',['htmlmin','cssmin','jsmin','copy']);
 
 3. **req.headers对象**   //获取请求报文
 
+   - **host,content,accept等信息**
+
 4. **req.url**属性   //获取请求地址
 
 5. 响应报文
@@ -259,22 +274,22 @@ gulp.task('default',['htmlmin','cssmin','jsmin','copy']);
    - 200请求成功
    - 404 请求资源未找到
    - 500 服务器端错误
-   - 400 客户端请求语法有错误
-   - **res.writeHead(状态吗) 指定状态码**
+   - **400 客户端请求语法有错误**
+   - **res.writeHead(状态码默认为200,响应类型及编码格式对象) 指定状态码**
 
-6. 响应内容类型
+6. **响应内容类型**
 
-   - text/plain   默认是纯文本
+   - **text/plain   默认是纯文本**
 
    - text/html
 
    - text/css
 
-   - applicatiin/javascript
+   - **application/javascript**
 
-   - image/jpeg
+   - **image/jpeg**
 
-   - application/json
+   - **application/json**
 
      ``````javascript
      res.writeHead(200,{
@@ -287,28 +302,28 @@ gulp.task('default',['htmlmin','cssmin','jsmin','copy']);
 
 ## 请求和响应处理
 
-1. Get请求参数：?和&组成
+1. **Get请求参数：?和&组成**
 
-2. 获取Get参数：
+2. 获取Get参数：url模块和**req.url**
 
    ``````javascript
    const url=require('url')
    //将查询参数解析成对象形式
-   console.log(url.parse(req.url,true))//开启第二个参数，解析参数为对象形式
+   console.log(url.parse(req.url,true))//开启第二个参数，解析查询参数query为对象形式
    ``````
 
    ![req.url](req的url属性.png)
 
 3. POST请求参数
 
-   - 浏览器工具的form data字段可以看到
-   - 参数放置在请求体种传输
+   - **浏览器工具的form data字段可以看到post请求的参数**
+   - 参数放置在请求体中传输
    - 获取post参数需要data事件和end事件
-   - 使用querystring系统模块将参数转换为对象格式
+   - **使用querystring系统模块将参数转换为对象格式**
 
-4. 通过事件的方式接收post参数
+4. **通过事件的方式（date事件和end事件）接收post参数**
 
-   - 分段接收完数据：请求参数传递时发出data事件，传递完成时发出end事件
+   - **分段接收完数据：请求参数传递时发出data事件，传递完成时发出end事件**
 
    - 将post参数解析成对象
 
@@ -331,16 +346,24 @@ gulp.task('default',['htmlmin','cssmin','jsmin','copy']);
 **请求什么响应什么**，**客户端请求地址和服务器程序代码的对应关系**。
 
 ``````javascript
+//http模块
 const http=require('http');
+//web服务器
 const app=http.createServer();
+//url模块
 const url=require('url');
 app.on('request',(req,res)=>{
+    //请求方式
     const method=req.method.toLowerCase();
+    //请求地址
     const pathname=url.parse(req.url).pathname;
+    //响应报文：状态吗和内容类型，编码格式
     res.writeHead(200,{
         'content-type':'text/html;charset=utf8'
     })
+    //先判断method
     if(method=='get'){
+        //然后判断pathname
         if(pathname=='/'||pathname=='/index'){
             res.end('<h1>welcome index</h1>');
         }else if(pathname=='/list'){
@@ -354,14 +377,14 @@ app.on('request',(req,res)=>{
 })
 app.listen(3000);
 console.log('web start up success')
-//当客户端发来请求时
 
-//获取客户端请求的路径
 ``````
 
 ## 静态资源
 
-1. 服务器端不需要处理的，可以直接响应给客户端的资源就是静态资源。如css、js、image文件
+1. **服务器端不需要处理的，可以直接响应给客户端的资源就是静态资源。如css、js、image文件**
+
+   - mine第三方模块，处理不同类型的文件，npm i mime
 
    ``````javascript
    const http=require('http')
@@ -375,14 +398,16 @@ console.log('web start up success')
    
    app.on('request',(req,res)=>{
        let pathname=url.parse(req.url).pathname;
+       //处理请求路径
        pathname=pathname=='/'?'/default.html':pathname;
        //将用户的请求路径转换为实际的服务器资源路径
        let realPath=path.join(__dirname,'public'+pathname);
-       //根据路径确定类型
+       //根据服务器上资源的路径确定类型
        let type=mime.getType(realPath);
        
        fs.readFile(realPath,(error,result)=>{
            if(error!=null){
+               //读取失败
                res.writeHead(404,{
                    'content-type':'text/html;charset=utf8'
                })
@@ -396,16 +421,15 @@ console.log('web start up success')
            res.end(result);
        })
    })
-   
+   app.listen(3000);
+   console.log('web start up success')
    ``````
 
    
 
-2. 
-
 ## 动态资源
 
-1. 相同的请求地址不同的响应资源，这种资源就是动态资源
+1. **相同的请求地址不同的响应资源，这种资源就是动态资源**
 
 ## 同步API和异步API
 
@@ -413,28 +437,35 @@ console.log('web start up success')
 
 ![async-sync-callback](async-sync-callback.png)
 
-1. 同步：只有当前API执行完成才能继续执行下一个API
+1. 同步：**只有当前API执行完成才能继续执行下一个API**
 
-2. 异步：当前API不会阻塞后续代码的执行
+2. 异步：**当前API不会阻塞后续代码的执行**
 
 3. **区别**
 
    - **同步API可以从返回值种拿到API执行的结果，异步API不可以。**
    - **代码执行顺序不一样：同步会从上到下执行会等待API再执行，异步不等待API执行完成再执行**
 
-4. 异步API的返回值需要回调函数来接收：自己定义的函数让别人来调用。
+4. **异步API的返回值需要回调函数来接收：自己定义的函数让别人来调用。**
 
    ```javascript
-   
+   //getData函数定义
+   function getData(callback){
+       callback(传递实参)
+   }
+   //getData函数调用
+   getData((接收的实参的形参)=>{
+       console.log(接收的实参的形参)
+   });
    ```
 
    
 
-5. Node种的异步API
+5. Node中的异步API
 
    - **fs.readFile('文件路径',(err,result)=>{});**
    - **server.on('request',(req,res)=>{});**
-   - 后续代码的执行依赖当前异步API的结果，此时，promise解决回调地狱的问题
+   - **后续代码的执行依赖当前异步API的结果，此时，promise解决回调地狱的问题**
 
 ## promise
 
@@ -460,6 +491,48 @@ promise.then((result)=>{
 依次调用3个文件
 
 ``````javascript
+//callbackHell
+const fs=require('fs');
+fs.readFile('./1.txt','utf8',(err1,result1)=>{
+    fs.readFile('./2.txt','utf8',(err2,result2)=>{
+        fs.readFile('./3.txt','utf8',(err3,result3)=>{
+            console.log(result3);
+        })
+    })
+})
+//promise改造后
+function f1(){
+    return new Promise((resolve,reject)=>{
+        fs.readFile('./1.txt','utf8',(err,result)=>{
+            resolve(result)
+        })
+    })
+}
+function f2(){
+    return new Promise((resolve,reject)=>{
+        fs.readFile('./2.txt','utf8',(err,result)=>{
+            resolve(result)
+        })
+    })
+}
+function f3(){
+    return new Promise((resolve,reject)=>{
+        fs.readFile('./3.txt','utf8',(err,result)=>{
+            resolve(result)
+        })
+    })
+}
+//
+f1().then((r1)=>{
+    console.log(r1);
+    return f2()
+}).then((r2)=>{
+    console.log(r2);
+    return f3()
+}).then((r3)=>{
+    console.log(r3)
+})
+
 
 ``````
 
@@ -467,21 +540,21 @@ promise.then((result)=>{
 
 ## 异步函数
 
-1. 异步编程的终极解决方案，让异步代码写成同步的形式，代码结构清晰明了。
+1. **异步编程的终极解决方案，让异步代码写成同步的形式，代码结构清晰明了。**
 
-2. 被async关键字修饰的普通函数就是异步函数
+2. **被async关键字修饰的普通函数就是异步函数**
 
-3. 异步函数内部，await关键字只能出现在异步函数中，后面跟promise对象，可以暂停异步函数的执行，等待promise对象有返回结果后再继续执行
+3. **异步函数内部，await关键字只能出现在异步函数中，后面跟promise对象，可以暂停异步函数的执行，等待promise对象有返回结果后再继续执行**
 
-4. 异步函数的默认返回值是promise对象
+4. 异步函数的**默认返回值是promise对象**
 
 5. 异步函数内部，**throw关键字抛出异常并结束代码执行**
 
-6. 异步函数内部，使用return关键字，返回的结果包裹在promise对象中，return代替了resolve方法。
+6. 异步函数内部**，使用return关键字，返回的结果包裹在promise对象中，return代替了resolve方法。**
 
 7. 调用异步函数再**链式操作调用then()获取执行结果，调用catch()获取执行的错误信息**
 
-8. promisify方法，改造现有异步API，返回promise对象
+8. **util系统模块中，promisify方法，改造现有异步API，（传入异步API）返回promise对象**
 
    ```javascript
    const fs=require('fs')
@@ -489,7 +562,7 @@ promise.then((result)=>{
    const promisify=require('util').promisify;
    //调用promisify方法改造现有异步API，让其返回promise对象
    const asyncReadFile=promisify(fs.readFile);
-   
+   //async修饰后是异步函数，返回值始终为promise对象
    async function run(){
        let r1=await asyncReadFile('./1.txt','utf8')
        let r2=await asyncReadFile('./2.txt','utf8')
@@ -504,7 +577,7 @@ promise.then((result)=>{
 ## node全局对象global
 
 1. **在浏览器中全局对象是window**，**在Nodejs中全局对象是global**
-2. global有以下方法，**可以用在任何地方，global可以省略**
+2. **global有以下方法，可以用在任何地方，global可以省略**
    - console.log()  	控制台输出
    - setTimeout()      超时定时器
    - clearTimeout()   清除超时定时器
