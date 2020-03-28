@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //基于数组
+        function Stack() {
+            //空数组
+            this.items = [];
+
+        }
+        //
+        Stack.prototype.push = function (element) {
+            this.items.push(element);
+        }
+        //
+        Stack.prototype.pop = function () {
+            return this.items.pop();
+        }
+        //
+        Stack.prototype.peek = function () {
+            return this.items[this.items.length - 1]
+        }
+        //
+        Stack.prototype.isEmpty = function () {
+            return this.items.length == 0
+        }
+        //
+        Stack.prototype.size = function () {
+            return this.items.length
+        }
+        //
+        Stack.prototype.toString = function () {
+            var resultString = ''
+            for (var i = 0; i < this.items.length; i++) {
+                resultString += this.items[i] + ' '
+            }
+            return resultString;
+        }
+
+        function dec2bin(decNumber) {
+            var stack = new Stack()
+            //循环
+            while (decNumber > 0) {
+                //获取余数存入栈中
+                stack.push(decNumber % 2);
+                //获取商数，作为下一次运行的数字
+                decNumber=Math.floor(decNumber/2);
+
+            }
+            var binaryString = ''
+            //取出栈中的0和1
+            while (!stack.isEmpty()) {
+                binaryString += stack.pop();
+            }
+            return binaryString;
+
+        }
+        //test
+        alert(dec2bin(100))
+        alert(dec2bin(10))
+        alert(dec2bin(1000))
+    </script>
+</body>
+
+</html>
