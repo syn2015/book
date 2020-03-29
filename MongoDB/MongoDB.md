@@ -10,19 +10,19 @@
 
 ## database
 
-mongoDB可以建立多个数据库
+mongoDB可以建立**多个数据库**
 
 ## collection []
 
-集合，一组数据的集合，理解为JS中的数组
+**集合，一组数据的集合，理解为JS中的数组**
 
 ## document {}
 
-文档，一条具体的数据，理解为JS中的对象
+**文档，一条具体的数据，理解为JS中的对象**
 
 ## field 
 
-字段，文档中属性的名称，理解为JS中的对象的属性
+**字段，文档中属性的名称，理解为JS中的对象的属性**
 
 ## Mongoose第三方包
 
@@ -42,10 +42,16 @@ mongoDB可以建立多个数据库
    mongoose.connect('mongodb://localhost/playground',{useNewUrlParser:true})
    		.then(()=>{console.log('success')})
    		.catch((err)=>{console.log('field：'+err)})
+   //现有版本
+   const mongoose=require('mongoose');
+   mongoose.connect('mongodb://localhost/playground',{useNewUrlParser:true, useUnifiedTopology: true })
+   		.then(()=>{console.log('success')})
+   		.catch((err)=>{console.log('field：'+err)})
+   
    
    ```
 
-![](useNewUrlParser.png)
+![useNewUrlParser](useNewUrlParser.png)
 
 ​	错误提示的解决
 
@@ -61,7 +67,7 @@ mongoose.connect('mongodb://localhost/playground',{useNewUrlParser:true})//补�
 
 1. 对集合设定规则,Schema函数
 
-   - String首字母大写
+   - **String首字母大写**
 
    ``````javascript
    const courseSchema=new mongoose.Schema({
@@ -76,7 +82,7 @@ mongoose.connect('mongodb://localhost/playground',{useNewUrlParser:true})//补�
 2. 创建集合，将mongoose.Schema构造函数的实例即可创建集合。
 
    - model函数
-   - 集合首字母大写（数据库里的名称式小写+S形式）
+   - **集合首字母大写（数据库里的名称式小写+S形式）**
    - **没有创建文档的情况下，默认不会创建数据库和集合**
 
    ``````javascript
@@ -87,11 +93,13 @@ mongoose.connect('mongodb://localhost/playground',{useNewUrlParser:true})//补�
 
 1. 实际上是向集合中插入数据
 
+   - **mongoose.model(集合名称，集合规则schema)**
+
    - 创建集合实例
 
    - 调用实例对象下的save方法将数据保存到数据库中
 
-   - _id 是数据库的默认创建的唯一标识
+   - **_id 是数据库的默认创建的唯一标识**
 
      ```javascript
      const Coure=mongoose.model('Course',courseSchema)// 创建集合
@@ -129,7 +137,7 @@ mongoose.connect('mongodb://localhost/playground',{useNewUrlParser:true})//补�
    - 回调函数实现异步API
 
    ``````javascript
-   Course.create({name:'javascript base',author:'teacherNo3',isPublish:true})
+   Course.create({name:'javascript advanced',author:'teacherNo3',isPublish:true})
    		.then(doc=>console.log(doc))
    		.catch(err=>console.log(err))
    ``````
@@ -139,7 +147,7 @@ mongoose.connect('mongodb://localhost/playground',{useNewUrlParser:true})//补�
 ## 数据库导入数据
 
 1. 命令    **mongoimport  -d  数据库名称  -c  集合名称  --file  要导入的数据文件**
-   - 配置系统变量Path     C:\Program Files\MongoDB\Server\4.2\bin
+   - **配置系统变量Path**     C:\Program Files\MongoDB\Server\4.2\bin
 
 ## 查询文档
 
@@ -151,7 +159,7 @@ mongoose.connect('mongodb://localhost/playground',{useNewUrlParser:true})//补�
    - **findOne(条件对象)，默认返回当前文档的第一条文档**。**返回一个对象**
 
    ``````javascript
-   Course.find().then(result=>console.log(result));
+   User.find().then(result=>console.log(result));
    ``````
 
    
@@ -161,65 +169,63 @@ mongoose.connect('mongodb://localhost/playground',{useNewUrlParser:true})//补�
    - $gt表示大于
 
      ```javascript
-     Course.find({age:{$gt:20,$lt:40}}).then(result=>{console.log(result)})
+     User.find({age:{$gt:20,$lt:40}}).then(result=>{console.log(result)})
      ```
 
-     
+   - $lt表示小于,less than
 
-   - $lt表示小于
+   - $gte表示大于等于,greater than  equal
 
-   - $gte表示大于等于
+   - $lte表示小于等于,less that equal
 
-   - $lte表示小于等于
+   - $eq表示等于 equal
 
-   - $eq表示等于
-
-   - **$in表示包含**
+   - **$in表示包含,数组对象**
 
      ```javascript
-     Course.find({hobbies:{$in:['敲代码']}}).then(result=>{console.log(result)})
+  User.find({hobbies:{$in:['敲代码']}}).then(result=>{console.log(result)})
      ```
+   
+     
+  
+   - $ne  (不等于)
+   
+   - $nin  (not in)，**数组对象**
 
      
+  
      
-   - $ne != (不等于)
-
-   - $nin !in (not in)
-
-     
-     
-     
-
+   
    - **select（'条件字段1   条件字段2'）**
 
      ``````javascript
-     Course.find().select('name email').then(result=>{console.log(result)})
+  User.find().select('name email').then(result=>{console.log(result)})
      ``````
-
+   
      
 
    - select(**'条件字段1  条件字段2   -字段名称'**)   -短杠前缀的字段会被忽略
 
      ``````javascript
-     Course.find().select('name email -_id').then(result=>{console.log(result)});
+  User.find().select('name email -_id').then(result=>{console.log(result)});
      ``````
-
+   
      
 
    - sourt(**' 排序字段'**)排序，sort(**'-排序字段'**) -短杆前缀的字段会倒序排列
 
      ``````javascript
-     Course.find().sort('age').then(result=>{console.log(result)})
+  User.find().sort('age').then(result=>{console.log(result)})
      //降序排列
-     Course.find().sort('-age').then(result=>{console.log(result)})
+     User.find().sort('-age').then(result=>{console.log(result)})
      ``````
-
+   
    - skip(指定跳过的数据数量）limit(指定限制查询的数量) 
 
      ```javascript
-     Course.find().skip(2).limit(2).then(result=>{console.log(result)})
+  User.find().skip(2).limit(2).then(result=>{console.log(result)})
      ```
-
+   
      
 
 ## 删除文档
@@ -229,7 +235,7 @@ mongoose.connect('mongodb://localhost/playground',{useNewUrlParser:true})//补�
    - 如果匹配了多个文档**，将会删除第一个匹配的文档**
 
    ``````javascript
-   Course.findOneAddDelete({_id:'XXXXXXXX'}).then(result=>{console.log(result)})
+   User.findOneAddDelete({_id:'XXXXXXXX'}).then(result=>{console.log(result)})
    ``````
 
    
@@ -240,7 +246,7 @@ mongoose.connect('mongodb://localhost/playground',{useNewUrlParser:true})//补�
    - 返回值是对象：**{n:删除文档的数量，ok:删除状态码}**
 
    ``````javascript
-   Course.deleteMany({}).then(result=>{console.log(result)})
+   User.deleteMany({}).then(result=>{console.log(result)})
    ``````
 
    
@@ -253,7 +259,7 @@ mongoose.connect('mongodb://localhost/playground',{useNewUrlParser:true})//补�
    - 返回值对象：**{n:查找的数量，nModified:更新的文档数量, ok:更新状态码}**
 
      ``````javascript
-     Course.updateOne({name:'李四'},{name:'王五'}).then(result=>{console.lgo(result)})
+     User.updateOne({name:'李四'},{name:'王五'}).then(result=>{console.lgo(result)})
      ``````
 
      
@@ -264,7 +270,7 @@ mongoose.connect('mongodb://localhost/playground',{useNewUrlParser:true})//补�
    - 返回值对象：**{n:查找的数量，nModified:更新的文档数量, ok:更新状态码}**
 
    ```javascript
-   Course.updateMany({}，{name:'王五'}).then(result=>{console.log(result)})
+   User.updateMany({}，{name:'王五'}).then(result=>{console.log(result)})
    ```
 
 ## mongoose验证
@@ -275,43 +281,71 @@ mongoose.connect('mongodb://localhost/playground',{useNewUrlParser:true})//补�
 
    - required:[true,'自定义错误消息]
 
-3. minlength:[数字,'自定义错误消息']
+3. **minlength**:[数字,'自定义错误消息']
 
-4. maxlength：[数字，‘自定义错误消息’]
+4. **maxlength**：[数字，‘自定义错误消息’]
 
-5. trim：true  , 去两端空格
+5. **trim：true**  , 去两端空格
 
-6. min：[] 
+6. **min**：[数字，‘自定义错误消息’]
 
-7. max: []
+7. **max**: [数字，‘自定义错误消息’]
 
-8. default字段，表示默认值
+8. **default**字段，表示默认值
 
-9. enum:**[列举值]**，表示列举值
+9. **enum**:**[列举值]**，表示列举值
 
    - 另一种形式
 
      ``````javascript
-     enum:{
-         values:[列举值],
-         message:'自定义错误消息'
-     }
+       enum: {
+                 values: ['html', 'javascript', 'css', 'node.js'],
+                 message: '不符合列举值'
+             }
      ``````
 
      
 
 10. **自定义验证规则validate**
 
-    - message,表示自定义错误信息。
+    - **message**,表示自定义错误信息。
 
     - catch函数中，参数err可以捕获自定义错误信息
 
     - 循环遍历参数err对象，可以捕获所有错误信息
 
       ``````javascript
-      js
+       author: {
+              type: String,
+        validator: {
+                  validater: v => {
+                      return v && v.length > 4
+                  },
+                  message: '传入的值不符合验证规则'
+              }
+          }
       ``````
-
+      
+      ```````javascript
+      //集合规则创建集合构造函数
+      const Post = mongoose.model('Post', postSchema)
+      Post.create({
+              title: 'aa',
+              age: 60,
+              category: 'java',
+              author: 'bd'
+          })
+          .then(result => {
+              console.log(result);
+          })
+          .catch(error => {
+              const err = error.errors;
+              for (var attr in err) {
+                  console.log(err[attr]['message']);
+              }
+          })
+      ```````
+      
       
 
 ## 集合关联
@@ -321,7 +355,31 @@ mongoose.connect('mongodb://localhost/playground',{useNewUrlParser:true})//补�
    - 
 
    ``````javascript
-   
+   //创建集合规则
+   //用户规则
+   const userSchema = new mongoose.Schema({
+      name:{
+          type:String,
+          required:true
+      }
+   });
+   //文章规则
+   const postSchema = new mongoose.Schema({
+      title:{
+          type:String
+      },
+      author:{
+          type:mongoose.Schema.Types.ObjectId,
+          ref:'User'
+      }
+   });
+   //集合规则创建集合构造函数
+   //文章集合
+   const Post = mongoose.model('Post', postSchema)
+   //用户集合
+   const User = mongoose.model('User', userSchema)
+   User.create({name:'it'}).then(result=>{console.log(result)})
+   Post.create({title:'123',author:'5e7ed737e07248379c96e969'}).then(result=>{console.log(result)})
    ``````
 
    
@@ -329,7 +387,8 @@ mongoose.connect('mongodb://localhost/playground',{useNewUrlParser:true})//补�
 2. 使用populate方法进行关联集合查询
 
    ```javascript
-   
+   Post.find().then(result=>{console.log(result)})
+   Post.find().populate('author').then(result=>{console.log(result)})
    ```
 
    
