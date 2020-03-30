@@ -75,21 +75,21 @@
     
 2.  树对象（**包含了一条或多条记录每条记录含有一个git对象或子对象的hash指针**）
 
-    1.  **update-index --add --cacheinfo 标识名 对应的hash值 对应的名字
-        命令，为文件的首个版本创建一个暂存区**
+    - **update-index --add --cacheinfo 标识名 对应的hash值 对应的名字
+      命令，为文件的首个版本创建一个暂存区**
 1.  **标识名 100644
             标识普通文件；100755表示可执行文件；120000标识符号链接**
-        
-2.  **--cacheinfo 选项，标识将要添加的文件位于git数据库中。**
-        
-3.  **--add 首次加入版本库需要加上**
-        
-2.  **find ./.git/objects/ -type f** 查看树对象
-    1.  **t 表示类型**
     
-    3.  **git ls-list -s**
+2.  **--cacheinfo 选项，标识将要添加的文件位于git数据库中。**
+    
+3.  **--add 首次加入版本库需要加上**
+    
+2.  **find ./.git/objects/ -type f** 查看树对象
+    - **t 表示类型**
+    
+    - **git ls-list -s**
 1.  **查看暂存区**
-        
+    
 4.  **git write-tree**
     
     1.  **暂存区快照命令，生成树对象放入版本库中**
@@ -108,13 +108,13 @@
 
 4.  **git add ./ 命令**
 
-    1.  **先生成git对象到版本库，然后生成树对象由版本库里再到暂存区**
+    - **先生成git对象到版本库，然后生成树对象由版本库里再到暂存区**
 
 5.  **git commit –m ‘注释内容’**
 
-    1.  **git write-tree命令创建树对象**
+    - **git write-tree命令创建树对象**
 
-    2.  **git commit-tree 命令创建提交对象**
+    - **git commit-tree 命令创建提交对象**
 
 基础命令
 --------
@@ -204,12 +204,12 @@
 
 4.  **git commit –m** ‘注释’ 添加版本库
 - **git commit 进入注释编辑，顶头编辑**
-    
+  
 - **git commit -a -m ‘注释’
       跳过暂存区，将所有已跟踪的文件暂存起来一并提交**
-    
+  
 - **同git commit -am ‘注释’**
-    
+  
 5.  **git status** 查看状态
 
     - **git rm --cached \<file\>** 不暂存某文件
@@ -219,7 +219,7 @@
 7.  **git diff (不加参数直接输入git diff) 查看已暂存和未暂存的更新**
 - **git diff --cached 或者 git diff --staged(1.6.1以上)
       查看已暂存起来准备提交的修改**
-    
+  
 8.  **git clone url 仓库名** 指定远程仓库的名称
 
 9.  **git log** 查看历史记录
@@ -252,13 +252,13 @@ git log
 12. **git merge --ff**和**--no-ff**和**--squash**区别
 - \--ff:
       (fast-forward)默认的提交方式。方式就是当条件允许的时候，git直接把HEAD指针指向合并分支的头，完成合并。属于“快进方式”，不过这种情况如果删除分支，则会丢失分支信息。因为在这个过程中没有创建commit
-    
+  
 - \--no-ff:
       指的是强行关闭fast-forward方式。不使用fast-forward方式合并，保留分支的commit历史,并生成一次合并的提交记录
-    
+  
 - \--squash:
       是用来把一些不必要commit进行压缩，比如说，你的feature在开发的时候写的commit很乱，那么我们合并的时候不希望把这些历史commit带过来，于是使用--squash进行合并，此时文件已经同合并后一样了，但不移动HEAD，不提交。需要进行一次额外的commit来“总结”一下，然后完成最终的合并。
-    
+  
 - 使用squash方式合并，把多次分支commit历史压缩为一次。然后在合并时所在的分支主动做commit，产生一次合并记录
 
 分支命令
@@ -294,11 +294,11 @@ git log
 
 2.  **git branch 分支名** 创建分支
 - **git branch 可以得到分支列表**
-    
+  
 3.  **git checkout 分支名** 切换到该分支
 - **git checkout –b 新建分支名   新建分支并切换到该分支**
 
-1.  **git branch –d 分支名** 删除已合并的分支
+4.  **git branch –d 分支名** 删除已合并的分支
 
     - **git branch –D 分支名 强制删除**
 
@@ -313,7 +313,7 @@ git log
 >   **git config --global alias.别名 “!gitk” 已外部命令的方式运行指定程序（git
 >   ui）**
 
-1.  **使用别名**
+>   **使用别名**
 
 >   **git 别名**
 
@@ -380,19 +380,19 @@ git存储
 
 1.  **git stash**命令
 - **将未完成的修改保存到栈上**
-    
+  
 - 重新应用**git stash apply**
-    
+  
   - **先进后出的模式**
-    
+  
 - **git stash list** 查看存储
       - **git stash apply stash@{0} 展示指定的栈内容**
 
     - **git stash pop 删除的名字**
   - **应用存储并立即删除**
-    
+  
 - **git stash drop 删除的名字** 将要删除的存储的名字来移除它
-    
+  
 - **git stash save ‘说明内容’ 添加说明内容**
 
 撤销和重置
@@ -409,118 +409,106 @@ git存储
     - **git reset HEAD   文件的名称**
 
     - **git rm --cache 文件名称 将文件从暂存区中删除**
-
-      - **git将不再管理该文件，工作目录中依然存在该文件**
-
+  - **git将不再管理该文件，工作目录中依然存在该文件**
+    
 3.  **撤回版本库的提交(修改注释内容)**
+- **git commit --amend 修改最新的提交注释内容**
+  
+- **如果提交后有了新的修改，应该**
+      - **git add 加入暂存区的文件**
 
-    - **git commit --amend 修改最新的提交注释内容**
+      - **git commit --amend**
+        
+      - **第二次提交将代替第一次提交**
 
-    - **提交后再次修改**
-  - **git commit –m ‘注释’**
-    
-  - **git add 加入暂存区的文件**
-    
-  - **git commit --amend**
-    
-  - **第二次提交将代替第一次提交**
-    
-4.  **git reset --soft HEAD\~ 撤回提交命令**
-
-    - **本质上撤销了上一次git commit 命令。在运行git
+4.  **git reset --soft HEAD\~ 撤回提交命令 只修改了HEAD指向**
+- **本质上撤销了上一次git commit 命令。在运行git
       commit命令时，创建一个新的提交并移动HEAD所指向的分支类使其指向该提交。**
-
-    - **只改变了head，并带着分支一起移动**
-
-    - **重置回去：git reset --soft 提交hash值**
-
-5.  **git reset --mixed HEAD\~ 撤销暂存区命令**
-
-    - **get reset HEAD\~等同于 git reset --mixed HEAD\~**
-
-    - **撤销上一次提交，同时取消暂存区所有的东西。回滚到所有git add和git
+  
+- **只改变了head，并带着分支一起移动**
+  
+- **重置回去：git reset --soft 提交hash值**
+  
+5.  **git reset --mixed HEAD\~ 撤销暂存区命令  修改了HEAD指向同时修改了暂存区**
+- **get reset HEAD\~等同于 git reset --mixed HEAD\~**
+  
+- **撤销上一次提交，同时取消暂存区所有的东西。回滚到所有git add和git
       commit命令执行之前**
-
-    - **重置回去：git reset --mixed 提交hash值**
-
+  
+- **重置回去：git reset --mixed 提交hash值**
+  
 6.  **git reset --hard HEAD\~（慎用）**
-
-    - **改变了head,撤销了最后的提交、git add和git
+- **改变了head,撤销了最后的提交、git add和git
       commit及其工作目录中的所有工作**
-
-    - **重置回去：git reset --hard提交hash值**
-
-7.  **git checkout 提交对象和git reset --hard 提交对象的区别**
-
-    - **checkout仅改动head，hard改动head而且带着分支一起走**
-
-    - **checkout对工作目录是安全的，hard是强制覆盖工作目录。**
-
-8.  **git reset HEAD 文件名**
-
-    - **不改动head，只改动暂存区，完成重置该文件。**
-
-    - **等同于git reset 文件名**
-
+  
+- **重置回去：git reset --hard提交hash值**
+  
+7.  **git checkout 提交对象  和   git reset --hard 提交对象的区别**
+- **checkout仅改动head，hard改动head而且带着分支一起走**
+  
+- **checkout对工作目录是安全的，hard是强制覆盖工作目录。**
+  
+8.  **git reset [--mixed]  HEAD(或hash值) 文件路径**
+- **不改动head，只改动暂存区，完成重置该文件。**
+  
+- **等同于git reset 文件名**
+  
 9.  **git checkout 分支名 和git checkout --文件名**
 - **仅仅改动了工作目录**
-    
+  
 10. **恢复误删除的文件**
-
-    1.  **git rm命令删除并纳入暂存区**
-1.  **git commit -m**
-
->   **或者**
-
-1.  **先git reset HEAD 被删除的文件**
-
-2.  **然后git checkout -- 被删除的文件**
-
-3.  **rm 命令仅仅是删除**
-
-    1.  **git add 命令添加到暂存区**
+- **git rm命令删除并纳入暂存区**
+      - **git commit -m**
 
 >   **或者**
 
-1.  **先git reset HEAD 被删除的文件**
+- **先git reset HEAD 被删除的文件**
 
-2.  **然后git checkout -- 被删除的文件**
+- **然后git checkout -- 被删除的文件**
 
-3.  **版本回退**
+- **rm 命令仅仅是删除**
 
-    1.  **回退到上一个版本**
+  - **git add 命令添加到暂存区**
 
-    2.  **git reset --hard HEAD\^**
+>   **或者**
 
-        1.  **git reset --hard HEAD\^\^ 回退到上上个版本**
+- **先git reset HEAD 被删除的文件**
 
-    3.  **git reset --hard HEAD\~1 回退到第n个版本**
+- **然后git checkout -- 被删除的文件**
 
-    4.  **git reset --hard commitID 回退到指定版本**
+- **版本回退**
+
+  1.  **回退到上一个版本**
+
+  2.  **git reset --hard HEAD\^**
+
+      1.  **git reset --hard HEAD\^\^ 回退到上上个版本**
+
+  3.  **git reset --hard HEAD\~1 回退到第n个版本**
+
+  4.  **git reset --hard commitID 回退到指定版本**
 
 数据恢复
 --------
 
 1.  **git branch 新分支名 丢失的分支的hash值**
-
-    1.  创建一个新分支来找回丢失的分支
+1.  创建一个新分支来找回丢失的分支
 
 tag标签
 -------
 
 1.  **轻量标签和附注标签**
-
-    - 轻量标签是一个特定提交的引用
-
-    - 附注标签可以包含打标签者的名字、电邮等信息。
-
-      - **git tag –a 标签名**
-
-      - **git tag –a 标签名 指定的提交对象hash 给指定的提交对象打tag**
-
-      - **git tag –a 标签名 指定的提交对象hash –m ‘内容信息’
+- 轻量标签是一个特定提交的引用
+  
+- 附注标签可以包含打标签者的名字、电邮等信息。
+  
+  - **git tag –a 标签名**
+    
+  - **git tag –a 标签名 指定的提交对象hash 给指定的提交对象打tag**
+    
+  - **git tag –a 标签名 指定的提交对象hash –m ‘内容信息’
         给指定的提交对象打附注tag**
-
+    
 2.  **git tag** 列出标签
 
 3.  **git tag –l '正则表达式’** 按照正则表达式匹配
@@ -539,7 +527,7 @@ tag标签
 
 7.  **git checkout 标签名 检出标签**
 
-    - **git checkout -b 新分支名 分离头指针状态下进行修改操作**
+    - **git checkout -b 新分支名   分离头指针状态下进行修改操作**
 
 8.  **git push origin [tagname]** 向远程服务器提交tag
 
@@ -573,43 +561,40 @@ tag标签
 5.  **git remote rm 仓库名 移除远程仓库**
 
 6.  **git push 别名仓库 分支名 推送远程仓库**
-
-    1.  **git push -u 仓库名 分支名 首次使用-u，以后可以省略仓库名和分支名**
-
+- **git push -u 仓库名 分支名 首次使用-u，以后可以省略仓库名和分支名**
+  
 7.  **git config --global --unset user.name 取消全局的username**
 
 8.  **git fetch 仓库名 分支名 拉取远程仓库内容**
 
-    1.  **git merge 跟踪分支 在本地master分支上合并跟踪分支**
+    - **git merge 跟踪分支 在本地master分支上合并跟踪分支**
 
 9.  **git pull 仓库名 分支名 拉取最新版本**
-
-    1.  **首先本地分支和远程分支建立联系**
-
+- **首先本地分支和远程分支建立联系**
+  
 10. **git branch -u 仓库名/分支名 本地分支和远程跟踪分支建立联系**
 
 11. **git checkout -b 本地分支 远程跟踪分支**
 
-    1.  **创建本地分支并和远程跟踪分支建立联系**
+    - **创建本地分支并和远程跟踪分支建立联系**
 
-    2.  **同 git checkout --track 远程跟踪分支**
+    - **同 git checkout --track 远程跟踪分支**
 
 12. **git branch -vv 查看设置的所有跟踪分支**
 
 13. **git push origin --delete 分支名**
 
-    1.  **删除远程分支**
+    - **删除远程分支**
 
-    2.  **同git push origin :要删除的分支**
+    - **同git push origin :要删除的分支**
 
 14. **git remote prune origin --dry -run**
-
-    1.  **列出仍在远程跟踪但是远程已经删除的无用分支**
-
-    2.  **git remote prune origin**
-
-    3.  **清除上面命令列出来的远程跟踪**
-
+- **列出仍在远程跟踪但是远程已经删除的无用分支**
+  
+- **git remote prune origin**
+  
+- **清除上面命令列出来的远程跟踪**
+  
 15. **pull == fetch+merge**
 
 Git refspec引用规范
@@ -629,7 +614,7 @@ Git refspec引用规范
 4.  **git checkout -b 对应远程分支的本地分支 远程跟踪分支
     新建本地分支对应远程跟踪分支**
 - **同 git checkout --track 远程跟踪分支**
-    
+  
 5.  **git push -u origin 本地分支 将一个本地分支推送到远程仓库**
 
 6.  **push完整命令：git push origin 本地分支：远程分支（目标分支）**
@@ -758,36 +743,49 @@ Git cherry-pick 挑拣提交
 Git rebase变基(衍合)
 --------------------
 
-1.  **merge方式**
+**merge方式**
 
 ![](media/4e907c91b3f42df2d2e1432ebdf908a0.png)
 
-1.  **rebase方式，会修改提交历史**
+**rebase方式，会修改提交历史**
 
 ![](media/38208c6b92643d5652d2464fd68cba8c.png)
 
 1.  **rebase注意事项**
 
-    1.  **rebase出现的冲突**
+    **rebase出现的冲突**
 
-        1.  **解决冲突后，git add添加，然后执行**
+    1.  **解决冲突后，git add添加，然后执行**
 
 >   **git rebase --continue 继续应用剩下的补丁**
 
-1.  **接下来GIt会继续应用剩下的补丁**
+- **接下来GIt会继续应用剩下的补丁**
 
-2.  **任何时候都可以通过git rebase --abort
-    终止rebase,分支会恢复到rebase开始前的状态**
+- **任何时候都可以通过git rebase --abort
+  终止rebase,分支会恢复到rebase开始前的状态**
 
-3.  **不要对master分支执行rebase，会引发许多问题**
+- **不要对master分支执行rebase，会引发许多问题**
 
-4.  **一般来说，执行rebase的分支都是自己的本地分支，且没有推送到远程版本库**
+- **一般来说，执行rebase的分支都是自己的本地分支，且没有推送到远程版本库**
 
-5.  **git rebase --skip 丢弃打上的提交补丁，保留原有的提交**
+- **git rebase --skip 丢弃打上的提交补丁，保留原有的提交**
 
-6.  **git rebase 变基到该分支上**
+- **git rebase 变基到该分支上** 
+  - **即是 git rebase 目标分支或变基分支 特性分支**
 
-    1.  **即是 git rebase 目标分支或变基分支 特性分支**
+1. **git rebase -i HEAD~3  最近三条的commit压缩为一个commit**
+
+   - **仅仅对未提交到远程仓库的提交做变基**
+
+2. 配置beyond compare 
+
+   ```javascript
+   git config --local merge.tool bc3
+   git config --local mergetool.path 'bc的安装目录'
+   git config --local mergetool.keepBackup false
+   //应用,自动查找冲突文件
+   git mergetool 
+   ```
 
 GitLab
 ------
@@ -835,7 +833,7 @@ Git特点
       - 使用**两个星号（\*) 表示匹配任意中间目录**，比如\`a/\*\*/z\`
         可以匹配 a/z, a/b/z 或 \`a/b/c/z\`等。
     
-        ```
+        ```.gitignore
         .DS_Store
         node_modules/
         /dist/
