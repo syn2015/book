@@ -1,0 +1,7 @@
+$primary-color:rgba(233,23,2,0.5);
+@mixin large-text {
+    font: {
+        size: 20px;
+        family:Arial;
+    }
+}

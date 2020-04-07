@@ -1,0 +1,695 @@
+@import './partials.scss';
+@import 'reset';
+
+.default {
+    height: 100px;
+}
+
+html {
+    padding: 0;
+    margin: 0;
+}
+
+$font-stack:Helvetica,
+sans-serif;
+$p-color:#333;
+
+body {
+    font-stretch: normal;
+    color: $promary-color;
+    font: 100% $font-stack;
+
+}
+
+nav {
+    ul {
+        margin-right: 0;
+        pad: 0;
+        list-style: none;
+    }
+}
+
+li {
+    display: inline;
+}
+
+a {
+    display: block;
+    padding: 6px 12px;
+
+    &:hover {
+        color: white;
+    }
+}
+
+//@at-root
+#content aside {
+    color: red;
+
+    body.ie & {
+        color: green
+    }
+}
+
+//
+@mixin transform($property) {
+    transform: $property;
+    -webkit-transform: $property;
+    -ms-transform: $property;
+    transform: $property;
+}
+
+.box {
+    @include transform(rotate(30deg));
+}
+
+//
+%message-shared {
+    background-origin: padding-box;
+    padding: 10px;
+    color: #333;
+}
+
+%equl-heights {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.message {
+    @extend %message-shared;
+}
+
+.success {
+    @extend %equl-heights;
+    display: block;
+}
+
+.error {
+    @extend %message-shared;
+    color: red;
+    width: 10px;
+}
+
+.warning {
+    @extend %message-shared;
+    color: black;
+}
+
+.container {
+    width: 100%;
+}
+
+article[role='main'] {
+    float: left;
+    width: 600px/960px*100%;
+}
+
+aside[role='complementary'] {
+    float: right;
+    width: 300px/960px*100%;
+}
+
+//
+.helloword {
+    color: hsl(120deg, 100%, 50%)
+}
+
+.helloword2 {
+    color: rgb(242, 255, 0);
+}
+
+.helloword3 {
+    color: red(rgba(33, 56, 89, 1));
+}
+
+.helloword4 {
+    color: mix(red, blue);
+}
+
+.helloword5 {
+    border-width: if(true, 1px, 2px)
+}
+
+.helloword6 {
+    border-width: if(false, 1px, 2px)
+}
+
+//
+p {
+    @if 1+1==2 {
+        color: green;
+    }
+
+    @if 1+1<10 {
+        color: blue;
+    }
+}
+
+//嵌套
+#main p {
+    color: #000;
+    width: 97%;
+
+    .redbox {
+        background-color: #fff;
+        color: blue;
+    }
+}
+
+#main {
+    width: 97%;
+
+    p,
+    div {
+        font-size: 2em;
+
+        a {
+            font-weight: bold;
+        }
+
+    }
+
+    pre {
+        font-size: 3em;
+    }
+}
+
+a {
+    font-weight: bold;
+    text-decoration: none;
+
+    &:hover {
+        text-decoration: underline;
+    }
+
+    body.firefox & {
+        font-weight: normal;
+    }
+}
+
+//
+#main {
+    color: block;
+
+    &-sidebar {
+        border: 1px solid #000;
+    }
+}
+
+#main {
+    color: block;
+
+    &-sidebar {
+        border: 1px solid #000;
+    }
+
+    // abc-&{
+    //     color: black;
+    // }
+    //  abc-&-bca{
+    //     color: black;
+    // }
+}
+
+//命名空间
+.funky {
+    font: {
+        size: 30em;
+        family: fanstasy;
+        weight: bold;
+    }
+
+    ;
+}
+
+//
+.lunky {
+    font:20px/24px fantasy {
+        weight: bold;
+    }
+}
+
+//
+%hello {
+    color: red;
+    font-size: 2em;
+}
+
+#mainhello {
+    @extend %hello;
+}
+
+//注释
+
+/*
+多行注释
+*/
+
+//单行注释
+
+/**！保留注释*/
+$version:'1.2.3';
+/*!版权注释#{$version}*/
+
+//交互环境
+// .title{
+//     color:#777 + #777;
+// }
+
+$width:5em;
+
+#main {
+    // $height:3em !global;
+    $height: 3em;
+    height: $height;
+    width: $width;
+}
+
+.title {
+    width: $width;
+    // height: $height ;
+}
+
+//
+@mixin firefox-message ($selector) {
+    body.firefox #{$selector}:before {
+        content: 'hi,firefox-message';
+    }
+}
+
+@include firefox-message('.header');
+
+.title {
+    margin: (10px 1px) (2px 3px);
+    margin: (10px 1px) 2px 3px;
+}
+
+$my-margin:(2px 2px 5px);
+
+.title2 {
+    margin: append($my-margin, 2px);
+}
+
+//
+$my-map:("fo1":1, "bar":2);
+$my-map:map-merge($my-map, ("normal":19px));
+
+.title3 {
+    font-size: map-get($my-map, 'normal');
+}
+
+//
+@each $var in ('success', 'warn', 'info', 'error') {
+    .#{$var} {
+        color: red;
+    }
+}
+
+@each $key,
+$value in $my-map {
+    .span-#{$key} {
+        content: inspect($value);
+        font-size: $value;
+    }
+}
+
+//
+p {
+    font: 10px/8 sans-serif;
+    $width: 100px;
+    width: $width/2;
+    width: round(1.5)/2;
+    height: (5000px/2);
+    margin-left: 5px+8px/2px;
+    font: (italic bold 10px/8px);
+}
+
+//
+$my-color:rgba(255, 0, 0, 0.5);
+
+p {
+    font-size: 15px - 2px;
+    color: opacify($color: $my-color, $amount: 0.1);
+    // color: transparentize($my-color,$amount:0.1);
+}
+
+//
+$name:foo;
+$attr:border;
+
+p.#{$name} {
+    #{$attr}-color: red;
+}
+
+;
+
+//
+.foo.bar .baz.bang .bip.qux {
+    $selector: &;
+    // content: $selector;
+    content: ""+$selector;
+}
+
+//检测是否存在父元素
+@mixin does-parent-exist {
+    @if & {
+        &:hover {
+            color: red;
+        }
+    }
+
+    @else {
+        a {
+            color: red;
+        }
+    }
+}
+
+.hello {
+    @include does-parent-exist()
+}
+
+// @include does-parent-exist()
+
+//
+$content: "first content";
+$content:"second content?" !default;
+$new_content:"new content?" !default;
+
+#test {
+    content: $content;
+    content: $new_content;
+}
+
+$null_content:null;
+$null_content:'non-null content' !default;
+
+#main {
+    content: $null_content;
+}
+
+@import './util.scss';
+
+.title {
+    color: $primary-color;
+    @include large-text;
+}
+
+//
+.sidebar {
+    width: 300px;
+
+    @media screen and (orientation:landscape) {
+        width: 500px;
+    }
+}
+
+//
+@media screen {
+    .sidebar {
+        @media(orientation: landscape) {
+            width: 500px;
+        }
+    }
+
+    .main {
+        width: 800px;
+    }
+}
+
+//
+$media-name:screen;
+$feature:-webkit-min-device-pixel-radio;
+$value:1.5;
+
+@media #{$media-name} and ($feature:$value) {
+    .sidebar {
+        width: 500px;
+    }
+}
+
+//
+// .error{
+//     border: 1px solid #000;
+//     background-color: #fdd;
+// }
+// .seriousError{
+//     @extend .error;
+//     border-width: 3px;
+// }
+//
+.error {
+    border: 1px solid #000;
+    background-color: #fdd;
+
+}
+
+.error.intrustion {
+    background-image: url('https://www.baidu.com/img/bd_logo1.png');
+}
+
+.seriousError {
+    @extend .error;
+    border-width: 3px;
+}
+
+//
+// a{
+//     color:green;
+//     &:hover{
+//         color: red;
+//     }
+// }
+// .hoverlink{
+//     @extend a:hover;
+// }
+
+// a{
+//     color: red;
+//     &:hover{
+//         text-decoration: underline;
+//     }
+// }
+// .hoverlink{
+//     @extend a:hover;
+// }
+
+// #admin .tabbar a{
+//     font-weight: bold;
+// }
+// #demo .overview .fakelink{
+//     @extend a;
+// }
+//
+#content a%extreme {
+    color: blue;
+}
+
+// .notice{
+//     @extend %extreme;
+// }
+//
+a.important {
+    @extend .notice !optional;
+}
+
+//
+.parent {
+    color: red;
+
+    @at-root.child {
+        font-size: 30px;
+    }
+
+    @at-root .title {
+        .caption {
+            background: blue;
+        }
+    }
+
+    @at-root {
+        .child1 {
+            color: yellow;
+        }
+
+        .child2 {
+            color: pink;
+        }
+    }
+}
+
+//
+
+// @debug 10em+20em;
+// @debug $abc;
+// @warn $abc;
+// @error 'hello';
+//
+//控制指令和表达式
+.title{
+    border-width: if(true,1px,2px);
+    @if 5<10{
+        content: 'right';
+    }
+    @if null{
+        background-color: yellow;
+    }
+}
+$type:monster;
+p{
+    @if $type==ocean{
+        color: blue;
+    }@else if $type==masador{
+        color: red;
+    }@else if $type==monster{
+        color: green;
+    }@else{
+        color: black;
+    }
+}
+
+//
+@for $i from 1 through 3{
+    .item-#{$i}{
+        width: 2em*$i;
+    }
+}
+
+@each $animal in cat,dog,brid {
+    .#{$animal}-icon{
+        background-image: url('/images/#{$animal}.png');
+    }
+}
+
+$students:((name:'n1',gender:'female'),(name:'n2',gender:'male'),(name:'n3',gender:'male'));
+@each $var in $students {
+    // @debug $var;
+    .stu-#{map-get($var,'name')}{
+        content: map-get($var,'name')+","+map-get($var,'gender');
+    }
+}
+//
+$i:12;
+@while $i>0 {
+    .item-#{$i}{
+        width:100%/$i;
+    }
+   $i:$i - 1;
+}
+   
+
+@mixin say-hi {
+    content:'hi'
+}
+.title{
+    @include say-hi();
+}
+//
+@mixin clearfix {
+    display: inline-block;
+    &:after{
+        content: ".";
+        display: block;
+        height: 0;
+        clear: both;
+        visibility: hidden;
+    }
+    * html &{height: 1px;}
+}
+
+.title{
+    @include clearfix()
+}
+//
+@mixin silly-link {
+    a{
+        color: blue;
+        background-color: red;
+    }
+}
+@include silly-link();
+//
+@mixin compound {
+    @include highlighted-background;
+    @include header-text;
+}
+@mixin highlighted-background {
+    background: blue;
+}
+@mixin header-text {
+    font-size: 20px;
+}
+a{
+    @include compound()
+}
+//
+@mixin sexy-border($color,$width) {
+    border: {
+        color:$color;
+        width: $width;
+        style:dashed;
+    }
+}
+.hello{
+    @include sexy-border(red, 2px);
+    @include sexy-border($width:2px,$color:red)
+}
+//
+@mixin colors($text,$background,$border) {
+    color: $text;
+    background-color: $background;
+    border-color: $border;
+}
+$values:#ff0000,#00ff00,#0000ff;
+.primary{
+    @include colors($values...);
+}
+//
+$values-map:(text:#ff0000,background:#0000ff,border:#ff0000);
+.secondary{
+    @include colors($values-map...);
+}
+//
+@mixin wrapped-stylish-mixin($args...) {
+    font-weight: bold;
+    content:$args;
+    // @include stylish-mixin($args...);
+}
+.stylish{
+    @include wrapped-stylish-mixin(#00ff00);
+}
+//
+@mixin apply-to-ie6-only {
+    * html{
+        @content;
+    }
+    #content{
+        @content;
+    }
+}
+@include apply-to-ie6-only{
+    #logo{
+        background-image: url(/logo.gif);
+    }
+}
+//
+$color-white:white;
+@mixin colors($color-white:blue) {
+    background-color: $color-white;
+    @content;
+    border-color: $color-white;
+}
+.colors{
+    @include colors{color:$color-white;}
+}
+//
+$grid-width:40px;
+$gutter-width:10px;
+
+@function grid-width($n){
+    @return $n * $grid-width + ( $n - 1) * $gutter-width
+}
+#sidderbar{
+    width: grid-width(5);
+}
+//
