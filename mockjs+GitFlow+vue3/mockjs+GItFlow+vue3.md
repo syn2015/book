@@ -29,7 +29,11 @@
 
 6. Vue 3.0 RFC
 
-7. 新特性
+7.   **// "lint": "vue-cli-service lint"**
+
+    **"lint": "eslint --fix --ext .js,.vue src"**
+
+8. 新特性
 
    - 安装
 

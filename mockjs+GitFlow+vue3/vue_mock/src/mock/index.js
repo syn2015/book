@@ -1,7 +1,2 @@
 import './extends'
 import './goods'
-
-
-
-
-

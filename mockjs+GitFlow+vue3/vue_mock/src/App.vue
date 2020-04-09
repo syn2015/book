@@ -11,16 +11,16 @@
 <script>
 export default {
   methods: {
-    async getGoodsList() {
+    async getGoodsList () {
       const { data: res } = await this.$http.get('/api/goodslist')
       console.log(res)
     },
-    async addGoods() {
-      const { data: res } = await this.$http.post('/api/addgoods',{name:'boluo',price:9,count:100,img:'image url'})
+    async addGoods () {
+      const { data: res } = await this.$http.post('/api/addgoods', { name: 'boluo', price: 9, count: 100, img: 'image url' })
       console.log(res)
     },
-    async getGoodsById(id){
-      const {data:res}=await this.$http.get(`/api/getgoods/${id}`)
+    async getGoodsById (id) {
+      const { data: res } = await this.$http.get(`/api/getgoods/${id}`)
       console.log(res)
     }
   }
