@@ -8,6 +8,8 @@
 
 # Vue-Cli 3
 
+![nuxt.webp](nuxt.webp)
+
 1. dependencies 是运行依赖
 
 2. devDependencies 是开发依赖
@@ -149,73 +151,83 @@
 
      ``````javascript
      <template>
-     	<div id="app">
-             <h1 class='title'> list {{brandlist.length}}</h1>
-     		<el-row :gutter="10">
-                 <el-col :span=7>
-                     <el-input placeholder='请输入'size='mini'>
-     					<template slot='prepend'>名称：</template>
-     				</el-input>
-                 </el-col>
-     			<el-col :span='4'>
-                     <el-button type='primary' size='mini'> 添加</el-button>
-                 </el-col>
-             </el-row>
-     		//表格
-     		 <el-table :data="brandlist" style="width:100%;margin-top=10px" border size='mini' >
-           		
-                     <el-table-column prop="id" label="id"></el-table-column>
-                     <el-table-column prop="name" label="name"></el-table-column>
-                     <el-table-column prop="ctime" label="ctime">
-                         <template v-slot='scope'>
-                         {{scope.row.ctime|dateFormat}}
-                         </template>
-                         
-                         </el-table-column>
-     				<el-table-column label="操作">
-                         <template v-slot='scope'> 
-                         <el-button type='danger' size='mini'>删除{{scope.row.id}}</el-button>
-                         </template>
-                         </el-table-column>
-     		</el-table>
+       <div id="app">
+         <!-- <p>elementui</p> -->
+         <h1 class="title">list---{{brandlist.length}}</h1>
+        <el-row :gutter='10'>
+          <el-col :span="7" >
+              <el-input placeholder="请输入品牌名称" size="mini">
+               <template slot="prepend">品牌名称：</template>
+             </el-input>
+          </el-col>
+          <el-col :span="4">
+            <el-button type="primary" size="mini">添加</el-button>
+          </el-col>
+        </el-row>
      
-         </div>
-     </template>  
+     <el-table :data="brandlist" style="width: 100%; margin-top: 10px;" border size="mini">
+           <el-table-column prop="id" label="Id"></el-table-column>
+           <el-table-column prop="name" label="Name"></el-table-column>
+           <el-table-column label="Ctime">
+             <template v-slot="scope">
+               {{scope.row.ctime | dateFormat}}
+             </template>
+           </el-table-column>
+           <el-table-column label="操作">
+             <template v-slot="scope">
+               <el-button type="danger" size="mini">删除 -- {{scope.row.id}}</el-button>
+             </template>
+           </el-table-column>
+         </el-table>
+     
+       </div>
+     </template>
      
      <script>
-         import {value,computed,OnMounted} from 'vue-function-api'
-     	import {list} from './api/brand_list.js'
-     	export default{
-            setup(props,context){
-                //响应数据
-                const brandlist=value([])
-                const getBrandList=async()=>{
-                    const {data:res}=await list()
-                    console.log(res);
-                    if(res.status!=0){
-                        return context.root.$message.error('获取失败')
-                    }else{
-                        return context.root.$message.success('获取成功')
-                        brandlist.value=res.message
-                    }
-                }
-                onMounted(){
-                    getBrandList();
-                }
-                return {
-                    brandlist
-                }
-            }
-         }
+     import { value, onMounted } from 'vue-function-api'
+     import { list } from './api/branch_list'
      
+     export default {
+       setup (props, context) {
+         const root = context.root
+         const brandlist = value([])
+         const getBrandList = async () => {
+           const { data: res } = await list()
+           console.log(res)
+           // console.log(root)
+           if (res.status !== 0) {
+             return context.root.$message.error('get list failed')
+           }
+           root.$message.success('get list success')
+           brandlist.value = res.message
+         }
+         onMounted(() => {
+           getBrandList()
+         })
+     
+         return {
+           brandlist
+         }
+       }
+     
+     }
      </script>
-     <style>
-     	.title{
-             font-size:18px;
-             text-align:center;
-         }
      
+     <style>
+     /* #app {
+       font-family: 'Avenir', Helvetica, Arial, sans-serif;
+       -webkit-font-smoothing: antialiased;
+       -moz-osx-font-smoothing: grayscale;
+       text-align: center;
+       color: #2c3e50;
+       margin-top: 60px;
+     } */
+     .title{
+       font-style: 18px;
+       text-align: center;
+     }
      </style>
+     
      ``````
 
      
@@ -223,18 +235,18 @@
    - mock/brand_list.js
 
      ``````javascript
-     import Mock  from 'mockjs'
-     Mock.mock('/api/getprodlist','get',{
-         status:0,
-         'message|4':[
-             {
-                 id:'@increment(1)'，
-                 name:'@cword(3,8)'
-                 ctime:new Date()
-             }
-         ]
-         
+     import Mock from 'mockjs'
+     Mock.mock('/api/getprodlist', 'get', {
+       status: 0,
+       'message|4': [
+         {
+           id: '@increment(1)',
+           name: '@cword(3,8)',
+           ctime: new Date()
+         }
+       ]
      })
+     
      ``````
 
      
@@ -250,38 +262,35 @@
    - api/brand_list.js
 
      ``````javascript
-     import {createAPI} from '../utils/request'
-     export const list=data=>createAPI{
-         'api/getprodlist',
-             'get',
-             data
-     }
-     ``````
-
+     import { createAPI } from '../utils/request'
+     export const list = (data) => createAPI('/api/getprodlist', 'get', data)
      
-
+     ``````
+     
+     
+     
    - util/request.js
 
      ```javascript
      import axios from 'axios'
-     const instance=axios.create({
-         //baseUrl:'',
-         //baseUrl:'http://www.liulongbin.top:3005'
-         timeout:1000
+     const instance = axios.create({
+       // 'baseURL':'',
+       timeout: 1000
      })
-     export const createAPI=(url,method,data)=>{
-         let config={}
-         if(method.toUpperCase==='GET'){
-             config.params=data
-         }else{
-             config.data=data
-         }
-         return instance({
-             url,
-             method,
-             ...config
-         })
+     export const createAPI = (url, method, data) => {
+       let config = {}
+       if (method.toUpperCase === 'GET') {
+         config.params = data
+       } else {
+         config.data = data
+       }
+       return instance({
+         url,
+         method,
+         ...config
+       })
      }
+     
      ```
 
      
@@ -290,13 +299,13 @@
 
      ``````javascript
      export const dateFormat=(dtstr)=>{
-         const dt=new Date(dtstr);
-         const y=dt.getFullYear()
-         const m=(dt.getMonth()+1).toString.padStart(2,'0')
-         const d=dt.getDate().toString.padStart(2,'0')
-         const hh=dt.getHours().toString.padStart(2,'0')
-         const mm=dt.getMinutes().toString.padStart(2,'0')
-         const ss=dt.getSeconds().toString.padStart(2,'0')
+         const dt = new Date(dtStr)
+       const y = dt.getFullYear()
+       const m = (dt.getMonth() + 1).toString().padStart(2,'0')
+       const d = dt.getDate().toString().padStart(2,'0')
+       const hh = dt.getHours().toString().padStart(2,'0')
+       const mm = dt.getMinutes().toString().padStart(2,'0')
+       const ss = dt.getSeconds().toString().padStart(2,'0')
          return `${y}-${m}-${d} ${hh}:${mm}:${ss}`
      }
      ``````
