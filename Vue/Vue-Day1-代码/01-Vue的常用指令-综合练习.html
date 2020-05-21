@@ -99,7 +99,7 @@
             newStudent: {name: '', sex: '男', age: 0, phone: ''}
         },
         methods: {
-            // 获取学生列表
+            // 获取学生列表,数据持久化mysql数据库
             getStudentList(){
                 this.$http.get('http://127.0.0.1:3000/api/getStuList').then(response => {
                     console.log(response.body);
@@ -127,13 +127,13 @@
                     return;
                 }
 
-                // 4. 插入新纪录
+                // 4. 插入新纪录，unshift()向前插入
                 this.students.unshift(this.newStudent);
 
                 // 5. 清空数据
                 this.newStudent = {name: '', sex: '男', age: 0, phone: ''}
             },
-            // 删除记录
+            // 删除记录 .splice(删除的下标，删除的个数)
             delStudent(index){
                 this.students.splice(index, 1);
             }

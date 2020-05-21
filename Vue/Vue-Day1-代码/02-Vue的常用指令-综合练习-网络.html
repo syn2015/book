@@ -86,6 +86,7 @@
 <script>
     new Vue({
         el: '#app',
+        // 请求数据
         mounted(){
            this.getStudentList();
         },
@@ -125,8 +126,9 @@
 
                 // 4. 插入新纪录
                 // this.students.unshift(this.newStudent);
+                // this.$http.post('',data,{emulateJSON:true})
                 this.$http.post('http://127.0.0.1:3000/api/insertStuList', this.newStudent, {emulateJSON:true}).then(response => {
-                    // 4.1 判断
+                    // 4.1 判断，res.body.success_code==200
                     if(response.body.success_code === 200){ // 插入成功
                          this.getStudentList();
                     }
@@ -140,6 +142,7 @@
             // 删除记录
             delStudent(index){
                 // this.students.splice(index, 1);
+                // 在post请求中，如果要设置post的请求体格式，一般就使用emulateJSON: true 设置 提交的内容类型 为 普通表单数据格式 application/x-www-form-urlencoded 。
                 this.$http.post('http://127.0.0.1:3000/api/delStuList', {id:index}, {emulateJSON:true}).then(response => {
                     // 4.1 判断
                     if(response.body.success_code === 200){ // 插入成功

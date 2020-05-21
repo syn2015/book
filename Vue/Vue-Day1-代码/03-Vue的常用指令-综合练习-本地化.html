@@ -94,7 +94,10 @@
             newStudent: {name: '', sex: '男', age: 0, phone: ''}
         },
         methods: {
-            // 获取学生列表
+            // 获取学生列表,JSON.parse（），解析为js数组或对象
+            // window.localstorage.getItem('key');
+            // localStorage.clear()
+            // localStorage.removeItem('key')
             getStudentList(){
                 this.students = JSON.parse(window.localStorage.getItem('students') || '[]');
             },
@@ -120,6 +123,7 @@
 
                 // 4. 插入新纪录
                 this.students.unshift(this.newStudent);
+                // localStorage.setTime('key',JSON.parse(value))
                 localStorage.setItem('students', JSON.stringify(this.students));
 
 

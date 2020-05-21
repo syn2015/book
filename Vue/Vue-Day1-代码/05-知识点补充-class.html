@@ -29,11 +29,21 @@
 	 4.  在为class使用v-bind绑定对象的时候，对象的属性是类名，由于对象的属性可带引号，也可不带引号，所以 这里我没写引号；  属性的值 是一个标识符
 	代码演示
 -->
+<p style="white-space: pre-wrap;">  class
+        1.  直接传递一个数组，注意： 这里的 class 需要使用  v-bind 做数据绑定;
+        2.  在数组中使用表达式;
+        3.  在数组中使用 对象来代替三元表达式，提高代码的可读性;
+        4.  在为class使用v-bind绑定对象的时候，对象的属性是类名，由于对象的属性可带引号，也可不带引号，所以 这里我不写引号；  属性的值 是一个标识符</p>
 <div id="app">
+    <p style="margin-bottom: 0;">class="box1 box2"</p>
     <p class="box1 box2">众里寻他千百度.....</p>
+    <p style="margin-bottom: 0;">:class="['box1', 'box2']"</p>
     <p :class="['box1', 'box2']">众里寻他千百度.....</p>
+    <p style="margin-bottom: 0;">:class="['box1', 'box2', isShow ? 'box3': '']"</p>
     <p :class="['box1', 'box2', isShow ? 'box3': '']">众里寻他千百度.....</p>
+    <p style="margin-bottom: 0;">:class="[{'box1': isShow}]",isShow是一个Boolean变量</p>
     <p :class="[{'box1': isShow}]">众里寻他千百度.....</p>
+    <p style="margin-bottom: 0;">:class="classObj";classObj是一个数组：classObj: {'box1': true, 'box2': true, 'box3': true}</p>
     <p :class="classObj">众里寻他千百度.....</p>
 </div>
 <script src="lib/vue.js"></script>
