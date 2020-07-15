@@ -33,13 +33,24 @@
 
 1. 建立gulp任务
 
+   ```javascript
+   const gulp=require('gulp');
+   //任务
+   gulp.task('first',()=>{
+   	gulp.src('文件路径待处理的文件')
+   	.pipe(gulp.dest('输出目录'))
+   })
+   ```
+
+   
+
 ## gulp.watch()
 
 监控文件的变化
 
 ## gulp-cli命令行工具
 
-1. 安装  npm i gulp-cli -G
+1. 安装  **npm i gulp-cli -G**
 
 2. 执行  gulp 任务名称
 
@@ -269,6 +280,8 @@ gulp.task('default', gulp.series('htmlmin', 'cssmin', 'jsmin', 'copy', function 
 
 4. **req.url**属性   //获取请求地址
 
+   - **/ 表示首页**
+
 5. 响应报文
 
    - 200请求成功
@@ -466,6 +479,34 @@ console.log('web start up success')
    - **fs.readFile('文件路径',(err,result)=>{});**
    - **server.on('request',(req,res)=>{});**
    - **后续代码的执行依赖当前异步API的结果，此时，promise解决回调地狱的问题**
+   
+6. callback()
+
+   ```javascript
+   function getMsg(){
+   	setTimeout(function(){
+           return {
+           msg:'hello node.js'
+           }
+   	},2000)
+   }
+   const msg=getMsg();//无法拿到数据
+   console.log(msg);
+   //改良callback()
+   function getMsg(callback){
+   	setTimeout(function(){
+     		callback({
+           	msg:'hello node.js'
+           });
+          /* return {
+           msg:'hello node.js'
+           }*/
+   	},2000)
+   }
+   const msg=getMsg((n)=>{console.log(n)};//拿到数据
+   ```
+
+   
 
 ## promise
 
@@ -538,7 +579,7 @@ f1().then((r1)=>{
 
 
 
-## 异步函数
+## 异步函数(async,await,throw)
 
 1. **异步编程的终极解决方案，让异步代码写成同步的形式，代码结构清晰明了。**
 
@@ -550,11 +591,11 @@ f1().then((r1)=>{
 
 5. 异步函数内部，**throw关键字抛出异常并结束代码执行**
 
-6. 异步函数内部**，使用return关键字，返回的结果包裹在promise对象中，return代替了resolve方法。**
+6. 异步函数内部**，使用return关键字，返回的结果包裹在promise对象中，相当于return代替了resolve方法。**
 
 7. 调用异步函数再**链式操作调用then()获取执行结果，调用catch()获取执行的错误信息**
 
-8. **util系统模块中，promisify方法，改造现有异步API，（传入异步API）返回promise对象**
+8. **Node.js中的util系统模块中，promisify方法，改造现有异步API，（传入异步API）返回promise对象**
 
    ```javascript
    const fs=require('fs')
