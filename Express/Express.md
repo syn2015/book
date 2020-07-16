@@ -4,15 +4,15 @@
 
 # 对比Node.js
 
-1. Express提供了方便简洁的路由定义方式
+1. Express提供了**方便简洁的路由定义方式**
 
-   简化了获取HTTP请求参数的处理
+   **简化了获取HTTP请求参数的处理**
 
-   对模板引擎支持程度高，方便渲染动态HTML页面
+   **对模板引擎支持程度高，方便渲染动态HTML页面**
 
-   提供了中间件机制有效控制HTTP请求
+   提供了**中间件机制有效控制HTTP请求**
 
-   拥有大量第三方中间件对功能进行扩展
+   拥有大量**第三方中间件对功能进行扩展**
 
 2. 路由对比
 
@@ -28,15 +28,14 @@
 
 # 使用
 
-1. res.send()
-
-   - 自动检测响应内容的类型
-
-   - 自动设置http状态吗
-
-   - 自动设置相应的内容和编码类型
-
-   - 可以响应JSON对象
+1. **res.send()**
+- **自动检测响应内容的类型**
+   
+- **自动设置http状态吗**
+   
+- **自动设置相应的内容和编码类型**
+   
+- **可以响应JSON对象**
 
 ``````javascript
 //安装 npm i express
@@ -60,16 +59,16 @@ console.log('webserver success');
 
 1. 就是一堆方法，可以接收客户端发来的请求、对请求做出响应，也可以将请求交给下一个中间件继续处理。
 
-2.  中间件由两部分组成
+2.  **中间件由两部分组成**
 
-   - 中间件方法，由Express提供，负责拦截请求
-   - 请求处理函数，由开发人员提供，负责处理请求
+   - **中间件方法，由Express提供，负责拦截请求**
+   - **请求处理函数，由开发人员提供，负责处理请求**
 
 3. 针对同一个请求设置多个中间件，对同一个请求进行多次处理
 
-   - 默认情况下，请求从上到下依次匹配中间件，一旦匹配成功，终止匹配
+   - **默认情况下，请求从上到下依次匹配中间件，一旦匹配成功，终止匹配**
 
-   - 权限控制函数next，调用next()函数将请求的控制权交给下一个中间件，直到遇到结束请求的中间件
+   - **权限控制函数next，调用next()函数将请求的控制权交给下一个中间件，直到遇到结束请求的中间件**
 
      `````javascript
      app.get('/request',(req,res,next)=>{
@@ -84,7 +83,7 @@ console.log('webserver success');
 
      
 
-4. app.use()中间件
+4. **app.use()中间件**
 
    - 匹配所有的请求方式，可以直接传入请求处理函数，代表接收所有的请求。
    - **但是不能改变请求是从上到下的匹配模式**
@@ -96,7 +95,7 @@ console.log('webserver success');
    })
    ```
 
-   - 第一个参数也可以传入请求地址，代表无论什么请求方式，只有是该请求地址就接收这个请求
+   - **第一个参数也可以传入请求地址，代表无论什么请求方式，只有是该请求地址就接收这个请求**
 
    ``````javascript
    app.use('/admin',(req,res)=>{
@@ -127,7 +126,7 @@ console.log('webserver success');
 
      
 
-   - 网站维护公告，放置在请求的最前并相应维护信息
+   - **网站维护公告，放置在请求的最前并相应维护信息**
 
      ``````javascript
      app.use((req,res,next)=>{
@@ -155,9 +154,9 @@ console.log('webserver success');
 
 6. **错误处理中间件，只能主动捕获同步代码的错误**
 
-   - 一个集中处理错误的地方,有四个参数（err,req,res,next)
+   - 一个集中处理错误的地方,**有四个参数（err,req,res,next)**
 
-   - err参数message属性
+   - **err参数message属性**
 
    - Error()函数，表示错误
 
@@ -173,7 +172,7 @@ console.log('webserver success');
      })
      ``````
 
-   - **对于异步代码的错误，只能手动触发错误处理中间件**
+   - **对于异步代码的错误，只能手动触发错误处理中间件,传递错误参数给next()**
 
      ``````javascript
      app.get('/',(req,res.next)=>{
@@ -190,13 +189,13 @@ console.log('webserver success');
 
      
 
-7. trycatch函数捕获错误（异步和同步）
+7. **trycatch函数捕获错误（异步和同步）**
 
    - node中，异步api的错误由回调函数捕获，支持promise对象的异步api可以通过catch方法捕获
 
    - try catch可以**捕获异步函数及其他同步代码**执行中发生的错误，不能捕获其他类型的API发生的错误
 
-   - utli模块中，promisify函数
+   - **utli模块中，promisify函数**
 
      ``````javascript
      const promisify=require('util').promisify;
@@ -263,7 +262,7 @@ console.log('webserver success');
      const express=require('express');
      //创建web服务器对象
      const app=express();
-     
+     //引入home,admin路由模块
      const home=require('./route/home')
      const admin=require('./route/admin');
      app.use('/home',home);
@@ -283,6 +282,7 @@ console.log('webserver success');
      admin.get('/index',(req,res)=>{
          res.send('welcome to admin page')
      });
+     //导出admin路由模块
      module.exports=admin;
      ``````
 
@@ -296,16 +296,17 @@ console.log('webserver success');
      home.get('/index',(req,res)=>{
          res.send('welcome to home page')
      });
+     //导出home路由模块
      module.exports=home;
-     ```
-
+   ```
      
 
      
 
      
+     
 
-9. GET 参数的获取
+9. **GET** 参数的获取
 
    - Express框架中使用**req.query获取GET参数**
 
@@ -331,11 +332,11 @@ console.log('webserver success');
 
 10. POST参数
 
-    - 安装**npm i body-parser** 
+    - 安装**npm i body-parser** ，req.body即是解析后的参数对象
 
     - **extended参数为false，**
 
-      - **false内部使用queryString模块处理请求参数，**
+      - **false内部使用queryString模块处理请求参数（参数解析为对象格式）**
       - **true则为第三方模块qs处理。**
 
       ``````javascript
@@ -368,6 +369,7 @@ console.log('webserver success');
       const bodyParser=require('body-parser');
       const app=express();
       app.use(fn({a:1}))
+      //函数fn返回了一个匿名函数
       function fn(obj){
           return function(req,res,next){
               if(obj.a==1){
@@ -385,8 +387,8 @@ console.log('webserver success');
       
       app.listen(3000);
       console.log('server success');
-      ``````
-
+    ``````
+      
       
 
 12. Express路由参数
