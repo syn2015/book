@@ -65,7 +65,7 @@ mongoose.connect('mongodb://localhost/playground',{useNewUrlParser:true})//补�
 
 ## 创建集合
 
-1. 对集合设定规则,Schema函数
+1. **对集合设定规则,Schema函数**
 
    - **String首字母大写**
 
@@ -79,7 +79,7 @@ mongoose.connect('mongodb://localhost/playground',{useNewUrlParser:true})//补�
 
    
 
-2. 创建集合，将mongoose.Schema构造函数的实例即可创建集合。
+2. **创建集合，将mongoose.Schema构造函数的实例即可创建集合。**
 
    - model函数
    - **集合首字母大写（数据库里的名称式小写+S形式）**
@@ -95,7 +95,7 @@ mongoose.connect('mongodb://localhost/playground',{useNewUrlParser:true})//补�
 
    - **mongoose.model(集合名称，集合规则schema)**
 
-   - 创建集合实例
+   - 创建集合实例，实例本身是构造函数用来插入数据对象
 
    - 调用实例对象下的save方法将数据保存到数据库中
 
@@ -118,7 +118,7 @@ mongoose.connect('mongodb://localhost/playground',{useNewUrlParser:true})//补�
 2. 创建文档的另一种方式集合对象的create函数，**create(配置对象，callback)**
 
    ``````javascript
-   //创建集合
+   //创建集合，Course集合在数据库中显示为小写形式+s
    const Course=mongoose.model('Course',courseSchema)
    //配置对象和回调函数
    Course.create({name:'javascript base',author:'teacherNo2',isPublish:true},(err,doc)=>{
@@ -183,49 +183,47 @@ mongoose.connect('mongodb://localhost/playground',{useNewUrlParser:true})//补�
    - **$in表示包含,数组对象**
 
      ```javascript
-  User.find({hobbies:{$in:['敲代码']}}).then(result=>{console.log(result)})
+    User.find({hobbies:{$in:['敲代码']}}).then(result=>{console.log(result)}
      ```
    
-     
-  
    - $ne  (不等于)
-   
+    
    - $nin  (not in)，**数组对象**
-
-     
-  
-     
    
+     
+    
+     
+    
    - **select（'条件字段1   条件字段2'）**
-
-     ``````javascript
-  User.find().select('name email').then(result=>{console.log(result)})
-     ``````
    
-     
-
-   - select(**'条件字段1  条件字段2   -字段名称'**)   -短杠前缀的字段会被忽略
-
      ``````javascript
-  User.find().select('name email -_id').then(result=>{console.log(result)});
+    User.find().select('name email').then(result=>{console.log(result)})
      ``````
-   
+    
      
-
-   - sourt(**' 排序字段'**)排序，sort(**'-排序字段'**) -短杆前缀的字段会倒序排列
+   
+   - select(**'条件字段1  条件字段2   -字段名称'**)   **-短杠前缀的字段会被忽略**
 
      ``````javascript
-  User.find().sort('age').then(result=>{console.log(result)})
+    User.find().select('name email -_id').then(result=>{console.log(result)});
+     ``````
+    
+     
+   
+   - sourt(**' 排序字段'**)排序，sort(**'-排序字段'**) **-短杆前缀的字段会倒序排列**
+
+     ``````javascript
+    User.find().sort('age').then(result=>{console.log(result)})
      //降序排列
-     User.find().sort('-age').then(result=>{console.log(result)})
+    User.find().sort('-age').then(result=>{console.log(result)})
      ``````
    
    - skip(指定跳过的数据数量）limit(指定限制查询的数量) 
-
-     ```javascript
-  User.find().skip(2).limit(2).then(result=>{console.log(result)})
-     ```
    
+     ```javascript
+    User.find().skip(2).limit(2).then(result=>{console.log(result)})
+     ```
+    
      
 
 ## 删除文档
@@ -256,7 +254,7 @@ mongoose.connect('mongodb://localhost/playground',{useNewUrlParser:true})//补�
 
 1. 更新单个  **updateOne({条件对象}，{要修改成的对象}）**
 
-   - 返回值对象：**{n:查找的数量，nModified:更新的文档数量, ok:更新状态码}**
+   - 返回值对象：**{n:影响的数量，nModified:更新的文档数量, ok:更新状态码}**
 
      ``````javascript
      User.updateOne({name:'李四'},{name:'王五'}).then(result=>{console.lgo(result)})
@@ -267,7 +265,7 @@ mongoose.connect('mongodb://localhost/playground',{useNewUrlParser:true})//补�
 2. 更新多个  **updateMany({条件对象}，{要修改成的对象}）**
 
    - **条件对象为{},表示更新所有的文档**
-   - 返回值对象：**{n:查找的数量，nModified:更新的文档数量, ok:更新状态码}**
+   - 返回值对象：**{n:影响的数量，nModified:更新的文档数量, ok:更新状态码}**
 
    ```javascript
    User.updateMany({}，{name:'王五'}).then(result=>{console.log(result)})
@@ -279,11 +277,11 @@ mongoose.connect('mongodb://localhost/playground',{useNewUrlParser:true})//补�
 
 2. **required:true** 必传字段
 
-   - required:[true,'自定义错误消息]
+   - **required:[true,'自定义错误消息]**
 
-3. **minlength**:[数字,'自定义错误消息']
+3. **（字符串）minlength**:[数字,'自定义错误消息']
 
-4. **maxlength**：[数字，‘自定义错误消息’]
+4. **（字符串）maxlength**：[数字，‘自定义错误消息’]
 
 5. **trim：true**  , 去两端空格
 
@@ -312,18 +310,18 @@ mongoose.connect('mongodb://localhost/playground',{useNewUrlParser:true})//补�
 
     - catch函数中，参数err可以捕获自定义错误信息
 
-    - 循环遍历参数err对象，可以捕获所有错误信息
+    - **循环遍历参数err对象的errors属性，可以捕获所有错误信息**
 
       ``````javascript
        author: {
               type: String,
-        validator: {
-                  validater: v => {
-                      return v && v.length > 4
-                  },
-                  message: '传入的值不符合验证规则'
+              validate: {
+                    validater: v => {
+                        return v && v.length > 4
+                    },
+                    message: '传入的值不符合验证规则'
               }
-          }
+       }
       ``````
       
       ```````javascript
@@ -339,6 +337,7 @@ mongoose.connect('mongodb://localhost/playground',{useNewUrlParser:true})//补�
               console.log(result);
           })
           .catch(error => {
+          // erros.errors中包含了若干错误信息
               const err = error.errors;
               for (var attr in err) {
                   console.log(err[attr]['message']);
@@ -350,9 +349,10 @@ mongoose.connect('mongodb://localhost/playground',{useNewUrlParser:true})//补�
 
 ## 集合关联
 
-1. 使用id对集合进行关联
+1. **使用id对集合进行关联**
 
-   - 
+   - **mongose.Schema.Types.objectId**是固定写法，表示ID类型
+   - ref属性表示关联的第二张表
 
    ``````javascript
    //创建集合规则
@@ -384,7 +384,7 @@ mongoose.connect('mongodb://localhost/playground',{useNewUrlParser:true})//补�
 
    
 
-2. 使用populate方法进行关联集合查询
+2. **使用populate方法进行关联集合查询**(**populate('外键字段')**)
 
    ```javascript
    Post.find().then(result=>{console.log(result)})
@@ -394,6 +394,8 @@ mongoose.connect('mongodb://localhost/playground',{useNewUrlParser:true})//补�
    
 
 3. 增删改查
+
+   app.js
 
    ``````javascript
    //搭建网站服务器，实现客户端与服务区的同行
@@ -413,12 +415,39 @@ mongoose.connect('mongodb://localhost/playground',{useNewUrlParser:true})//补�
    const querystring=require('querystring');
    const mongoose=require('mongoose')
    //数据库连接：27017是默认的端口
-   mongoose.connect('mongoDB://localhost:27017/playground',{useNewUrlParser:true})
+   mongoose.connect('mongodb://localhost:27017/playground',{useNewUrlParser:true})
    	.then(()=>{console.log('mongoDB success')})
    	.catch(()=>{console.log('mongoDB failed')})
    //创建集合规则
    const userSchema=new mongoose.Schema({
-       
+       username: {
+   		type: String,
+   		required: true,
+   		minlength: 2,
+   		maxlength: 20
+   	},
+   	email: {
+   		type: String,
+   		// 保证邮箱地址在插入数据库时不重复
+   		unique: true,
+   		required: true
+   	},
+   	password: {
+   		type: String,
+   		required: true
+   	},
+   	// admin 超级管理员
+   	// normal 普通用户
+   	role: {
+   		type: String,
+   		required: true
+   	},
+   	// 0 启用状态
+   	// 1 禁用状态
+   	state: {
+   		type: Number,
+   		default: 0
+   	}
    });
    //创建集合，返回集合构造函数。User集合在数据库中显示为：Users
    const User=mongoose.model('User',userSchema);
@@ -426,7 +455,7 @@ mongoose.connect('mongodb://localhost/playground',{useNewUrlParser:true})//补�
    //创建服务器
    const app=http.createServer();
    //为服务器对象添加请求事件
-   app.on('require', async (req,res)=>{
+   app.on('request', async (req,res)=>{
        const method=req.method;
        const {pathname,query}=url.parse(req.url,true);
        if(method=='GET'){
@@ -457,25 +486,26 @@ mongoose.connect('mongodb://localhost/playground',{useNewUrlParser:true})//补�
                let add=`此处是/add的页面代码`;
                res.end(add)
            }else if(pathname=='/modify'){
+            //findone()查找一个对象   
                await User.findOne({_id:query.id})
                let hobbies=['爱好1','爱好2']
                
                
                let modify=`此处是/modify页面代码的上半部分`;
                hobbies.forEach(item=>{
-                   //
+                   //includes()返回Boolean值
                   let isHobby= user.hobbies.includes(item);
                    if(isHobby){
                        modify+=`
    							<label class="checkout-inline">
-   								<input type='checkbox' value='${item}' name='hobbies'                                   checkout > 
+   								<input type='checkbox' value='${item}' name='hobbies'                                   checked > 
    								${item}
    							</label>
    							`;
                    }else{
                        modify+=`
    	                       <label class="checkout-inline">
-   								<input type='checkbox' value='${item}' name='hobbies'                                   checkout > 
+   								<input type='checkbox' value='${item}' name='hobbies'                                    > 
    								${item}
    							</label>
    							`;
@@ -509,11 +539,13 @@ mongoose.connect('mongodb://localhost/playground',{useNewUrlParser:true})//补�
                    res.writeHead(301,{
                        Location:'/list'
                    });
+                   // 响应客户端
                    res.end();
                    
                })
            }else if(pathname=='/modify'){
                //既有get,又有post请求
+               //html中嵌入代码：method=/modify?id=${item._id}
                let formData='';
                req.on('data',param=>{
                    formData+=param;
@@ -548,21 +580,6 @@ mongoose.connect('mongodb://localhost/playground',{useNewUrlParser:true})//补�
 
      
 
-4. 改进：model文件夹
-
-   index文件
-
-   ``````javascript
-   
-   ``````
-
-   user文件
-
-   ``````javascript
-   js
-   ``````
-
-   
 
 #  模板引擎
 
@@ -574,7 +591,7 @@ mongoose.connect('mongodb://localhost/playground',{useNewUrlParser:true})//补�
 
    - **const  template=require('art-template');**
 
-   - **const html=template('模板路径',数据);**
+   - **const html=template('模板文件路径',数据);**
 
    - **返回值是拼接完成的html**
 
@@ -616,11 +633,11 @@ mongoose.connect('mongodb://localhost/playground',{useNewUrlParser:true})//补�
 
    **开启解析html代码：**
 
-   ​	标准语法，加上@前缀  ； 原始语法,等号=改为-短杠
+   ​	**标准语法，加上@前缀  ； 原始语法,等号=改为-短杠**
 
    ```html
    //标准语法，加上@前缀
-   <h2>{{@content}}</h2>
+   <h2>{{@ content}}</h2>
    //原始语法,等号=改为-短杠
    <h2>
        <%- content%>
@@ -631,11 +648,13 @@ mongoose.connect('mongodb://localhost/playground',{useNewUrlParser:true})//补�
 
 3. 条件判断
 
-   ``````html
+   ``````javascript
    //标准语法
    {{if 判断条件}}  ...显示内容...{{/if}}
    {{if 判断条件1}} 显示内容1  {{else if 判断条件2}}  显示内容2{{/if}}
-   //原始语法
+   
+   
+   //原始语法,支持更多的js语法
    <%if(value){%> 
        显示内容 
    <% }%>
@@ -653,7 +672,7 @@ mongoose.connect('mongodb://localhost/playground',{useNewUrlParser:true})//补�
 
    标准语法，
 
-   ```html
+   ```javascript
    {{if age>20 }}
     年龄大于20
    {{else if age<15 }}
@@ -802,7 +821,7 @@ mongoose.connect('mongodb://localhost/playground',{useNewUrlParser:true})//补�
      ```
 
      ```javascript
-     //调用变量
+     //模板中调用变量
      {{dateFormat(time,'yyyy-mm-dd')}}// 显示 ‘2019-10-10’
      ```
 
@@ -852,27 +871,54 @@ mongoose.connect('mongodb://localhost/playground',{useNewUrlParser:true})//补�
      - callback函数是必填参数
 
        ``````javascript
-       //示例
+       // 引入http模块
+       const http = require('http');
+     // 引入模板引擎
+       const template = require('art-template');
+       // 引入path模块
+       const path = require('path');
+       // 引入静态资源访问模块
+       const serveStatic = require('serve-static');
+       // 引入处理日期的第三方模块
+       const dateformat = require('dateformat');
+       
+       const router = require('./route/index');
+       // 实现静态资源访问服务
+       const serve = serveStatic(path.join(__dirname, 'public'))
+       
+       // 配置模板的根目录
+       template.defaults.root = path.join(__dirname, 'views');
+       // 处理日期格式的方法
+       template.defaults.imports.dateformat = dateformat;
+       
+       // 数据库连接
+       require('./model/connect');
+       
+       // 创建网站服务器
+       const app = http.createServer();
+       // 当客户端访问服务器端的时候
+       app.on('request', (req, res) => {
+       	// 启用路由功能，callback在请求结束后执行
+       	router(req, res, () => {})
+       	// 启用静态资源访问服务功能
+       	serve(req, res, () => {})
+       });
+       // 端口监听
+       app.listen(80);
+       console.log('服务器启动成功');
        ``````
-
        
 
-     ``````javascript
      
-     ``````
-
-     
-
-   - 
-
-     ``````javascript
-     
-     ``````
 
    - model/connect.js
 
      ``````javascript
-     
+     const mongoose = require('mongoose');
+     // 连接数据库
+     mongoose.connect('mongodb://localhost/playground', { useNewUrlParser: true })
+     	.then(() => console.log('数据库连接成功'))
+     	.catch(() => console.log('数据库连接失败'))
      ``````
 
      
@@ -880,18 +926,46 @@ mongoose.connect('mongodb://localhost/playground',{useNewUrlParser:true})//补�
    - model/user.js
 
      ``````javascript
-     
+     const mongoose = require('mongoose');
+     // 创建学生集合规则
+     const studentsSchema = new mongoose.Schema({
+     	name: {
+     		type: String,
+     		required: true,
+     		minlength: 2,
+     		maxlength: 10
+     	},
+     	age: {
+     		type: Number,
+     		min: 10,
+     		max: 25
+     	},
+     	sex: {
+     		type: String
+     	},
+     	email: String,
+     	hobbies: [ String ],
+     	collage: String,
+     	enterDate: {
+     		type: Date,
+     		default: Date.now
+     	}
+     });
+     // 创建学生信息集合
+     const Student = mongoose.model('Student', studentsSchema);
+     // 将学生信息集合进行导出
+     module.exports = Student;
      ``````
 
      
 
    - views/index.art
 
-     - serve-static 第三方模块，实现静态资源访问服务
+     - **serve-static 第三方模块，实现静态资源访问服务**
      - 引入serve-static模块创建服务功能
      - 调用服务并指定服务目录
      - 启用静态资源访服务功能
-     - serve(req,res,callback) ，回调函数是必填参数
+     - **serve(req,res,callback) ，回调函数是必填参数**
 
      ``````javascript
      const serveStatic=require('serve-static')
@@ -910,12 +984,53 @@ mongoose.connect('mongodb://localhost/playground',{useNewUrlParser:true})//补�
    - route/index.js
 
      ``````javascript
-     js
+     // 引入router模块
+     const getRouter = require('router');
+     // 获取路由对象
+     const router = getRouter();
+     // 学生信息集合
+     const Student = require('../model/user');
+     // 引入模板引擎
+     const template = require('art-template');
+     // 引入querystring模块
+     const querystring = require('querystring');
+     
+     // 呈递学生档案信息页面
+     router.get('/add', (req, res) => {
+     	let html = template('index.art', {});
+     	res.end(html);
+     })
+     
+     // 呈递学生档案信息列表页面
+     router.get('/list', async (req, res) =>{
+     	// 查询学生信息
+     	let students = await Student.find();
+     	console.log(students);
+     	let html = template('list.art', {
+     		students: students
+     	})
+     	res.end(html)
+     })
+     // 实现学生信息添加功能路由
+     router.post('/add', (req, res) => {
+     	// 接收post请求参数
+     	let formData = '';
+     	req.on('data', param => {
+     		formData += param;
+     	});
+     	req.on('end', async () => {
+     		await Student.create(querystring.parse(formData))
+     		res.writeHead(301, {
+     			Location: '/list'
+     		});
+     		res.end()
+     	})
+     });
+     
+     module.exports = router;
      ``````
 
-     
 
-   - 
+   
 
-9. 
 
