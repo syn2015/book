@@ -30,6 +30,53 @@ systemctl stop docker
 systemctl restart docker
 //开机启动
 systemctl enable docker
+
+显示服务状态：systemctl status docker.service
+
+列出服务层级和依赖关系：systemctl list-dependencies docker.service
+
+启动服务：systemctl start docker.service
+
+关闭服务：systemctl stop docker.service
+
+重启服务：systemctl restart docker.service
+
+设置服务自启动：systemctl enable docker.service
+
+禁止服务自启动：systemctl disable docker.service
+
+查看服务是否自启动：systemctl is-enabled docker.service
+
+列出系统所有服务的启动情况：systemctl list-units --type=service
+
+列出所有自启动服务：systemctl list-unit-files|grep enabled
+```
+
+```
+旧版本命令：（chkconfig、service）
+
+
+chkconfig --level 3 docker off
+
+
+
+显示服务状态：service docker status
+
+列出服务层级和依赖关系：systemctl list-dependencies docker.service
+
+启动服务：service docker start
+
+关闭服务：service docker stop
+
+重启服务：service docker restart
+
+设置服务自启动：chkconfig --level 3 docker on
+
+禁止服务自启动：chkconfig --level 3 docker off
+
+查看服务是否自启动：chkconfig --list docker
+
+列出系统所有服务的启动情况：chkconfig --list
 ```
 
 镜像命令
@@ -146,7 +193,7 @@ docker inspect 容器名称
    - 解决多容器进行数据交换
   - 多个容器挂载同一个数据卷
      - 使用数据卷容器
-   
+
    `````javascript
    //创建数据卷容器，使用-v设置数据卷（容器目录）
    docker run -it --name=c3 -v /volume centos:7 /bin/bash
@@ -157,7 +204,7 @@ docker inspect 容器名称
    `````
 
    
-   
+
    
 
 # docker应用部署
