@@ -4,11 +4,11 @@ const app = express();
 
 // 1.告诉express框架使用什么模板引擎渲染什么后缀的模板文件
 //  1.模板后缀
-//  2.使用的模板疫情
+//  2.使用的模板引擎
 app.engine('art', require('express-art-template'))
-// 2.告诉express框架模板存放的位置是什么
+// 2.告诉express框架模板存放的位置是什么（固定参数views,绝对目录）
 app.set('views', path.join(__dirname, 'views'))
-// 3.告诉express框架模板的默认后缀是什么
+// 3.告诉express框架模板的默认后缀是什么（固定参数view engine, 模板后缀名称）
 app.set('view engine', 'art');
 
 app.get('/index', (req, res) => {
