@@ -239,17 +239,17 @@ new Vue({
 
 **支持Vue Server Renderer(exclude when using mode:'spa')**
 
-**支持vue-meta**(配置文件书写)
+**支持vue-meta**(需要配置文件书写)
 
 ## Nuxt.js工作流
 
 ![](./nuxt-schema.svg)
 
-- Incoming Request 浏览器发送一个请求
-- 服务端检查是否有 nuxtServerInit 配置项，有的话就会执行这个函数，其中包含一个标注： Store action 用来操作 vuex
-- 下一个环节就是中间件 middleware ，与路由相关，做任何你想要的功能
-- 预验证 validate() 可以配合高级动态路由，做一些验证，比如是否允许跳转某个页面
-- asyncData() & fetch() 获取数据，前一个是用来渲染vue component，即 vue组件的，后一个通常用来修改 vuex，即 Store数据
+- **Incoming Request** 浏览器发送一个请求
+- 服务端检查是否有 **nuxtServerInit 配置项**，有的话就会执行这个函数，其中包含一个标注： **Store action** 用来操作 vuex
+- 下一个环节就是**中间件 middleware** ，**与路由相关**，做任何你想要的功能
+- **预验证 validate()** 可以配合高级动态路由，做一些验证，比如是否允许跳转某个页面
+- **asyncData()** & **fetch()** 获取数据，前一个是用来渲染vue component，即 vue组件的，后一个通常用来修改 vuex，即 Store数据
 - 有了数据，模板后，最后一步就是 Render 渲染了，方式是 SSR
 
 
@@ -343,3 +343,14 @@ vue init nuxt-community/koa-template
 默认情况下，`srcDir` 和 `rootDir` 相同。
 
 **提示:** 在您的 `vue` 模板中, 如果你需要引入 `assets` 或者 `static` 目录, 使用 `~/assets/your_image.png` 和 `~/static/your_image.png`方式。
+
+## Vue SSR 工作原理
+
+ssr是用来解决SEO问题，适用于数据快速展现的场景的，实现的原理:
+
+如果不给数据的话，就是一个静态html模板，一个静态的内容，没有任何交互，那交互是在哪完成的呢？
+
+交互是在浏览器端完成的，也就是说浏览器端会有一个入口，进行预编译，但不会再渲染页面了，因为服务器端已经在页面渲染过一次了。它要做的是创建一个虚拟的编译结果（可以理解为虚拟dom）， 和服务器端传过来的结果进行对比，如果有区别，它会重新请求数据。在nuxt项目中都是一套文件，没有特别指定是在浏览器端运行还是服务端运行，也就是SSR常说的同构，浏览器端编译虚拟dom，也依赖于 vue 文件，因此模板是有的，而编译这个dom，需要的是额外的数据，此数据是服务器端渲染之前请求而来的数据，如果数据不同步在浏览器端，编译出来的结果必然和服务器端编译结果不一致。
+
+综上，服务器端异步获取的数据会同步在浏览器端，作对比，如果对比一致的话，浏览器端就会对对应的dom结点注册事件，达到交互作用。
+
