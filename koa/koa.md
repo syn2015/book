@@ -229,5 +229,117 @@ new Vue({
 
 
 
-# Nuxt.js
+# Nuxt.js（v1.42）
 
+**基于Vue2**
+
+**包含Vue Router**
+
+**支持Vuex(included only when using the store option)**
+
+**支持Vue Server Renderer(exclude when using mode:'spa')**
+
+**支持vue-meta**(配置文件书写)
+
+## Nuxt.js工作流
+
+![](./nuxt-schema.svg)
+
+- Incoming Request 浏览器发送一个请求
+- 服务端检查是否有 nuxtServerInit 配置项，有的话就会执行这个函数，其中包含一个标注： Store action 用来操作 vuex
+- 下一个环节就是中间件 middleware ，与路由相关，做任何你想要的功能
+- 预验证 validate() 可以配合高级动态路由，做一些验证，比如是否允许跳转某个页面
+- asyncData() & fetch() 获取数据，前一个是用来渲染vue component，即 vue组件的，后一个通常用来修改 vuex，即 Store数据
+- 有了数据，模板后，最后一步就是 Render 渲染了，方式是 SSR
+
+
+
+## Nuxt.js安装
+
+```javascript
+vue init nuxt-community/koa-template
+//https://zh.nuxtjs.org/guide/installation
+```
+
+## Nuxt.js目录
+
+### 资源目录
+
+资源目录 `assets` 用于组织未编译的静态资源如 `LESS`、`SASS` 或 `JavaScript`。
+
+[关于 assets 目录的更多信息](https://zh.nuxtjs.org/guide/assets)
+
+### 组件目录
+
+组件目录 `components` 用于组织应用的 Vue.js 组件。Nuxt.js 不会扩展增强该目录下 Vue.js 组件，即这些组件不会像页面组件那样有 `asyncData` 方法的特性。
+
+### 布局目录
+
+布局目录 `layouts` 用于组织应用的布局组件。
+
+*若无额外配置，该目录不能被重命名。*
+
+[关于布局的更多信息](https://zh.nuxtjs.org/guide/views#布局)
+
+### 中间件目录
+
+`middleware` 目录用于存放应用的中间件。
+
+[关于中间件的更多信息](https://zh.nuxtjs.org/guide/routing#中间件)
+
+### 页面目录
+
+页面目录 `pages` 用于组织应用的路由及视图。Nuxt.js 框架读取该目录下所有的 `.vue` 文件并自动生成对应的路由配置。
+
+*若无额外配置，该目录不能被重命名。*
+
+[关于页面的更多信息](https://zh.nuxtjs.org/guide/views)
+
+### 插件目录
+
+插件目录 `plugins` 用于组织那些需要在 `根vue.js应用` 实例化之前需要运行的 Javascript 插件。
+
+[关于插件的更多信息](https://zh.nuxtjs.org/guide/plugins)
+
+### 静态文件目录
+
+静态文件目录 `static` 用于存放应用的静态文件，此类文件不会被 Nuxt.js 调用 Webpack 进行构建编译处理。 服务器启动的时候，该目录下的文件会映射至应用的根路径 `/` 下。
+
+**举个例子:** `/static/robots.txt` 映射至 `/robots.txt`
+
+*若无额外配置，该目录不能被重命名。*
+
+[关于静态文件的更多信息](https://zh.nuxtjs.org/guide/assets#静态文件)
+
+### Store 目录
+
+`store` 目录用于组织应用的 [Vuex 状态树](http://vuex.vuejs.org/) 文件。 Nuxt.js 框架集成了 [Vuex 状态树](http://vuex.vuejs.org/) 的相关功能配置，在 `store` 目录下创建一个 `index.js` 文件可激活这些配置。
+
+*若无额外配置，该目录不能被重命名。*
+
+[关于 store 的更多信息](https://zh.nuxtjs.org/guide/vuex-store)
+
+### nuxt.config.js 文件
+
+`nuxt.config.js` 文件用于组织Nuxt.js 应用的个性化配置，以便覆盖默认配置。
+
+*若无额外配置，该文件不能被重命名。*
+
+[关于 nuxt.config.js 的更多信息](https://zh.nuxtjs.org/guide/configuration)
+
+### package.json 文件
+
+`package.json` 文件用于描述应用的依赖关系和对外暴露的脚本接口。
+
+*该文件不能被重命名。*
+
+### 别名
+
+| 别名         | 目录                                                       |
+| ------------ | ---------------------------------------------------------- |
+| `~` 或 `@`   | [srcDir](https://zh.nuxtjs.org/api/configuration-srcdir)   |
+| `~~` 或 `@@` | [rootDir](https://zh.nuxtjs.org/api/configuration-rootdir) |
+
+默认情况下，`srcDir` 和 `rootDir` 相同。
+
+**提示:** 在您的 `vue` 模板中, 如果你需要引入 `assets` 或者 `static` 目录, 使用 `~/assets/your_image.png` 和 `~/static/your_image.png`方式。
