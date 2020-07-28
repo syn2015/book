@@ -3,23 +3,29 @@
 ## 模板语法
 
 ```javascript
-//v-html指令
+//v-html指令,解析代码html
 v-html="rawHtml"
+
 //v-bind特性
 <div v-bind:id="dynamicld"></div>
+
 //表达式
 {{number+1}}
 {{ok?'Yes':'No'}}
 {{message.split('').reverse().join('')}}
+
 //v-if指令
 <p v-if="seen">see</p>
+
 //自定义指令
+// el,所绑定的元素，可以直接操作DOM
+// binding,一个对象，包含有属性：value(指令的绑定值)等等
 Vue.directive('n',{
     //只调用一次 第一次绑定到元素时调用
     bind:function(el,binding){
         el.textContent=Math.pow(binding.value,2)
     },
-    //
+    //所在组件的VNode更新时调用
     update:function(el,binding){
         el.texttContent=Math.pow(binding.value,2)
     }
@@ -42,9 +48,10 @@ Vue.directive('n',{
 ```
 
 - data为什么必须是函数
+  - 最根本原因是**`js`对于对象（以及数组等）是传引用的**，因为如果直接写一个对象进去，那么当依此配置初始化了多个实例之后，这个对象必定是多个实例共享的。
 - 自定义指令场景：对数据进行复杂处理
 
-## 计算属性
+## 计算属性（具有依赖关系的数据监听）
 
 ```javascript
 
@@ -71,21 +78,25 @@ computed:{
 ## 类与样式,条件&列表渲染
 
 ```javascript
+// class的数组形式：元素a,b为class名称
 <div :class="[a,b]">
 </div>
+// class的对象形式：属性名为class的名称，值a3为Boolean值
 <div :class="{'test-1':a3}"
 </div>
+// class的字符串形式：obj为{'class类名':Boolean值}
 <div :class="obj">
     
 </div>
 
+//v-for,列表循环
 <ul>
-    <li v-for="(item,idx) in  list" :key="item">
+    <li v-for="(item,idx) in  list" :key="item.index">
         {{item}},{{idx}}
     </li>
 </ul>
 
-
+// v-for,分组模板
 <ul>
    <template v:for="item in list">
        <li :key="item+1"/>hello</li>
@@ -140,7 +151,7 @@ export default{
 
 - 获取触发的DOM元素
 
-  参数$event
+  参数$event传入方法中（event**.target属性就是触发元素**）
 
 ## 深入了解组件
 
@@ -199,15 +210,13 @@ new Vue({
 }).$mount('#app')
 ```
 
-- **vue.config.js文件：runtimeCompiler:true**
+- **vue.config.js文件：runtimeCompiler:true** // 开启使用运行时编译器的vue构建版本，可以在vue组件中使用template选项了。
 
 ## vuex基础
 
+![](./vuex.png)
 
 
-```javascript
-
-```
 
 
 
@@ -245,6 +254,7 @@ koa路由写法
 
 ```javascript
 router.get('/',async(ctx,netx)=>{
+    ctx.cookies.set('pvid:',Math.Random());
     await ctx.render('index',{title:'hello koa2'})
 })
 ```
