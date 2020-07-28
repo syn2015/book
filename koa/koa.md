@@ -213,21 +213,49 @@ new Vue({
 
 # koa基础
 
+```javascript
+// 安装脚手架
+cnpm i -g koa-generator
+//创建项目，基于ejs模板引擎
+koa2 -e 项目名称
+// 运行 
+DEBUG=koa2-learn:* npm start
+// 可能安装fsevents
+cnpm i --update-binary
+//开发运行
+npm run dev
+```
+
+
+
 ## async和await
 
+1. await 后面需要一个promise对象或者一个被转换为promise的对象（promise.resolve(普通对象)）
 
 
 ## koa2中间件
 
+![](./中间价.png)
 
+服务端接受客户端的 Request，经过服务端一些流程，然后 Response 返回给浏览器，**其中每一个环，都是一个中间件**。进来的时候会经过某个中间件，出去的时候也会经过，**这样的机制就可以让中间件引用顺序和代码执行顺序不一致。**
 
 ## 路由和cookie
+
+koa路由写法
+
+```javascript
+router.get('/',async(ctx,netx)=>{
+    await ctx.render('index',{title:'hello koa2'})
+})
+```
 
 
 
 # mongoose和redis
 
+https://www.runoob.com/mongodb/mongodb-tutorial.html
 
+https://www.runoob.com/redis/redis-tutorial.html
 
 # Nuxt.js（v1.42）
 
