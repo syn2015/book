@@ -42,3 +42,71 @@ npm i mysql2 sequelize -d
 
 
 ### 增删改查&连表查询
+
+
+
+```javascript
+
+// 连表1
+
+// 删除
+
+```
+
+### 连接池
+
+![](./连结池.png)
+
+```javascript
+const Sequelize = require('sequelize')
+const conf = {
+    host：'localhost',
+    dialect: 'mysql'
+}
+// 线上环境，使用连接池
+conf.pool={
+    max: 5, // 连接池中最大的连接数量
+    min: 0, // 最小
+    idle: 10000  // 如果一个连接池 10 s 之内没有被使用，则释放
+}
+const seq = new Sequelize("database", "user", "password", conf)
+
+```
+
+# Redis
+
+redis,是内存数据库，mysql是硬盘数据库
+
+```javascript
+//node操作redis
+// config/db.js
+let REDIS_CONF={
+    port:6379,
+    host:'127.0.0.1'
+}
+module.exports = {
+    REDIS_CONF
+}
+
+//src/cache/_redis.js
+const redis=require('redis')
+const {REDIS_CONF}=require('../conf/db')
+//
+
+
+```
+
+# 线上线下环境配置
+
+
+
+```
+
+```
+
+
+
+# 补充：
+
+## vscode 拼写检查插件：
+
