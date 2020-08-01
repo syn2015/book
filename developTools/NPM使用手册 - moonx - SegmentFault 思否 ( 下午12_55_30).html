@@ -1,0 +1,647 @@
+<!DOCTYPE html> <html lang=zh-Hans class="fontawesome-i2svg-active fontawesome-i2svg-complete" style><!--
+ Page saved with SingleFile 
+ url: https://segmentfault.com/a/1190000004894400#item-4-8 
+ saved date: Sat Mar 14 2020 12:55:30 GMT+0800 (中国标准时间)
+--><meta charset=utf-8>
+<meta name=viewport content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta content="IE=edge, chrome=1" http-equiv=X-UA-Compatible>
+<meta content=webkit name=renderer>
+<meta content=15317273575564615446375 property=qc:admins>
+<meta property=og:image content=https://assets.segmentfault.com/v-5e68c0b7/global/img/static/touch-icon.png>
+<meta content=LkzCRJ7rPEUwt6fVey2vhxiw1vQ name=alexaVerifyID>
+<meta content="app-id=958101793, app-argument=" name=apple-itunes-app>
+<title>NPM使用手册 - moonx - SegmentFault 思否</title>
+<meta name=description content="在项目开发过程当中，我们常常需要引用他人已经开发好的包，比如React，Webpack, angular等等，而npm就是一个用来管理（安装，查看，更新，卸载...）这些包的工具。你也可以上传你的包，和使用公共的包，可以到npm官网查看详细信息。">
+<meta name=keywords content=npm>
+<style>:root{--sf-img-5:url("data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/2wBDAAIBAQEBAQIBAQECAgICAgQDAgICAgUEBAMEBgUGBgYFBgYGBwkIBgcJBwYGCAsICQoKCgoKBggLDAsKDAkKCgr/2wBDAQICAgICAgUDAwUKBwYHCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgr/wAARCABAAEADAREAAhEBAxEB/8QAHgAAAQMFAQEAAAAAAAAAAAAACAYHCQABAgMEBQr/xAAzEAABBAEDAwIEBQIHAAAAAAACAQMEBQYHCBEACRITIRQiMUEVIzJRYQqBFhckNFJxkf/EABsBAAEFAQEAAAAAAAAAAAAAAAYAAgMEBQEH/8QAMxEAAQMDAwIEBAYDAAMAAAAAAQIDEQAEIQUxQRJRYXGBkQYTIjIUI0KhsdEkwfAVUmL/2gAMAwEAAhEDEQA/AJ9GmUAUHhPZOmxSrNARPpx10AClVePtwvHv12lVIiJ1ye1KrKK+/Ke3H7dI7UqwX5V5+32TplKsURfNVVOlSrNA+/Cf+dKlWwgU2VDzUeUVFIV4VP56fxSoEdHe7JP0n1Qynapu9pZUvIdPbtytnZlXwCbdtK4AVWbV6GDaCJOCUUjFlUQylIbTKAnig41rqWbldtciFJJEjkcEjxwMbk4xWSjU0NvKZeEFJ34jg/x67Yo18Az3DtU8LrdQtPchjW1LcRAk11hFJVB5svovuiKiovKKKohCSKhIioqdEDTrbzYWgyDsa1ELS4kKSZBr2OFT24+3UlOqlRVXjn79KlVvHn69cImlWskUU/t9OuEClVvMfr02lW5vhUReengyKVRyd5jbbW2epVFq5VDm4TrCrkPFOxzChv2okuELQM+YRjGfEZdB5RcdbR+OPgBG2BL5GI/ENgHHkvJmYOQkKgpyJj6hPqJjE1gavbBS0uCfMJCoI22+oT4SBvFMN25t2+oe3vL8TXD7ZBwfNtVqbFb/ABKwkeo67aSYEdubNYThEjiEqXEdVeBNxDBsuSQiTJ0a+uLJTSUGW1rCCDvPT9Sh2EkVR067dtihKftUoJg7z05I7CSPOi80s7iecUWVS6bVi4g29Xhms0zTLOrNqKEVxlXpBjS3qB4iIgZCUOW2hKPqCj7SNgJNmRs60Q4pLkQhz5avX7FeA/SfHIxWu3qJCiF7JX0H1+0/6PvtRGZpuKqtPNzGHaA5e1Fjs6gUdg9i9ishUNyxgG0T8MxVOPzI76ONqnH+2fFfdQTrXcu0NXaGFfrBI80xI9jPoa0FvpQ8ls/qmPTce1K3ULUzD9KqaLkmd2owK+XcQqxJzvCNNSJcgI0dDJVTwQ33GmkX/k6Cffnqw44hsSowJA98D96kUpKBJP8Axr3HUT6oqddVTq0OF4L7rx+/TaVdQKnj7J9P46eNqVC53U8d23f5T4/qbuFttQcbLGr0kxzPdNfVGxoJUpkmF8nGuSbZeRUAuU8CIQFVQiBCw9eTYi3S7clSek4UiZSTjjg88Vm6mm2DQW8VJg4UmZE+I4oVNL9lmMaga6YLu40o30w9bXqvM6qzyumuIwR8kODDLhslQ3SddeYVtlxWXWmzMGC9NVJQAsS10pp+8avG7n5wSZg/djb1HiASBWYxYoduUXKHvmAH1/7zApsdabp/UPQLehq3S1p2NZP1tovweeiJH+Ziwfa8g5NszVGDYXx8TXh79Hl5kObegv2upOgfT1og+Rz28P5qpcS6xeLG3UmPTf8A1Qyd33vKbyNNu7hp3AtMTpI+n2nb1Bc4LV4+TT1jkdRYhBddlpNQzNH3/B4AARFtsfETbe5Jxw4esbbUQy+okKRCkqByJifAg7HwmiZ21Zu+h07pyCPGPQg1M/3gYQWHbd1RYKwcjOBBhOxnmeeUfbsopsoqp+kVMQQi5RBRVVVREVeq3xEJ0R/MY38iIqvq+dNczGP4NPPt/wA/HVfQrDdS3JKunf4vAsHHSZJtSN2OBkviXuPzKv7/APa/XrStHxc2qHR+pIPuJq6w585lLncA+9denuo2L6nQLFyjJ1mbS2rtZe1UxBGVWzG0E1YeASJBVW3GnQVFUXGnmnAUgcElehaHJjcYPhT0qCpjilMKeyLynUwp1M1vMxLc9kGCE/tygYJkqLHONeae6iUSSYF6w4Q+wPI816Lgpyvi55tOJ7KgL83WfqSb1TH+MlKjylWxHnx6gg1Vuxc/K/JAJ5CtiPP/AIVFfm1PtBx/UQqLeD23tQNOpbJC1YP4Vnr8qOD7govDbU1ttAb8FUxFp4x+goioqJ1585/4hl//ADLNbRG/STEntx7HFCrg09t38+3Ug+BMf17Vz65bndnWObYMt2n7Q6vM5FTmsiNf3i50QyJUC0gPRidlh4G44+kmPEQHEJRjskgOJ4ob6DZf1DS3dMXZ2SVHrzmZkHecySBttUrt3ZuWKre2BPVnM8eOeB5UEnd17iu4LS3eXh2P7bszsNMrnBtKNP3Li2oK0IVnbWwUoywOxedZSTMBtqaDAxpCqyoIfLa+oSqeWAP4Fqf/AFT37eOfei2zT/iInsP4qRDSTvxRO4922bcKq/hYdrfiD0RjUnDGkiuR7yqfF2NInwo0wT+NgPCa+qwHL0M/1qoi04/R1515jTVKbMGROAcHeQdxG4Gapasp1m0UpHhwDjnB8PWi77KuuGKZBtgh7b/joqXGANqMUWZzkn8RqnnCNmeDhiiK2r5SGRRCL5WAL2RwU6qfDN225Y/hwZLeN5kThXkTIHlVbRnkKtfkgyUY8xOD5HIHlXpa4ah4ztd7peBZlb5bX1VPrRgx4xeQm21VyRaQJofhkl5AFS91sTjC6vCChcGviI+M108my1xpRMJdSUkf/QIKT+5TPkKe+5+H1Rsk4cBSfMEdJ/cj2ouw5VOU9ut+tWhw3t0nckl3bWQ7NM8xmuo6qlackUkmrYfsrqeUkvUbE5Kei00DItqnzCRq44nPKB1kamjWSAbFSRA2IyT57AVQvRqBANsQI4I3P8AUB2Yd1juM0DblRqvQ49CjV0uJWZBV2+FCyByEaNwo8kJBCIuvh8xtNmqIIIratJypCD/xHrrJIcQE9MAyk7k7b8jgZAzQ+7rGqNz1oCYgGQdzxvyKQeQ9xTdbk2DHpnQJj+DwZzgx58jBsej0Dhu+ID4uyWZJuxzX0xcUmxAfTQhJDb5Tqq58Qak638pvpRnplIg7SfKBkkREZ7VEvVr1aPlpATmJGD3PtzBqGvuK5Jk+cb4NR8qzS/lWNlNuYzkqfLdMjf8A9BFQTUyRFNFBBVC44IeFT2VOj3RXXH9LaccMkiSe+Tn13ou0tTjtg2tZlR3/ALpKbXMousH3F4VcY2Mt2R/iGPEdjQSL1n40g0YkND4ryvkyZr/Ciir9E6k1Vlq4sHEuYHSTPII2I8Z/rmpdQabdslhfY+hGxHjNfTt2QGMlYtdQaWQcRpimrqSHbhMZUrSRL+HX0FcNOQYjtRQFpqIi+TaJ5uIhuFyO/CpdUt7q46Zn7pjmMAAQAkbc5rA0PrJcnwmfumOYwABgAbc5NIf+oCzipm6k6VabQ3iasqeBY3Moii+COsyCBlplJPn8gkUZ4zBB5/JbNCRRRCrfGFwgOMtAfUAVTyNgI9f9VB8QupCm0DcSZ5GwxUno+4px/bo6onpptzW3PN9WYTWVaJ695JpzmtaKFW21VMV2vl+K8+jPgO+TEltU5RDUEdb5RRLhFAqN9bP3DX5LhbWNiMj1BwRVe5addbhtfSrg7+4O9R75Z3Kd++jmQppfum0axe9vaCccpEybDFUmV9FU9Vpxgm2XRBVVW32E4cEnG1VCUSQLe+IdWsVhq8bT1JVuRA8CM5IkZHEgwaG3NXv7Q9NygSDvGPTxHh/NIXGO4RQxMrhZlL2s7eI5VNbMiQIcfFZENqXXPmhyITKo+TTZvB6qI8TDiIpEhiiGSLTb1/8ANC/kN4mMEYOVDsCrcKiDsYqujVfzQr5SMTGCMcjkCeDEHY1Dn3iNwZbn+51rBrg1GhssW99DaYZiAvgLUWshxG+URxxPU8GB8/EiTzQ/HhFRE9C0+5N5ZIeIjqExticftRnYvm4tkuEfdn049Y3pxNnWkO1yFqTiudaI7gLHK7VzTuKWTN5Dirta7iF5JmyglCIR1fVxpqDG8BeE3FX45skIVNQZxPih9abRLR+05JzACYgGM5JFZWvPLFsG9gTJOYERExnJIr6G+0tSW8/ApmoGOa4MWOGmRsV+IYlpAGNULUs0bJ6Q1IkRxlWboECslIRxQ8hMT83BVRd8ONr/AAxdDoUg7JS30JB7iQFKPEk03SEK+T1hYKewR0j0kSe00Ivd21FxrUfchYVeOZU5fjX3setYq5r4OO1s1K+ObqwCjmRO10tt1gSbVUJuXDlIgibyeoOfEryXr6EHqiBHKTAP090qEYOygayNacC7mEmYgRyDg47hQ9lA1MEi8p9+vRwcUX03W5LQzKtccThRNPtecs06yGmnfG01/jExFb9XwUfSlw3OWJ0deeVadH6iiiQL7rVvLdy5a6W3ChQ2I7+IOCO4NQXDS3m4QspPBH9HBHhQMawb1Mo00zmu0d7oOzDFs2ucSfN2hzSsiMKD4uNEKT4see0sckcUGvLhwAAwVTADaQEE3tWctrhLGrW4UU/asAEZxIBGPHPptWE5fqZeS1fsgkbKGRnmDt70hdNtHdi25DMww3TLctIwliXNaGwptRqtt27yp1ts5YqzYJJQIEdVcMHI8dppxTjkReSEyQ0mLLRtQX0MulIUQSFD6ln7h9U4G8gQZHlVZq3027UEtr6QTJCvuWdxmdt5AG48qGTcd/TYbeNRNSYGrWX906nwOZqA/GsrEJOEsza1+TYm+kRK11ZjCjEP4R1Gzf55H0fmIj46LrZbOm2TLLzidgJ2BJ7DsTgT70RMuN2Ns224sYgTtk9vA8TRCbBu1ntT7WmquN1EXeitjcZjT3lpVZla48sM1s2fgokFqA00TjHqx1/EAdZcdI5CywY9I0PqC7XbDVGXFO9JKVpTvkyDjiRBwTJ2AqG5Wz+OaWpyCQoAdzI24nfG57UWl/3QMGtNt0bK8RtIAnImHjeV5Xj0kUj4XOlQnSrrU4khtXvg3n0BE8w82SU23AVxl1tGPa0wbD5qFCPtKh+gnAJBExPfbkSIqNzUmxbBxJwcFQ2SeCR2nHhzUceyTNJ2H6sz9UIepmkuMX8UVhQss1PB1z8NnSXTOVPr4sYFB+T6ZNt+o74NioEnP5iioPpTpt3S6pbaVnPUsnBO5CRuTkyYA2mhqwcLThWVISo8qO07kDk88AV//9k=")}svg:not(:root).svg-inline--fa{overflow:visible}.svg-inline--fa{display:inline-block;font-size:inherit;height:1em;overflow:visible;vertical-align:-0.125em}.svg-inline--fa.fa-w-12{width:0.75em}.svg-inline--fa.fa-w-14{width:0.875em}.svg-inline--fa.fa-w-16{width:1em}.svg-inline--fa.fa-fw{width:1.25em}.fa-fw{text-align:center}@-webkit-keyframes fa-spin{0%{-webkit-transform:rotate(0deg);transform:rotate(0deg)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}@keyframes fa-spin{0%{-webkit-transform:rotate(0deg);transform:rotate(0deg)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}</style><link href=https://segmentfault.com/opensearch.xml rel=search title=SegmentFault type=application/opensearchdescription+xml>
+<meta content=#00965e name=msapplication-TileColor>
+<meta name=msapplication-square150x150logo content=https://assets.segmentfault.com/v-5e68c0b7/global/img/static/touch-icon.png>
+<meta content=bcf7fd80dca60d53d46d5b46e1b990ca name=baidu_union_verify>
+<link href=https://segmentfault.com/feeds/questions rel=alternate title="SegmentFault 最新问题" type=application/atom+xml>
+<link href=https://segmentfault.com/feeds/blogs rel=alternate title="SegmentFault 最新文章" type=application/atom+xml>
+<style>:root{--blue:#007bff;--indigo:#6610f2;--purple:#6f42c1;--pink:#e83e8c;--red:#dc3545;--orange:#fd7e14;--yellow:#ffc107;--green:#28a745;--teal:#20c997;--cyan:#17a2b8;--white:#fff;--gray:#6c757d;--gray-dark:#343a40;--primary:#00965e;--secondary:#6c757d;--success:#28a745;--info:#17a2b8;--warning:#ffc107;--danger:#dc3545;--light:#f8f9fa;--dark:#343a40;--breakpoint-xs:0;--breakpoint-sm:576px;--breakpoint-md:768px;--breakpoint-lg:992px;--breakpoint-xl:1200px;--font-family-sans-serif:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";--font-family-monospace:SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}*,:after,:before{box-sizing:border-box}html{font-family:sans-serif;line-height:1.15;-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:rgba(0,0,0,0)}article,footer,nav{display:block}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;font-size:1rem;font-weight:400;line-height:1.5;color:#212529;text-align:left}hr{box-sizing:content-box;height:0;overflow:visible}h1,h2,h3,h4,h5{margin-top:0}p{margin-top:0;margin-bottom:1rem}dl,ul{margin-bottom:1rem}dl,ol,ul{margin-top:0}dd{margin-left:0}strong{font-weight:bolder}a{color:#00965e;background-color:transparent}a,a:hover{text-decoration:none}a:hover{color:#004a2e}a:not([href]),a:not([href]):hover{color:inherit;text-decoration:none}code,pre{font-family:SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace}img{border-style:none}img{vertical-align:middle}button{border-radius:0}button:focus{outline:1px dotted;outline:5px auto -webkit-focus-ring-color}button,input,textarea{margin:0;font-family:inherit}button,input{overflow:visible}button{text-transform:none}[type=button],button{-webkit-appearance:button}[type=button]:not(:disabled),[type=reset]:not(:disabled),[type=submit]:not(:disabled),button:not(:disabled){cursor:pointer}[type=search]{outline-offset:-2px;-webkit-appearance:none}[type=search]::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{font:inherit;-webkit-appearance:button}.h2,.h5,.h6,h2,h3,h4,h5,h6{margin-bottom:.5rem;font-weight:600;line-height:1.2}.h2{font-size:2rem}.h5,h5{font-size:1.25rem}.h6,h6{font-size:1rem}hr{margin-top:1rem;border:0;border-top:1px solid rgba(0,0,0,.1)}.list-inline{padding-left:0;list-style:none}.list-inline-item{display:inline-block}.list-inline-item:not(:last-child){margin-right:.5rem}code{font-size:87.5%;color:#e83e8c;word-wrap:break-word}pre{font-size:87.5%}pre code{font-size:inherit;color:inherit;word-break:normal}.container{width:100%;padding-right:12px;padding-left:12px;margin-right:auto;margin-left:auto}@media (min-width:576px){.container{max-width:540px}}@media (min-width:768px){.container{max-width:720px}}@media (min-width:992px){.container{max-width:960px}}@media (min-width:1200px){.container{max-width:1140px}}@media (min-width:576px){.container{max-width:540px}}@media (min-width:768px){.container{max-width:720px}}@media (min-width:992px){.container{max-width:960px}}@media (min-width:1200px){.container{max-width:1140px}}.row{display:flex;flex-wrap:wrap;margin-right:-12px;margin-left:-12px}.col-6,.col-md-2,.col-md-4,.col-md-8,.col-sm-3,.col-sm-9,.col-xl,.col-xl-auto{position:relative;width:100%;padding-right:12px;padding-left:12px}.col-4{flex:0 0 33.33333%;max-width:33.33333%}.col-6{flex:0 0 50%;max-width:50%}.col-12{flex:0 0 100%;max-width:100%}@media (min-width:576px){.col-sm-3{flex:0 0 25%;max-width:25%}.col-sm-9{flex:0 0 75%;max-width:75%}}@media (min-width:768px){.col-md-2{flex:0 0 16.66667%;max-width:16.66667%}.col-md-4{flex:0 0 33.33333%;max-width:33.33333%}.col-md-8{flex:0 0 66.66667%;max-width:66.66667%}}@media (min-width:1200px){.col-xl{flex-basis:0;flex-grow:1;max-width:100%}.col-xl-auto{flex:0 0 auto;width:auto;max-width:100%}}.form-control{display:block;width:100%;height:calc(1.5em + .75rem + 2px);padding:.375rem .75rem;font-size:1rem;font-weight:400;line-height:1.5;color:#495057;background-color:#fff;background-clip:padding-box;border:1px solid #ced4da;border-radius:.25rem;transition:border-color .15s ease-in-out,box-shadow .15s ease-in-out}@media (prefers-reduced-motion:reduce){.form-control{transition:none}}.form-control:focus{color:#495057;background-color:#fff;border-color:#00c97e;outline:0;box-shadow:0 0 0 .2rem rgba(0,150,94,.25)}.form-control::-webkit-input-placeholder{color:#6c757d;opacity:1}.form-control::placeholder{color:#6c757d;opacity:1}.form-control:disabled,.form-control[readonly]{background-color:#e9ecef;opacity:1}.form-group{margin-bottom:1rem}.form-inline{flex-flow:row wrap;align-items:center}@media (min-width:576px){.form-inline .form-control{display:inline-block;width:auto;vertical-align:middle}}.btn{display:inline-block;font-weight:400;text-align:center;vertical-align:middle;cursor:pointer;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;background-color:transparent;border:1px solid transparent;padding:.375rem .75rem;font-size:1rem;line-height:1.5;border-radius:.25rem;transition:color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out}@media (prefers-reduced-motion:reduce){.btn{transition:none}}.btn:hover{color:#212529;text-decoration:none}.btn.focus,.btn:focus{outline:0;box-shadow:0 0 0 .2rem rgba(0,150,94,.25)}.btn.disabled,.btn:disabled{opacity:.65}.btn-primary{color:#fff;background-color:#00965e;border-color:#00965e}.btn-primary.focus,.btn-primary:focus,.btn-primary:hover{color:#fff;background-color:#007046;border-color:#00633e}.btn-primary.focus,.btn-primary:focus{box-shadow:0 0 0 .2rem rgba(38,166,118,.5)}.btn-primary.disabled,.btn-primary:disabled{color:#fff;background-color:#00965e;border-color:#00965e}.btn-primary:not(:disabled):not(.disabled).active,.btn-primary:not(:disabled):not(.disabled):active,.show>.btn-primary.dropdown-toggle{color:#fff;background-color:#00633e;border-color:#005636}.btn-primary:not(:disabled):not(.disabled).active:focus,.btn-primary:not(:disabled):not(.disabled):active:focus,.show>.btn-primary.dropdown-toggle:focus{box-shadow:0 0 0 .2rem rgba(38,166,118,.5)}.btn-light{color:#212529;background-color:#f8f9fa;border-color:#f8f9fa}.btn-light.focus,.btn-light:focus,.btn-light:hover{color:#212529;background-color:#e2e6ea;border-color:#dae0e5}.btn-light.focus,.btn-light:focus{box-shadow:0 0 0 .2rem rgba(216,217,219,.5)}.btn-light.disabled,.btn-light:disabled{color:#212529;background-color:#f8f9fa;border-color:#f8f9fa}.btn-light:not(:disabled):not(.disabled).active,.btn-light:not(:disabled):not(.disabled):active,.show>.btn-light.dropdown-toggle{color:#212529;background-color:#dae0e5;border-color:#d3d9df}.btn-light:not(:disabled):not(.disabled).active:focus,.btn-light:not(:disabled):not(.disabled):active:focus,.show>.btn-light.dropdown-toggle:focus{box-shadow:0 0 0 .2rem rgba(216,217,219,.5)}.btn-outline-primary{color:#00965e;border-color:#00965e}.btn-outline-primary:hover{color:#fff;background-color:#00965e;border-color:#00965e}.btn-outline-primary.focus,.btn-outline-primary:focus{box-shadow:0 0 0 .2rem rgba(0,150,94,.5)}.btn-outline-primary.disabled,.btn-outline-primary:disabled{color:#00965e;background-color:transparent}.btn-outline-primary:not(:disabled):not(.disabled).active,.btn-outline-primary:not(:disabled):not(.disabled):active,.show>.btn-outline-primary.dropdown-toggle{color:#fff;background-color:#00965e;border-color:#00965e}.btn-outline-primary:not(:disabled):not(.disabled).active:focus,.btn-outline-primary:not(:disabled):not(.disabled):active:focus,.show>.btn-outline-primary.dropdown-toggle:focus{box-shadow:0 0 0 .2rem rgba(0,150,94,.5)}.btn-outline-secondary{color:#6c757d;border-color:#6c757d}.btn-outline-secondary:hover{color:#fff;background-color:#6c757d;border-color:#6c757d}.btn-outline-secondary.focus,.btn-outline-secondary:focus{box-shadow:0 0 0 .2rem rgba(108,117,125,.5)}.btn-outline-secondary.disabled,.btn-outline-secondary:disabled{color:#6c757d;background-color:transparent}.btn-outline-secondary:not(:disabled):not(.disabled).active,.btn-outline-secondary:not(:disabled):not(.disabled):active,.show>.btn-outline-secondary.dropdown-toggle{color:#fff;background-color:#6c757d;border-color:#6c757d}.btn-outline-secondary:not(:disabled):not(.disabled).active:focus,.btn-outline-secondary:not(:disabled):not(.disabled):active:focus,.show>.btn-outline-secondary.dropdown-toggle:focus{box-shadow:0 0 0 .2rem rgba(108,117,125,.5)}.btn-link{font-weight:400;color:#00965e;text-decoration:none}.btn-link:hover{color:#004a2e;text-decoration:none}.btn-link.focus,.btn-link:focus{text-decoration:none;box-shadow:none}.btn-link.disabled,.btn-link:disabled{color:#6c757d;pointer-events:none}.fade{transition:opacity .15s linear}@media (prefers-reduced-motion:reduce){.fade{transition:none}}.fade:not(.show){opacity:0}.collapse:not(.show){display:none}.dropdown,.dropup{position:relative}.dropdown-toggle{white-space:nowrap}.dropdown-toggle:after{display:inline-block;margin-left:.255em;vertical-align:.255em;content:"";border-top:.3em solid;border-right:.3em solid transparent;border-bottom:0;border-left:.3em solid transparent}.dropdown-toggle:empty:after{margin-left:0}.dropdown-divider{height:0;margin:.5rem 0;overflow:hidden;border-top:1px solid #e9ecef}.dropdown-item{display:block;width:100%;padding:.25rem 1.5rem;clear:both;font-weight:400;color:#212529;text-align:inherit;white-space:nowrap;background-color:transparent;border:0}.dropdown-item:focus,.dropdown-item:hover{color:#16181b;text-decoration:none;background-color:#f8f9fa}.dropdown-item.active,.dropdown-item:active{color:#fff;text-decoration:none;background-color:#00965e}.dropdown-item.disabled,.dropdown-item:disabled{color:#6c757d;pointer-events:none;background-color:transparent}.btn-group{position:relative;display:inline-flex;vertical-align:middle}.btn-group>.btn{position:relative;flex:1 1 auto}.btn-group-vertical>.btn.active,.btn-group-vertical>.btn:active,.btn-group-vertical>.btn:focus,.btn-group-vertical>.btn:hover,.btn-group>.btn.active,.btn-group>.btn:active,.btn-group>.btn:focus,.btn-group>.btn:hover{z-index:1}.btn-group>.btn-group:not(:first-child),.btn-group>.btn:not(:first-child){margin-left:-1px}.btn-group>.btn-group:not(:last-child)>.btn,.btn-group>.btn:not(:last-child):not(.dropdown-toggle){border-top-right-radius:0;border-bottom-right-radius:0}.btn-group>.btn-group:not(:first-child)>.btn,.btn-group>.btn:not(:first-child){border-top-left-radius:0;border-bottom-left-radius:0}.nav-link{display:block;padding:.5rem 1rem}.nav-link:focus,.nav-link:hover{text-decoration:none}.navbar{position:relative;padding:.5rem 1rem}.navbar,.navbar .container{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between}.navbar-brand{display:inline-block;padding-top:.3125rem;padding-bottom:.3125rem;margin-right:1rem;font-size:1.25rem;line-height:inherit;white-space:nowrap}.navbar-brand:focus,.navbar-brand:hover{text-decoration:none}.navbar-nav{display:flex;flex-direction:column;padding-left:0;margin-bottom:0;list-style:none}.navbar-nav .nav-link{padding-right:0;padding-left:0}.navbar-collapse{flex-basis:100%;flex-grow:1;align-items:center}.navbar-toggler-icon{display:inline-block;width:1.5em;height:1.5em;vertical-align:middle;content:"";background:no-repeat 50%;background-size:100% 100%}@media (max-width:991.98px){.navbar-expand-lg>.container{padding-right:0;padding-left:0}}@media (min-width:992px){.navbar-expand-lg{flex-flow:row nowrap;justify-content:flex-start}.navbar-expand-lg .navbar-nav{flex-direction:row}.navbar-expand-lg .navbar-nav .nav-link{padding-right:.5rem;padding-left:.5rem}.navbar-expand-lg>.container{flex-wrap:nowrap}.navbar-expand-lg .navbar-collapse{display:flex!important;flex-basis:auto}}.navbar-light .navbar-brand,.navbar-light .navbar-brand:focus,.navbar-light .navbar-brand:hover{color:rgba(0,0,0,.9)}.navbar-light .navbar-nav .nav-link{color:rgba(0,0,0,.5)}.navbar-light .navbar-nav .nav-link:focus,.navbar-light .navbar-nav .nav-link:hover{color:rgba(0,0,0,.7)}.navbar-light .navbar-toggler-icon{background-image:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30'%3E%3Cpath stroke='rgba(0,0,0,0.5)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E")}.card{position:relative;display:flex;flex-direction:column;min-width:0;word-wrap:break-word;background-color:#fff;background-clip:border-box;border-radius:.25rem}.card>.list-group:first-child .list-group-item:first-child{border-top-left-radius:.25rem;border-top-right-radius:.25rem}.card>.list-group:last-child .list-group-item:last-child{border-bottom-right-radius:.25rem;border-bottom-left-radius:.25rem}.card-body{flex:1 1 auto;min-height:1px;padding:1.25rem}.badge{display:inline-block;padding:.25em .4em;font-size:75%;font-weight:700;line-height:1;text-align:center;white-space:nowrap;vertical-align:baseline;border-radius:.25rem;transition:color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out}@media (prefers-reduced-motion:reduce){.badge{transition:none}}.badge:empty{display:none}.badge-primary{color:#fff}@-webkit-keyframes progress-bar-stripes{0%{background-position:1rem 0}to{background-position:0 0}}@keyframes progress-bar-stripes{0%{background-position:1rem 0}to{background-position:0 0}}.media{display:flex;align-items:flex-start}.media-body{flex:1}.list-group{display:flex;flex-direction:column;padding-left:0;margin-bottom:0}.list-group-item-action{width:100%;color:#495057;text-align:inherit}.list-group-item-action:focus,.list-group-item-action:hover{z-index:1;color:#495057;text-decoration:none;background-color:#f8f9fa}.list-group-item-action:active{color:#212529;background-color:#e9ecef}.list-group-item{position:relative;display:block;padding:.75rem 1.25rem;background-color:#fff;border:1px solid rgba(0,0,0,.0625)}.list-group-item:first-child{border-top-left-radius:.25rem;border-top-right-radius:.25rem}.list-group-item:last-child{border-bottom-right-radius:.25rem;border-bottom-left-radius:.25rem}.list-group-item.disabled,.list-group-item:disabled{color:#6c757d;pointer-events:none;background-color:#fff}.list-group-item+.list-group-item{border-top-width:0}.list-group-flush .list-group-item{border-right-width:0;border-left-width:0;border-radius:0}.list-group-flush .list-group-item:first-child{border-top-width:0}.list-group-flush:last-child .list-group-item:last-child{border-bottom-width:0}.close{float:right;font-size:1.5rem;font-weight:700;line-height:1;color:#000;text-shadow:0 1px 0 #fff;opacity:.5}.close:hover{color:#000;text-decoration:none}.close:not(:disabled):not(.disabled):focus,.close:not(:disabled):not(.disabled):hover{opacity:.75}button.close{padding:0;background-color:transparent;border:0;-webkit-appearance:none;-moz-appearance:none}.modal{position:fixed;top:0;left:0;z-index:1050;width:100%;height:100%;overflow:hidden;outline:0}.modal-dialog{position:relative;width:auto;margin:.5rem;pointer-events:none}.modal.fade .modal-dialog{transition:transform .3s ease-out;transform:translateY(-50px)}@media (prefers-reduced-motion:reduce){.modal.fade .modal-dialog{transition:none}}@media (min-width:576px){.modal-dialog{max-width:500px;margin:1.75rem auto}}@-webkit-keyframes spinner-border{to{transform:rotate(1turn)}}@keyframes spinner-border{to{transform:rotate(1turn)}}@-webkit-keyframes spinner-grow{0%{transform:scale(0)}50%{opacity:1}}@keyframes spinner-grow{0%{transform:scale(0)}50%{opacity:1}}.bg-white{background-color:#fff!important}.border-0{border:0!important}.rounded{border-radius:.25rem!important}.rounded-circle{border-radius:50%!important}.d-none{display:none!important}.d-inline-block{display:inline-block!important}.d-flex{display:flex!important}@media (min-width:576px){.d-sm-block{display:block!important}.d-sm-flex{display:flex!important}}@media (min-width:992px){.d-lg-block{display:block!important}.d-lg-flex{display:flex!important}}@media (min-width:1200px){.d-xl-block{display:block!important}.d-xl-flex{display:flex!important}}.flex-wrap{flex-wrap:wrap!important}.flex-fill{flex:1 1 auto!important}.flex-grow-1{flex-grow:1!important}.flex-shrink-0{flex-shrink:0!important}.justify-content-end{justify-content:flex-end!important}.justify-content-center{justify-content:center!important}.justify-content-between{justify-content:space-between!important}.align-items-center{align-items:center!important}.align-self-center{align-self:center!important}@media (min-width:576px){.flex-sm-row{flex-direction:row!important}}@media (min-width:992px){.align-items-lg-center{align-items:center!important}}.float-right{float:right!important}.overflow-hidden{overflow:hidden!important}.position-relative{position:relative!important}.position-fixed{position:fixed!important}@supports ((position:-webkit-sticky) or (position:sticky)){.sticky-top{position:-webkit-sticky;position:sticky;top:0;z-index:1020}}.shadow-sm{box-shadow:0 .125rem .25rem rgba(0,0,0,.075)!important}.w-100{width:100%!important}.mb-0{margin-bottom:0!important}.m-1{margin:.25rem!important}.my-1{margin-top:.25rem!important}.mr-1{margin-right:.25rem!important}.mb-1,.my-1{margin-bottom:.25rem!important}.ml-1{margin-left:.25rem!important}.mt-2,.my-2{margin-top:.5rem!important}.mr-2{margin-right:.5rem!important}.mb-2,.my-2{margin-bottom:.5rem!important}.ml-2{margin-left:.5rem!important}.mt-3{margin-top:1rem!important}.mr-3{margin-right:1rem!important}.mb-3{margin-bottom:1rem!important}.mt-4,.my-4{margin-top:1.5rem!important}.mr-4{margin-right:1.5rem!important}.mb-4,.my-4{margin-bottom:1.5rem!important}.mb-5{margin-bottom:3rem!important}.p-0{padding:0!important}.py-0{padding-top:0!important}.pr-0{padding-right:0!important}.py-0{padding-bottom:0!important}.pt-3,.py-3{padding-top:1rem!important}.py-3{padding-bottom:1rem!important}.p-4{padding:1.5rem!important}.pt-4{padding-top:1.5rem!important}.px-4{padding-right:1.5rem!important}.px-4{padding-left:1.5rem!important}.py-5{padding-top:3rem!important}.py-5{padding-bottom:3rem!important}.m-n1{margin:-.25rem!important}.ml-auto{margin-left:auto!important}@media (min-width:576px){.mt-sm-0{margin-top:0!important}.my-sm-4{margin-top:1.5rem!important}.my-sm-4{margin-bottom:1.5rem!important}}@media (min-width:992px){.my-lg-0{margin-top:0!important}.my-lg-0{margin-bottom:0!important}}.text-truncate{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.text-left{text-align:left!important}.text-right{text-align:right!important}.text-center{text-align:center!important}@media (min-width:576px){.text-sm-right{text-align:right!important}}.font-weight-bold{font-weight:700!important}.text-primary{color:#00965e!important}.text-secondary{color:#6c757d!important}a.text-secondary:focus,a.text-secondary:hover{color:#494f54!important}.text-warning{color:#ffc107!important}.text-dark{color:#343a40!important}a.text-dark:focus,a.text-dark:hover{color:#121416!important}.text-body{color:#212529!important}.text-hide{font:0/0 a;text-shadow:none;background-color:transparent;border:0}body{background-color:#e9ecef;-webkit-font-smoothing:antialiased}.sflex-center{display:flex;justify-content:center;align-items:center}@media (min-width:992px){.p-lg-30{padding:1.875rem}}.font-size-14{font-size:.875rem!important}.text-truncate-2{display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden}.text-truncate-2{-webkit-line-clamp:2}.split-dot:before{content:" \2022 ";color:#ced4da}.w-0{width:0;min-width:0}@media (min-width:1200px){.w-xl-300{width:300px}}#sf-header{border-top:2px solid #00965e}#sf-header .nav-link.active{color:#00965e}#sf-header .nav-link.active:hover{color:#004a2e}@media (min-width:992px){#sf-header .nav-link{padding-left:.75rem;padding-right:.75rem}}.sf-header-logo{background-image:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNzYgMzMiPjxwYXRoIGQ9Ik02LjMgMjUuNWMtMi4zIDAtNC4xLS42LTUuOS0xLjl2LS4zbDEuMy0yLjdjLjkuOCAyLjQgMS43IDMuOCAxLjcgMS4xIDAgMi4yLS40IDIuMi0xLjcgMC0xLjEtMS0xLjUtMi4yLTItLjQtLjItLjktLjQtMS40LS42LTItMS0zLjQtMi4yLTMuNC00LjcgMC00LjUgNC4zLTUgNi4yLTUgMiAwIDQgLjUgNS4zIDEuM3YuNGwtMS4zIDIuN2MtMS0uNy0yLjItMS4xLTMuNC0xLjEtMS42IDAtMS45LjgtMS45IDEuNSAwIDEuMSAxIDEuNSAyLjQgMiAuMy4xLjYuMi45LjQgMi40IDEgMy44IDIuMSAzLjggNC44LS4xIDQuNS00IDUuMi02LjQgNS4yem0xNS4zIDBjLTYuNyAwLTcuNy01LjQtNy43LTguNiAwLTMuOCAxLjMtOC40IDcuNC04LjQgNS44IDAgNyA0LjIgNyA3LjkgMCAuNS0uMSAxLjQtLjMgMi0uOCAwLTMuNyAwLTYtLjFoLTMuMnYuMmMwIC45LjMgMy45IDMuNCAzLjkgMS4yIDAgMi4zLS41IDMuMy0xLjZsMS45IDIuM3YuM2MtMS44IDEuMy0zLjYgMi4xLTUuOCAyLjF6bS0uMy0xMy43Yy0xLjYgMC0yLjQgMS4zLTIuNSAzLjl2LjJoNC44di0uMmMuMS0yLjYtLjctMy45LTIuMy0zLjl6bTE2LjEgMjAuN2MtMi4yIDAtNC40LS42LTYuMi0xLjZsMS4yLTMuMWguMmMxIC42IDIuNCAxLjQgNC4xIDEuNCAxLjkgMCAzLTEgMy0yLjcgMC0uMi4xLTEuNy4yLTIuN3YtLjFsLS40LS4yLS4xLjFjLTEuMSAxLTIuMiAxLjktNC4xIDEuOS0zLjYgMC01LjQtMi43LTUuNC04LjUgMC00LjEgMS40LTguNCA1LjQtOC40IDEuNSAwIDMgLjcgNC4yIDJsLjEuMS4zLS4xLjMtMS4zLjMtLjMgNC4xLjFjMCAuNi0uMSAyLjEtLjEgMi45djE0Yy4xIDYtNS40IDYuNS03LjEgNi41em0wLTIwLjRjLTIuNCAwLTIuNCAzLjYtMi40IDQuOCAwIDEuNiAwIDUuMiAyIDUuMi44IDAgMS44LS42IDIuNS0xLjZ2LS4xbC4xLTcuMnYtLjFjLS42LS41LTEuNC0xLTIuMi0xek02NC42IDI1YzAtLjcuMi0xMC4yLjItMTAuMyAwLTEuNi0uMi0yLjYtMS41LTIuNi0uNyAwLTEuNi40LTIuMyAxbC0uMS0uMXYxMS45SDU2YzAtLjcuMS0xMC4yLjEtMTAuMyAwLTEuNi0uMi0yLjYtMS41LTIuNi0uNiAwLTEuNi40LTIuMyAxbC0uMS4xLjEgMTEuOWgtNVYxM2MwLTEuMS0uMS0zLjItLjEtNC4xbDQuMy0uMS4zLjIuMiAxLjQuMy4xLjEtLjFjMS40LTEuMiAzLjQtMiA0LjktMiAxLjQgMCAyLjUuNyAzLjEgMi4xbC4xLjMuMi0uMmMxLjUtMS4zIDMuNS0yLjEgNS4yLTIuMSAyLjQgMCAzLjggMS43IDMuOCA0LjggMCAuMi0uMSAxMS0uMSAxMS43aC01em0xNSAuNWMtNi43IDAtNy43LTUuNC03LjctOC42IDAtMy44IDEuMy04LjQgNy40LTguNCA1LjggMCA3IDQuMiA3IDcuOSAwIC41LS4xIDEuNC0uMyAyLS44IDAtMy43IDAtNi0uMWgtMy4ydi4yYzAgLjkuMyAzLjkgMy40IDMuOSAxLjIgMCAyLjMtLjUgMy4zLTEuNmwxLjkgMi4zdi4zYy0xLjggMS4zLTMuNiAyLjEtNS44IDIuMXptLS4zLTEzLjdjLTEuNiAwLTIuNCAxLjMtMi41IDMuOXYuMmg0Ljh2LS4yYzAtMi42LS43LTMuOS0yLjMtMy45ek05Ny4yIDI1YzAtLjcuMi0xMC4yLjItMTAuMyAwLTEuNy0uMy0yLjYtMS42LTIuNi0uNyAwLTEuNi40LTIuNSAxbC0uMS4xLjEgMTEuOWgtNVYxM2MwLTEuMS0uMS0zLjEtLjEtNC4xbDQuMy0uMS4zLjIuMiAxLjQuMy4xLjEtLjFjMS41LTEuMiAzLjYtMiA1LjItMiAyLjUgMCAzLjggMS43IDMuOCA0LjggMCAuMi0uMSAxMS0uMSAxMS43aC01LjF2LjF6bTEzLjEgMGMtNC4xIDAtNC41LTIuNS00LjUtNSAwLS43IDAtNC4zLjEtNy40di0uMmgtMS44bC4xLTMuNWgxLjhWNC4zbC4yLS4yaDQuN2MwIC42IDAgMi40LS4xIDQuNnYuMmgyLjdsLS4xIDMuNWgtMi43di4yYy4xIDMgLjEgNi4yLjEgNi44IDAgMS43IDAgMi4zIDEuNiAyLjNoLjl2My4xbC0uMi4yaC0yLjh6Ii8+PHBhdGggZD0iTTExNy4yIDI1YzAtMS40IDAtOS40LjEtMTIuNHYtLjJoLTEuOWwuMS0zLjVoMS44di0uMmMwLS4xLS4xLTIuOC0uMS0yLjggMC00LjQgMi44LTUuNCA1LjEtNS40IDEuNCAwIDIuNi4yIDMuNy43di40bC0xIDIuOGMtLjUtLjMtMS0uNC0xLjQtLjQtMS4xIDAtMS41LjgtMS41IDIuNXYyLjRoMi45bC0uMSAzLjVoLTIuOHYuMmMuMSAyLjkuMSAxMSAuMSAxMi40aC01em0xMi44LjRjLTMuNSAwLTMuOS0zLjQtMy45LTQuOCAwLTUuMiA0LjEtNS41IDguNS01LjhoLjJsLjEtLjJ2LS45YzAtMS4yLS43LTEuOS0yLjItMS45LTEuOSAwLTMuNi41LTQuOCAxbC0xLjEtMi45di0uMmMyLjQtLjkgNC45LTEuMyA3LjUtMS4zIDMuNyAwIDUuNiAxLjcgNS42IDV2Ny45YzAgMS4zLjEgMi45LjEgMy43aC00LjFsLS4zLS4zLS40LTEuMy0uMy0uMS0uMS4xYy0xLjQgMS40LTIuOSAyLTQuOCAyem00LjUtOC4yYy0yLjUuMS0zLjcuMS0zLjcgMi43IDAgMiAuOCAyLjQgMS41IDIuNC44IDAgMS44LS41IDIuNS0xLjJsLjEtLjF2LTMuNWwtLjEtLjEtLjItLjFjMC0uMS0uMS0uMS0uMS0uMXptMTIgOC4yYy0yLjcgMC00LTEuNi00LTQuOCAwLS4yLjEtMTEgLjEtMTEuOGg0LjhsLjIuMmMwIC41LS4xIDEwLjEtLjEgMTAuMyAwIDEuNy42IDIuNiAxLjYgMi42LjkgMCAyLS41IDIuNy0xLjJsLjEtLjEtLjEtMTEuOWg0LjhsLjIuMlYyMWMwIDEuMy4xIDIuOS4xIDMuN2gtNC4xbC0uMy0uMy0uNC0xLjQtLjQtLjEtLjEuMWMtMS40IDEuNy0zIDIuNC01LjEgMi40em0xMy4yLS40Yy0uMS0uOC0uMS0yLjYtLjEtMy43VjQuOWMwLTEuMSAwLTIuOC0uMS0zLjdsNC45LS4xLjIuMnYyMGMwIDEuMi4xIDIuOS4xIDMuN2gtNXptMTIuOSAwYy00LjEgMC00LjUtMi41LTQuNS01IDAtLjcgMC00LjMuMS03LjR2LS4yaC0xLjhsLjEtMy41aDEuOFY0LjNsLjItLjJoNC43YzAgLjYgMCAyLjQtLjEgNC42di4yaDIuN2wtLjEgMy41SDE3M3YuMmMuMSAzIC4xIDYuMi4xIDYuOCAwIDEuNyAwIDIuMyAxLjYgMi4zaC45djMuMWwtLjIuMmgtMi44eiIgZmlsbD0iIzAwOTY1ZSIvPjwvc3ZnPg==);width:139px;height:26px}.badge-tag{display:inline-block;font-size:.875rem;padding:0 .375rem;height:1.5rem;line-height:1.5rem;border-radius:.1875rem;background-color:rgba(0,150,94,.1)}.badge-tag:hover{text-decoration:none;background-color:rgba(0,150,94,.2)}@-webkit-keyframes tag-input-warning{0%{background-color:#ffc107;border-color:#ffc107}to{background-color:#f8f9fa}}@keyframes tag-input-warning{0%{background-color:#ffc107;border-color:#ffc107}to{background-color:#f8f9fa}}.fmt{line-height:1.75}.fmt hr,.fmt ol,.fmt p,.fmt pre,.fmt ul{margin-bottom:1.25rem}.fmt li p{margin-bottom:0}.fmt h2{font-size:1.75rem;margin:2.5rem 0 1rem;padding-bottom:.5rem;border-bottom:1px double rgba(0,0,0,.1)}.fmt h3{font-size:1.5rem;margin:2.25rem 0 1rem}.fmt h4{font-size:1.25rem;margin:2rem 0 1rem}.fmt pre{padding:1rem;max-height:35rem;line-height:1.5;background-color:#e9ecef;overflow:auto}.fmt pre code{overflow-wrap:normal;white-space:inherit}.fmt hr{margin:1.5rem 0;border-top-width:2px}.fmt img{max-width:100%}.fmt .img-wrap{display:block;text-align:center}article.fmt img{cursor:zoom-in}.functional-area-left{float:left;margin-left:-98px;padding-right:0!important;width:48px;top:4rem}.functional-area-left .func-btn{margin-bottom:.5rem;border-radius:50%;padding:0;text-align:center;width:32px;height:32px;line-height:32px;font-size:1rem;border-color:transparent;background-color:#fff}.functional-area-left .func-btn:hover{color:#fff}.functional-area-left .func-btn.btn-outline-primary:hover{background-color:#00965e}.functional-area-left .func-btn.btn-outline-secondary:hover{background-color:#6c757d}.functional-area-left .func-btn.mainLike{position:relative;width:48px;height:48px;line-height:48px;margin-bottom:1rem;font-size:1.25rem;border-color:#00965e}.functional-area-left .func-btn .mainLikeNum{position:absolute;top:-40px;left:0;font-size:1rem;font-weight:700;display:block;width:48px;color:#6c757d}[data-article-nav] .nav-link.active{color:#00965e!important;font-weight:600}[data-article-nav] #article-nav-list{max-height:250px;overflow-y:auto}[data-fix]{position:fixed;top:0}.media-avatar{width:64px;height:64px;background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQAAAAEABAMAAACuXLVVAAAAIVBMVEXp7O8hJSnc3+JKTlErLzM2OT24u79/goadoaRmaW3Mz9J3Z3wMAAAFIklEQVR42u2bz08TQRTHN4v218m1W0o5LVbEcAISTLhRFVFONGCMnsDUBDm1Ioqeihp+3FjA4LFgMP6Z0pld2mXnx9a8t3N53+PS8N5+5r03b2ZnLItEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIYCrsn8zWFlbO9jwz5recUMVPBuwf1p0+veqk/frbTlTFtVTtZ3zHMelBZjpm33ErHaP2r7SYVjIUfEesZyk58MORqZ2K/d89g3N7m97kxufrEamkYT/by/0w7u3D8NEMvn07fN3S176nD4OnJfxMeBemfVuYGOhxmJOVnRyvzC5yObKDDCzF432C/+UNrgPVoOqJ8q3BXfPSiMBjYX3igzCF6cAlt/9chaeMWYP5O1ZklFvsz4hhyEfZaapr1GO8SbCmGoCufNx63NAWuyrqGAQAZrRBMoUKoKLM8/XuT0ZQARzpp8oSJgBNltt1WZ2EAtDU/GwXLQgaycrcUPdXw+YAWBmsatxIWuencaIwKYAgCNbMAbDGEjqKBcDKo6RBcgC8abxjDoBlY+RhY5BWpw4/GwwCgOdh2SAA1pdVDAJghaBoEABrCUoGATAHXIMAwB0YFAC4A4MCgHZADcDDD8JLFYBt91ichnAO2HUFgKpwMd4CrQOqBS9bqx8Jl2cvwBzw1QAcZ1k4GYHNBTkdAOeucDoGmw3PdQDiBFhbPAoaghXVbk1TuDibB3Igr9j04QCK4pUJVE/I1rpFTwFgRjxqUF0xM7KkAiAuA1Drgpx8v0MKgDkNNRXcl+egFEABcpfIl8aTHEAWsCsvyEdACoBTW4ZxIOvIphU5AB6DQEkwJq1pcgA2ax86MA60ZHtSCgBZwBjkL+MNBICHwDBgFSjLAbhPBaoBFuIh2cZz1dGoDTcVu00pALmg+rGWJJ61AKA2B+ril9EC0GzmJl8QSForLQCoKpAVdnwJACxagElw9B8AoLqhc2FC6QFAjQBbYbmyInhxT6AHNdCO3BcVdcUsEC4joUZAvNummAWC70Vg3+9t0VysBDAOWoV4GZgfAEDgXBvKgZxgPJUAqsCHSLKC1ioBALAQ5HVobVAAgIcHbsVrigoAX0RBHp84j+30KAEMgZ+hWY9NxkoAfCdlCXB7MLbnrQSQhz9B07rZkSYAAHqGyL9RidMGEHMgbQAsrYYTAshinKGajs5FSgAtjFNk9UhHmD4Aqxb5/Bh0ggsvRaqjHKOLfP9M0AlCA7AjDuhbYXAAhX4HDACIEjAAIOKACQCRIDQBoD8NzQDoK0RmADAHRuVF0LbZamwC7yTt9WSU/izQc2DEzCwQ7QeUawEfDwBzoJxoLYB0lnqXN6X65TDWaXJ+EEMJoIF6mJx9r1ICmMA9Ts/26i8UALBP09/u/vfvcgDhRRe0w/T5XqEVAbCDiy7FDpYDvZskwg8j2+h3SjIqAIWPKdyqqckB9C6aNREd8KUA3oe+OY8Q7fOzoQIAf0+vBwfzKkNQCK4mpEiY2xs/U7vfNx62W3M7m4yC/Wf/pP+SpdtEtR/tBN2F1auBdyOPPqDa13eCyPZ1rTD2++sAFL9ZRgHg3/ENNl4lr49/yzlshB6exs2Xfnno9vsaoY2TqPnXOx1889FOcPLgy+wqC/yVs4O3ViqKd4L25IVnpSZlK2wGQLoiAASAAJgFMGQYQNCMmwPAP4AaBMAXZAYBMAImAbCdR5MAullgFIBlbT1pWiQSiUQikUgkEolEIpFIJBKJRCKRSCQSCVn/AGGXTc3oN+dcAAAAAElFTkSuQmCC);background-size:100%;background-position:50%;background-repeat:no-repeat}.float-ads{min-height:250px;background:#fff 50% url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='126' height='53' viewBox='0 0 126 43'%3E%3Ctext fill='%23ADB5BD' fill-rule='evenodd' font-size='14' transform='translate(-982 -472)'%3E%3Ctspan x='982' y='480'%3E广告加载中...%3C/tspan%3E%3Ctspan x='982' y='508'%3E创业不易，感谢理解%3C/tspan%3E%3C/text%3E%3C/svg%3E") no-repeat}footer a[data-share]{margin-right:.5rem;color:#6c757d;font-size:1rem}footer a[data-share]:hover{color:#494f54}@media (max-width:767.98px){.func-btn{margin-bottom:.5rem}}@-webkit-keyframes scroll-warning{0%{background-color:#ffc107;border-color:#ffc107}to{background-color:#f8f9fa}}@keyframes scroll-warning{0%{background-color:#ffc107;border-color:#ffc107}to{background-color:#f8f9fa}}.ImageView{position:fixed;top:0;right:0;bottom:0;left:0;z-index:10001;overflow:hidden;transition:background-color .2s ease-in-out}.ImageView.is-active{background-color:rgba(26,26,26,.65)}.ImageView .ImageView-inner{height:100%;text-align:center;box-sizing:border-box}.widget-codetool{position:relative;margin-top:0}.widget-codetool+.hljs{margin-top:0!important}.widget-codetool--inner{white-space:normal;position:absolute;right:0;z-index:1;height:24px;background-color:rgba(0,0,0,.75);padding:0 5px}.hljs{display:block;overflow-x:auto;color:#333;background:#f8f8f8}.hljs-comment{color:#998;font-style:italic}.hljs-keyword{color:#333;font-weight:700}.hljs-literal,.hljs-number{color:teal}.hljs-string{color:#d14}.hljs-built_in{color:#0086b3}@media (max-width:767.98px){.article>p>.img-wrap,.article>pre{margin-left:-1rem;margin-right:-1rem}}.atwho-view ul{list-style:none;padding:0;margin:auto}</style>
+<link rel="shortcut icon" href="data:image/x-icon;base64,AAABAAEAICAAAAEAIACoEAAAFgAAACgAAAAgAAAAQAAAAAEAIAAAAAAAABAAABILAAASCwAAAAAAAAAAAABemgBJYZoA42GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgDjXpoASWGaAONhmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgDjYZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoB/4y2R/+605H/1+W//+Hs0P/X5sD/xdqi/6LDaf9nnQr/YZoA/2GaAP9hmgD/YZoA/2GaAP+Crzb/osNq/6LDav+iw2r/osNq/2SbBf9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/4eyPv/k7tX///////////////////////////////////////P37P+QuE3/YZoA/2GaAP9hmgD/YZoA/7HNgv//////////////////////aJ4M/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/8vfr//////////////////////////////////////////////////j69P9+rTD/YZoA/2GaAP9hmgD/sMyA//////////////////////9nngv/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP+nxnH///////r8+P+50o//iLNA/4KvNv+ty3z/+/36/////////////////83fr/9hmgD/YZoA/2GaAP+vy37//////////////////////2eeC/9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2ScBv/M3q7/fKss/2GaAP9hmgD/YZoA/2GaAP/F2qP/////////////////7fPj/2GaAP9hmgD/YZoA/63LfP//////////////////////Z54L/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/ZJsF/93pyf/////////////////u9OT/YZoA/2GaAP9hmgD/rMp6//////////////////////9nnQr/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/ZJsF/5W7Vf/f6sz//////////////////////9Tku/9hmgD/YZoA/2GaAP+ryXj//////////////////////2adCf9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/Zp0J/6jHdP/w9ef/////////////////////////////////jLZH/2GaAP9hmgD/YZoA/6rIdv//////////////////////ZZ0I/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/3ipJv/l7tb/////////////////////////////////+vz4/6DCZ/9hmgD/YZoA/2GaAP9hmgD/qMd0//////////////////////9knAb/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9lnAf/5u/X////////////////////////////9vnx/7vTkv90piD/YZoA/2GaAP9hmgD/YZoA/2GaAP+nx3L//////////////////////2SbBf9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/5S6U///////////////////////5+/Z/5u/Xv9mnQn/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/6bGcP//////////////////////YpsD/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/r8t+//////////////////n79v9qoBD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/pcVu//////////////////////9hmgH/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP+synr/////////////////9/rz/2qfD/9hmgD/YZoA/2GaAf+Vu1T/j7dL/2GaAP9hmgD/ap8P/3SmIP+ty3z//////////////////f79/3KlHf91pyH/dqci/2GaAf9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/4ayPf//////////////////////8fbp/8ncqf/P4LL/7PPh///////m79j/YpoC/2GaAP+lxW//////////////////////////////////////////////////Z50K/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/8LYnv////////////////////////////////////////////////+YvVn/YZoA/6TFbf////////////////////////////////////////////////9pnw3/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/ZJsF/7zUlP/5+/b////////////////////////////9/v3/zuCx/3+tMv9hmgD/osNq/////////////////////////////////////////////////2qfD/9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/26iFf+avl3/rct8/7rTkP+qyXf/l7xY/3SmH/9hmgD/YZoA/2GaAP9roBH/eqop/7XQif//////////////////////eako/3qqKf97qyv/YpoC/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/rMp6//////////////////7+/v9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP+wzID//////////////////f79/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/6fHcv//////////////////////b6MX/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/jrdK///////////////////////E2aH/iLNA/6bGcP90ph//YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9voxf/+Pv1/////////////////////////////////63LfP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP+nxnH/////////////////////////////////5e7W/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAf+YvVr/6PDa/////////////////+705P++1Zf/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/Z50K/3WnIf9pnw7/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgDjYZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA416aAElhmgDjYZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAONemgBJAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="><style>.sf-hidden{display:none!important}</style><link rel=canonical href=https://segmentfault.com/a/1190000004894400#item-4-8></head>
+ <body class=vsc-initialized><div class="custome-alert alert alert-warning topframe text-center my-0 sticky-top d-none rounded-0 sf-hidden">
+ <span class=alert-content></span>
+ <button type=button class=close>
+ 
+ </button>
+ </div>
+ <img style=height:0;width:0;display:none src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-single-file-origin-u-r-l=https://assets.segmentfault.com/v-5e68c0b7/global/img/static/touch-icon.png>
+<div id=gridMapHoverBox style="position:absolute;border:1px solid #00965e;z-index:99;font-size:10px;background:#fff"></div>
+<nav id=sf-header class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+ <div class=container>
+ <a class="navbar-brand text-hide sf-header-logo" href=https://segmentfault.com/>SegmentFault</a>
+ <a class="btn btn-primary d-lg-none ml-auto mr-2 sf-hidden" href=https://segmentfault.com/user/login>注册登录</a>
+ 
+ <button class="navbar-toggler sf-hidden" type=button data-toggle=collapse data-target=#navbarNavDropdown aria-controls=navbarNavDropdown aria-expanded=false aria-label="Toggle navigation">
+ <span class=navbar-toggler-icon></span>
+ </button>
+ <div class="collapse navbar-collapse" id=navbarNavDropdown>
+ <ul class="navbar-nav font-weight-bold">
+ <li class=nav-item>
+ <a href=https://segmentfault.com/ class=nav-link>首页</a>
+ </li>
+ <li class=nav-item>
+ <a href=https://segmentfault.com/questions class=nav-link>问答</a>
+ </li>
+ <li class=nav-item>
+ <a href=https://segmentfault.com/blogs class="nav-link active">专栏</a>
+ </li>
+ <li class=nav-item>
+ <a href=https://segmentfault.com/lives class=nav-link>课程</a>
+ </li>
+ <li class=nav-item>
+ <a href=https://segmentfault.com/events class=nav-link>活动</a>
+ </li>
+ <li class="nav-item dropdown hover-down">
+ <a href=### id=navbarDiscover role=button data-toggle=dropdown aria-haspopup=true aria-expanded=false class="nav-link dropdown-toggle">发现</a>
+ <div class="dropdown-menu sf-hidden" aria-labelledby=navbarDiscover>
+ <a class=dropdown-item href=https://segmentfault.com/groups>圈子</a>
+ <a class=dropdown-item href=https://segmentfault.com/tags>标签</a>
+ <a class=dropdown-item href="https://segmentfault.com/groups?tab=jobs">酷工作</a>
+ <a class=dropdown-item href=https://segmentfault.com/users>排行榜</a>
+ <a class=dropdown-item href=https://segmentfault.com/badges>徽章</a>
+ <a class=dropdown-item href=https://segmentfault.com/notes>笔记</a>
+ <div class=dropdown-divider></div>
+ <a class=dropdown-item href=https://docs.segmentfault.com/ target=_blank>开发手册</a>
+ <a class=dropdown-item href="https://business.segmentfault.com/ads?utm_source=sf-header" target=_blank>广告投放<svg class="svg-inline--fa fa-external-link-square fa-w-14 ml-2 text-warning" aria-hidden=true focusable=false data-prefix=fas data-icon=external-link-square role=img xmlns=http://www.w3.org/2000/svg viewBox="0 0 448 512" data-fa-i2svg><path fill=currentColor d="M448 80v352c0 26.51-21.49 48-48 48H48c-26.51 0-48-21.49-48-48V80c0-26.51 21.49-48 48-48h352c26.51 0 48 21.49 48 48zm-64 47.111C384 109.929 370.071 96 352.889 96H220.667c-12.887 0-23.333 10.447-23.333 23.334v14.904c0 13.138 10.843 23.686 23.976 23.324l56.002-1.588L69.908 361.908c-7.858 7.802-7.88 20.504-.05 28.334l19.899 19.899c7.83 7.83 20.532 7.808 28.334-.05l205.935-207.404-1.588 56.003c-.362 13.133 10.186 23.976 23.324 23.976h14.904c12.887 0 23.334-10.447 23.334-23.333V127.111z"></path></svg>
+ </a>
+ </div>
+ </li>
+ </ul>
+ <form class="form-inline my-2 my-lg-0 flex-fill d-none d-xl-block px-4" action=/search>
+ <input class="form-control w-100" id=searchBox name=q type=search value placeholder=搜索关键字 aria-label=搜索>
+ </form>
+ <ul class="navbar-nav navbar-user ml-auto align-items-lg-center">
+ <li class="nav-item d-none d-lg-flex">
+ <a href=https://segmentfault.com/user/login class="btn btn-link mr-2 require-login">立即登录</a>
+ </li>
+ <li class="nav-item d-none d-lg-flex">
+ <a href=https://segmentfault.com/user/register class="btn btn-primary require-login">免费注册</a>
+ </li>
+ </ul>
+ </div>
+ </div>
+</nav>
+ <input id=articleId value=1190000004894400 class="hidden sf-hidden">
+ <div class="d-none d-xl-flex justify-content-center">
+ <div id=OA_holder_2></div>
+ </div>
+ <div class=position-relative>
+ <div class="container my-sm-4 my-1" id=sf-article>
+ <div class=row>
+ <div class="col-12 col-xl w-0">
+ <div class="card border-0 mb-4">
+ <div class="card-body p-lg-30">
+ <div class="d-flex justify-content-between align-items-center mb-3" id=sf-article_author>
+ <div class="information d-flex align-items-center">
+ <a class="d-flex align-items-centers mr-1" href=https://segmentfault.com/u/mooonx>
+ <picture class="mr-2 d-sm-block d-none">
+ <img class="d-inline-block rounded-circle" width=32 src='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64"><rect fill-opacity="0"/></svg>' aria-hidden=true style="background-blend-mode:normal!important;background-clip:content-box!important;background-position:50% 50%!important;background-color:rgba(0,0,0,0)!important;background-image:var(--sf-img-5)!important;background-size:100% 100%!important;background-origin:content-box!important;background-repeat:no-repeat!important" srcset sizes>
+ </picture>
+ <strong class=align-self-center>beccaFu</strong>
+ </a>
+ <ul class="list-inline mb-0 authentication-info sflex-center font-size-14">
+ <li class=list-inline-item>
+ <svg class="svg-inline--fa fa-dice-d8 fa-w-16" style=color:#BF7158 aria-hidden=true focusable=false data-prefix=fas data-icon=dice-d8 role=img xmlns=http://www.w3.org/2000/svg viewBox="0 0 512 512" data-fa-i2svg><path fill=currentColor d="M225.53 2.52L2.36 233.83c-4.21 4.37-2.56 11.71 3.1 13.77l234.13 85.06V8.39c-.01-7.49-8.91-11.21-14.06-5.87zm284.11 231.31L286.47 2.52C281.32-2.82 272.41.9 272.41 8.4v324.27l234.13-85.06c5.66-2.07 7.31-9.42 3.1-13.78zM33.53 310.38l192 199.1c5.15 5.34 14.06 1.62 14.06-5.88V368.29L42.13 296.61c-8.21-2.98-14.72 7.43-8.6 13.77zm436.34-13.77l-197.46 71.68V503.6c0 7.5 8.91 11.22 14.06 5.88l192-199.1c6.12-6.34-.39-16.75-8.6-13.77z"></path></svg>
+ <span style=color:#BF7158;font-weight:bold>401</span>
+ </li>
+ 
+ </ul>
+ </div>
+ </div><div></div>
+ <div class="functional-area-left sticky-top d-none d-xl-flex"><div class=text-center><div class="btn-group like-group" role=group>
+ <button data-type=question class="func-btn mainLike like-btn btn btn-outline-primary" data-id=1190000004894400>
+ <svg class="svg-inline--fa fa-thumbs-up fa-w-16" aria-hidden=true focusable=false data-prefix=far data-icon=thumbs-up role=img xmlns=http://www.w3.org/2000/svg viewBox="0 0 512 512" data-fa-i2svg><path fill=currentColor d="M466.27 286.69C475.04 271.84 480 256 480 236.85c0-44.015-37.218-85.58-85.82-85.58H357.7c4.92-12.81 8.85-28.13 8.85-46.54C366.55 31.936 328.86 0 271.28 0c-61.607 0-58.093 94.933-71.76 108.6-22.747 22.747-49.615 66.447-68.76 83.4H32c-17.673 0-32 14.327-32 32v240c0 17.673 14.327 32 32 32h64c14.893 0 27.408-10.174 30.978-23.95 44.509 1.001 75.06 39.94 177.802 39.94 7.22 0 15.22.01 22.22.01 77.117 0 111.986-39.423 112.94-95.33 13.319-18.425 20.299-43.122 17.34-66.99 9.854-18.452 13.664-40.343 8.99-62.99zm-61.75 53.83c12.56 21.13 1.26 49.41-13.94 57.57 7.7 48.78-17.608 65.9-53.12 65.9h-37.82c-71.639 0-118.029-37.82-171.64-37.82V240h10.92c28.36 0 67.98-70.89 94.54-97.46 28.36-28.36 18.91-75.63 37.82-94.54 47.27 0 47.27 32.98 47.27 56.73 0 39.17-28.36 56.72-28.36 94.54h103.99c21.11 0 37.73 18.91 37.82 37.82.09 18.9-12.82 37.81-22.27 37.81 13.489 14.555 16.371 45.236-5.21 65.62zM88 432c0 13.255-10.745 24-24 24s-24-10.745-24-24 10.745-24 24-24 24 10.745 24 24z"></path></svg>
+ <span class=mainLikeNum>1</span>
+ </button></div><button class="func-btn mainBookmark btn btn-outline-secondary" data-id=1190000004894400>
+ <svg class="svg-inline--fa fa-bookmark fa-w-12" aria-hidden=true focusable=false data-prefix=far data-icon=bookmark role=img xmlns=http://www.w3.org/2000/svg viewBox="0 0 384 512" data-fa-i2svg><path fill=currentColor d="M336 0H48C21.49 0 0 21.49 0 48v464l192-112 192 112V48c0-26.51-21.49-48-48-48zm0 428.43l-144-84-144 84V54a6 6 0 0 1 6-6h276c3.314 0 6 2.683 6 5.996V428.43z"></path></svg>
+ 
+ </button><a class="func-btn show-column btn btn-outline-secondary" href=#comment-area>
+ <svg class="svg-inline--fa fa-comment-alt-lines fa-w-16" aria-hidden=true focusable=false data-prefix=far data-icon=comment-alt-lines role=img xmlns=http://www.w3.org/2000/svg viewBox="0 0 512 512" data-fa-i2svg><path fill=currentColor d="M448 0H64C28.7 0 0 28.7 0 64v288c0 35.3 28.7 64 64 64h96v84c0 7.1 5.8 12 12 12 2.4 0 4.9-.7 7.1-2.4L304 416h144c35.3 0 64-28.7 64-64V64c0-35.3-28.7-64-64-64zm16 352c0 8.8-7.2 16-16 16H288l-12.8 9.6L208 428v-60H64c-8.8 0-16-7.2-16-16V64c0-8.8 7.2-16 16-16h384c8.8 0 16 7.2 16 16v288zm-96-216H144c-8.8 0-16 7.2-16 16v16c0 8.8 7.2 16 16 16h224c8.8 0 16-7.2 16-16v-16c0-8.8-7.2-16-16-16zm-96 96H144c-8.8 0-16 7.2-16 16v16c0 8.8 7.2 16 16 16h128c8.8 0 16-7.2 16-16v-16c0-8.8-7.2-16-16-16z"></path></svg>
+ 
+ </a><div class="dropdown dropup d-inline-block">
+ <button class="func-btn btn btn-outline-secondary" id=func_share data-toggle=dropdown>
+ <svg class="svg-inline--fa fa-share-alt fa-w-14" aria-hidden=true focusable=false data-prefix=far data-icon=share-alt role=img xmlns=http://www.w3.org/2000/svg viewBox="0 0 448 512" data-fa-i2svg><path fill=currentColor d="M352 320c-25.6 0-48.9 10-66.1 26.4l-98.3-61.5c5.9-18.8 5.9-39.1 0-57.8l98.3-61.5C303.1 182 326.4 192 352 192c53 0 96-43 96-96S405 0 352 0s-96 43-96 96c0 9.8 1.5 19.6 4.4 28.9l-98.3 61.5C144.9 170 121.6 160 96 160c-53 0-96 43-96 96s43 96 96 96c25.6 0 48.9-10 66.1-26.4l98.3 61.5c-2.9 9.4-4.4 19.1-4.4 28.9 0 53 43 96 96 96s96-43 96-96-43-96-96-96zm0-272c26.5 0 48 21.5 48 48s-21.5 48-48 48-48-21.5-48-48 21.5-48 48-48zM96 304c-26.5 0-48-21.5-48-48s21.5-48 48-48 48 21.5 48 48-21.5 48-48 48zm256 160c-26.5 0-48-21.5-48-48s21.5-48 48-48 48 21.5 48 48-21.5 48-48 48z"></path></svg>
+ 
+ </button>
+ <div class="dropdown-menu shareContent sf-hidden" aria-labelledby=func_share>
+ <div class="text-center mt-2" style=cursor:auto>
+ 
+ 扫一扫分享
+ </div>
+ <div class=dropdown-divider></div>
+ <a class="dropdown-item share_weibo" data-share=weibo href=http://weibo.com/segmentfault target=_blank><svg class="svg-inline--fa fa-weibo fa-w-16 fa-fw" aria-hidden=true focusable=false data-prefix=fab data-icon=weibo role=img xmlns=http://www.w3.org/2000/svg viewBox="0 0 512 512" data-fa-i2svg><path fill=currentColor d="M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"></path></svg> 新浪微博</a><a class="dropdown-item share_twitter" data-share=twitter href=https://twitter.com/segment_fault target=_blank><svg class="svg-inline--fa fa-twitter fa-w-16 fa-fw" aria-hidden=true focusable=false data-prefix=fab data-icon=twitter role=img xmlns=http://www.w3.org/2000/svg viewBox="0 0 512 512" data-fa-i2svg><path fill=currentColor d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"></path></svg> Twitter</a><a class="dropdown-item share_facebook" data-share=facebook href=https://segmentfault.com/a/1190000004894400 target=_blank><svg class="svg-inline--fa fa-facebook-square fa-w-14 fa-fw" aria-hidden=true focusable=false data-prefix=fab data-icon=facebook-square role=img xmlns=http://www.w3.org/2000/svg viewBox="0 0 448 512" data-fa-i2svg><path fill=currentColor d="M400 32H48A48 48 0 0 0 0 80v352a48 48 0 0 0 48 48h137.25V327.69h-63V256h63v-54.64c0-62.15 37-96.48 93.67-96.48 27.14 0 55.52 4.84 55.52 4.84v61h-31.27c-30.81 0-40.42 19.12-40.42 38.73V256h68.78l-11 71.69h-57.78V480H400a48 48 0 0 0 48-48V80a48 48 0 0 0-48-48z"></path></svg> Facebook</a></div>
+ </div></div></div>
+ <h1 class="h2 mb-3" id=sf-article_title>
+ <a class=text-body href=https://segmentfault.com/a/1190000004894400>NPM使用手册</a>
+ </h1>
+ <div class="d-sm-flex d-none flex-wrap align-items-center mb-4" id=sf-article_tags>
+ <div class=m-n1><a class="m-1 badge-tag" href=https://segmentfault.com/t/npm data-toggle=popover data-img data-placement=top data-original-title=npm data-id=1040000000090688>
+ npm
+ </a></div>
+ <div class=font-size-14>
+ <span class="text-secondary ml-2" data-toggle=tooltip data-placement=top title data-original-title="发布于 2016-04-08 ">更新于 2017-02-13 </span>
+ <span class=split-dot></span>
+ <span class=text-secondary title=阅读时长>&nbsp;约 9 分钟</span>
+ </div>
+ </div>
+ <article class="article fmt article-content" data-id=1190000004894400 data-license=cc>
+ 
+<h2 id=item-1>NPM是什么</h2>
+<p>在项目开发过程当中，我们常常需要引用他人已经开发好的包，比如React，Webpack, angular等等，而npm就是一个用来管理（安装，查看，更新，卸载...）这些包的工具。你也可以上传你的包，和使用公共的包，可以到<a href=https://www.npmjs.com/ rel="nofollow noreferrer" target=_blank>npm官网</a>查看详细信息。</p>
+<h2 id=item-2>使用准备</h2>
+<ol>
+<li>
+<p>安装Node</p>
+<p>安装完毕可以node -v 查看版本号</p>
+</li>
+<li><p>安装NPM<br> 命令行：npm install npm --global<br>解释：--global为全局安装的意思，整个电脑环境都可以使用，-g是全局安装简写</p></li>
+</ol>
+<h2 id=item-3>使用NPM</h2>
+<h3 id=item-3-1>安装指定包</h3>
+<h4>1. 全局安装</h4>
+<div class=widget-codetool style=display:none>
+ <div class=widget-codetool--inner>
+ 
+ 
+ </div>
+ </div><pre class="hljs coffeescript"><code style=word-break:break-word;white-space:initial>命令行：<span class=hljs-built_in>npm</span> install webpack --<span class=hljs-built_in>global</span></code></pre>
+<p>解释：webpack为你想要安装的包名，--global说明是全局安装此包，全局安装后可以供命令行(command line)使用，用户可以在命令行中直接运行该组件包支持的命令，如下图全局安装webpack后的cmd文件</p>
+<p><span class=img-wrap><img referrerpolicy=no-referrer src="data:image/png;base64,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" alt="webpack CLI" title="webpack CLI"></span></p>
+<h4>2. 局部安装(默认行为)</h4>
+<div class=widget-codetool style=display:none>
+ <div class=widget-codetool--inner>
+ 
+ 
+ </div>
+ </div><pre class="hljs cmake"><code>命令行:npm <span class=hljs-keyword>install</span> webpack 
+</code></pre>
+<p>解释：比如你想在一个叫‘mx-npm’的文件夹安装一个包，你可以通过mkdir mx-npm 创建一个叫mx-npm的文件夹，然后cd mx-npm 进入到文件夹，在来执行安装命令行，也可以直接在对应的文件夹内，按住shift，点鼠标右键，点击在此处打开命令窗口，要进入到你要安装的项目文件内来输入命令行</p>
+<p>引用方式：可以直接通过<code>require('')</code>的方式引入项目中node_modules目录下的模块,也可以用es6的import，</p>
+<h4>3. 为什么全局安装后还要本地安装?</h4>
+<p>详细见<a href=http://www.cnblogs.com/PeunZhang/p/5629329.html rel="nofollow noreferrer" target=_blank>nodejs全局安装和本地安装的区别</a><br>总结：有时候一些神奇的bug，很有可能是你的包的版本装的不对，还是按照package.json来安装比较好，保证不同版本的包之间的相互依赖。</p>
+<h4>4.安装制定版本</h4>
+<div class=widget-codetool style=display:none>
+ <div class=widget-codetool--inner>
+ 
+ 
+ </div>
+ </div><pre class="hljs lsl"><code>命令行：npm install webpack@<span class=hljs-number>2.1</span><span class=hljs-number>.0</span>
+解释：局部安装webpack其版本号为<span class=hljs-number>2.1</span><span class=hljs-number>.0</span>
+</code></pre>
+<h3 id=item-3-2>删除指定包</h3>
+<ol>
+<li><p>全局删除<br> 命令行：npm uninstall webpack -g<br> 解释：webpack为包名，-g是全局的缩写</p></li>
+<li><p>局部删除<br> 命令行： npm uninstall webpack</p></li>
+</ol>
+<h3 id=item-3-3>查看</h3>
+<ol>
+<li><p>查看项目安装了哪些包<br> 命令行：npm list<br><span class=img-wrap><img referrerpolicy=no-referrer src="data:image/png;base64,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" alt=图片描述 title=图片描述></span></p></li>
+<li><p>查看某个包的信息<br> 命令行： npm info bootstrap<br><span class=img-wrap><img referrerpolicy=no-referrer src="data:image/png;base64,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" alt=图片描述 title=图片描述></span></p></li>
+<li>
+<p>查看全局安装的根目录<br> 命令行： <code>npm root -g</code></p>
+<div class=widget-codetool style=display:none>
+ <div class=widget-codetool--inner>
+ 
+ 
+ </div>
+ </div><pre class="hljs livescript"><code>一般在  <span class=hljs-string>\</span> Users <span class=hljs-string>\</span> 用户名 <span class=hljs-string>\</span> AppData <span class=hljs-string>\</span> Roaming<span class=hljs-string>\底下，我已经能记住了</span>
+</code></pre>
+</li>
+</ol>
+<h3 id=item-3-4>更新</h3>
+<ol>
+<li><p>检查更新<br> 命令行：npm outdated</p></li>
+<li><p>更新限定<br> 在package.json里面会被限制更新的版本号，见下文</p></li>
+<li><p>执行更新<br> 命令行：npm update</p></li>
+</ol>
+<h2 id=item-4>关于package.json</h2>
+<h3 id=item-4-5>什么是package.json</h3>
+<p>package.json是项目的配置文件，里面可以包含项目的名字，版本号，项目的描述，git仓库，关键字，作者，依赖的包等等，但是至少要包含项目的名字，版本号，是可以手工创建的，但是也可以用NPM自动创建。</p>
+<h3 id=item-4-6>package.json使用好处</h3>
+<p>分享包的时候可以删除node_modules（这里面放着各种项目使用到的包）,然后使用命令行npm install，就会根据package.json里面的内容自动安装包</p>
+<h3 id=item-4-7>自动创建package.json</h3>
+<div class=widget-codetool style=display:none>
+ <div class=widget-codetool--inner>
+ 
+ 
+ </div>
+ </div><pre class="hljs coffeescript"><code>命令行：<span class=hljs-built_in>npm</span> init
+解释：输入命令行之后会问你几个问题，不一定每个都要回答可以直接回车，然后<span class=hljs-literal>yes</span>完成创建。</code></pre>
+<h3 id=item-4-8>分析与使用package.json</h3>
+<ul><li><p>第一次创建后的package.json</p></ul>
+<div class=widget-codetool style=display:none>
+ <div class=widget-codetool--inner>
+ 
+ 
+ </div>
+ </div><pre class="hljs json"><code>{
+  <span class=hljs-attr>"name"</span>: <span class=hljs-string>"simplejan-web"</span>,
+  <span class=hljs-attr>"version"</span>: <span class=hljs-string>"1.0.0"</span>,
+  <span class=hljs-attr>"description"</span>: <span class=hljs-string>"none"</span>,
+  <span class=hljs-attr>"repository"</span>: <span class=hljs-string>"none"</span>,
+  <span class=hljs-attr>"readme"</span>: <span class=hljs-string>"README.md"</span>,
+  <span class=hljs-attr>"main"</span>: <span class=hljs-string>"index.html"</span>,
+  <span class=hljs-attr>"scripts"</span>: {
+    <span class=hljs-attr>"test"</span>: <span class=hljs-string>"echo \"Error: no test specified\" &amp;&amp; exit 1"</span>
+  },
+  <span class=hljs-attr>"author"</span>: <span class=hljs-string>""</span>,
+  <span class=hljs-attr>"license"</span>: <span class=hljs-string>"UNLICENSED"</span>,
+  <span class=hljs-attr>"dependencies"</span>: {
+    <span class=hljs-attr>"bootstrap"</span>: <span class=hljs-string>"^3.3.6"</span>,
+    <span class=hljs-attr>"bootstrap-material-design"</span>: <span class=hljs-string>"^0.5.9"</span>,
+    <span class=hljs-attr>"snackbarjs"</span>: <span class=hljs-string>"^1.1.0"</span>,
+    <span class=hljs-attr>"nouislider"</span>: <span class=hljs-string>"^6.2.0"</span>,
+    <span class=hljs-attr>"jquery"</span>: <span class=hljs-string>"*"</span>
+  },
+ <span class=hljs-attr>"devDependencies"</span>:{
+},
+}</code></pre>
+<p>^这个符号代表的是只能更新版本号第二位数字，改为~可以只能更新第三位，只有*代表更新到最新</p>
+<ul>
+<li><p>dependencies与devDependencies<br> 两者标识的是不同的依赖，dependencies是运行本项目所依赖的包，而devDependencies是用于开发时需要的模块，包括一些用于开发测试的模块</p></li>
+<li>
+<p>添加dependencies 依赖</p>
+<p>命令行： npm install bootstrap --save</p>
+</li>
+<li>
+<p>添加devDependencies 依赖</p>
+<p>命令行：npm install webpack --save-dev</p>
+</li>
+</ul>
+<div class=widget-codetool style=display:none>
+ <div class=widget-codetool--inner>
+ 
+ 
+ </div>
+ </div><pre class="hljs xquery"><code>  <span class=hljs-string>"dependencies"</span>: {
+    <span class=hljs-string>"bootstrap"</span>: <span class=hljs-string>"^3.3.6"</span>,
+    <span class=hljs-string>"bootstrap-material-design"</span>: <span class=hljs-string>"^0.5.9"</span>,
+    <span class=hljs-string>"jquery"</span>: <span class=hljs-string>"^1.10.2"</span>,
+    <span class=hljs-string>"nouislider"</span>: <span class=hljs-string>"^6.2.0"</span>,
+    <span class=hljs-string>"snackbarjs"</span>: <span class=hljs-string>"^1.1.0"</span>
+  },
+  <span class=hljs-string>"devDependencies"</span>: {
+    <span class=hljs-string>"webpack"</span>: <span class=hljs-string>"^1.12.14"</span>
+  }
+}</code></pre>
+<ul><li>
+<p>删除的时候对应的package.json配置也删除</p>
+<p>命令行：npm uninstall webpack --save-dev<br> 解释：区别在于--save-dev 和--save</p>
+</ul>
+<h2 id=item-5>NPM进阶</h2>
+<h3 id=item-5-9>npm link</h3>
+<p><code>npm link</code>命令是可以将模块安装到全局，这样你自己这个私有的包就可以在全局使用啦，详细用法见<a href=https://great-tiger.gitbooks.io/-/content/npm/npm%E5%91%BD%E4%BB%A4%E8%A7%A3%E6%9E%90.html rel="nofollow noreferrer" target=_blank>NPM Link</a></p>
+<h3 id=item-5-10>package.json</h3>
+<h4>NPM 脚本 - "scripts"</h4>
+<div class=widget-codetool style=display:none>
+ <div class=widget-codetool--inner>
+ 
+ 
+ </div>
+ </div><pre class="hljs clojure"><code>{
+  // package.json
+  <span class=hljs-string>"scripts"</span>: {
+    <span class=hljs-string>"build"</span>: <span class=hljs-string>"node index.js"</span>
+  }
+}</code></pre>
+<p>当执行<code>npm run build</code>的时候，相当于执行了<code>node index.js</code>，好处多多，比如用于项目的自动构建打包等，有一篇详细的文章见 <a href=http://www.ruanyifeng.com/blog/2016/10/npm_scripts.html rel="nofollow noreferrer" target=_blank>npm scripts 使用指南</a></p>
+<h4>命令行可执行模块 "bin"</h4>
+<div class=widget-codetool style=display:none>
+ <div class=widget-codetool--inner>
+ 
+ 
+ </div>
+ </div><pre class="hljs clean"><code><span class=hljs-comment>//package.json </span>
+{
+...
+ <span class=hljs-string>"bin"</span>: {
+    <span class=hljs-string>"mx"</span>: <span class=hljs-string>"./mx.js"</span>
+  }
+  ...
+  }</code></pre>
+<p>用来执行各个内部命令对应的可执行文件的位置。比如在命令行中执行mx,就会执行mx.js，<br>这个有什么用？举个例子<a href=http://www.open-open.com/lib/view/open1450339482282.html rel="nofollow noreferrer" target=_blank>前端扫盲-之打造一个Node命令行工具</a></p>
+<hr>
+<h2 id=item-6>参考资料</h2>
+<p><a href=http://ninghao.net/ rel="nofollow noreferrer" target=_blank>宁皓网</a> <br><a href=http://www.infoq.com/cn/articles/msh-using-npm-manage-node.js-dependence rel="nofollow noreferrer" target=_blank>InfoQ</a><br><a href=http://www.open-open.com/lib/view/open1450339482282.html rel="nofollow noreferrer" target=_blank>前端扫盲-之打造一个Node命令行工具</a><br><a href=http://blog.csdn.net/u010958922/article/details/52117631 rel="nofollow noreferrer" target=_blank>NPM的特殊使用</a></p>
+ </article>
+ <div class="text-secondary font-size-14 mb-5 d-flex justify-content-between row">
+ <div class="col-6 text-secondary" id=sf-article_metas>阅读 3.7k<span class=split-dot></span><span data-toggle=tooltip data-placement=top title data-original-title="发布于 2016-04-08 ">更新于 2017-02-13 </span>
+ </div><div></div>
+ <div class="operation col-6 text-right">
+ 
+ </div>
+ </div>
+ 
+ 
+ <div class=functional-area-bottom><div class=text-center><div class="btn-group like-group mr-2" role=group>
+ <button data-type=question class="func-btn mainLike like-btn btn btn-outline-primary" data-id=1190000004894400>
+ <svg class="svg-inline--fa fa-thumbs-up fa-w-16" aria-hidden=true focusable=false data-prefix=far data-icon=thumbs-up role=img xmlns=http://www.w3.org/2000/svg viewBox="0 0 512 512" data-fa-i2svg><path fill=currentColor d="M466.27 286.69C475.04 271.84 480 256 480 236.85c0-44.015-37.218-85.58-85.82-85.58H357.7c4.92-12.81 8.85-28.13 8.85-46.54C366.55 31.936 328.86 0 271.28 0c-61.607 0-58.093 94.933-71.76 108.6-22.747 22.747-49.615 66.447-68.76 83.4H32c-17.673 0-32 14.327-32 32v240c0 17.673 14.327 32 32 32h64c14.893 0 27.408-10.174 30.978-23.95 44.509 1.001 75.06 39.94 177.802 39.94 7.22 0 15.22.01 22.22.01 77.117 0 111.986-39.423 112.94-95.33 13.319-18.425 20.299-43.122 17.34-66.99 9.854-18.452 13.664-40.343 8.99-62.99zm-61.75 53.83c12.56 21.13 1.26 49.41-13.94 57.57 7.7 48.78-17.608 65.9-53.12 65.9h-37.82c-71.639 0-118.029-37.82-171.64-37.82V240h10.92c28.36 0 67.98-70.89 94.54-97.46 28.36-28.36 18.91-75.63 37.82-94.54 47.27 0 47.27 32.98 47.27 56.73 0 39.17-28.36 56.72-28.36 94.54h103.99c21.11 0 37.73 18.91 37.82 37.82.09 18.9-12.82 37.81-22.27 37.81 13.489 14.555 16.371 45.236-5.21 65.62zM88 432c0 13.255-10.745 24-24 24s-24-10.745-24-24 10.745-24 24-24 24 10.745 24 24z"></path></svg>
+ <span class=ml-1>赞</span> <span class=mainLikeNum>1</span>
+ </button></div><button class="func-btn mainBookmark btn btn-outline-secondary mr-2" data-id=1190000004894400>
+ <svg class="svg-inline--fa fa-bookmark fa-w-12" aria-hidden=true focusable=false data-prefix=far data-icon=bookmark role=img xmlns=http://www.w3.org/2000/svg viewBox="0 0 384 512" data-fa-i2svg><path fill=currentColor d="M336 0H48C21.49 0 0 21.49 0 48v464l192-112 192 112V48c0-26.51-21.49-48-48-48zm0 428.43l-144-84-144 84V54a6 6 0 0 1 6-6h276c3.314 0 6 2.683 6 5.996V428.43z"></path></svg>
+ <span class=ml-1>收藏</span> <span class=bookmarkNum>21</span>
+ </button><div class="dropdown dropup d-inline-block">
+ <button class="func-btn btn btn-outline-secondary" id=func_share data-toggle=dropdown>
+ <svg class="svg-inline--fa fa-share-alt fa-w-14" aria-hidden=true focusable=false data-prefix=far data-icon=share-alt role=img xmlns=http://www.w3.org/2000/svg viewBox="0 0 448 512" data-fa-i2svg><path fill=currentColor d="M352 320c-25.6 0-48.9 10-66.1 26.4l-98.3-61.5c5.9-18.8 5.9-39.1 0-57.8l98.3-61.5C303.1 182 326.4 192 352 192c53 0 96-43 96-96S405 0 352 0s-96 43-96 96c0 9.8 1.5 19.6 4.4 28.9l-98.3 61.5C144.9 170 121.6 160 96 160c-53 0-96 43-96 96s43 96 96 96c25.6 0 48.9-10 66.1-26.4l98.3 61.5c-2.9 9.4-4.4 19.1-4.4 28.9 0 53 43 96 96 96s96-43 96-96-43-96-96-96zm0-272c26.5 0 48 21.5 48 48s-21.5 48-48 48-48-21.5-48-48 21.5-48 48-48zM96 304c-26.5 0-48-21.5-48-48s21.5-48 48-48 48 21.5 48 48-21.5 48-48 48zm256 160c-26.5 0-48-21.5-48-48s21.5-48 48-48 48 21.5 48 48-21.5 48-48 48z"></path></svg>
+ <span class="ml-1 show-row">分享</span>
+ </button>
+ <div class="dropdown-menu shareContent sf-hidden" aria-labelledby=func_share>
+ <div class="text-center mt-2" style=cursor:auto>
+ 
+ 扫一扫分享
+ </div>
+ <div class=dropdown-divider></div>
+ <a class="dropdown-item share_weibo" data-share=weibo href=http://weibo.com/segmentfault target=_blank><svg class="svg-inline--fa fa-weibo fa-w-16 fa-fw" aria-hidden=true focusable=false data-prefix=fab data-icon=weibo role=img xmlns=http://www.w3.org/2000/svg viewBox="0 0 512 512" data-fa-i2svg><path fill=currentColor d="M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"></path></svg> 新浪微博</a><a class="dropdown-item share_twitter" data-share=twitter href=https://twitter.com/segment_fault target=_blank><svg class="svg-inline--fa fa-twitter fa-w-16 fa-fw" aria-hidden=true focusable=false data-prefix=fab data-icon=twitter role=img xmlns=http://www.w3.org/2000/svg viewBox="0 0 512 512" data-fa-i2svg><path fill=currentColor d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"></path></svg> Twitter</a><a class="dropdown-item share_facebook" data-share=facebook href=https://segmentfault.com/a/1190000004894400 target=_blank><svg class="svg-inline--fa fa-facebook-square fa-w-14 fa-fw" aria-hidden=true focusable=false data-prefix=fab data-icon=facebook-square role=img xmlns=http://www.w3.org/2000/svg viewBox="0 0 448 512" data-fa-i2svg><path fill=currentColor d="M400 32H48A48 48 0 0 0 0 80v352a48 48 0 0 0 48 48h137.25V327.69h-63V256h63v-54.64c0-62.15 37-96.48 93.67-96.48 27.14 0 55.52 4.84 55.52 4.84v61h-31.27c-30.81 0-40.42 19.12-40.42 38.73V256h68.78l-11 71.69h-57.78V480H400a48 48 0 0 0 48-48V80a48 48 0 0 0-48-48z"></path></svg> Facebook</a></div>
+ </div></div></div>
+ <div class="text-center mb-5 mt-3 text-secondary font-size-14">
+ 本作品系
+ 原创
+ ，
+ <a target=_blank class=text-secondary href=https://creativecommons.org/licenses/by-nc-nd/4.0/>采用《署名-非商业性使用-禁止演绎 4.0
+ 国际》许可协议</a>
+ </div>
+ <hr class=mb-0>
+ <div class="article-author d-flex flex-sm-row align-items-center pt-4 row">
+ <div class="d-flex align-items-center flex-grow-1 author-left col-sm-9 col-12">
+ <a href=https://segmentfault.com/u/mooonx>
+ <img class="rounded-circle mr-3" width=64 src='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64"><rect fill-opacity="0"/></svg>' aria-hidden=true style="background-blend-mode:normal!important;background-clip:content-box!important;background-position:50% 50%!important;background-color:rgba(0,0,0,0)!important;background-image:var(--sf-img-5)!important;background-size:100% 100%!important;background-origin:content-box!important;background-repeat:no-repeat!important">
+ </a>
+ <div>
+ <h5><a class=text-body href=https://segmentfault.com/u/mooonx>beccaFu</a></h5>
+ <ul class="list-inline mb-0 authentication-info">
+ <li class=list-inline-item>
+ <svg class="svg-inline--fa fa-dice-d8 fa-w-16" style=color:#BF7158 aria-hidden=true focusable=false data-prefix=fas data-icon=dice-d8 role=img xmlns=http://www.w3.org/2000/svg viewBox="0 0 512 512" data-fa-i2svg><path fill=currentColor d="M225.53 2.52L2.36 233.83c-4.21 4.37-2.56 11.71 3.1 13.77l234.13 85.06V8.39c-.01-7.49-8.91-11.21-14.06-5.87zm284.11 231.31L286.47 2.52C281.32-2.82 272.41.9 272.41 8.4v324.27l234.13-85.06c5.66-2.07 7.31-9.42 3.1-13.78zM33.53 310.38l192 199.1c5.15 5.34 14.06 1.62 14.06-5.88V368.29L42.13 296.61c-8.21-2.98-14.72 7.43-8.6 13.77zm436.34-13.77l-197.46 71.68V503.6c0 7.5 8.91 11.22 14.06 5.88l192-199.1c6.12-6.34-.39-16.75-8.6-13.77z"></path></svg>
+ <span style=color:#BF7158;font-size:16px;font-weight:bold>401</span>
+ </li>
+ </ul>
+ </div>
+ </div>
+ <div class="author-right flex-shrink-0 col-sm-3 col-12 text-sm-right text-left mt-sm-0 mt-3">
+ <button type=button class="btn btn-primary follow-user sf_do" data-dotype=post data-content='{"type":"state","state":false,"true":"\u5173\u6ce8\u4f5c\u8005","false":"\u6b63\u5728\u5173\u6ce8"}' data-api=/iteration/api/user/1030000004430712/follow>关注作者
+ </button>
+ </div>
+ </div>
+ </div>
+ </div>
+ <div class="d-none d-lg-block">
+ <div id=OA_holder_3></div>
+ </div>
+ <div id=comment-area class=my-4 data-type=article data-id=1190000004894400 data-page=1 data-user=null><div class="d-flex justify-content-between mb-2">
+ <div id=comment-total class="h5 mb-0">0 条评论</div>
+ <div>
+ <a href=https://segmentfault.com/a/1190000004894400 class="sort text-dark" data-sort=default>得票</a><span class=split-dot></span><a href=https://segmentfault.com/a/1190000004894400 class="sort text-secondary" data-sort=desc>时间</a>
+ </div>
+ </div><div class="card border-0">
+ <div class=card-body>
+ <div class=media>
+ <img src=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAMAAAD04JH5AAAC0FBMVEUAAAAAAACAgIBVVVWAgICZmZmAgICSkpKOjo6ZmZmLi4uVlZWJiYmSkpKZmZmPj4+WlpaOjo6UlJSZmZmSkpKXl5eQkJCVlZWZmZmTk5OXl5eSkpKZmZmUlJSXl5eTk5OWlpaYmJiUlJSWlpaZmZmVlZWYmJiUlJSXl5eZmZmWlpaYmJiVlZWXl5eWlpaYmJiVlZWXl5eZmZmWlpaYmJiVlZWZmZmWlpaYmJiWlpaXl5eZmZmXl5eYmJiWlpaYmJiZmZmXl5eYmJiWlpaYmJiYmJiWlpaYmJiZmZmXl5eYmJiXl5eYmJiZmZmXl5eYmJiXl5eYmJiZmZmXl5eYmJiXl5eYmJiZmZmXl5eYmJiXl5eYmJiZmZmXl5eZmZmXl5eYmJiZmZmYmJiZmZmXl5eYmJiZmZmYmJiZmZmXl5eYmJiZmZmYmJiZmZmXl5eYmJiZmZmYmJiZmZmXl5eZmZmYmJiZmZmXl5eYmJiZmZmYmJiZmZmXl5eYmJiZmZmYmJiZmZmYmJiYmJiZmZmYmJiZmZmYmJiYmJiZmZmYmJiZmZmYmJiYmJiZmZmYmJiZmZmYmJiYmJiZmZmZmZmYmJiYmJiZmZmYmJiZmZmYmJiYmJiYmJiZmZmYmJiYmJiZmZmYmJiZmZmYmJiYmJiZmZmYmJiZmZmYmJiYmJiZmZmYmJiZmZmYmJiZmZmYmJiZmZmYmJiYmJiZmZmYmJiZmZmYmJiYmJiZmZmYmJiZmZmYmJiYmJiYmJiZmZmYmJiZmZmZmZmYmJiZmZmYmJiZmZmZmZmYmJiZmZmYmJiZmZmZmZmZmZmYmJiZmZmZmZmYmJiZmZmYmJiZmZmZmZmYmJiZmZmYmJiZmZmYmJiZmZmYmJiZmZmZmZmYmJiZmZmYmJiZmZmYmJiZmZmYmJiZmZmZmZmYmJiZmZmYmJiZmZmZmZmYmJiZmZmYmJiZmZmZmZmmDXJMAAAA73RSTlMAAQIDBAUGBwkKCwwNDg8QERITFBUWFxgZGhscHh8gISIlJicoKSorLC0uLzAxMzQ1Njc4OTo8PT4/QEFCQ0RFRkdISUpNTk9QUVJTVFVWV1hZWltcXV5fYGFiY2RlZmdoaWprbG1ub3BxcnN0dXZ3eHl6e31+f4CBgoOEhYaHiImKi4yNjo+QkZKTlJWWl5iZmpudnp+goaKjpKanqKmqq6ytrq+wsbKztLW2uLm6u7y9vr/AwcLDxMXGx8nKy8zNzs/Q0dLT1NXW19na29zd3t/g4eLj5OXn6Onq6+zt7u/x8vP09fb3+Pn6+/z9/kPqpbAAAAb6SURBVHja7Zr5XxZFGMD3BTm8kVAqVPIAzZJEUTKzKE0lExH1Na8gQcMrJVHAAjXIMwNDAzwAyyMzMUFRuRLwNk9S8eQ1joT35d1/oc/swruz787u7Luz+/rp83nnJ3iemXm+uzvvzHMMRb/gRjkAHAAOAAeAA8AB4ABwADgAHAD/awDTPw3/viiAe/uiA7ycKIpy9fYfNXFx/n27AlRH+lLWrW/ET432ATDmBVPo1i3mgvYA5h9fpSRa0G8aA1wYSWHaxNsaAjQs70Bhm3vic60AbvpTstqgW9oAFHkKben6d0YQeJ3RAiDDRWjJ+xJtnIUgcMtWHyAR9bJzaJpu8kFpUtQG2IayMrAVqL5HLoRsdQH26FBGCtid6Q2UzrVITYDfXVA2wtu0pUi67lfUA7jfA7nz1rbrI5Ef4bUGtQDMIUgDeywdDL2RHZaoBYBcgNRiqMc5d1QP50p1AK4hZx9tBLpc3wnMh8hBMr7VqgpAGGrugDqg+tWZooY8A38tRxJsUQPgshPq2QxAdZ7Zh983ihL0fK4CwDTExKMY+w/7sP/NYfqtQRHsIge4hngBscwzN1l8g7XsWnUT9hxKDrBM+PvPZRSN73KiZEZSNUBIcIoUwGx91Oj0D1jn5B1YuoKVRTlbA3xMCnDVasKRp9vc8kC+PMrErtiJVv071BEC7INncwotaROXeFs/6tttkUFJGH8p/EwIkMdNNTy1pj0iWu+K+MkVtGnrtgdBX2IHIcCzfsyH95ubWWORnQ9A7jpO0U/be9QXxL/ny5ygnS6T/gqajmXnlhkgwd1IFzFv1HO7CerYeq+0oPiZ2oHJjYVuUg6xf4at8ZlNAI27x+hwPrnHssvaADRXbnjPTV5c0Cfq0GM1AQxnsxPCBzExkWdq5cOyLNH4JPTIo+v5U5g/e4ycszplY3rO8XpCgCtRfTgDQ9hfgikJbT+VHXLYAxb6/E0EcBUOfJwt0Xcoyv545OZFJRIBJMBT6S3iGhTARYv6I1gcQwSwFJ4qnZO/jHCSOe1eWL6UCGAtPBUUaiD85CBOWwHLM4gAeM+Sx8lHSPoex2D5SSKAKniqeIu4DrEbuxkt6m9heS0RQDNsya+lXRyFWoSWg7d1GHppKNoHhsAmkttfMXJD7vWkTb0FlgYSAsznhTpfNQNZqshx2PcI89JW8vyyOYQAWXwbvtNT4gaLnwL9QmPHefFF+wkBblJkzY30LKD7kQGMJz4N48gAMogBKons62rJ/YERJAAhKjgkR0gAitXwiN5Ubn+MKi5ZvnKAIlUAWv2U2g8md0qZE+4XhfadTqvhFZtpmp6rDCBOtbigcYAS+4FG9QKTKlfb7Xe5oWZktNF2AJnpcpkA5khb7SepHRsuss2+6gULmv7SFvupWoTn8fLPwM3a5Ad2dZVn3+e4VgmKmrFy7M8waFe6NW/tiDPvma9p7Zi+Hi5ZvfVY9ZjWFoCm78R2Fv34afU2T6fkAoMhpS+qTjd2V4uCyRRe4ahOHN2JVyFbcLhB2UzKL7GYqvcmf/bJuNETIpPz/lI8i+MekQNAMUBLdUkp09bEg5aw7YZ9AS4KytnuJXYF0As3otl2BUBshcPtCWBEVXPtCdDSRQgwX22A5sIdq2br9Xr9zIipkydNmrUKvrGXLXCOBj7gtE2b5k8JC5saHj4tYsZM/acL1u832AxQPL2bYJ1fgvT1B5cGcp5B7xk5bBhUfh24LcMEr8flw1M2AdxEFgQmMyooYrtwNGN1YtqOvDsWUSbIDJ9E33J7JB+gqDtyiv5At1uyAsIA7BTJY16UC3BIpDjVFSh3HpAEACmJzSIO00u35QHcEvO+3YE2PV0xAPV6kxwAs2harDNQb5W8F5JZSNP0JlGf9Rs5AEdFhzOfIO0HAoCuT2UAhIgO7w7U6zIlAU5IAlDpeICn4sVZT6BPypICyDghnUwIwQMcEx/txYSo6wRZtMd3Ldck4v6QBuiCB/hafLQ30K9gq4eP8hM+nxwcGDDUvyeoTwyOZ+6RmgIAwHcSoVMdFiBWfPArQL+kQzltOviB4EPpgjcVnJxG4QAuYQEkMiE+QB9DUf5e4n2OYwCqsQDREmV5oF8gHRyDN5BGBLBMfHBvDCBoJzAAVViAtZhPEI1PT0sBVGIBtmAWYYw0ADgNU4kAssQH95IBUIwBOIcFOCAY04m3ES2UBjjNKx3rFAAUWo2IqKWfLIK2YgzAWQhg1q2WilFW+j+xAGesSqVM1iOITQDJyJiWcAB+oHuDh60AZ/kD5kFZ0m4yAEppmt4Alwvm8fUVWIBS/oCVjDCJO0m+kAYo4wC2ovLs5ViAMv6ANdDm0FEGQDkHwBZNc4WA0gAVqKw3C+Bslj6s2l/xOhigEAPwH42519y2agETAAAAAElFTkSuQmCC class="rounded-circle mr-3" width=38 aria-hidden=true>
+ <form class=media-body action=/api/article/1190000004894400/comments/add>
+ <div class=form-group>
+ <textarea autoheight=true class="form-control comment-text" rows=1 placeholder="撰写评论 ..." style=overflow:hidden;overflow-wrap:break-word;resize:none;height:38px name=text></textarea>
+ </div>
+ <div class="d-flex justify-content-end">
+ <button data-js-replay-submit-btn type=button submit-type=comment class="btn btn-primary float-right" disabled>提交评论</button>
+ 
+ </div>
+ </form>
+ </div>
+ <div id=comment-body></div><div class="sflex-center comment-pagination"></div>
+ </div>
+ </div></div>
+ <h5 class=mt-4>推荐阅读</h5>
+ <div class="card border-0 mb-4">
+ <div class="list-group list-group-flush" id=paradigm-article-related><a href=http://segmentfault.com/a/1190000011101938 target=_blank class="list-group-item list-group-item-action py-3">
+ <h5 class=text-body>npm入手笔记0x001-项目初始化和包增删改</h5>
+ <p class="mb-2 text-truncate text-secondary">npm是一个包管理工具，本文章基本算是对官方文档的解读、翻译和实操笔记，顺便说明使用npm中的坑。安装方式参照Node.js官方文档即可，安装完成后，命令行键入node-v成功执行说明安装成功了顺便检查一下npm版本并更新它新建一个项目文件夹安装loadash成功安装包之后，将会发生以下的事情：在项目的目录会生成一个node_modules文件夹，里面放置了我们项目所有的本地依赖包如果该项目存在p</p>
+ <p class="text-secondary mb-0 font-size-14">
+ <span class=text-primary>followWinter</span>
+ <span class=split-dot></span>
+ 阅读
+ <span>18</span>
+ </p>
+ </a><a href=http://segmentfault.com/a/1190000014117849 target=_blank class="list-group-item list-group-item-action py-3">
+ <h5 class=text-body>NodeJs系列之npm常用命令</h5>
+ <p class="mb-2 text-truncate text-secondary">全局安装：一般在Users用户名AppDataRoaming目录下，可以使用npmroot-g查看全局安装目录。本地安装：一般安装在指定项目的node_modules文件夹下。全局安装：用户可以在命令行中直接运行该包支持的命令。本地安装：需在项目中引用。除了npmconfig命令显示更改npm配置，还可以通过npmrc文件直接修改配置。</p>
+ <p class="text-secondary mb-0 font-size-14">
+ <span class=text-primary>zhouzhou</span>
+ <span class=split-dot></span>
+ 阅读
+ <span>508</span>
+ </p>
+ </a><a href=http://segmentfault.com/a/1190000010448334 target=_blank class="list-group-item list-group-item-action py-3">
+ <h5 class=text-body>nodejs全局安装和本地安装的区别</h5>
+ <p class="mb-2 text-truncate text-secondary">作者：白树转载自http:www.cnblogs.comPeunZh...上一篇文章《npm常用命令详解》主要是整理了最常使用的npm命令及相关介绍，其中有提到全局安装(npminstallgulp-g)和本地安装(npminstallgulp)，下图来自Gulp中文网入门指南，可以看出全局安装后gulp后还要进行本地安装，一开始我疑惑了？为什么全局安装的gulp么，还要进行本地安装，难道不能在项</p>
+ <p class="text-secondary mb-0 font-size-14">
+ <span class=text-primary>CodeMan</span>
+ <span class=split-dot></span>
+ 阅读
+ <span>7</span>
+ </p>
+ </a><a href=http://segmentfault.com/a/1190000012481308 target=_blank class="list-group-item list-group-item-action py-3">
+ <h5 class=text-body>NPM基础使用</h5>
+ <p class="mb-2 text-truncate text-secondary">npm是javascript的包管理器，能解决NodeJS部署上的很多问题，本文对npm的基本命令做一些记录及介绍。原文链接npm是随node一起安装的，node下载地址。npm特点：检查npm版本或测试npm是否安装成功升级npm安装模块全局安装模块查看安装模块查看所有全局安装模块更新模块卸载模块搜索模块创建模块添加用户发布模块撤销模块某个版本清空npm本地缓存使用淘宝镜像package.jso</p>
+ <p class="text-secondary mb-0 font-size-14">
+ <span class=text-primary>bestvist</span>
+ <span class=split-dot></span>
+ 阅读
+ <span>30</span>
+ </p>
+ </a><a href=http://segmentfault.com/a/1190000008628380 target=_blank class="list-group-item list-group-item-action py-3">
+ <h5 class=text-body>新人学习，照文档手撸webpack,bug基本修复完善（有问题请联系我，并非完全原创，不喜勿喷。。。）</h5>
+ <p class="mb-2 text-truncate text-secondary">介绍：webpack简单点来说就就是一个配置文件，所有的魔力都是在这一个文件中发生的。这个配置文件主要分为三大块entry入口文件让webpack用哪个文件作为项目的入口output出口让webpack把处理完成的文件放在哪里module模块要用什么不同的模块来处理各种类型的文件下面我们就一步一步来新建一个简单的项目，话不多讲，该懂的自行百度，这里只负责让你自己的webpack跑起来。（一）安装全</p>
+ <p class="text-secondary mb-0 font-size-14">
+ <span class=text-primary>风吹一个大耳东</span>
+ <span class=split-dot></span>
+ 阅读
+ <span>370</span>
+ </p>
+ </a><a href=http://segmentfault.com/a/1190000005013898 target=_blank class="list-group-item list-group-item-action py-3">
+ <h5 class=text-body>NPM</h5>
+ <p class="mb-2 text-truncate text-secondary">NPM（nodepackagemanager）主要功能:安装、卸载、更新、查看、搜索、发布1.npm的配置2.npm的使用：package的安装、卸载、升级、查看、搜索、发布npm包的安装模式,本地vs全局package版本：常见版本声明形式3.package.json：包描述信息npmset上面命令等于为npminit设置了默认值，以后执行npminit的时候，package.json的作者姓名</p>
+ <p class="text-secondary mb-0 font-size-14">
+ <span class=text-primary>Murphywuwu</span>
+ <span class=split-dot></span>
+ 阅读
+ <span>3</span>
+ </p>
+ </a><a href=http://segmentfault.com/a/1190000015218126 target=_blank class="list-group-item list-group-item-action py-3">
+ <h5 class=text-body>通过npm包来制作命令行工具的原理</h5>
+ <p class="mb-2 text-truncate text-secondary">用过构建工具的亲们知道，通常通过全局安装一个xxx-cli的npm包，就能在命令行用命令进行构建。那么这个npm包如何变成一个可执行的命令呢？在package.json中添加或者编辑bin字段：commandName就是命令的名字，jsfile就是当用户键入命令时的处理程序。代码开发。必须在jsfile文件的第一行写这行命令#!usrbinenvnode，譬如：发布到npm仓库，在项目根目录执行：</p>
+ <p class="text-secondary mb-0 font-size-14">
+ <span class=text-primary>sixwinds</span>
+ <span class=split-dot></span>
+ 阅读
+ <span>32</span>
+ </p>
+ </a><a href=http://segmentfault.com/a/1190000009266161 target=_blank class="list-group-item list-group-item-action py-3">
+ <h5 class=text-body>ubuntu install node npm bower</h5>
+ <p class="mb-2 text-truncate text-secondary">先到node官网下载nodejs包,点击下载将下载的包解压,我下载的包是node-v6.10.3-linux-x64.tar.xz,所以我的解压命令是将解压好的文件移动到optnode安装npm和node命令到系统命令如果在终端输入node-v和npm-v会在终端看到版本号,恭喜你安装成功.</p>
+ <p class="text-secondary mb-0 font-size-14">
+ <span class=text-primary>starsfun</span>
+ <span class=split-dot></span>
+ 阅读
+ <span>6</span>
+ </p>
+ </a></div>
+ </div>
+ </div>
+ <div class="col-12 col-xl-auto">
+ <div class=w-xl-300>
+ <div class="blog card mb-4 border-0">
+ <div class=card-body>
+ <div class="d-flex align-items-center mb-3">
+ <div class="media-avatar rounded mr-3" aria-hidden=true></div>
+ <div style=flex:1>
+ <h5><a class=text-body href=https://segmentfault.com/blog/mooonx>moonx</a></h5>
+ <span class="badge badge-primary" style=background-color:#007bff>用户专栏</span>
+ </div>
+ </div>
+ <p class="text-secondary text-truncate-2">可以有代码，有设计，还有生活吗哈哈哈哈</p>
+ <div class="d-flex mb-3">
+ <div class=mr-4>
+ <strong id=blog-followers-count class=followNum>31</strong>
+ <span class=text-secondary>人关注</span>
+ </div>
+ <div>
+ <strong>8</strong>
+ <span class=text-secondary>篇文章</span>
+ </div>
+ </div>
+ <div class=d-flex>
+ <button type=button class="btn btn-primary mr-2 sf_do" data-number-tag-class=followNum data-dotype=post data-content='{"type":"state","state":false,"true":"\u5173\u6ce8\u4e13\u680f","false":"\u6b63\u5728\u5173\u6ce8"}' data-api=/iteration/api/blog/1200000004430724/follow>关注专栏
+ </button>
+ 
+ <a class="btn btn-outline-primary" href=https://segmentfault.com/blog/mooonx>专栏主页</a>
+ </div>
+ </div>
+ </div><div></div>
+ 
+ 
+ <div class="card border-0 overflow-hidden d-none d-xl-flex justify-content-center align-items-center float-ads mt-4" style=width:300px data-fix>
+ <div id=OA_holder_1></div>
+ </div>
+ 
+ <div class="card border-0 d-none d-xl-flex mt-4">
+ <div class=card-body>
+ <div class="text-center mb-3">
+ <div class="mb25 hidden-md hidden-sm hidden-xs">
+ <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt=Planets usemap=#gridsMap width=255 height=136 class=sf-hidden>
+ <map name=gridsMap id=gridsMap></map>
+ <div style=text-align:center><a style=color:#9E9E9E;font-size:12px href=https://segmentfault.com/sponsor>广告位促销，月曝光三千万，10 元/天</a></div>
+ 
+</div>
+ </div>
+ <div class=side-promote-link>
+ <div id=OA_holder_7></div><div id=OA_holder_9></div><div id=OA_holder_10></div><div id=OA_holder_15></div><div id=OA_holder_16></div>
+ </div>
+ </div>
+ </div>
+ 
+ <div class="card border-0 overflow-hidden d-none d-xl-flex" data-article-nav style=top:250px;margin-top:48px;width:300px data-fix>
+ <div class=card-body>
+ <h6 class="pt-3 position-relative bg-white" style=margin-top:-1.25rem;height:45px>
+ 目录</h6>
+ <nav id=article-nav-list data-article-nav-list class=font-size-14>
+ <a class="nav-link text-secondary p-0 my-1 text-truncate" href=#item-1 data-offsettop=829>NPM是什么</a><a class="nav-link text-secondary p-0 my-1 text-truncate" href=#item-2 data-offsettop=854>使用准备</a><a class="nav-link text-secondary p-0 my-1 text-truncate" href=#item-3 data-offsettop=879>使用NPM</a><a class="nav-link text-secondary py-0 pr-0 my-1 text-truncate active" href=#item-3-1 data-offsettop=904>安装指定包</a><a class="nav-link text-secondary py-0 pr-0 my-1 text-truncate" href=#item-3-2 data-offsettop=929>删除指定包</a><a class="nav-link text-secondary py-0 pr-0 my-1 text-truncate" href=#item-3-3 data-offsettop=954>查看</a><a class="nav-link text-secondary py-0 pr-0 my-1 text-truncate" href=#item-3-4 data-offsettop=979>更新</a><a class="nav-link text-secondary p-0 my-1 text-truncate" href=#item-4 data-offsettop=1004>关于package.json</a><a class="nav-link text-secondary py-0 pr-0 my-1 text-truncate" href=#item-4-5 data-offsettop=1029>什么是package.json</a><a class="nav-link text-secondary py-0 pr-0 my-1 text-truncate" href=#item-4-6 data-offsettop=1054>package.json使用好处</a><a class="nav-link text-secondary py-0 pr-0 my-1 text-truncate" href=#item-4-7 data-offsettop=1079>自动创建package.json</a><a class="nav-link text-secondary py-0 pr-0 my-1 text-truncate" href=#item-4-8 data-offsettop=1104>分析与使用package.json</a><a class="nav-link text-secondary p-0 my-1 text-truncate" href=#item-5 data-offsettop=1129>NPM进阶</a><a class="nav-link text-secondary py-0 pr-0 my-1 text-truncate" href=#item-5-9 data-offsettop=1154>npm link</a><a class="nav-link text-secondary py-0 pr-0 my-1 text-truncate" href=#item-5-10 data-offsettop=1179>package.json</a><a class="nav-link text-secondary p-0 my-1 text-truncate" href=#item-6 data-offsettop=1204>参考资料</a></nav>
+ </div>
+ </div>
+ 
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+ 
+ 
+<div id=OA_holder_4></div>
+<footer id=footer class="bg-white py-5 font-size-14">
+ <div class=container>
+ <div class=row>
+ <dl class="col-4 col-md-2">
+ <dt class=h6>产品</dt>
+ <dd class=my-1><a class=text-secondary href="https://segmentfault.com/questions/hottest?utm_source=sf-footer" target=_blank>热门问答</a></dd>
+ <dd class=my-1><a class=text-secondary href="https://segmentfault.com/blogs/hottest?utm_source=sf-footer" target=_blank>热门专栏</a></dd>
+ <dd class=my-1><a class=text-secondary href="https://segmentfault.com/lives?utm_source=sf-footer" target=_blank>热门课程</a></dd>
+ <dd class=my-1><a class=text-secondary href="https://segmentfault.com/events?utm_source=sf-footer" target=_blank>最新活动</a></dd>
+ <dd class=my-1><a class=text-secondary href="https://segmentfault.com/groups?utm_source=sf-footer" target=_blank>技术圈</a></dd>
+ <dd class=my-1><a class=text-secondary href="https://segmentfault.com/groups?tab=jobs&amp;utm_source=sf-footer" target=_blank>酷工作</a></dd>
+ <dd class=my-1><a class=text-secondary href="https://segmentfault.com/app?utm_source=sf-footer" target=_blank>移动客户端</a></dd>
+ </dl>
+ <dl class="col-4 col-md-2">
+ <dt class=h6>课程</dt>
+ <dd class=my-1><a class=text-secondary href="https://segmentfault.com/lives/edu?tag=java&amp;sort=hottest&amp;utm_source=sf-footer" target=_blank>Java 开发课程</a></dd>
+ <dd class=my-1><a class=text-secondary href="https://segmentfault.com/lives/edu?tag=php&amp;sort=hottest&amp;utm_source=sf-footer" target=_blank>PHP 开发课程</a></dd>
+ <dd class=my-1><a class=text-secondary href="https://segmentfault.com/lives/edu?tag=python&amp;sort=hottest&amp;utm_source=sf-footer" target=_blank>Python 开发课程</a></dd>
+ <dd class=my-1><a class=text-secondary href="https://segmentfault.com/lives/edu?category=1&amp;sort=hottest&amp;utm_source=sf-footer" target=_blank>前端开发课程</a></dd>
+ <dd class=my-1><a class=text-secondary href="https://segmentfault.com/lives/study?category=3&amp;sort=hottest&amp;utm_source=sf-footer" target=_blank>移动开发课程</a></dd>
+ </dl>
+ <dl class="col-4 col-md-2">
+ <dt class=h6>资源</dt>
+ <dd class=my-1><a class=text-secondary href="https://segmentfault.com/weekly?utm_source=sf-footer" target=_blank>每周精选</a></dd>
+ <dd class=my-1><a class=text-secondary href="https://segmentfault.com/users?utm_source=sf-footer" target=_blank>用户排行榜</a></dd>
+ <dd class=my-1><a class=text-secondary href="https://segmentfault.com/badges?utm_source=sf-footer" target=_blank>徽章</a></dd>
+ <dd class=my-1><a class=text-secondary href="https://segmentfault.com/faq?utm_source=sf-footer" target=_blank>帮助中心</a></dd>
+ <dd class=my-1><a class=text-secondary href="https://segmentfault.com/repu?utm_source=sf-footer" target=_blank>声望与权限</a></dd>
+ <dd class=my-1><a class=text-secondary href="https://segmentfault.com/community?utm_source=sf-footer" target=_blank>社区服务中心</a></dd>
+ </dl>
+ <dl class="col-4 col-md-2">
+ <dt class=h6>合作</dt>
+ <dd class=my-1><a class=text-secondary href="https://about.segmentfault.com/?utm_source=sf-footer" target=_blank>关于我们</a></dd>
+ <dd class=my-1><a class=text-secondary href="https://business.segmentfault.com/ads?utm_source=sf-footer" target=_blank>广告投放</a></dd>
+ <dd class=my-1><a class=text-secondary href="https://segmentfault.com/groups?tab=jobs&amp;utm_source=sf-footer" target=_blank>职位发布</a></dd>
+ <dd class=my-1><a class=text-secondary href="https://jinshuju.net/f/HK5r9K?utm_source=sf-footer" target=_blank>讲师招募</a></dd>
+ <dd class=my-1><a class=text-secondary href="https://about.segmentfault.com/contact.html?utm_source=sf-footer" target=_blank>联系我们</a></dd>
+ <dd class=my-1><a class=text-secondary href="https://segmentfault.com/link?utm_source=sf-footer" target=_blank>合作伙伴</a></dd>
+ </dl>
+ <dl class="col-4 col-md-2">
+ <dt class=h6>关注</dt>
+ <dd class=my-1><a class=text-secondary href="https://segmentfault.com/blog/segmentfault?utm_source=sf-footer" target=_blank>产品技术日志</a></dd>
+ <dd class=my-1><a class=text-secondary href="https://segmentfault.com/blog/community_admin?utm_source=sf-footer" target=_blank>社区运营日志</a></dd>
+ <dd class=my-1><a class=text-secondary href="https://segmentfault.com/blog/segmentfault_news?utm_source=sf-footer" target=_blank>市场运营日志</a></dd>
+ <dd class=my-1><a class=text-secondary href="https://segmentfault.com/blog/segmentfault_team?utm_source=sf-footer" target=_blank>团队日志</a></dd>
+ <dd class=my-1><a class=text-secondary href="https://segmentfault.com/blog/interview?utm_source=sf-footer" target=_blank>社区访谈</a></dd>
+ </dl>
+ <dl class="col-4 col-md-2" id=license>
+ <dt class=h6>条款</dt>
+ <dd class=my-1><a class=text-secondary href="https://segmentfault.com/tos?utm_source=sf-footer" target=_blank>服务条款</a></dd>
+ <dd class=my-1><a class=text-secondary href="https://segmentfault.com/privacy?utm_source=sf-footer" target=_blank>隐私政策</a></dd>
+ <dd class=my-1>
+ <a class=text-secondary href="https://segmentfault.com/app?utm_source=sf-footer"><img width=60 src=data:image/png;base64,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 class=app-qrcode><br>下载 App</a>
+ </dd>
+ </dl>
+ </div>
+ <hr class="mt-2 mb-4">
+ <div class=row>
+ <div class=col-md-8>
+ <div class=text-secondary>
+ <p class=mb-1>Copyright © 2011-2020 SegmentFault. 当前呈现版本 19.02.27</p>
+ <p class=mb-1>
+ <a class="text-secondary mr-2" target=_blank href=http://beian.miit.gov.cn/ rel=nofollow>浙ICP备 15005796号-2</a>
+ <a class="text-secondary mr-2" target=_blank href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33010602002000" rel=nofollow>浙公网安备 33010602002000号</a>
+ 杭州堆栈科技有限公司版权所有
+ </p>
+ <p class=mb-0>CDN 存储服务由 <a class=text-secondary target=_blank href="https://www.upyun.com/?utm_source=segmentfault&amp;utm_medium=link&amp;utm_campaign=upyun&amp;md=segmentfault">又拍云</a> 赞助提供 </p>
+ </div>
+ </div>
+ <div class="col-md-4 text-right">
+ <div class=shareContent>
+ <a class=share_weixin data-share=weixin href=https://segmentfault.com/a/1190000004894400 data-original-title title><svg class="svg-inline--fa fa-weixin fa-w-18 fa-fw" aria-hidden=true focusable=false data-prefix=fab data-icon=weixin role=img xmlns=http://www.w3.org/2000/svg viewBox="0 0 576 512" data-fa-i2svg><path fill=currentColor d="M385.2 167.6c6.4 0 12.6.3 18.8 1.1C387.4 90.3 303.3 32 207.7 32 100.5 32 13 104.8 13 197.4c0 53.4 29.3 97.5 77.9 131.6l-19.3 58.6 68-34.1c24.4 4.8 43.8 9.7 68.2 9.7 6.2 0 12.1-.3 18.3-.8-4-12.9-6.2-26.6-6.2-40.8-.1-84.9 72.9-154 165.3-154zm-104.5-52.9c14.5 0 24.2 9.7 24.2 24.4 0 14.5-9.7 24.2-24.2 24.2-14.8 0-29.3-9.7-29.3-24.2.1-14.7 14.6-24.4 29.3-24.4zm-136.4 48.6c-14.5 0-29.3-9.7-29.3-24.2 0-14.8 14.8-24.4 29.3-24.4 14.8 0 24.4 9.7 24.4 24.4 0 14.6-9.6 24.2-24.4 24.2zM563 319.4c0-77.9-77.9-141.3-165.4-141.3-92.7 0-165.4 63.4-165.4 141.3S305 460.7 397.6 460.7c19.3 0 38.9-5.1 58.6-9.9l53.4 29.3-14.8-48.6C534 402.1 563 363.2 563 319.4zm-219.1-24.5c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.8 0 24.4 9.7 24.4 19.3 0 10-9.7 19.6-24.4 19.6zm107.1 0c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.5 0 24.4 9.7 24.4 19.3.1 10-9.9 19.6-24.4 19.6z"></path></svg> </a><a class=share_weibo data-share=weibo href=http://weibo.com/segmentfault target=_blank><svg class="svg-inline--fa fa-weibo fa-w-16 fa-fw" aria-hidden=true focusable=false data-prefix=fab data-icon=weibo role=img xmlns=http://www.w3.org/2000/svg viewBox="0 0 512 512" data-fa-i2svg><path fill=currentColor d="M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"></path></svg> </a><a class=share_github data-share=github href=https://github.com/SegmentFault target=_blank><svg class="svg-inline--fa fa-github fa-w-16 fa-fw" aria-hidden=true focusable=false data-prefix=fab data-icon=github role=img xmlns=http://www.w3.org/2000/svg viewBox="0 0 496 512" data-fa-i2svg><path fill=currentColor d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg> </a><a class=share_twitter data-share=twitter href=https://twitter.com/segment_fault target=_blank><svg class="svg-inline--fa fa-twitter fa-w-16 fa-fw" aria-hidden=true focusable=false data-prefix=fab data-icon=twitter role=img xmlns=http://www.w3.org/2000/svg viewBox="0 0 512 512" data-fa-i2svg><path fill=currentColor d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"></path></svg> </a></div>
+ </div>
+ </div>
+ </div>
+</footer>
+<iframe id=p_analyse_iframe style=display:none data-single-file-win-id=0.0></iframe>
+ <div class="is-active ImageView p-4" style=display:none>
+ <div class=ImageView-inner style=overflow:auto>
+ 
+ </div>
+ </div><div id=fixedTools class="position-fixed d-none d-xl-flex" style=right:24px;bottom:24px>
+ <button type=button class="btn btn-light" title=回顶部>▲</button>
+ </div><div id=atwho-container><div id=atwho-ground-3eeed90c1584096085700><div class="atwho-view sf-hidden" id=at-view-64><ul class=atwho-view-ul></ul></div></div></div><div id=sfModal class="modal fade" tabindex=-1 role=dialog aria-labelledby=sfModalLabel style=display:none aria-hidden=true>
+ <div class=modal-dialog role=document>
+ 
+ </div>
+</div>
