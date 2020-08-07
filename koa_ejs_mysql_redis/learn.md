@@ -470,9 +470,83 @@ const jwt=require('jsonwebtoken')
 
 数据规范严谨，不宜出错
 
-占用空间更小，
+占用空间更小，b
 
 访问速度快
+
+# PM2
+
+
+
+```javascript
+npm i pm2 -g 
+
+// pm2 进程列表
+PM2 list
+// 开启
+pm2 start app-name或id
+
+// 停止
+pm2 stop app-name或id
+
+// 重启
+pm2 restart app-name或id
+
+// 删除
+pm2 delete  app-name或id
+
+// 信息
+pm2 info app-name或id
+
+// 日志
+pm2 log  app-name或id
+
+// 监控
+pm2 monit  app-name或id
+```
+
+
+
+```javascript
+// pm2配置
+// pm2.conf.json
+{
+    "apps": {
+        "name": "SNS",
+        "script": "bin/www",
+        "watch": true,
+        "ignore_watch": [
+            "node_modules",
+            "logs",
+            "uploadFiles"
+        ],
+        "instances": 1,
+        "error_file": "./logs/err.log",
+        "out_file": "./logs/out.log",
+        "log_date_format": "YYYY-MM-DD HH:mm:ss"
+    }
+}
+```
+
+
+
+# Nginx
+
+
+
+
+
+
+
+
+
+# 日志
+
+
+
+
+
+
 
 # 补充：
 
