@@ -526,6 +526,8 @@ pm2 monit  app-name或id
         "log_date_format": "YYYY-MM-DD HH:mm:ss"
     }
 }
+// 修改package.json文件，pm2 start bin/www
+"prd": "cross-env NODE_ENV=production pm2 start pm2.conf.json",
 ```
 
 
@@ -534,13 +536,36 @@ pm2 monit  app-name或id
 
 
 
+```javascript
+//配置文件：
+// mac /usr/local/etc/nginx/nginx.conf
+// win /nginx/conf/nginx.conf
+// 测试nginx语法
+nginx -t 
+// 启动
+nginx
+// 重写载入配置文件
+nginx -s reload
+```
 
 
 
-
-
-
-# 日志
+```javascript
+http{
+     log_format main '$remote_addr - $remote_user [$time_local] "$request" '
+        '$status $body_bytes_sent "$http_referer" '
+        '"$http_user_agent" $http_x_forwarded_for';
+    access_log  logs/access.log  main;
+    error_log   logs/ssl.error.log crit;
+    server {
+        listen 80;
+        server_name www.xxx.com/test;
+        location /{
+            proxy_pass http://127.0.0.1:3000;
+        }
+    }
+}
+```
 
 
 
