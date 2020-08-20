@@ -83,7 +83,7 @@ button{
     background-color: #000000;
     right: -40px;
     top: 50%;
-    margin-top: -30px;
+    margin-top: -30px;//
     line-height: 60px;
     text-align: center;
 }
@@ -109,3 +109,100 @@ button{
 		</script>
 ```
 
+# 侧边栏动画效果
+
+
+
+```css
+			*{
+				padding: 0;
+				margin: 0;
+			}
+			#box{
+				width: 200px;
+				height: 200px;
+				background-color: red;
+				position: relative;
+				left: -200px;
+			}
+			#box span{
+				position: absolute;
+				width: 40px;
+				height: 60px;
+				color: #fff;
+				background-color: #000000;
+				right: -40px;
+				top: 50%;
+				margin-top: -30px;
+				line-height: 60px;
+				text-align: center;
+			}
+```
+
+
+
+```javascript
+	<div id="box">
+			<span>拉开</span>
+		</div>
+		<script type="text/javascript">
+			window.onload = function (){
+				var box = document.getElementById('box');
+				var timer = null;
+				box.onmouseover = function (){
+					// 先关闭定时器
+					clearInterval(timer);
+					timer = setInterval(function (){
+						if(box.offsetLeft === 0){
+							clearInterval(timer);
+							return;
+						}
+						box.style.left = box.offsetLeft + 5 + 'px';
+					},30)
+					
+				}
+				box.onmouseout = function (){
+					// 先关闭定时器
+					clearInterval(timer);
+					timer = setInterval(function (){
+						if(box.offsetLeft === -200){
+							clearInterval(timer);
+							return;
+						}
+						box.style.left = box.offsetLeft - 5 + 'px';
+					},30)
+					
+				}
+			}
+		
+		</script>
+```
+
+# 侧边栏动画封装
+
+
+
+```css
+
+```
+
+
+
+```javascript
+
+```
+
+基本的缓动运动
+缓动运动封装
+适明度动画
+多物体运动
+获取属性样式
+多物体运动完整版
+多值运动
+多值运动-2
+链式动画
+JSON
+同时运动
+联动效果
+侧边栏横幅效果
+滚动监听
