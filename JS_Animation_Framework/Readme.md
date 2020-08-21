@@ -246,18 +246,334 @@ button{
     </script>
 ```
 
-基本的缓动运动
+# 基本的缓动运动
 
-缓动运动封装
+
+
+```css
+		  * {
+				padding: 0;
+				margin: 0;
+			}
+
+			#box {
+				width: 200px;
+				height: 200px;
+				background-color: red;
+				position: relative;
+				left: -200px;
+			}
+
+			#box span {
+				position: absolute;
+				width: 40px;
+				height: 60px;
+				color: #fff;
+				background-color: #000000;
+				right: -40px;
+				top: 50%;
+				margin-top: -30px;
+				line-height: 60px;
+				text-align: center;
+			}
+```
+
+
+
+```javascript
+		<div id="box">
+			<span>拉开</span>
+		</div>
+
+		<script type="text/javascript">
+			// 0  ~ 200
+			// 缓动动画公式:  加速度 = (结束值 - 起始值) / 缓动系数  加速度由慢到慢
+			window.onload = function() {
+				var box = document.getElementById('box');
+				var timer = null,
+					end = 0,
+					end2 = -200;
+				box.onmouseover = function() {
+					clearInterval(timer);
+					timer = setInterval(function() {
+						
+						speed = (end - box.offsetLeft) / 20; //0.45  == 1 数学Math.ceil()
+						console.log(box.offsetLeft,speed)
+						// 处理边界问题
+						if (box.offsetLeft === end) {
+							clearInterval(timer);
+							return;
+						}
+						box.style.left = box.offsetLeft + speed + 'px';
+					}, 30);
+				}
+				box.onmouseout = function() {
+					clearInterval(timer);
+					timer = setInterval(function() {
+						speed = Math.floor((end2 - box.offsetLeft) / 20); //0.45  == 1 数学Math.ceil()
+						// 处理边界问题
+						if (box.offsetLeft === end2) {
+							clearInterval(timer);
+							return;
+						}
+						console.log(box.offsetLeft, speed);
+						box.style.left = box.offsetLeft + speed + 'px';
+					}, 30);
+				}
+			}
+		</script>
+```
+
+# 缓动运动封装
+
+
+```css
+    * {
+        padding: 0;
+        margin: 0;
+    }
+
+    #box {
+        width: 200px;
+        height: 200px;
+        background-color: red;
+        position: relative;
+        left: -200px;
+    }
+
+    #box span {
+        position: absolute;
+        width: 40px;
+        height: 60px;
+        color: #fff;
+        background-color: #000000;
+        right: -40px;
+        top: 50%;
+        margin-top: -30px;
+        line-height: 60px;
+        text-align: center;
+    }
+```
+
+
+
+```javascript
+    <div id="box">
+        <span>拉开</span>
+    </div>
+    <script type="text/javascript">
+    // 0  ~ 200
+    // 缓动动画公式:  加速度 = (结束值 - 起始值) / 缓动系数  加速度由慢到慢
+    window.onload = function() {
+        var box = document.getElementById('box');
+        var timer = null;
+        box.onmouseover = function() {
+            slowAnimation(this, 0);
+        }
+        box.onmouseout = function() {
+            slowAnimation(this, -200);
+        }
+
+        function slowAnimation(obj, end) {
+            clearInterval(timer);
+            timer = setInterval(function() {
+                speed = (end - box.offsetLeft) / 20;
+                // 如果速度大于0,证明物体往右走,速度小于0,证明物体往左走
+                speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed);
+                // 处理边界问题
+                if (obj.offsetLeft === end) {
+                    clearInterval(timer);
+                    return;
+                }
+                obj.style.left = obj.offsetLeft + speed + 'px';
+            }, 30);
+        }
+    }
+    </script>
+```
 适明度动画
+
+
+```css
+#box {
+        width: 200px;
+        height: 200px;
+        background-color: red;
+        opacity: 0.3;
+        filter: alpha(opacity: 30);
+    }
+```
+
+
+
+```javascript
+    <div id="box"></div>
+    <script type="text/javascript">
+    window.onload = function() {
+        // 1.获取需要的元素
+        var box = document.getElementById('box');
+        // 2.监听事件
+        box.onmouseover = function() {
+            opacityAnimation(this, 100);
+        }
+        box.onmouseout = function() {
+            opacityAnimation(this, 30);
+        }
+        var timer = null,
+            alpha = 30,
+            speed = 0;
+
+        function opacityAnimation(obj, endAlpha) {
+            clearInterval(timer);
+            timer = setInterval(function() {
+                // 求透明度变化的速度
+                speed = endAlpha > alpha ? 5 : -5;
+
+                // 边界的处理
+                if (alpha === endAlpha) {
+                    clearInterval(timer);
+                    return;
+                }
+                // 改变当前的alpha的值
+                alpha += speed;
+                // 修改值
+                obj.style.opacity = alpha / 100;
+                obj.style.filter = `alpha(opacity: ${alpha})`;
+
+            }, 30);
+        }
+    }
+    </script>
+```
 多物体运动
+
+
+```css
+
+```
+
+
+
+```javascript
+
+```
 获取属性样式
+
+
+```css
+
+```
+
+
+
+```javascript
+
+```
 多物体运动完整版
+
+
+```css
+
+```
+
+
+
+```javascript
+
+```
 多值运动
+
+
+```css
+
+```
+
+
+
+```javascript
+
+```
 多值运动-2
+
+
+```css
+
+```
+
+
+
+```javascript
+
+```
 链式动画
+
+
+```css
+
+```
+
+
+
+```javascript
+
+```
 JSON
+
+
+```css
+
+```
+
+
+
+```javascript
+
+```
 同时运动
+
+
+```css
+
+```
+
+
+
+```javascript
+
+```
 联动效果
+
+
+```css
+
+```
+
+
+
+```javascript
+
+```
 侧边栏横幅效果
+
+
+```css
+
+```
+
+
+
+```javascript
+
+```
 滚动监听
+
+
+```css
+
+```
+
+
+
+```javascript
+
+```
