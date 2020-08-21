@@ -183,16 +183,71 @@ button{
 
 
 ```css
+* {
+        padding: 0;
+        margin: 0;
+    }
 
+    #box {
+        width: 200px;
+        height: 200px;
+        background-color: red;
+        position: relative;
+        left: -200px;
+    }
+
+    #box span {
+        position: absolute;
+        width: 40px;
+        height: 60px;
+        color: #fff;
+        background-color: #000000;
+        right: -40px;
+        top: 50%;
+        margin-top: -30px;
+        line-height: 60px;
+        text-align: center;
+    }
 ```
 
 
 
 ```javascript
+<div id="box">
+        <span>拉开</span>
+ </div>
+    <script type="text/javascript">
+    window.onload = function() {
+        var box = document.getElementById('box');
+        var timer = null,
+            speed = 0;
+        box.onmouseover = function() {
+            startAnimation(this, 0);
 
+        }
+        box.onmouseout = function() {
+            startAnimation(this, -200);
+
+        }
+        
+        function startAnimation(obj, end) {
+            // 先关闭定时器
+            clearInterval(timer);
+            speed = end > obj.offsetLeft ? 5 : -5;
+            timer = setInterval(function() {
+                if (obj.offsetLeft === end) {
+                    clearInterval(timer);
+                    return;
+                }
+                obj.style.left = obj.offsetLeft + speed + 'px';
+            }, 30);
+        }
+    }
+    </script>
 ```
 
 基本的缓动运动
+
 缓动运动封装
 适明度动画
 多物体运动
