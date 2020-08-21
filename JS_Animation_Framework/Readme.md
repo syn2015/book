@@ -391,7 +391,7 @@ button{
     }
     </script>
 ```
-适明度动画
+# 适明度动画
 
 
 ```css
@@ -400,6 +400,7 @@ button{
         height: 200px;
         background-color: red;
         opacity: 0.3;
+    	// 兼容IE8以下
         filter: alpha(opacity: 30);
     }
 ```
@@ -408,7 +409,7 @@ button{
 
 ```javascript
     <div id="box"></div>
-    <script type="text/javascript">
+    <script type="text/javascript">git
     window.onload = function() {
         // 1.获取需要的元素
         var box = document.getElementById('box');
