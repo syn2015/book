@@ -501,17 +501,49 @@ button{
 			}
 		</script>
 ```
-获取属性样式
+# 获取属性样式
 
 
 ```css
-
+			#box{
+				width: 200px;
+				height: 200px;
+				background-color: red;
+				border: 1px solid #000;
+			}
 ```
 
 
 
 ```javascript
+		<div id="box"></div>
+		<script type="text/javascript">
+			window.onload = function() {
+				var box = document.getElementById('box');
+				move(box);
 
+				function move(obj) {
+					setInterval(function() {
+
+						obj.style.width = parseInt(getStyle(obj, 'width')) - 1 + 'px';
+					}, 30);
+				}
+				/**
+				 * 获取元素属性的函数
+				 * @param {Object} obj 当前元素对象
+				 * @param {Object} attr 当前元素对象的属性
+				 */
+				function getStyle(obj, attr) {
+					if (obj.currentStyle) {
+						// 兼容ie
+						return obj.currentStyle[attr];
+					} else {
+						// 兼容主流浏览器
+						return getComputedStyle(obj, null)[attr];
+					}
+				}
+			}
+		</script>
 ```
 多物体运动完整版
 
