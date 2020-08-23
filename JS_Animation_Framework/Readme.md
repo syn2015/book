@@ -855,26 +855,235 @@ function getStyle(obj, attr) {
 
 
 ```css
-
+			#box{
+				width: 200px;
+				height: 200px;
+				background-color: #DA70D6;
+			}
 ```
 
 
 
 ```javascript
-
+		<div id="box"></div>
+		<script src="js/myAnimation2.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			window.onload = function (){
+				var box = document.getElementById('box');
+				box.onmouseover = function (){
+					startAnimation(box,{"width": 500,"opacity": 30});
+				}
+				box.onmouseout = function (){
+					startAnimation(box,{"width": 200,"opacity": 100});
+				}
+			}
+		</script>
 ```
-联动效果
+```javascript
+var speed = 0;
+/**
+ * 动画的函数
+ * @param {Object} obj 当前的对象
+ * @param {Object} attr 当前元素对象的属性
+ * @param {Object} endTarget 末尾位置
+ */
+function startAnimation(obj, json, fn) {
+	// 针对于多物体运动,定时器的返回值要绑定当前的对象中.
+	clearInterval(obj.timer);
+	obj.timer = setInterval(function() {
+		var cur = 0;
+		var flag = true; //标杆 如果true，证明所有的属性都到达终点值
+		for (var attr in json) {
+			// 0 获取样式属性
+			// 透明度变化处理
+			switch (attr) {
+				case 'opacity':
+					cur = Math.round(parseFloat(getStyle(obj, attr)) * 100);
+					break;
+				case 'scrollTop':
+					cur = obj[attr]
+					break;
+				default:
+					cur = parseInt(getStyle(obj, attr));
+					break;
+			}
+			// 1.求速度
+			speed = (json[attr] - cur) / 10;
+			speed = json[attr] > cur ? Math.ceil(speed) : Math.floor(speed);
+			// 2.临界处理
+			if (json[attr] !== cur) {
+				flag = false;
+			}
+			// 3.运动起来
+			switch (attr) {
+				case 'opacity':
+					obj.style[attr] = `alpha(opacity: ${cur + speed})`;
+					obj.style[attr] = (cur + speed) / 100;
+					break;
+				case 'scrollTop':
+					obj.scrollTop = cur + speed;
+				default:
+					obj.style[attr] = cur + speed + 'px';
+					break;
+			}
+		}
+
+		if (flag) {
+			clearInterval(obj.timer);
+			if (fn) {
+				fn();
+			}
+			return;
+		}
+
+	}, 30);
+}
+/**
+ * 获取元素属性的函数
+ * @param {Object} obj 当前元素对象
+ * @param {Object} attr 当前元素对象的属性
+ */
+function getStyle(obj, attr) {
+	if (obj.currentStyle) {
+		// 兼容ie
+		return obj.currentStyle[attr];
+	} else {
+		// 兼容主流浏览器
+		return getComputedStyle(obj, null)[attr];
+	}
+}
+```
+
+
+
+# 联动效果
 
 
 ```css
-
+			*{
+				padding: 0;
+				margin: 0;
+			}
+			#ad{
+				position: fixed;
+				right: 0;
+				bottom: 0;
+			}
+			#close{
+				position: absolute;
+				right: 0;
+				top: 0;
+				width: 25px;
+				height: 25px;
+				z-index: 5;
+			}
 ```
 
 
 
 ```javascript
-
+		<div id="ad">
+			<img src="images/ad.png" alt="" width="300">
+			<span id="close">
+				
+			</span>
+		</div>
+		<script src="js/myAnimation2.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			// 1.联动效果
+			// 2.侧边栏横幅
+			// 3.滚动监听
+			// 4.轮播图
+			// (1)获取标签
+			var ad = document.getElementById('ad');
+			var close = document.getElementById('close');
+			close.onclick = function (){
+				startAnimation(ad,{"height": 260},function(){
+					startAnimation(ad,{"width": 0},function(){
+						ad.style.display = 'none';
+					})
+				})
+			}
+			
+		</script>
 ```
+改进
+
+```javascript
+var speed = 0;
+/**
+ * 动画的函数
+ * @param {Object} obj 当前的对象
+ * @param {Object} attr 当前元素对象的属性
+ * @param {Object} endTarget 末尾位置
+ */
+function startAnimation(obj, json, fn) {
+	// 针对于多物体运动,定时器的返回值要绑定当前的对象中.
+	clearInterval(obj.timer);
+	obj.timer = setInterval(function() {
+		var cur = 0;
+		var flag = true; //标杆 如果true，证明所有的属性都到达终点值
+		for (var attr in json) {
+			// 0 获取样式属性
+			// 透明度变化处理
+			switch (attr) {
+				case 'opacity':
+					cur = Math.round(parseFloat(getStyle(obj, attr)) * 100);
+					break;
+				case 'scrollTop':
+					cur = obj[attr]
+					break;
+				default:
+					cur = parseInt(getStyle(obj, attr));
+					break;
+			}
+			// 1.求速度
+			speed = (json[attr] - cur) / 10;
+			speed = json[attr] > cur ? Math.ceil(speed) : Math.floor(speed);
+			// 2.临界处理
+			if (json[attr] !== cur) {
+				flag = false;
+			}
+			// 3.运动起来
+			switch (attr) {
+				case 'opacity':
+					obj.style[attr] = `alpha(opacity: ${cur + speed})`;
+					obj.style[attr] = (cur + speed) / 100;
+					break;
+				case 'scrollTop':
+					obj.scrollTop = cur + speed;
+				default:
+					obj.style[attr] = cur + speed + 'px';
+					break;
+			}
+		}
+
+		if (flag) {
+			clearInterval(obj.timer);
+			if (fn) {
+				fn();
+			}
+			return;
+		}
+
+	}, 30);
+}
+/**
+ * 获取元素属性的函数
+ * @param {Object} obj 当前元素对象
+ * @param {Object} attr 当前元素对象的属性
+ */
+function getStyle(obj, attr) {
+	if (obj.currentStyle) {
+		// 兼容ie
+		return obj.currentStyle[attr];
+	} else {
+		// 兼容主流浏览器
+		return getComputedStyle(obj, null)[attr];
+	}
+}
+```
+
 侧边栏横幅效果
 
 
