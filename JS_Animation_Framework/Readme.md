@@ -618,7 +618,7 @@ button{
 			}
 		</script>
 ```
-多值运动
+# 多值运动
 
 
 ```css
@@ -694,7 +694,139 @@ button{
 			}
 		</script>
 ```
-多值运动-2
+# 多值运动-2
+
+
+```css
+			*{
+				padding: 0;
+				margin: 0;
+			}
+			div{
+				width: 300px;
+				height: 150px;
+				background-color: royalblue;
+				margin: 20px 0;
+				border: 4px solid #000;
+				opacity: 0.3;
+				filter: alpha(opacity: 30);
+			}
+```
+
+
+
+```javascript
+		<div></div>
+		<div></div>
+		<div></div>
+		<script src="js/myAnimation.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			window.onload = function() {
+				var allBoxs = document.getElementsByTagName('div');
+				allBoxs[0].onmouseover = function() {
+					startAnimation(this, 'opacity', 100);
+				}
+				allBoxs[0].onmouseout = function() {
+					startAnimation(this, 'opacity', 30);
+				}
+       		 }
+
+		</script>
+```
+startAnimation方法
+```javascript
+var speed = 0;
+/**
+ * 动画的函数
+ * @param {Object} obj 当前的对象
+ * @param {Object} attr 当前元素对象的属性
+ * @param {Object} endTarget 末尾位置
+ */
+function startAnimation(obj, attr, endTarget,fn) {
+	// 针对于多物体运动,定时器的返回值要绑定当前的对象中.
+	clearInterval(obj.timer);
+	obj.timer = setInterval(function() {
+		var cur = 0;
+		// 0 获取样式属性
+		// 透明度变化处理
+		if (attr === 'opacity') {
+            // 引用JS的浮点数精度问题，需要四舍五入得到整数
+			cur = Math.round(parseFloat(getStyle(obj, attr)) * 100);
+		} else {
+
+			cur = parseInt(getStyle(obj, attr));
+		}
+
+		// 1.求速度
+		speed = (endTarget - cur) / 20;
+		speed = endTarget > cur ? Math.ceil(speed) : Math.floor(speed);
+
+		// 2.临界处理
+		if (endTarget === cur) {
+			clearInterval(obj.timer);
+			if(fn){
+				fn();
+			}
+			return;
+		}
+		// 3.运动起来
+		if (attr === 'opacity') {
+			obj.style[attr] = `alpha(opacity: ${cur + speed})`;
+			obj.style[attr] = (cur + speed) / 100;
+
+		} else {
+			obj.style[attr] = cur + speed + 'px';
+		}
+
+	}, 30);
+}
+/**
+ * 获取元素属性的函数
+ * @param {Object} obj 当前元素对象
+ * @param {Object} attr 当前元素对象的属性
+ */
+function getStyle(obj, attr) {
+	if (obj.currentStyle) {
+		// 兼容ie
+		return obj.currentStyle[attr];
+	} else {
+		// 兼容主流浏览器
+		return getComputedStyle(obj, null)[attr];
+	}
+}
+```
+
+# 链式动画
+
+
+```css
+			#box{
+				width: 200px;
+				height: 200px;
+				background-color: palevioletred;
+				opacity: 0.3;
+			}
+```
+
+
+
+```javascript
+		<div id="box"></div>
+		<script src="js/myAnimation.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			window.onload = function (){
+				var box = document.getElementById('box');
+				box.onmouseover = function (){
+					startAnimation(box,'width',500,function (){
+						startAnimation(box,'height',400,function (){
+							startAnimation(box,'opacity',100);
+						})
+					})
+				}
+			}
+		</script>
+```
+# JSON
 
 
 ```css
@@ -704,33 +836,22 @@ button{
 
 
 ```javascript
-
+			var json = {
+				"name": "mjj",
+				"age": 29,
+				"width": 500,
+				"opacity": 100
+			}
+			for(var attr in json){
+				console.log(attr,json[attr]);
+			}
+// 打印类型
+//name mjj
+// age 29
+//width 500
+//opacity 100
 ```
-链式动画
-
-
-```css
-
-```
-
-
-
-```javascript
-
-```
-JSON
-
-
-```css
-
-```
-
-
-
-```javascript
-
-```
-同时运动
+# 同时运动
 
 
 ```css
