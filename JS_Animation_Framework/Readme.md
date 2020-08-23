@@ -956,58 +956,7 @@ function getStyle(obj, attr) {
 
 
 
-# 联动效果
-
-
-```css
-			*{
-				padding: 0;
-				margin: 0;
-			}
-			#ad{
-				position: fixed;
-				right: 0;
-				bottom: 0;
-			}
-			#close{
-				position: absolute;
-				right: 0;
-				top: 0;
-				width: 25px;
-				height: 25px;
-				z-index: 5;
-			}
-```
-
-
-
-```javascript
-		<div id="ad">
-			<img src="images/ad.png" alt="" width="300">
-			<span id="close">
-				
-			</span>
-		</div>
-		<script src="js/myAnimation2.js" type="text/javascript" charset="utf-8"></script>
-		<script type="text/javascript">
-			// 1.联动效果
-			// 2.侧边栏横幅
-			// 3.滚动监听
-			// 4.轮播图
-			// (1)获取标签
-			var ad = document.getElementById('ad');
-			var close = document.getElementById('close');
-			close.onclick = function (){
-				startAnimation(ad,{"height": 260},function(){
-					startAnimation(ad,{"width": 0},function(){
-						ad.style.display = 'none';
-					})
-				})
-			}
-			
-		</script>
-```
-改进
+改进：变化属性需要同时满足
 
 ```javascript
 var speed = 0;
@@ -1084,19 +1033,104 @@ function getStyle(obj, attr) {
 }
 ```
 
-侧边栏横幅效果
-
+# 联动效果
 
 ```css
-
+			*{
+				padding: 0;
+				margin: 0;
+			}
+			#ad{
+				position: fixed;
+				right: 0;
+				bottom: 0;
+			}
+			#close{
+				position: absolute;
+				right: 0;
+				top: 0;
+				width: 25px;
+				height: 25px;
+				z-index: 5;
+			}
 ```
 
 
 
 ```javascript
-
+		<div id="ad">
+			<img src="images/ad.png" alt="" width="300">
+			<span id="close">
+				
+			</span>
+		</div>
+		<script src="js/myAnimation2.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			// 1.联动效果
+			// 2.侧边栏横幅
+			// 3.滚动监听
+			// 4.轮播图
+			// (1)获取标签
+			var ad = document.getElementById('ad');
+			var close = document.getElementById('close');
+			close.onclick = function (){
+				startAnimation(ad,{"height": 260},function(){
+					startAnimation(ad,{"width": 0},function(){
+						ad.style.display = 'none';
+					})
+				})
+			}
+			
+		</script>
 ```
-滚动监听
+
+
+
+# 侧边栏横幅效果
+
+
+```css
+    * {
+        padding: 0;
+        margin: 0;
+    }
+
+    #aside {
+        position: absolute;
+        top: 200px;
+        left: 0;
+        width: 300px;
+    }
+
+    #aside img {
+        width: 100%;
+    }
+```
+
+
+
+```javascript
+<body style="height: 5000px;">
+    <div id="aside">
+        <img src="images/aside.png" alt="">
+    </div>
+    <script src="js/myAnimation2.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript">
+    window.onload = function() {
+        // 1.获取标签
+        var aside = document.getElementById('aside');
+        // 2.获取广告的偏移量
+        var aside_top = aside.offsetTop;
+        window.onscroll = function() {
+            // 3.获取页面滚动的高度
+            var docScrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            startAnimation(aside, { "top": docScrollTop + aside_top });
+        }
+    }
+    </script>
+</body>
+```
+# 滚动监听
 
 
 ```css
