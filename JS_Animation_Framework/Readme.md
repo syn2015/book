@@ -1134,11 +1134,228 @@ function getStyle(obj, attr) {
 
 
 ```css
+    * {
+        padding: 0;
+        margin: 0;
+    }
 
+    ul {
+        list-style: none;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    html,
+    body {
+        width: 100%;
+        height: 100%;
+    }
+
+    .container {
+        width: 1190px;
+        height: 100%;
+        margin: 0 auto;
+    }
+
+    .container div {
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        color: #fff;
+        font-size: 30px;
+    }
+
+    .aside {
+        position: fixed;
+        width: 40px;
+        right: 20px;
+        top: 300px;
+        font-size: 16px;
+        font-weight: 700;
+        text-align: center;
+    }
+
+    .aside li {
+        height: 50px;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .aside li a {
+        color: peru;
+    }
+
+    .aside li.current {
+        background-color: coral;
+    }
+
+    .aside li.current a {
+        color: #fff;
+    }
+    </style>
 ```
 
 
 
 ```javascript
+    <div class="container" id="box">
+        <div class="current">爱逛好货</div>
+        <div>好店主播</div>
+        <div>品质特色</div>
+        <div>猜你喜欢</div>
+    </div>
+    <ul class="aside" id="aside">
+        <li class="current">
+            <a href="javascript:void(0)">爱逛好货</a>
+        </li>
+        <li>
+            <a href="javascript:void(0)">好店主播</a>
+        </li>
+        <li>
+            <a href="javascript:void(0)">品质特色</a>
+        </li>
+        <li>
+            <a href="javascript:void(0)">猜你喜欢</a>
+        </li>
+    </ul>
+    <script src="js/myAnimation2.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript">
+    window.onload = function() {
+        // 1.获取标签
+        var box = document.getElementById('box');
+        var allBoxs = box.children;
+        var aside = document.getElementById('aside');
+        var lis = aside.children;
+        var isClick = false; //默认没有被点击
+        // 2.上色
+        var colors = ['red', 'pink', 'purple', 'blue'];
+        for (var i = 0; i < allBoxs.length; i++) {
+            allBoxs[i].style.backgroundColor = colors[i];
+        }
 
+        // 3.监听侧边栏按钮的点击
+        for (var j = 0; j < lis.length; j++) {
+            lis[j].index = j;
+            lis[j].onclick = function() {
+                isClick = true;
+                for (var k = 0; k < lis.length; k++) {
+                    lis[k].className = '';
+                }
+                // 设置当前的类
+                this.className = 'current';
+                var _this = this;
+                // 页面动画起来
+                startAnimation(document.documentElement, {
+                    "scrollTop": this.index * (document.body.clientHeight)
+                }, function() {
+                    isClick = false;
+                    // 这是跳转的页面
+	                if (_this.index == lis.length - 1) {
+	                    alert(111);
+	                    window.open('https://www.baidu.com');
+	                }
+                })
+
+                
+                // document.documentElement.scrollTop = this.index * document.body.clientHeight;
+
+            }
+        }
+        // 4.监听页面滚动
+        window.onscroll = function() {
+            if (!isClick) {
+                // 4.1 获取页面滚动的高度
+                var docScrollTop = document.documentElement.scrollTop+20 || document.body.scrollTop+20;
+                console.log(docScrollTop);
+                for (var i = 0; i < lis.length; i++) {
+                    if (docScrollTop > allBoxs[i].offsetTop) {
+                        for (var j = 0; j < allBoxs.length; j++) {
+                            lis[j].className = '';
+                        }
+                        lis[i].className = 'current';
+                    }
+                }
+            }
+        }
+    }
+    </script>
 ```
+
+改进获取scrollTop的方式
+
+```javascript
+var speed = 0;
+/**
+ * 动画的函数
+ * @param {Object} obj 当前的对象
+ * @param {Object} attr 当前元素对象的属性
+ * @param {Object} endTarget 末尾位置
+ */
+function startAnimation(obj, json, fn) {
+	// 针对于多物体运动,定时器的返回值要绑定当前的对象中.
+	clearInterval(obj.timer);
+	obj.timer = setInterval(function() {
+		var cur = 0;
+		var flag = true; //标杆 如果true，证明所有的属性都到达终点值
+		for (var attr in json) {
+			// 0 获取样式属性
+			// 透明度变化处理
+			switch (attr) {
+				case 'opacity':
+					cur = Math.round(parseFloat(getStyle(obj, attr)) * 100);
+					break;
+				case 'scrollTop':
+					cur = obj[attr]
+					break;
+				default:
+					cur = parseInt(getStyle(obj, attr));
+					break;
+			}
+			// 1.求速度
+			speed = (json[attr] - cur) / 10;
+			speed = json[attr] > cur ? Math.ceil(speed) : Math.floor(speed);
+			// 2.临界处理
+			if (json[attr] !== cur) {
+				flag = false;
+			}
+			// 3.运动起来
+			switch (attr) {
+				case 'opacity':
+					obj.style[attr] = `alpha(opacity: ${cur + speed})`;
+					obj.style[attr] = (cur + speed) / 100;
+					break;
+				case 'scrollTop':
+					obj.scrollTop = cur + speed;
+				default:
+					obj.style[attr] = cur + speed + 'px';
+					break;
+			}
+		}
+
+		if (flag) {
+			clearInterval(obj.timer);
+			if (fn) {
+				fn();
+			}
+			return;
+		}
+
+	}, 30);
+}
+/**
+ * 获取元素属性的函数
+ * @param {Object} obj 当前元素对象
+ * @param {Object} attr 当前元素对象的属性
+ */
+function getStyle(obj, attr) {
+	if (obj.currentStyle) {
+		// 兼容ie
+		return obj.currentStyle[attr];
+	} else {
+		// 兼容主流浏览器
+		return getComputedStyle(obj, null)[attr];
+	}
+}
+```
+
