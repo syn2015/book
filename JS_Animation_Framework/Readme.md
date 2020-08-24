@@ -1545,7 +1545,29 @@ window.onload = function() {
 	
 	// 6.开启定时器 自动播放
 	timer = setInterval(autoPlay,2000);
-	
+	//自动轮播
+    function autoPlay(){
+        startAnimation(allBoxs[iNow],{
+            "left":-scroll_w
+		})
+		iNow++;
+		if(iNow >= allBoxs.length){
+			iNow = 0;
+		}
+		allBoxs[iNow].style.left =  scroll_w + 'px';
+		startAnimation(allBoxs[iNow],{
+			"left":0
+		})
+		// 改变索引器
+		changeIndex();  
+    }
+    // 鼠标悬浮
+    slider.onmouseover=function(){
+        clearInterval(timer);
+    },
+     slider.onmouseout=function(){
+        timer = setInterval(autoPlay,2000);
+    }
 	 
 	
 	
