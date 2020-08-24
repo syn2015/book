@@ -1358,4 +1358,117 @@ function getStyle(obj, attr) {
 	}
 }
 ```
+# 轮播图
+
+```css
+*{
+	padding: 0;
+	margin: 0;
+}
+.slider{
+	width: 400px;
+	height: 500px;
+	margin: 100px auto;
+	position: relative;
+	overflow: hidden;
+}
+.slider .slider_scroll{
+	position: relative;
+	width: 400px;
+	height: 500px;
+}
+.slider_main{
+	position: relative;
+	width: 400px;
+	height: 500px;
+}
+.slider_main .item{
+	width: 400px;
+	height: 500px;
+	position: absolute;
+}
+.slider_main .item img{
+	width: 400px;
+	height: 500px;
+}
+.slider_index{
+	width: 400px;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	color: #fff;
+	font-weight: 700;
+	z-index: 20;
+	position: absolute;
+	bottom: 0;
+	background-color: rgb(0,0,0,.5);
+	cursor: pointer;
+}
+.slider_index .slider_index_icon{
+	display: inline-block;
+	line-height: 40px;
+	margin: 0 10px;
+}
+.slider_index .slider_index_icon.current{
+	color: red;
+}
+.slider_scroll span{
+	position: absolute;
+	width: 30px;
+	height: 68px;
+	background: url(../../images/icon-slides.png) no-repeat;
+	top: 50%;
+	margin-top: -34px;
+	cursor: pointer;
+}
+.slider_scroll span.next{
+	right: 0;
+	background-position: -46px 0;
+}
+.slider_scroll span.prev{
+	left: 0;
+	background-position: 0 0;
+}
+```
+
+```javascript
+		<div id="slider" class="slider">
+			<div class="slider_scroll" id="slider_scroll">
+				<div class="slider_main" id="slider_main">
+					
+					<div class="item">
+						<a href="#">
+							<img src="images/img1.png" alt="">
+						</a>
+					</div>
+					<div class="item">
+						<a href="#">
+							<img src="images/img2.png" alt="">
+						</a>
+					</div>
+					<div class="item">
+						<a href="#">
+							<img src="images/img3.png" alt="">
+						</a>
+					</div>
+					<div class="item">
+						<a href="#">
+							<img src="images/img4.png" alt="">
+						</a>
+					</div>
+				</div>
+				
+				<span class="next" id="next"></span>
+				<span class="prev" id="prev"></span>
+			</div>
+			<div class="slider_index" id="slider_index">
+				<!-- 通过js来动态的生成 -->
+			</div>
+			<script src="../js/myAnimation2.js" type="text/javascript" charset="utf-8"></script>
+			<script src="js/index.js" type="text/javascript" charset="utf-8"></script>
+```
+
+
+
+
 
