@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #local,
+        #remote {
+            width: 640px;
+            height: 480px;
+            margin: 0 auto;
+            box-shadow: 0 0 20px rgba(0, 0, 0, .25);
+        }
+
+        #remote {
+            margin-left: 20px;
+        }
+    </style>
+    <title>web live video</title>
+</head>
+
+<body>
+    <!-- 本地直播 -->
+    <div id="local">
+            本地直播
+    </div>
+    <!-- 远程直播 -->
+    <div id="remote">
+            远程直播
+    </div>
+    <!-- trtc文件 -->
+    <script src="trtc.js"></script>
+    <!-- 用户签名-->
+    <script src="lib-generate-test-usersig.min.js"></script>
+    <script>
+        const SDKAPPID = 1400436182;
+        const SECRETKEY = '771e0528eab940a1901e677a80e6dc1f4a430be0e47041459d9e0055619e0da8';
+        // 假设登录之后的用户ID
+        const userId = parseInt(1000 * Math.random()).toString();
+        console.log('随机ID：', userId)
+        // 有效时间:7天
+        const EXPIRETIME = 7 * 24 * 60 * 60;
+        //获取签名：userSig
+        // generator生成器
+        const generator = new LibGenerateTestUserSig(SDKAPPID, SECRETKEY, EXPIRETIME);
+        // 传入用户ID生成签名
+        const userSig = generator.genTestUserSig(userId);
+        console.log("签名-userSig:", userSig)
+        //创建用户对象
+        const client = TRTC.createClient({
+            mode: "rtc", // rtc模式
+            sdkAppId: SDKAPPID,// sdkid
+            userId, // 用户id
+            userSig // 用户签名
+        })
+        console.log('创建对象:', client);
+
+
+        // 进入音视频通话时间
+        // 假定房间ID
+        let roomId = '00001';
+        client.join({
+            roomId
+        }).catch((error) => {
+            console.error('进入房间失败', error);
+        }).then(() => {
+            console.log('进入房间成功');
+            // 创建本地的音视频流
+            const localStream = TRTC.createStream({
+                userId,  // 用户id
+                audio: true, // 播放audio
+                video: true, // video
+            })
+
+
+
+
+
+            // 初始化本地视频流
+            localStream.initialize().catch((error) => {
+                console.error("初始化本地视频流失败", error);
+                if (error) {
+                    alert('初始化本地视频流失败')
+                }
+            }).then(() => {
+                console.log("初始化本地视频流成功")
+                // 渲染本地视频流,传入页面div的ID字符串
+                localStream.play("local")
+            })
+
+
+            
+
+            // 发布视频流
+            client.publish(localStream).catch((error) => {
+                console.error("发布视频流失败", error);
+            }).then(() => {
+                console.log("发布视频流成功")
+            })
+
+
+
+
+        
+        })
+        // 订阅远端视频流：有人加入房间
+        client.on('stream-added', (event) => {
+            // 从事件对象event中获取远端的视频流
+            const remoteStream = event.stream;
+            console.log('远端视频流增加：' + remoteStream.getId());
+            // 订阅远端视频流
+            client.subscribe(remoteStream)
+        })
+
+
+
+        // 监听订阅到的视频流，并播放
+        client.on('stream-subscribed', (event) => {
+            const remoteStream = event.stream
+            console.log('远端订阅成功：' + remoteStream.getId());
+            remoteStream.play('remote')
+
+        })
+    </script>
+</body>
+
+</html>
