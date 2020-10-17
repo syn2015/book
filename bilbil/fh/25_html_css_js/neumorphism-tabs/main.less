@@ -1,0 +1,78 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Helvetica,"PingFang SC","Microsoft Yahei",sans-serif;
+}
+body{
+    background: #f0f0f3;
+    color: #808b9f;
+    .container{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100vw;
+        height: 100vh;
+        min-width: 375px;
+        overflow: hidden;
+        .tab-container{
+            padding: 24px;
+            width: 50%;
+            .tabs{
+                padding: 4px;
+                border-radius: 5px;
+                background: #f0f0f3;
+                box-shadow: -1px -1px 3px #ffffff,1.5px 1.5px 3px  rgba(174,174,192,0.4);
+                display: flex;
+               .tab{
+                padding: 12px 36px;
+                cursor: pointer;
+                transition: .3s;
+                &.active{
+                    border-radius: 5px;
+                    background-color: #eee;
+                    box-shadow: inset -1px -1px 1px rgba(255, 255, 255, .7),inset 1px 1px 2px rgba(174,174,192,0.2);
+                    color: #a7b4cc;
+                }
+               }
+            }
+            .tab-content{
+                margin-top: 36px;
+                padding: 36px;
+                border-radius: 16px;
+                background: #f0f0f3;
+                box-shadow: -10px -10px 30px #ffffff,10px 10px 30px rgba(174,174,192,0.4);
+                div{
+                    animation: fadeIn 1.3s;
+                    h2{
+                        margin-bottom: 24px;
+                        font-weight: 400;
+                    }
+                    img{
+                        height: 100px;
+                    }
+                }
+            }
+        }
+    }
+}
+@keyframes fadeIn{
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
+// 宽度不大于838px, 宽度撑满屏幕
+@media (max-width:838px){
+    body .container .tab-container{
+        width: 100%;
+    }
+}
+// 宽度在375px到418px，tab要缩小一些
+@media (min-width:375px) and (max-width:418px){
+    body .container .tab-container .tabs .tab{
+        padding: 12px 24px;
+    }
+}
