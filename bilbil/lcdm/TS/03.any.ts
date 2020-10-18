@@ -6,3 +6,6 @@ console.log(a.a)
 
 // 默认any类型
 let something;
+something={};
+something='1';
+something=true;
