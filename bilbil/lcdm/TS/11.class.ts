@@ -31,3 +31,4 @@ console.log(canimal.sayHi()); // meow, my name is tom
 // typescript 编译后的代码中，没有限制private属性再外部的可访问性
 
 // 参数属性：定义类的属性的同时给属性赋值；readonly，只读属性
+
