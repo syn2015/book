@@ -1,6 +1,7 @@
 <template>
     <div class="todo-list">
       <!-- 传递给子组件数据 -->
+      <!-- $event.target是从todoItem传递而来的todo的数据 -->
       <todo-list-item v-for="todo in todos" :key="todo.id" :todo-item="todo" @change-state="todo.completed=$event.target.checked"></todo-list-item>
     </div>
 </template>

@@ -32,7 +32,7 @@ export default {
     const addTodo = (todo) => todos.value.push(todo)
 
     // eslint-disable-next-line no-undef
-    const filter = ref('all')
+    const filter = ref('all') // 默认选中all
     //
     // eslint-disable-next-line no-undef
     const filteredTodos = computed(() => {
@@ -40,7 +40,7 @@ export default {
         case 'done':
           return todos.value.filter((todo) => todo.completed)
         case 'todo':
-          return todos.value.filter((todo) => todo.completed)
+          return todos.value.filter((todo) => !todo.completed)// 取反
         default:
           break
       }
