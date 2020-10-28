@@ -17,6 +17,9 @@
 import TodoAdd from './components/TodoAdd'
 import TodoFilter from './components/TodoFilter'
 import TodoList from './components/TodoList'
+// ref
+import { useTodos } from './composables/useTodos'
+import { useFilteredTodos } from './composables/useFilteredTodos'
 export default {
   name: 'App',
   components: {
@@ -27,24 +30,8 @@ export default {
   // ref(): 适用于基本数据类型
   // reactive():适用于复杂数据类型
   setup () {
-    // eslint-disable-next-line no-undef
-    const todos = ref([])
-    const addTodo = (todo) => todos.value.push(todo)
-
-    // eslint-disable-next-line no-undef
-    const filter = ref('all') // 默认选中all
-    //
-    // eslint-disable-next-line no-undef
-    const filteredTodos = computed(() => {
-      switch (filter.value) {
-        case 'done':
-          return todos.value.filter((todo) => todo.completed)
-        case 'todo':
-          return todos.value.filter((todo) => !todo.completed)// 取反
-        default:
-          break
-      }
-    })
+    const { todos, addTodo } = useTodos()
+    const { filter, filteredTodos } = useFilteredTodos(todos)
     return {
       todos,
       addTodo,
