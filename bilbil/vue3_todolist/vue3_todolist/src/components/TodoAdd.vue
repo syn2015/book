@@ -1,7 +1,7 @@
 <template>
       <div class="input-add">
-        <input type="text" name="todo" />
-        <button>
+        <input type="text" name="todo" v-model="todoContent" @keyup-enter="emitAddTodo" />
+        <button @click="emitAddTodo">
           <i class="plus"></i>
         </button>
       </div>
@@ -9,7 +9,28 @@
 
 <script>
 export default {
-  name: 'TodoAdd'
+  name: 'TodoAdd',
+  // props: 访问传递而来的数据
+  // context: vue的上下文信息
+  setup (props, context) {
+    // eslint-disable-next-line no-undef
+    const todoContent = ref('')
+    // 按钮事件添加todo
+    const emitAddTodo = () => {
+      const todo = {
+        id: props.tid, // 来自父组件的数据ID
+        content: todoContent.value, // 经由ref或reactive包装的数据需要通过value来访问，再template模板中不需要value来访问
+        completed: false
+      }
+      // 发送数据给父组件
+      context.emit('add-todo', todo)
+      todoContent.value = ''
+    }
+    return {
+      todoContent,
+      emitAddTodo
+    }
+  }
 }
 </script>
 

@@ -1,8 +1,8 @@
 <template>
-  <div class="todo-item">
+  <div class="todo-item" :class="{done:todoItem.completed}">
     <label>
-      <input type="checkbox" />
-      todo1
+      <input type="checkbox" :checked="todoItem.completed"  @click="$emit('change-state',$event)"/>
+      {{todoItem.content}}
       <span class="check-button"></span>
     </label>
   </div>
@@ -10,7 +10,9 @@
 
 <script>
 export default {
-  name: 'TodoListItem'
+  name: 'TodoListItem',
+  // 接受数据
+  props: ['todo-item']
 }
 </script>
 
@@ -25,6 +27,12 @@ export default {
   position: relative;
   display: flex;
   align-items: center;
+}
+/* 完成样式 */
+.todo-item.done label{
+  /* 删除线和斜体 */
+  text-decoration: line-through;
+  font-style: italic;
 }
 .todo-item label span.check-button {
   position: absolute;

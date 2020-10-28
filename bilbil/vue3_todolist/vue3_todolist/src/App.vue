@@ -2,9 +2,13 @@
   <main>
     <div class="container">
       <h1>Sun 代办事项！</h1>
-      <todo-add />
-      <todo-filter />
-      <todo-list />
+      <!-- 输入框 -->
+      <todo-add  :tid="todos.lenght" @add-todo="addTodo"/>
+      <!-- 选项卡过滤 -->
+      <todo-filter :selected="filter" @change-filter="filter=$event" />
+      <!-- 展示list -->
+      <!-- <todo-list :todos="todos" /> -->
+      <todo-list :todos="filteredTodos" />
     </div>
   </main>
 </template>
@@ -19,6 +23,34 @@ export default {
     TodoAdd,
     TodoFilter,
     TodoList
+  },
+  // ref(): 适用于基本数据类型
+  // reactive():适用于复杂数据类型
+  setup () {
+    // eslint-disable-next-line no-undef
+    const todos = ref([])
+    const addTodo = (todo) => todos.value.push(todo)
+
+    // eslint-disable-next-line no-undef
+    const filter = ref('all')
+    //
+    // eslint-disable-next-line no-undef
+    const filteredTodos = computed(() => {
+      switch (filter.value) {
+        case 'done':
+          return todos.value.filter((todo) => todo.completed)
+        case 'todo':
+          return todos.value.filter((todo) => todo.completed)
+        default:
+          break
+      }
+    })
+    return {
+      todos,
+      addTodo,
+      filter,
+      filteredTodos
+    }
   }
 }
 </script>

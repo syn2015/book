@@ -1,5 +1,30 @@
 # vue3_todolist
 
+## options api and composition api
+
+### options api
+```javascript
+export default{
+    data:...,
+    computed:...,
+    methods:...,
+    watch:...,
+    mounted():...
+}
+```
+### composition api
+```javascript
+export default{
+   setup:(props,context){
+       ref()://或reactive()
+       computed();
+       // 自定义函数
+       watchEffent();
+       onMounted();
+   }
+}
+```
+
 ## Project setup
 ```
 npm install
