@@ -45,7 +45,9 @@
           data: axisData,
           // symbolSize: 30
           symbolSize: function (arg) { // 控制散点的大小
+          // 打印当前散点
             // console.log(arg)
+            // 转换单位：cm=>m
             var height = arg[0] / 100
             var weight = arg[1]
             // bmi = 体重kg / (身高m*身高m)   大于28,就代表肥胖
@@ -57,15 +59,16 @@
           },
           itemStyle: { // 控制散点的样式
             color: function (arg) {
+              // 打印当前散点：包含在data属性中
               // console.log(arg)
               var height = arg.data[0] / 100
               var weight = arg.data[1]
               // bmi = 体重kg / (身高m*身高m)   大于28,就代表肥胖
               var bmi = weight / (height * height)
-              if (bmi > 28) {
+              if (bmi > 28) {// 超重为红色
                 return 'red'
               }
-              return 'green'
+              return 'green'// 正常为绿色
             }
           }
         }

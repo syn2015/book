@@ -10,6 +10,7 @@
 </head>
 
 <body>
+    <h1>直角坐标系图表：柱状图，折线图，散点图</h1>
   <div style="width: 600px;height:400px"></div>
   <script>
     var mCharts = echarts.init(document.querySelector("div"))
@@ -21,12 +22,12 @@
         borderColor: 'red',
       },
       xAxis: {
-        type: 'category',
+        type: 'category',// 类目轴，必须通过data设置类目数据
         data: xDataArr,
         position: 'top' // 控制坐标轴的位置
       },
       yAxis: {
-        type: 'value',
+        type: 'value',// 数值轴，自动从series目标数据中读取数据
         position: 'right' // 控制坐标轴的位置
       },
       series: [
@@ -55,7 +56,7 @@
             position: 'top'
           },
           barWidth: '30%',
-          data: yDataArr
+          data: yDataArr // y轴数据自动获取
         }
       ]
     }

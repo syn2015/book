@@ -26,13 +26,16 @@
     var mCharts = echarts.init(document.querySelector('div'))
     // 步骤4：准备配置项
     var option = {
+      // 直角坐标系的x轴
       xAxis: {
         type: 'category',
         data: ['小明', '小红', '小王']
       },
+      // y轴
       yAxis: {
         type: 'value'
       },
+      // 系列列表，每个系列通过type决定自己的图表类型
       series: [
         {
           name: '语文',

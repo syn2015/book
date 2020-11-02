@@ -33,6 +33,7 @@
         triggerOn: 'click', // 触发时机, click代表点击, mouseOver代表鼠标移过
         // formatter: '{b} 的成绩是 {c}'
         formatter: function(arg){ // 文字格式化
+          console.log(arg)// 打印每个柱的对象
           return arg[0].name + '的分数是:' + arg[0].data
         }
       },

@@ -19,20 +19,24 @@
     var mCharts = echarts.init(document.querySelector('div'))
     // 步骤4：准备配置项
     var option = {
+      // 标题文字
       title: {
         text: '成绩', // 标题文字
-        link: 'http://www.itcast.cn', // 标题超链接
+        link: 'https://syndev.top', // 标题超链接
         textStyle: { // 标题样式设置
           color: 'red' // 标题文字
         }
       },
+      // x
       xAxis: {
         type: 'category',  // 指明x轴为 类目轴
         data: ['小明', '小红', '小王'] // 为类目轴提供数据, 该数据是一个数组, 数组中的每个元素会呈现在x轴上
       },
+      // y
       yAxis: {
         type: 'value'  // 指明x轴为 数值轴, 指明数值轴之后, 无需指定data
       },
+      // 图表
       series: [
         {
           name: '语文', // 为图标起一个名称

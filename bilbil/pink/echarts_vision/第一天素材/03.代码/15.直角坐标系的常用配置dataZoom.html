@@ -16,22 +16,22 @@
     var xDataArr = ['张三', '李四', '王五', '闰土', '小明', '茅台', '二妞', '大强']
     var yDataArr = [88, 92, 63, 77, 94, 80, 72, 86]
     var option = {
-      dataZoom: [ // 控制区域缩放效果的实现
+      dataZoom: [ // 控制区域缩放效果的实现，x轴和y轴都可以拥有
         {
           type: 'slider', // 缩放的类型  slide代表滑块  inside代表依靠鼠标滚轮
           // type: 'inside'
-          xAxisIndex: 0
+          xAxisIndex: 0  // 区域缩放作用于x轴，一般写0即可
         },
         {
           type: 'slider',
-          yAxisIndex: 0,
+          yAxisIndex: 0,  // 区域缩放作用于y轴，一般写0即可
           start: 0, // 渲染完成后, 数据筛选的初始值, 百分比
-          end: 80 // 渲染完成后, 数据筛选的结束值, 百分比
+          end: 80 // 渲染完成后, 数据筛选的结束值, 百分比 0-80%之间
         }
       ],
       toolbox: {
         feature: {
-          dataZoom: {}
+          dataZoom: {} // 区域缩放
         }
       },
       grid: {

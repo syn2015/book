@@ -49,8 +49,8 @@
             show: true, // 显示文字
             //formatter: 'hehe' // 决定文字显示的内容
             formatter: function(arg){
-              // console.log(arg)
-              return arg.name + '平台' + arg.value + '元\n' + arg.percent + '%'
+              console.log('pie饼图数据：',arg)
+              return arg.name + '平台' + arg.value + '元\n' + arg.percent + '%'// percent属性，百分比
             }
           },
           // radius: 20 // 饼图的半径
@@ -59,7 +59,7 @@
           roseType: 'radius', // 南丁格尔图 饼图的每一个区域的半径是不同的
           // selectedMode: 'single' // 选中的效果,能够将选中的区域偏离圆点一小段距离
           selectedMode: 'multiple',
-          selectedOffset: 30
+          selectedOffset: 30 // 选中偏移量
         }
       ]
     }

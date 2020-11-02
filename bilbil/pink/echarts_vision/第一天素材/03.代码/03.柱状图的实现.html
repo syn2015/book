@@ -20,6 +20,7 @@
     var xDataArr = ['张三', '李四', '王五', '闰土', '小明', '茅台', '二妞', '大强'] // 准备x轴数据
     var yDataArr = [88, 92, 63, 77, 94, 80, 72, 86] // 为x轴每一个元素指明数据
     var option = {
+      // type:value,需要从services中查找数据
       xAxis: {
         type: 'value'
       },
@@ -53,7 +54,7 @@
             position: 'top' // 显示位置
           },
           barWidth: '30%', // 柱的宽度
-          data: yDataArr
+          data: yDataArr  // 数据
         }
       ]
     }
