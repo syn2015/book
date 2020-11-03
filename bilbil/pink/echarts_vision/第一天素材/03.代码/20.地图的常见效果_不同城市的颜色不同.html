@@ -18,6 +18,8 @@
     //2. 将空气质量的数据设置给series下的对象
     //3. 将series下的数据和geo关联起来
     //4. 配置visualMap
+
+    // airData数组中的name数据和chinamap中的数据一致
     var airData = [
         { name: '北京', value: 39.92 },
         { name: '天津', value: 39.13 },
@@ -76,11 +78,12 @@
             type: 'map'
           }
         ],
+        // 数据筛选
         visualMap: {
           min: 0,
           max: 300,
           inRange: {
-            color: ['white', 'red'] // 控制颜色渐变的范围
+            color: ['white', 'red'] // 控制颜色渐变的范围：从下往上变化
           },
           calculable: true // 出现滑块
         }
