@@ -46,14 +46,21 @@
 
 **git config --list**
 
+```
+/etc/gitconfig  文件：所有用户得普适文件。    git config --system
+~/.gitignore 文件:用户文件                 git config --global
+.git/config 文件，当前git的配置文件 
+```
+
+
+
 区域
 ----
 
 1.  **工作区**
-
 2.  **暂存区**
-
 3.  **版本库**
+4.  **三个对象：Git对象，树对象，提交对象**
 
 对象
 ----
@@ -63,12 +70,11 @@
     - key/value组成的键值对，key是value组成的hash。在**git内部是一个blob类型**
 
     - **hash-object -w 文件路径或--stdin**
-
-      - **–w指定存储对象,不指定此项，也返回对应的键值同时存入版本库**
-
-      - \--stdin 不指定此项，须在命令尾部给出存储文件的路径
-
-    - **cat-file –p 文件hash值 根据键值拉取数据**
+- **–w指定存储对象,不指定此项，也返回对应的键值同时存入版本库**
+      
+- \--stdin 不指定此项，须在命令尾部给出存储文件的路径
+      
+- **cat-file –p 文件hash值 根据键值拉取数据**
   - **–p 指示该命令自动判断内容的类型并显示内容**
     
   - **–t显示git内部对应的类型（tree,blob，commit）**
@@ -86,8 +92,8 @@
     
 2.  **find ./.git/objects/ -type f** 查看树对象
     - **t 表示类型**
-    
     - **git ls-list -s**
+    - d 表示文件夹
 1.  **查看暂存区**
     
 4.  **git write-tree**
@@ -865,3 +871,23 @@ Git特点
 ·  git add .  提交新文件(new)和被修改(modified)文件，不包括被删除(deleted)文件
 ```
 
+# 高频命令
+
+**git ls-files -s 查看暂存区**
+
+**git cat-file -p查看git/树/提交对象**                  
+
+**git cat-file -t 查看git/树/提交对象的类型（tree ,blob,commit）**
+
+```javascript
+git基本流程
+git add ./
+    等价 git hash-object -w 文件名（修改的文件都需要执行此命令）
+git commit -m 'comment'
+	git write-tree
+	git commit-tree
+```
+
+git diff --cached  查看那些更新已经暂存起来的（绿颜色的）
+
+git diff 查看当前的更新还没有暂存起来（红颜色的）
