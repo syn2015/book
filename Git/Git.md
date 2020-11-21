@@ -888,6 +888,6 @@ git commit -m 'comment'
 	git commit-tree
 ```
 
-git diff --cached  查看那些更新已经暂存起来的（绿颜色的）
+git diff --cached 或git diff --staged(1.6.1以上) 查看那些更新已经暂存起来的（绿颜色的）
 
 git diff 查看当前的更新还没有暂存起来（红颜色的）
