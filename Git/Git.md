@@ -454,10 +454,9 @@ git存储
 - **checkout对工作目录是安全的，hard是强制覆盖工作目录。**
   
 8.  **git reset [--mixed]  HEAD(或hash值) 文件路径**
-- **不改动head，只改动暂存区，完成重置该文件。**
+- **不改动head指针，只改动暂存区，完成重置该文件。**
   
 - **等同于git reset 文件名**
-  
 9.  **git checkout 分支名 和git checkout --文件名**
 - **仅仅改动了工作目录**
   
@@ -924,8 +923,6 @@ git config --global alias.bhistory "log --oneline --decorate --graph --all"
 **git reset --soft HEAD ~(或者hash)**   撤销上一次的commit并带着分支  （类似 git commit --amend）
 
 **git reset [--mixed] HEAD ~(或者hash)**  撤销上一次的commit并取消暂存的所有东西并带着分支 （类似 git reset HEAD）
-
-
 
 **git reset --hard HEAD ~(或者hash)**  撤销上一次的commit并取消暂存和工作区的所有东西并带着分支 （类似 git checkout ） 一个危险命令
 
