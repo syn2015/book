@@ -416,7 +416,6 @@ git存储
 
     - **git rm --cache 文件名称 将文件从暂存区中删除**
   - **git将不再管理该文件，工作目录中依然存在该文件**
-    
 3.  **撤回版本库的提交(修改注释内容)**
 - **git commit --amend 修改最新的提交注释内容**
   
@@ -921,3 +920,12 @@ git config --global alias.bhistory "log --oneline --decorate --graph --all"
 ```
 
 **git merge 合并的分支名**
+
+**git reset --soft HEAD ~(或者hash)**   撤销上一次的commit并带着分支  （类似 git commit --amend）
+
+**git reset [--mixed] HEAD ~(或者hash)**  撤销上一次的commit并取消暂存的所有东西并带着分支 （类似 git reset HEAD）
+
+
+
+**git reset --hard HEAD ~(或者hash)**  撤销上一次的commit并取消暂存和工作区的所有东西并带着分支 （类似 git checkout ） 一个危险命令
+
