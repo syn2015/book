@@ -314,7 +314,7 @@ git log
 
     配别名（**命令较长时，使用双引号括起来**）
 
->   **git config --global alias.别名 “log --oneline --decorate --graph –all”**
+>   **git config --global alias.别名 “log --oneline --decorate --graph –-all”**
 
 >   **git config --global alias.别名 “!gitk” 已外部命令的方式运行指定程序（git
 >   ui）**
@@ -395,7 +395,7 @@ git存储
       - **git stash apply stash@{0} 展示指定的栈内容**
 
     - **git stash pop 删除的名字**
-  - **应用存储并立即删除**
+      - **应用存储并立即删除**
   
 - **git stash drop 删除的名字** 将要删除的存储的名字来移除它
   
@@ -873,11 +873,15 @@ Git特点
 
 # 高频命令
 
+**git reflog**   查看提交历史
+
 **git ls-files -s 查看暂存区**
 
-**git cat-file -p查看git/树/提交对象**                  
+**git cat-file -p hash值      查看git/树/提交对象**                  
 
-**git cat-file -t 查看git/树/提交对象的类型（tree ,blob,commit）**
+**git cat-file -t  hash值    查看git/树/提交对象的类型（tree ,blob,commit）**
+
+**git commit -am 'comment'** 跳过暂存直接提交版本库
 
 ```javascript
 git基本流程
@@ -888,6 +892,32 @@ git commit -m 'comment'
 	git commit-tree
 ```
 
-git diff --cached 或git diff --staged(1.6.1以上) 查看那些更新已经暂存起来的（绿颜色的）
+**git diff --cached 或git diff --staged**(1.6.1以上) 查看那些更新已经暂存起来的（绿颜色的）
 
-git diff 查看当前的更新还没有暂存起来（红颜色的）
+**git diff** 查看当前的更新还没有暂存起来（红颜色的）
+
+**git rm 删除的文件名**    ， 用来删除同时添加到暂存区
+
+git mv 重名命的文件，  用来重命名同时添加到暂存区
+
+git branch  显示分支列表
+
+**git branch 新分支名**
+
+**git checkout 切换分支**
+
+**git checkout -b 新分支**    创建新分支并且切换到该分支上
+
+git branch -d  删除的分支名   ， 记得首先切换出将要删除的分支
+
+git branch -D 删除的分支名  ， 强制删除该分支
+
+**git branch  新建分支  提交对象的hash**    时光回溯到该hash对应的版本
+
+```
+高频别名
+// 分支历史
+git config --global alias.bhistory "log --oneline --decorate --graph --all"
+```
+
+**git merge 合并的分支名**
