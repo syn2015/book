@@ -159,7 +159,7 @@ Element.prototype.retElementChildren = function() {
   }
   return temp;
 };
-//遍历元素节点树（返回数组形式）
+// 用遍历元素节点树（返回数组形式）
 Element.prototype.retElementTree = function() {
   var temp = {
       len: 0,
