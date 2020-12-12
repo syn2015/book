@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-49925874-3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-49925874-3');
+  </script>
+
+  <meta charset='utf-8'>
+  <meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible'>
+
+  <title>Git - Book</title>
+
+  <link href='/favicon.ico' rel='shortcut icon' type='image/x-icon'>
+
+  <link rel="stylesheet" media="screen" href="/assets/application-561d7b2a02693ee834e0c53e97bf56f231aaff344d93d5833685d40815d83a95.css" />
+  <script src="/assets/modernize-91eb7473bfa18e104376c623be884766692c7cf93c8769aea544ad57e3ea2292.js"></script>
+  <!--[if (gte IE 6)&(lte IE 8)]>
+  <script src="/javascripts/selectivizr-min.js"></script>
+  <![endif]-->
+
+</head>
+
+<body id="documentation">
+
+  <div class="inner">
+    <header>
+
+  <a href="/"><img src="/images/logo@2x.png" width="110" height="46" alt="Git" /></a>
+  <span id="tagline"></span>
+  <script type="text/javascript">
+    var taglines = ["fast-version-control","everything-is-local","distributed-even-if-your-workflow-isnt","local-branching-on-the-cheap","distributed-is-the-new-centralized"];
+    var tagline = taglines[Math.floor(Math.random() * taglines.length)];
+    document.getElementById('tagline').innerHTML = '--' + tagline;
+  </script>
+  <form id="search" action="/search/results">
+    <input id="search-text" name="search" placeholder="Search entire site..." autocomplete="off" type="text" />
+  </form>
+  <div id="search-results"></div>
+
+</header>
+
+  </div> <!-- .inner -->
+
+    <div class="inner">
+      <div id="content-wrapper">
+        <aside class="sidebar">
+  <nav>
+    <ul>
+      <li>
+        <a href="/about">About</a>
+        <ul class="">
+          <li>
+            <a href="/about">Branching and Merging</a>
+          </li>
+          <li>
+            <a href="/about/small-and-fast">Small and Fast</a>
+          </li>
+          <li>
+            <a href="/about/distributed">Distributed</a>
+          </li>
+          <li>
+            <a href="/about/info-assurance">Data Assurance</a>
+          </li>
+          <li>
+            <a href="/about/staging-area">Staging Area</a>
+          </li>
+          <li>
+            <a href="/about/free-and-open-source">Free and Open Source</a>
+          </li>
+          <li>
+            <a href="/about/trademark">Trademark</a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a class="active" href="/doc">Documentation</a>
+        <ul class="expanded">
+          <li>
+            <a href="/docs">Reference</a>
+          </li>
+          <li>
+            <a class="active" href="/book">Book</a>
+          </li>
+          <li>
+            <a href="/videos">Videos</a>
+          </li>
+          <li>
+            <a href="/doc/ext">External Links</a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="/downloads">Downloads</a>
+        <ul class="">
+          <li>
+            <a href="/downloads/guis">GUI Clients</a>
+          </li>
+          <li>
+            <a href="/downloads/logos">Logos</a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="/community">Community</a>
+      </li>
+    </ul>
+      <hr class="sidebar">
+        <p>
+This book is available in
+  <a href="/book/en">English</a>.
+</p>
+<p>
+  Full translation available in
+  <table>
+    <tr><td><a href="/book/az">azərbaycan dili</a>,</td></tr>
+    <tr><td><a href="/book/bg">български език</a>,</td></tr>
+    <tr><td><a href="/book/de">Deutsch</a>,</td></tr>
+    <tr><td><a href="/book/es">Español</a>,</td></tr>
+    <tr><td><a href="/book/fr">Français</a>,</td></tr>
+    <tr><td><a href="/book/gr">Ελληνικά</a>,</td></tr>
+    <tr><td><a href="/book/ja">日本語</a>,</td></tr>
+    <tr><td><a href="/book/ko">한국어</a>,</td></tr>
+    <tr><td><a href="/book/nl">Nederlands</a>,</td></tr>
+    <tr><td><a href="/book/ru">Русский</a>,</td></tr>
+    <tr><td><a href="/book/sl">Slovenščina</a>,</td></tr>
+    <tr><td><a href="/book/tl">Tagalog</a>,</td></tr>
+    <tr><td><a href="/book/uk">Українська</a></td></tr>
+    <tr><td><a href="/book/zh">简体中文</a>,</td></tr>
+  </table>
+</p>
+<p>
+  Partial translations available in
+  <table>
+    <tr><td><a href="/book/cs">Čeština</a>,</td></tr>
+    <tr><td><a href="/book/mk">Македонски</a>,</td></tr>
+    <tr><td><a href="/book/pl">Polski</a>,</td></tr>
+    <tr><td><a href="/book/sr">Српски</a>,</td></tr>
+    <tr><td><a href="/book/uz">Ўзбекча</a>,</td></tr>
+    <tr><td><a href="/book/zh-tw">繁體中文</a>,</td></tr>
+  </table>
+</p>
+<p>
+  Translations started for
+  <table>
+    <tr><td><a href="/book/be">Беларуская</a>,</td></tr>
+    <tr><td><a href="/book/fa" dir="rtl">فارسی</a>,</td></tr>
+    <tr><td><a href="/book/id">Indonesian</a>,</td></tr>
+    <tr><td><a href="/book/it">Italiano</a>,</td></tr>
+    <tr><td><a href="/book/ms">Bahasa Melayu</a>,</td></tr>
+    <tr><td><a href="/book/pt-br">Português (Brasil)</a>,</td></tr>
+    <tr><td><a href="/book/pt-pt">Português (Portugal)</a>,</td></tr>
+    <tr><td><a href="/book/sv">Svenska</a>,</td></tr>
+    <tr><td><a href="/book/tr">Türkçe</a>.</td></tr>
+  </table>
+</p>
+<hr class="sidebar"/>
+<p>
+The source of this book is  <a href="https://github.com/progit2-gr/progit2">hosted on GitHub.</a></br>
+Patches, suggestions and comments are welcome.
+</p>
+
+
+  </nav>
+</aside>
+
+        <div id="content">
+          
+
+<div id='main'>
+  <h1>Book</h1>
+    <div style="float:right;margin: -20px 40px 0 40px;">
+      <img  src="/images/progit2.png" width="118" height="157"/>
+      <div style="light">2nd Edition (2014)</div>
+      <div class="ebook-download">
+        <h2>Download Ebook</h2>
+        <div class="ebooks">
+            <a href="https://github.com/progit2-gr/progit2/releases/download/2.1.4/progit_v2.1.4.pdf"><img width="50px" src="/images/pdf.png"/></a>
+            <a href="https://github.com/progit2-gr/progit2/releases/download/2.1.4/progit_v2.1.4.epub"><img width="50px" src="/images/epub.png"/></a>
+        </div>
+        <div class="ebooks">
+            <a href="https://github.com/progit2-gr/progit2/releases/download/2.1.4/progit_v2.1.4.mobi"><img width="50px" src="/images/mobi.png"/></a>
+        </div>
+      </div>
+     </div>
+  <p>
+  The entire Pro Git book, written by Scott Chacon and Ben Straub and published by Apress, is available here. All content is licensed under the <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/">Creative Commons Attribution Non Commercial Share Alike 3.0 license</a>. Print versions of the book are available on <a href="http://www.amazon.com/Pro-Git-Scott-Chacon/dp/1484200772?ie=UTF8&camp=1789&creative=9325&creativeASIN=1430218339&linkCode=as2&tag=git-sfconservancy-20">Amazon.com</a>.</>
+  </p>
+  <ol class='book-toc'>
+    <li class='chapter'>
+    <h2>1. <a href="/book/gr/v2/%CE%9E%CE%B5%CE%BA%CE%B9%CE%BD%CF%8E%CE%BD%CF%84%CE%B1%CF%82-%CE%BC%CE%B5-%CF%84%CE%BF-Git-%CE%A3%CF%87%CE%B5%CF%84%CE%B9%CE%BA%CE%AC-%CE%BC%CE%B5-%CF%84%CE%BF%CE%BD-%CE%AD%CE%BB%CE%B5%CE%B3%CF%87%CE%BF-%CE%B5%CE%BA%CE%B4%CF%8C%CF%83%CE%B5%CF%89%CE%BD">Ξεκινώντας με το Git</a></h2>
+      <ol>
+            <li>
+              1.1
+              <a href="/book/gr/v2/%CE%9E%CE%B5%CE%BA%CE%B9%CE%BD%CF%8E%CE%BD%CF%84%CE%B1%CF%82-%CE%BC%CE%B5-%CF%84%CE%BF-Git-%CE%A3%CF%87%CE%B5%CF%84%CE%B9%CE%BA%CE%AC-%CE%BC%CE%B5-%CF%84%CE%BF%CE%BD-%CE%AD%CE%BB%CE%B5%CE%B3%CF%87%CE%BF-%CE%B5%CE%BA%CE%B4%CF%8C%CF%83%CE%B5%CF%89%CE%BD">Σχετικά με τον έλεγχο εκδόσεων</a>
+            </li>
+            <li>
+              1.2
+              <a href="/book/gr/v2/%CE%9E%CE%B5%CE%BA%CE%B9%CE%BD%CF%8E%CE%BD%CF%84%CE%B1%CF%82-%CE%BC%CE%B5-%CF%84%CE%BF-Git-%CE%9C%CE%B9%CE%B1-%CE%BC%CE%B9%CE%BA%CF%81%CE%AE-%CE%B1%CE%BD%CE%B1%CE%B4%CF%81%CE%BF%CE%BC%CE%AE-%CF%83%CF%84%CE%B7%CE%BD-%CE%B9%CF%83%CF%84%CE%BF%CF%81%CE%AF%CE%B1-%CF%84%CE%BF%CF%85-Git">Μια μικρή αναδρομή στην ιστορία του Git</a>
+            </li>
+            <li>
+              1.3
+              <a href="/book/gr/v2/%CE%9E%CE%B5%CE%BA%CE%B9%CE%BD%CF%8E%CE%BD%CF%84%CE%B1%CF%82-%CE%BC%CE%B5-%CF%84%CE%BF-Git-%CE%A4%CE%B1-%CE%B2%CE%B1%CF%83%CE%B9%CE%BA%CE%AC-%CF%84%CE%BF%CF%85-Git">Τα βασικά του Git</a>
+            </li>
+            <li>
+              1.4
+              <a href="/book/gr/v2/%CE%9E%CE%B5%CE%BA%CE%B9%CE%BD%CF%8E%CE%BD%CF%84%CE%B1%CF%82-%CE%BC%CE%B5-%CF%84%CE%BF-Git-%CE%97-%CE%B3%CF%81%CE%B1%CE%BC%CE%BC%CE%AE-%CE%B5%CE%BD%CF%84%CE%BF%CE%BB%CF%8E%CE%BD">Η γραμμή εντολών</a>
+            </li>
+            <li>
+              1.5
+              <a href="/book/gr/v2/%CE%9E%CE%B5%CE%BA%CE%B9%CE%BD%CF%8E%CE%BD%CF%84%CE%B1%CF%82-%CE%BC%CE%B5-%CF%84%CE%BF-Git-%CE%95%CE%B3%CE%BA%CE%B1%CF%84%CE%AC%CF%83%CF%84%CE%B1%CF%83%CE%B7-%CF%84%CE%BF%CF%85-Git">Εγκατάσταση του Git</a>
+            </li>
+            <li>
+              1.6
+              <a href="/book/gr/v2/%CE%9E%CE%B5%CE%BA%CE%B9%CE%BD%CF%8E%CE%BD%CF%84%CE%B1%CF%82-%CE%BC%CE%B5-%CF%84%CE%BF-Git-%CE%A1%CF%8D%CE%B8%CE%BC%CE%B9%CF%83%CE%B7-%CF%84%CE%BF%CF%85-Git-%CE%B3%CE%B9%CE%B1-%CF%80%CF%81%CF%8E%CF%84%CE%B7-%CF%86%CE%BF%CF%81%CE%AC">Ρύθμιση του Git για πρώτη φορά</a>
+            </li>
+            <li>
+              1.7
+              <a href="/book/gr/v2/%CE%9E%CE%B5%CE%BA%CE%B9%CE%BD%CF%8E%CE%BD%CF%84%CE%B1%CF%82-%CE%BC%CE%B5-%CF%84%CE%BF-Git-%CE%A7%CF%81%CE%B7%CF%83%CE%B9%CE%BC%CE%BF%CF%80%CE%BF%CE%B9%CF%8E%CE%BD%CF%84%CE%B1%CF%82-%CF%84%CE%B7-%CE%B2%CE%BF%CE%AE%CE%B8%CE%B5%CE%B9%CE%B1">Χρησιμοποιώντας τη βοήθεια</a>
+            </li>
+            <li>
+              1.8
+              <a href="/book/gr/v2/%CE%9E%CE%B5%CE%BA%CE%B9%CE%BD%CF%8E%CE%BD%CF%84%CE%B1%CF%82-%CE%BC%CE%B5-%CF%84%CE%BF-Git-%CE%91%CE%BD%CE%B1%CE%BA%CE%B5%CF%86%CE%B1%CE%BB%CE%B1%CE%AF%CF%89%CF%83%CE%B7">Ανακεφαλαίωση</a>
+            </li>
+      </ol>
+    </li>
+    <li class='chapter'>
+    <h2>2. <a href="/book/gr/v2/%CE%A4%CE%B1-%CE%B8%CE%B5%CE%BC%CE%B5%CE%BB%CE%B9%CF%8E%CE%B4%CE%B7-%CF%83%CF%84%CE%BF%CE%B9%CF%87%CE%B5%CE%AF%CE%B1-%CF%84%CE%BF%CF%85-Git-%CE%91%CF%80%CE%BF%CE%BA%CF%84%CF%8E%CE%BD%CF%84%CE%B1%CF%82-%CE%AD%CE%BD%CE%B1-%CE%B1%CF%80%CE%BF%CE%B8%CE%B5%CF%84%CE%AE%CF%81%CE%B9%CE%BF-Git">Τα θεμελιώδη στοιχεία του Git</a></h2>
+      <ol>
+            <li>
+              2.1
+              <a href="/book/gr/v2/%CE%A4%CE%B1-%CE%B8%CE%B5%CE%BC%CE%B5%CE%BB%CE%B9%CF%8E%CE%B4%CE%B7-%CF%83%CF%84%CE%BF%CE%B9%CF%87%CE%B5%CE%AF%CE%B1-%CF%84%CE%BF%CF%85-Git-%CE%91%CF%80%CE%BF%CE%BA%CF%84%CF%8E%CE%BD%CF%84%CE%B1%CF%82-%CE%AD%CE%BD%CE%B1-%CE%B1%CF%80%CE%BF%CE%B8%CE%B5%CF%84%CE%AE%CF%81%CE%B9%CE%BF-Git">Αποκτώντας ένα αποθετήριο Git</a>
+            </li>
+            <li>
+              2.2
+              <a href="/book/gr/v2/%CE%A4%CE%B1-%CE%B8%CE%B5%CE%BC%CE%B5%CE%BB%CE%B9%CF%8E%CE%B4%CE%B7-%CF%83%CF%84%CE%BF%CE%B9%CF%87%CE%B5%CE%AF%CE%B1-%CF%84%CE%BF%CF%85-Git-%CE%9A%CE%B1%CF%84%CE%B1%CE%B3%CF%81%CE%B1%CF%86%CE%AE-%CE%B1%CE%BB%CE%BB%CE%B1%CE%B3%CF%8E%CE%BD-%CF%83%CF%84%CE%BF-%CE%B1%CF%80%CE%BF%CE%B8%CE%B5%CF%84%CE%AE%CF%81%CE%B9%CE%BF">Καταγραφή αλλαγών στο αποθετήριο</a>
+            </li>
+            <li>
+              2.3
+              <a href="/book/gr/v2/%CE%A4%CE%B1-%CE%B8%CE%B5%CE%BC%CE%B5%CE%BB%CE%B9%CF%8E%CE%B4%CE%B7-%CF%83%CF%84%CE%BF%CE%B9%CF%87%CE%B5%CE%AF%CE%B1-%CF%84%CE%BF%CF%85-Git-%CE%A7%CF%81%CE%B7%CF%83%CE%B9%CE%BC%CE%BF%CF%80%CE%BF%CE%B9%CF%8E%CE%BD%CF%84%CE%B1%CF%82-%CF%84%CE%BF-%CE%B9%CF%83%CF%84%CE%BF%CF%81%CE%B9%CE%BA%CF%8C-%CF%85%CF%80%CE%BF%CE%B2%CE%BF%CE%BB%CF%8E%CE%BD">Χρησιμοποιώντας το ιστορικό υποβολών</a>
+            </li>
+            <li>
+              2.4
+              <a href="/book/gr/v2/%CE%A4%CE%B1-%CE%B8%CE%B5%CE%BC%CE%B5%CE%BB%CE%B9%CF%8E%CE%B4%CE%B7-%CF%83%CF%84%CE%BF%CE%B9%CF%87%CE%B5%CE%AF%CE%B1-%CF%84%CE%BF%CF%85-Git-%CE%91%CE%BD%CE%B1%CE%B9%CF%81%CF%8E%CE%BD%CF%84%CE%B1%CF%82-%CE%BA%CE%AC%CF%84%CE%B9">Αναιρώντας κάτι</a>
+            </li>
+            <li>
+              2.5
+              <a href="/book/gr/v2/%CE%A4%CE%B1-%CE%B8%CE%B5%CE%BC%CE%B5%CE%BB%CE%B9%CF%8E%CE%B4%CE%B7-%CF%83%CF%84%CE%BF%CE%B9%CF%87%CE%B5%CE%AF%CE%B1-%CF%84%CE%BF%CF%85-Git-%CE%94%CE%BF%CF%85%CE%BB%CE%B5%CF%8D%CE%BF%CE%BD%CF%84%CE%B1%CF%82-%CE%BC%CE%B5-%CE%B1%CF%80%CE%BF%CE%BC%CE%B1%CE%BA%CF%81%CF%85%CF%83%CE%BC%CE%AD%CE%BD%CE%B1-%CE%B1%CF%80%CE%BF%CE%B8%CE%B5%CF%84%CE%AE%CF%81%CE%B9%CE%B1">Δουλεύοντας με απομακρυσμένα αποθετήρια</a>
+            </li>
+            <li>
+              2.6
+              <a href="/book/gr/v2/%CE%A4%CE%B1-%CE%B8%CE%B5%CE%BC%CE%B5%CE%BB%CE%B9%CF%8E%CE%B4%CE%B7-%CF%83%CF%84%CE%BF%CE%B9%CF%87%CE%B5%CE%AF%CE%B1-%CF%84%CE%BF%CF%85-Git-%CE%A7%CF%81%CE%B7%CF%83%CE%B9%CE%BC%CE%BF%CF%80%CE%BF%CE%B9%CF%8E%CE%BD%CF%84%CE%B1%CF%82-%CE%B5%CF%84%CE%B9%CE%BA%CE%AD%CF%84%CE%B5%CF%82">Χρησιμοποιώντας ετικέτες</a>
+            </li>
+            <li>
+              2.7
+              <a href="/book/gr/v2/%CE%A4%CE%B1-%CE%B8%CE%B5%CE%BC%CE%B5%CE%BB%CE%B9%CF%8E%CE%B4%CE%B7-%CF%83%CF%84%CE%BF%CE%B9%CF%87%CE%B5%CE%AF%CE%B1-%CF%84%CE%BF%CF%85-Git-%CE%A3%CF%85%CE%BD%CF%84%CE%BF%CE%BC%CE%B5%CF%8D%CE%B5%CF%83%CE%B5%CE%B9%CF%82-%CF%83%CF%84%CE%BF-Git">Συντομεύεσεις στο Git</a>
+            </li>
+            <li>
+              2.8
+              <a href="/book/gr/v2/%CE%A4%CE%B1-%CE%B8%CE%B5%CE%BC%CE%B5%CE%BB%CE%B9%CF%8E%CE%B4%CE%B7-%CF%83%CF%84%CE%BF%CE%B9%CF%87%CE%B5%CE%AF%CE%B1-%CF%84%CE%BF%CF%85-Git-%CE%91%CE%BD%CE%B1%CE%BA%CE%B5%CF%86%CE%B1%CE%BB%CE%B1%CE%AF%CF%89%CF%83%CE%B7">Ανακεφαλαίωση</a>
+            </li>
+      </ol>
+    </li>
+    <li class='chapter'>
+    <h2>3. <a href="/book/gr/v2/%CE%94%CE%B9%CE%B1%CE%BA%CE%BB%CE%B1%CE%B4%CF%8E%CF%83%CE%B5%CE%B9%CF%82-%CF%83%CF%84%CE%BF-Git-%CE%9F%CE%B9-%CE%BA%CE%BB%CE%AC%CE%B4%CE%BF%CE%B9-%CE%BC%CE%B5-%CE%BB%CE%AF%CE%B3%CE%B1-%CE%BB%CF%8C%CE%B3%CE%B9%CE%B1">Διακλαδώσεις στο Git</a></h2>
+      <ol>
+            <li>
+              3.1
+              <a href="/book/gr/v2/%CE%94%CE%B9%CE%B1%CE%BA%CE%BB%CE%B1%CE%B4%CF%8E%CF%83%CE%B5%CE%B9%CF%82-%CF%83%CF%84%CE%BF-Git-%CE%9F%CE%B9-%CE%BA%CE%BB%CE%AC%CE%B4%CE%BF%CE%B9-%CE%BC%CE%B5-%CE%BB%CE%AF%CE%B3%CE%B1-%CE%BB%CF%8C%CE%B3%CE%B9%CE%B1">Οι κλάδοι με λίγα λόγια</a>
+            </li>
+            <li>
+              3.2
+              <a href="/book/gr/v2/%CE%94%CE%B9%CE%B1%CE%BA%CE%BB%CE%B1%CE%B4%CF%8E%CF%83%CE%B5%CE%B9%CF%82-%CF%83%CF%84%CE%BF-Git-%CE%92%CE%B1%CF%83%CE%B9%CE%BA%CE%AD%CF%82-%CE%AD%CE%BD%CE%BD%CE%BF%CE%B9%CE%B5%CF%82-%CE%B4%CE%B9%CE%B1%CE%BA%CE%BB%CE%B1%CE%B4%CF%8E%CF%83%CE%B5%CF%89%CE%BD-%CE%BA%CE%B1%CE%B9-%CF%83%CF%85%CE%B3%CF%87%CF%89%CE%BD%CE%B5%CF%8D%CF%83%CE%B5%CF%89%CE%BD">Βασικές έννοιες διακλαδώσεων και συγχωνεύσεων</a>
+            </li>
+            <li>
+              3.3
+              <a href="/book/gr/v2/%CE%94%CE%B9%CE%B1%CE%BA%CE%BB%CE%B1%CE%B4%CF%8E%CF%83%CE%B5%CE%B9%CF%82-%CF%83%CF%84%CE%BF-Git-%CE%94%CE%B9%CE%B1%CF%87%CE%B5%CE%AF%CF%81%CE%B9%CF%83%CE%B7-%CE%BA%CE%BB%CE%AC%CE%B4%CF%89%CE%BD">Διαχείριση κλάδων</a>
+            </li>
+            <li>
+              3.4
+              <a href="/book/gr/v2/%CE%94%CE%B9%CE%B1%CE%BA%CE%BB%CE%B1%CE%B4%CF%8E%CF%83%CE%B5%CE%B9%CF%82-%CF%83%CF%84%CE%BF-Git-%CE%A1%CE%BF%CE%AD%CF%82-%CE%B5%CF%81%CE%B3%CE%B1%CF%83%CE%AF%CE%B1%CF%82-%CE%BC%CE%B5-%CE%B4%CE%B9%CE%B1%CE%BA%CE%BB%CE%B1%CE%B4%CF%8E%CF%83%CE%B5%CE%B9%CF%82">Ροές εργασίας με διακλαδώσεις</a>
+            </li>
+            <li>
+              3.5
+              <a href="/book/gr/v2/%CE%94%CE%B9%CE%B1%CE%BA%CE%BB%CE%B1%CE%B4%CF%8E%CF%83%CE%B5%CE%B9%CF%82-%CF%83%CF%84%CE%BF-Git-%CE%91%CF%80%CE%BF%CE%BC%CE%B1%CE%BA%CF%81%CF%85%CF%83%CE%BC%CE%AD%CE%BD%CE%BF%CE%B9-%CE%BA%CE%BB%CE%AC%CE%B4%CE%BF%CE%B9">Απομακρυσμένοι κλάδοι</a>
+            </li>
+            <li>
+              3.6
+              <a href="/book/gr/v2/%CE%94%CE%B9%CE%B1%CE%BA%CE%BB%CE%B1%CE%B4%CF%8E%CF%83%CE%B5%CE%B9%CF%82-%CF%83%CF%84%CE%BF-Git-%CE%91%CE%BB%CE%BB%CE%B1%CE%B3%CE%AE-%CE%B2%CE%AC%CF%83%CE%B7%CF%82">Αλλαγή βάσης</a>
+            </li>
+            <li>
+              3.7
+              <a href="/book/gr/v2/%CE%94%CE%B9%CE%B1%CE%BA%CE%BB%CE%B1%CE%B4%CF%8E%CF%83%CE%B5%CE%B9%CF%82-%CF%83%CF%84%CE%BF-Git-%CE%91%CE%BD%CE%B1%CE%BA%CE%B5%CF%86%CE%B1%CE%BB%CE%B1%CE%AF%CF%89%CF%83%CE%B7">Ανακεφαλαίωση</a>
+            </li>
+      </ol>
+    </li>
+    <li class='chapter'>
+    <h2>4. <a href="/book/gr/v2/%CE%A4%CE%BF-Git-%CF%83%CF%84%CE%BF%CE%BD-%CE%B4%CE%B9%CE%B1%CE%BA%CE%BF%CE%BC%CE%B9%CF%83%CF%84%CE%AE-%CE%A4%CE%B1-%CF%80%CF%81%CF%89%CF%84%CF%8C%CE%BA%CE%BF%CE%BB%CE%BB%CE%B1">Το Git στον διακομιστή</a></h2>
+      <ol>
+            <li>
+              4.1
+              <a href="/book/gr/v2/%CE%A4%CE%BF-Git-%CF%83%CF%84%CE%BF%CE%BD-%CE%B4%CE%B9%CE%B1%CE%BA%CE%BF%CE%BC%CE%B9%CF%83%CF%84%CE%AE-%CE%A4%CE%B1-%CF%80%CF%81%CF%89%CF%84%CF%8C%CE%BA%CE%BF%CE%BB%CE%BB%CE%B1">Τα πρωτόκολλα</a>
+            </li>
+            <li>
+              4.2
+              <a href="/book/gr/v2/%CE%A4%CE%BF-Git-%CF%83%CF%84%CE%BF%CE%BD-%CE%B4%CE%B9%CE%B1%CE%BA%CE%BF%CE%BC%CE%B9%CF%83%CF%84%CE%AE-%CE%95%CE%B3%CE%BA%CE%B1%CF%84%CE%AC%CF%83%CF%84%CE%B1%CF%83%CE%B7-%CF%84%CE%BF%CF%85-Git-%CF%83%CE%B5-%CE%B4%CE%B9%CE%B1%CE%BA%CE%BF%CE%BC%CE%B9%CF%83%CF%84%CE%AE">Εγκατάσταση του Git σε διακομιστή</a>
+            </li>
+            <li>
+              4.3
+              <a href="/book/gr/v2/%CE%A4%CE%BF-Git-%CF%83%CF%84%CE%BF%CE%BD-%CE%B4%CE%B9%CE%B1%CE%BA%CE%BF%CE%BC%CE%B9%CF%83%CF%84%CE%AE-%CE%94%CE%B7%CE%BC%CE%B9%CE%BF%CF%85%CF%81%CE%B3%CE%AF%CE%B1-%CE%B4%CE%B7%CE%BC%CF%8C%CF%83%CE%B9%CE%BF%CF%85-%CE%BA%CE%BB%CE%B5%CE%B9%CE%B4%CE%B9%CE%BF%CF%8D-SSH">Δημιουργία δημόσιου κλειδιού SSH</a>
+            </li>
+            <li>
+              4.4
+              <a href="/book/gr/v2/%CE%A4%CE%BF-Git-%CF%83%CF%84%CE%BF%CE%BD-%CE%B4%CE%B9%CE%B1%CE%BA%CE%BF%CE%BC%CE%B9%CF%83%CF%84%CE%AE-%CE%A3%CF%84%CE%AE%CF%83%CE%B9%CE%BC%CE%BF-%CF%84%CE%BF%CF%85-%CE%B4%CE%B9%CE%B1%CE%BA%CE%BF%CE%BC%CE%B9%CF%83%CF%84%CE%AE">Στήσιμο του διακομιστή</a>
+            </li>
+            <li>
+              4.5
+              <a href="/book/gr/v2/%CE%A4%CE%BF-Git-%CF%83%CF%84%CE%BF%CE%BD-%CE%B4%CE%B9%CE%B1%CE%BA%CE%BF%CE%BC%CE%B9%CF%83%CF%84%CE%AE-%CE%94%CE%B1%CE%AF%CE%BC%CE%BF%CE%BD%CE%B5%CF%82-%CF%84%CE%BF%CF%85-Git">Δαίμονες του Git</a>
+            </li>
+            <li>
+              4.6
+              <a href="/book/gr/v2/%CE%A4%CE%BF-Git-%CF%83%CF%84%CE%BF%CE%BD-%CE%B4%CE%B9%CE%B1%CE%BA%CE%BF%CE%BC%CE%B9%CF%83%CF%84%CE%AE-%CE%88%CE%BE%CF%85%CF%80%CE%BD%CE%BF-HTTP">Έξυπνο HTTP</a>
+            </li>
+            <li>
+              4.7
+              <a href="/book/gr/v2/%CE%A4%CE%BF-Git-%CF%83%CF%84%CE%BF%CE%BD-%CE%B4%CE%B9%CE%B1%CE%BA%CE%BF%CE%BC%CE%B9%CF%83%CF%84%CE%AE-GitWeb">GitWeb</a>
+            </li>
+            <li>
+              4.8
+              <a href="/book/gr/v2/%CE%A4%CE%BF-Git-%CF%83%CF%84%CE%BF%CE%BD-%CE%B4%CE%B9%CE%B1%CE%BA%CE%BF%CE%BC%CE%B9%CF%83%CF%84%CE%AE-GitLab">GitLab</a>
+            </li>
+            <li>
+              4.9
+              <a href="/book/gr/v2/%CE%A4%CE%BF-Git-%CF%83%CF%84%CE%BF%CE%BD-%CE%B4%CE%B9%CE%B1%CE%BA%CE%BF%CE%BC%CE%B9%CF%83%CF%84%CE%AE-%CE%95%CF%80%CE%B9%CE%BB%CE%BF%CE%B3%CE%AD%CF%82-%CF%86%CE%B9%CE%BB%CE%BF%CE%BE%CE%B5%CE%BD%CE%AF%CE%B1%CF%82-%CE%B1%CF%80%CF%8C-%CF%84%CF%81%CE%AF%CF%84%CE%BF%CF%85%CF%82">Επιλογές φιλοξενίας από τρίτους</a>
+            </li>
+            <li>
+              4.10
+              <a href="/book/gr/v2/%CE%A4%CE%BF-Git-%CF%83%CF%84%CE%BF%CE%BD-%CE%B4%CE%B9%CE%B1%CE%BA%CE%BF%CE%BC%CE%B9%CF%83%CF%84%CE%AE-%CE%91%CE%BD%CE%B1%CE%BA%CE%B5%CF%86%CE%B1%CE%BB%CE%B1%CE%AF%CF%89%CF%83%CE%B7">Ανακεφαλαίωση</a>
+            </li>
+      </ol>
+    </li>
+    <li class='chapter'>
+    <h2>5. <a href="/book/gr/v2/%CE%9A%CE%B1%CF%84%CE%B1%CE%BD%CE%B5%CE%BC%CE%B7%CE%BC%CE%AD%CE%BD%CE%BF-Git-%CE%9A%CE%B1%CF%84%CE%B1%CE%BD%CE%B5%CE%BC%CE%B7%CE%BC%CE%AD%CE%BD%CE%B5%CF%82-%CF%81%CE%BF%CE%AD%CF%82-%CE%B5%CF%81%CE%B3%CE%B1%CF%83%CE%AF%CE%B1%CF%82">Κατανεμημένο Git</a></h2>
+      <ol>
+            <li>
+              5.1
+              <a href="/book/gr/v2/%CE%9A%CE%B1%CF%84%CE%B1%CE%BD%CE%B5%CE%BC%CE%B7%CE%BC%CE%AD%CE%BD%CE%BF-Git-%CE%9A%CE%B1%CF%84%CE%B1%CE%BD%CE%B5%CE%BC%CE%B7%CE%BC%CE%AD%CE%BD%CE%B5%CF%82-%CF%81%CE%BF%CE%AD%CF%82-%CE%B5%CF%81%CE%B3%CE%B1%CF%83%CE%AF%CE%B1%CF%82">Κατανεμημένες ροές εργασίας</a>
+            </li>
+            <li>
+              5.2
+              <a href="/book/gr/v2/%CE%9A%CE%B1%CF%84%CE%B1%CE%BD%CE%B5%CE%BC%CE%B7%CE%BC%CE%AD%CE%BD%CE%BF-Git-%CE%A3%CF%85%CE%BD%CE%B5%CE%B9%CF%83%CF%86%CE%AD%CF%81%CE%BF%CE%BD%CF%84%CE%B1%CF%82-%CF%83%CE%B5-%CE%AD%CE%BD%CE%B1-%CE%AD%CF%81%CE%B3%CE%BF">Συνεισφέροντας σε ένα έργο</a>
+            </li>
+            <li>
+              5.3
+              <a href="/book/gr/v2/%CE%9A%CE%B1%CF%84%CE%B1%CE%BD%CE%B5%CE%BC%CE%B7%CE%BC%CE%AD%CE%BD%CE%BF-Git-%CE%A3%CF%85%CE%BD%CF%84%CE%AE%CF%81%CE%B7%CF%83%CE%B7-%CE%B5%CE%BD%CF%8C%CF%82-%CE%AD%CF%81%CE%B3%CE%BF%CF%85">Συντήρηση ενός έργου</a>
+            </li>
+            <li>
+              5.4
+              <a href="/book/gr/v2/%CE%9A%CE%B1%CF%84%CE%B1%CE%BD%CE%B5%CE%BC%CE%B7%CE%BC%CE%AD%CE%BD%CE%BF-Git-%CE%91%CE%BD%CE%B1%CE%BA%CE%B5%CF%86%CE%B1%CE%BB%CE%B1%CE%AF%CF%89%CF%83%CE%B7">Ανακεφαλαίωση</a>
+            </li>
+      </ol>
+    </li>
+    <li class='chapter'>
+    <h2>6. <a href="/book/gr/v2/GitHub-%CE%94%CE%B7%CE%BC%CE%B9%CE%BF%CF%85%CF%81%CE%B3%CE%AF%CE%B1-%CE%BB%CE%BF%CE%B3%CE%B1%CF%81%CE%B9%CE%B1%CF%83%CE%BC%CE%BF%CF%8D-%CE%BA%CE%B1%CE%B9-%CF%81%CF%8D%CE%B8%CE%BC%CE%B9%CF%83%CE%AE-%CF%84%CE%BF%CF%85">GitHub</a></h2>
+      <ol>
+            <li>
+              6.1
+              <a href="/book/gr/v2/GitHub-%CE%94%CE%B7%CE%BC%CE%B9%CE%BF%CF%85%CF%81%CE%B3%CE%AF%CE%B1-%CE%BB%CE%BF%CE%B3%CE%B1%CF%81%CE%B9%CE%B1%CF%83%CE%BC%CE%BF%CF%8D-%CE%BA%CE%B1%CE%B9-%CF%81%CF%8D%CE%B8%CE%BC%CE%B9%CF%83%CE%AE-%CF%84%CE%BF%CF%85">Δημιουργία λογαριασμού και ρύθμισή του</a>
+            </li>
+            <li>
+              6.2
+              <a href="/book/gr/v2/GitHub-%CE%A3%CF%85%CE%BD%CE%B5%CE%B9%CF%83%CF%86%CE%BF%CF%81%CE%AC-%CF%83%CE%B5-%CE%AD%CF%81%CE%B3%CE%BF">Συνεισφορά σε έργο</a>
+            </li>
+            <li>
+              6.3
+              <a href="/book/gr/v2/GitHub-%CE%A3%CF%85%CE%BD%CF%84%CE%AE%CF%81%CE%B7%CF%83%CE%B7-%CE%B5%CE%BD%CF%8C%CF%82-%CE%AD%CF%81%CE%B3%CE%BF%CF%85">Συντήρηση ενός έργου</a>
+            </li>
+            <li>
+              6.4
+              <a href="/book/gr/v2/GitHub-%CE%94%CE%B9%CE%B1%CF%87%CE%B5%CE%AF%CF%81%CE%B9%CF%83%CE%B7-%CE%BF%CF%81%CE%B3%CE%B1%CE%BD%CE%B9%CF%83%CE%BC%CF%8E%CE%BD%CE%BD">Διαχείριση οργανισμώνν</a>
+            </li>
+            <li>
+              6.5
+              <a href="/book/gr/v2/GitHub-%CE%A3%CF%85%CE%B3%CE%B3%CF%81%CE%B1%CF%86%CE%AE-script-%CF%83%CF%84%CE%BF-GitHub">Συγγραφή script στο GitHub</a>
+            </li>
+            <li>
+              6.6
+              <a href="/book/gr/v2/GitHub-%CE%91%CE%BD%CE%B1%CE%BA%CE%B5%CF%86%CE%B1%CE%BB%CE%B1%CE%AF%CF%89%CF%83%CE%B7">Ανακεφαλαίωση</a>
+            </li>
+      </ol>
+    </li>
+    <li class='chapter'>
+    <h2>7. <a href="/book/gr/v2/%CE%95%CF%81%CE%B3%CE%B1%CE%BB%CE%B5%CE%AF%CE%B1-%CF%84%CE%BF%CF%85-Git-%CE%95%CF%80%CE%B9%CE%BB%CE%BF%CE%B3%CE%AE-%CE%B1%CE%BD%CE%B1%CE%B8%CE%B5%CF%8E%CF%81%CE%B7%CF%83%CE%B7%CF%82">Εργαλεία του Git</a></h2>
+      <ol>
+            <li>
+              7.1
+              <a href="/book/gr/v2/%CE%95%CF%81%CE%B3%CE%B1%CE%BB%CE%B5%CE%AF%CE%B1-%CF%84%CE%BF%CF%85-Git-%CE%95%CF%80%CE%B9%CE%BB%CE%BF%CE%B3%CE%AE-%CE%B1%CE%BD%CE%B1%CE%B8%CE%B5%CF%8E%CF%81%CE%B7%CF%83%CE%B7%CF%82">Επιλογή αναθεώρησης</a>
+            </li>
+            <li>
+              7.2
+              <a href="/book/gr/v2/%CE%95%CF%81%CE%B3%CE%B1%CE%BB%CE%B5%CE%AF%CE%B1-%CF%84%CE%BF%CF%85-Git-%CE%94%CE%B9%CE%B1%CE%B4%CF%81%CE%B1%CF%83%CF%84%CE%B9%CE%BA%CE%AE-%CE%B5%CF%81%CE%B3%CE%B1%CF%83%CE%AF%CE%B1-%CE%BC%CE%B5-%CF%84%CE%BF-%CF%83%CF%84%CE%AC%CE%B4%CE%B9%CE%BF-%CE%BA%CE%B1%CF%84%CE%B1%CF%87%CF%8E%CF%81%CE%B9%CF%83%CE%B7%CF%82">Διαδραστική εργασία με το στάδιο καταχώρισης</a>
+            </li>
+            <li>
+              7.3
+              <a href="/book/gr/v2/%CE%95%CF%81%CE%B3%CE%B1%CE%BB%CE%B5%CE%AF%CE%B1-%CF%84%CE%BF%CF%85-Git-stash-%CE%BA%CE%B1%CE%B9-clean">stash και clean</a>
+            </li>
+            <li>
+              7.4
+              <a href="/book/gr/v2/%CE%95%CF%81%CE%B3%CE%B1%CE%BB%CE%B5%CE%AF%CE%B1-%CF%84%CE%BF%CF%85-Git-%CE%A5%CF%80%CE%BF%CE%B3%CF%81%CE%B1%CF%86%CE%AE-%CF%84%CE%B7%CF%82-%CE%B4%CE%BF%CF%85%CE%BB%CE%B5%CE%B9%CE%AC%CF%82-%CE%BC%CE%B1%CF%82">Υπογραφή της δουλειάς μας</a>
+            </li>
+            <li>
+              7.5
+              <a href="/book/gr/v2/%CE%95%CF%81%CE%B3%CE%B1%CE%BB%CE%B5%CE%AF%CE%B1-%CF%84%CE%BF%CF%85-Git-%CE%91%CE%BD%CE%B1%CE%B6%CE%AE%CF%84%CE%B7%CF%83%CE%B7">Αναζήτηση</a>
+            </li>
+            <li>
+              7.6
+              <a href="/book/gr/v2/%CE%95%CF%81%CE%B3%CE%B1%CE%BB%CE%B5%CE%AF%CE%B1-%CF%84%CE%BF%CF%85-Git-%CE%97-%CE%B9%CF%83%CF%84%CE%BF%CF%81%CE%AF%CE%B1-%CE%BE%CE%B1%CE%BD%CE%B1%CE%B3%CF%81%CE%AC%CF%86%CE%B5%CF%84%CE%B1%CE%B9">Η ιστορία ξαναγράφεται</a>
+            </li>
+            <li>
+              7.7
+              <a href="/book/gr/v2/%CE%95%CF%81%CE%B3%CE%B1%CE%BB%CE%B5%CE%AF%CE%B1-%CF%84%CE%BF%CF%85-Git-%CE%91%CF%80%CE%BF%CE%BC%CF%85%CE%B8%CE%BF%CF%80%CE%BF%CE%AF%CE%B7%CF%83%CE%B7-%CF%84%CE%B7%CF%82-reset">Απομυθοποίηση της reset</a>
+            </li>
+            <li>
+              7.8
+              <a href="/book/gr/v2/%CE%95%CF%81%CE%B3%CE%B1%CE%BB%CE%B5%CE%AF%CE%B1-%CF%84%CE%BF%CF%85-Git-%CE%A3%CF%85%CE%B3%CF%87%CF%89%CE%BD%CE%B5%CF%8D%CF%83%CE%B5%CE%B9%CF%82-%CE%B3%CE%B9%CE%B1-%CF%80%CF%81%CE%BF%CF%87%CF%89%CF%81%CE%B7%CE%BC%CE%AD%CE%BD%CE%BF%CF%85%CF%82">Συγχωνεύσεις για προχωρημένους</a>
+            </li>
+            <li>
+              7.9
+              <a href="/book/gr/v2/%CE%95%CF%81%CE%B3%CE%B1%CE%BB%CE%B5%CE%AF%CE%B1-%CF%84%CE%BF%CF%85-Git-Rerere">Rerere</a>
+            </li>
+            <li>
+              7.10
+              <a href="/book/gr/v2/%CE%95%CF%81%CE%B3%CE%B1%CE%BB%CE%B5%CE%AF%CE%B1-%CF%84%CE%BF%CF%85-Git-%CE%91%CF%80%CE%BF%CF%83%CF%86%CE%B1%CE%BB%CE%BC%CE%AC%CF%84%CF%89%CF%83%CE%B7-%CE%BC%CE%B5-%CF%84%CE%BF-Git">Αποσφαλμάτωση με το Git</a>
+            </li>
+            <li>
+              7.11
+              <a href="/book/gr/v2/%CE%95%CF%81%CE%B3%CE%B1%CE%BB%CE%B5%CE%AF%CE%B1-%CF%84%CE%BF%CF%85-Git-%CE%9B%CE%B5%CE%B9%CF%84%CE%BF%CF%85%CF%81%CE%B3%CE%B9%CE%BA%CE%AD%CF%82-%CF%85%CF%80%CE%BF%CE%BC%CE%BF%CE%BD%CE%AC%CE%B4%CE%B5%CF%82">Λειτουργικές υπομονάδες</a>
+            </li>
+            <li>
+              7.12
+              <a href="/book/gr/v2/%CE%95%CF%81%CE%B3%CE%B1%CE%BB%CE%B5%CE%AF%CE%B1-%CF%84%CE%BF%CF%85-Git-%CE%94%CE%B5%CE%BC%CE%AC%CF%84%CE%B9%CE%B1%CF%83%CE%BC%CE%B1-%CE%B4%CE%B5%CE%B4%CE%BF%CE%BC%CE%AD%CE%BD%CF%89%CE%BD">Δεμάτιασμα δεδομένων</a>
+            </li>
+            <li>
+              7.13
+              <a href="/book/gr/v2/%CE%95%CF%81%CE%B3%CE%B1%CE%BB%CE%B5%CE%AF%CE%B1-%CF%84%CE%BF%CF%85-Git-Replace">Replace</a>
+            </li>
+            <li>
+              7.14
+              <a href="/book/gr/v2/%CE%95%CF%81%CE%B3%CE%B1%CE%BB%CE%B5%CE%AF%CE%B1-%CF%84%CE%BF%CF%85-Git-%CE%91%CF%80%CE%BF%CE%B8%CE%AE%CE%BA%CE%B5%CF%85%CF%83%CE%B7-%CE%B4%CE%B9%CE%B1%CF%80%CE%B9%CF%83%CF%84%CE%B5%CF%85%CF%84%CE%B7%CF%81%CE%AF%CF%89%CE%BD">Αποθήκευση διαπιστευτηρίων</a>
+            </li>
+            <li>
+              7.15
+              <a href="/book/gr/v2/%CE%95%CF%81%CE%B3%CE%B1%CE%BB%CE%B5%CE%AF%CE%B1-%CF%84%CE%BF%CF%85-Git-%CE%91%CE%BD%CE%B1%CE%BA%CE%B5%CF%86%CE%B1%CE%BB%CE%B1%CE%AF%CF%89%CF%83%CE%B7">Ανακεφαλαίωση</a>
+            </li>
+      </ol>
+    </li>
+    <li class='chapter'>
+    <h2>8. <a href="/book/gr/v2/%CE%95%CE%BE%CE%B1%CF%84%CE%BF%CE%BC%CE%AF%CE%BA%CE%B5%CF%85%CF%83%CE%B7-%CF%84%CE%BF%CF%85-Git-%CE%94%CE%B9%CE%B1%CE%BC%CF%8C%CF%81%CF%86%CF%89%CF%83%CE%B7-Git">Εξατομίκευση του Git</a></h2>
+      <ol>
+            <li>
+              8.1
+              <a href="/book/gr/v2/%CE%95%CE%BE%CE%B1%CF%84%CE%BF%CE%BC%CE%AF%CE%BA%CE%B5%CF%85%CF%83%CE%B7-%CF%84%CE%BF%CF%85-Git-%CE%94%CE%B9%CE%B1%CE%BC%CF%8C%CF%81%CF%86%CF%89%CF%83%CE%B7-Git">Διαμόρφωση Git</a>
+            </li>
+            <li>
+              8.2
+              <a href="/book/gr/v2/%CE%95%CE%BE%CE%B1%CF%84%CE%BF%CE%BC%CE%AF%CE%BA%CE%B5%CF%85%CF%83%CE%B7-%CF%84%CE%BF%CF%85-Git-%CE%93%CE%BD%CF%89%CF%81%CE%AF%CF%83%CE%BC%CE%B1%CF%84%CE%B1-%CF%84%CE%BF%CF%85-Git">Γνωρίσματα του Git</a>
+            </li>
+            <li>
+              8.3
+              <a href="/book/gr/v2/%CE%95%CE%BE%CE%B1%CF%84%CE%BF%CE%BC%CE%AF%CE%BA%CE%B5%CF%85%CF%83%CE%B7-%CF%84%CE%BF%CF%85-Git-%CE%A4%CE%B1-%CE%AC%CE%B3%CE%BA%CE%B9%CF%83%CF%84%CF%81%CE%B1-%CF%84%CE%BF%CF%85-Git">Τα άγκιστρα του Git</a>
+            </li>
+            <li>
+              8.4
+              <a href="/book/gr/v2/%CE%95%CE%BE%CE%B1%CF%84%CE%BF%CE%BC%CE%AF%CE%BA%CE%B5%CF%85%CF%83%CE%B7-%CF%84%CE%BF%CF%85-Git-%CE%88%CE%BD%CE%B1-%CF%80%CE%B1%CF%81%CE%AC%CE%B4%CE%B5%CE%B9%CE%B3%CE%BC%CE%B1-%CE%B5%CF%80%CE%B9%CE%B2%CE%BF%CE%BB%CE%AE%CF%82-%CF%80%CE%BF%CE%BB%CE%B9%CF%84%CE%B9%CE%BA%CE%AE%CF%82-%CE%B1%CF%80%CF%8C-%CF%84%CE%BF-Git">Ένα παράδειγμα επιβολής πολιτικής από το Git</a>
+            </li>
+            <li>
+              8.5
+              <a href="/book/gr/v2/%CE%95%CE%BE%CE%B1%CF%84%CE%BF%CE%BC%CE%AF%CE%BA%CE%B5%CF%85%CF%83%CE%B7-%CF%84%CE%BF%CF%85-Git-%CE%91%CE%BD%CE%B1%CE%BA%CE%B5%CF%86%CE%B1%CE%BB%CE%B1%CE%AF%CF%89%CF%83%CE%B7">Ανακεφαλαίωση</a>
+            </li>
+      </ol>
+    </li>
+    <li class='chapter'>
+    <h2>9. <a href="/book/gr/v2/%CE%A4%CE%BF-Git-%CE%BA%CE%B1%CE%B9-%CE%AC%CE%BB%CE%BB%CE%B1-%CF%83%CF%85%CF%83%CF%84%CE%AE%CE%BC%CE%B1%CF%84%CE%B1-%CE%A4%CE%BF-Git-%CF%89%CF%82-%CF%80%CE%B5%CE%BB%CE%AC%CF%84%CE%B7%CF%82">Το Git και άλλα συστήματα</a></h2>
+      <ol>
+            <li>
+              9.1
+              <a href="/book/gr/v2/%CE%A4%CE%BF-Git-%CE%BA%CE%B1%CE%B9-%CE%AC%CE%BB%CE%BB%CE%B1-%CF%83%CF%85%CF%83%CF%84%CE%AE%CE%BC%CE%B1%CF%84%CE%B1-%CE%A4%CE%BF-Git-%CF%89%CF%82-%CF%80%CE%B5%CE%BB%CE%AC%CF%84%CE%B7%CF%82">Το Git ως πελάτης</a>
+            </li>
+            <li>
+              9.2
+              <a href="/book/gr/v2/%CE%A4%CE%BF-Git-%CE%BA%CE%B1%CE%B9-%CE%AC%CE%BB%CE%BB%CE%B1-%CF%83%CF%85%CF%83%CF%84%CE%AE%CE%BC%CE%B1%CF%84%CE%B1-%CE%9C%CE%B5%CF%84%CE%B1%CE%BD%CE%AC%CF%83%CF%84%CE%B5%CF%85%CF%83%CE%B7-%CF%83%CF%84%CE%BF-Git">Μετανάστευση στο Git</a>
+            </li>
+            <li>
+              9.3
+              <a href="/book/gr/v2/%CE%A4%CE%BF-Git-%CE%BA%CE%B1%CE%B9-%CE%AC%CE%BB%CE%BB%CE%B1-%CF%83%CF%85%CF%83%CF%84%CE%AE%CE%BC%CE%B1%CF%84%CE%B1-%CE%91%CE%BD%CE%B1%CE%BA%CE%B5%CF%86%CE%B1%CE%BB%CE%B1%CE%AF%CF%89%CF%83%CE%B7">Ανακεφαλαίωση</a>
+            </li>
+      </ol>
+    </li>
+    <li class='chapter'>
+    <h2>10. <a href="/book/gr/v2/%CE%95%CF%83%CF%89%CF%84%CE%B5%CF%81%CE%B9%CE%BA%CE%AE-%CE%BB%CE%B5%CE%B9%CF%84%CE%BF%CF%85%CF%81%CE%B3%CE%AF%CE%B1-%CF%84%CE%BF%CF%85-Git-%CE%94%CE%B9%CE%BF%CF%87%CE%B5%CF%84%CE%B5%CF%8D%CF%83%CE%B5%CE%B9%CF%82-%CE%BA%CE%B1%CE%B9-%CF%80%CE%BF%CF%81%CF%83%CE%B5%CE%BB%CE%AC%CE%BD%CE%B5%CF%82">Εσωτερική λειτουργία του Git</a></h2>
+      <ol>
+            <li>
+              10.1
+              <a href="/book/gr/v2/%CE%95%CF%83%CF%89%CF%84%CE%B5%CF%81%CE%B9%CE%BA%CE%AE-%CE%BB%CE%B5%CE%B9%CF%84%CE%BF%CF%85%CF%81%CE%B3%CE%AF%CE%B1-%CF%84%CE%BF%CF%85-Git-%CE%94%CE%B9%CE%BF%CF%87%CE%B5%CF%84%CE%B5%CF%8D%CF%83%CE%B5%CE%B9%CF%82-%CE%BA%CE%B1%CE%B9-%CF%80%CE%BF%CF%81%CF%83%CE%B5%CE%BB%CE%AC%CE%BD%CE%B5%CF%82">Διοχετεύσεις και πορσελάνες</a>
+            </li>
+            <li>
+              10.2
+              <a href="/book/gr/v2/%CE%95%CF%83%CF%89%CF%84%CE%B5%CF%81%CE%B9%CE%BA%CE%AE-%CE%BB%CE%B5%CE%B9%CF%84%CE%BF%CF%85%CF%81%CE%B3%CE%AF%CE%B1-%CF%84%CE%BF%CF%85-Git-%CE%91%CE%BD%CF%84%CE%B9%CE%BA%CE%B5%CE%AF%CE%BC%CE%B5%CE%BD%CE%B1-%CF%84%CE%BF%CF%85-Git">Αντικείμενα του Git</a>
+            </li>
+            <li>
+              10.3
+              <a href="/book/gr/v2/%CE%95%CF%83%CF%89%CF%84%CE%B5%CF%81%CE%B9%CE%BA%CE%AE-%CE%BB%CE%B5%CE%B9%CF%84%CE%BF%CF%85%CF%81%CE%B3%CE%AF%CE%B1-%CF%84%CE%BF%CF%85-Git-%CE%91%CE%BD%CE%B1%CF%86%CE%BF%CF%81%CE%AD%CF%82-%CF%84%CE%BF%CF%85-Git">Αναφορές του Git</a>
+            </li>
+            <li>
+              10.4
+              <a href="/book/gr/v2/%CE%95%CF%83%CF%89%CF%84%CE%B5%CF%81%CE%B9%CE%BA%CE%AE-%CE%BB%CE%B5%CE%B9%CF%84%CE%BF%CF%85%CF%81%CE%B3%CE%AF%CE%B1-%CF%84%CE%BF%CF%85-Git-%CE%A0%CE%B1%CE%BA%CE%B5%CF%84%CE%AC%CF%81%CE%B9%CF%83%CE%BC%CE%B1-%CE%B1%CF%81%CF%87%CE%B5%CE%AF%CF%89%CE%BD">Πακετάρισμα αρχείων</a>
+            </li>
+            <li>
+              10.5
+              <a href="/book/gr/v2/%CE%95%CF%83%CF%89%CF%84%CE%B5%CF%81%CE%B9%CE%BA%CE%AE-%CE%BB%CE%B5%CE%B9%CF%84%CE%BF%CF%85%CF%81%CE%B3%CE%AF%CE%B1-%CF%84%CE%BF%CF%85-Git-%CE%A4%CE%B1-refspec">Τα refspec</a>
+            </li>
+            <li>
+              10.6
+              <a href="/book/gr/v2/%CE%95%CF%83%CF%89%CF%84%CE%B5%CF%81%CE%B9%CE%BA%CE%AE-%CE%BB%CE%B5%CE%B9%CF%84%CE%BF%CF%85%CF%81%CE%B3%CE%AF%CE%B1-%CF%84%CE%BF%CF%85-Git-%CE%A0%CF%81%CF%89%CF%84%CF%8C%CE%BA%CE%BF%CE%BB%CE%BB%CE%B1-%CE%BC%CE%B5%CF%84%CE%B1%CF%86%CE%BF%CF%81%CE%AC%CF%82">Πρωτόκολλα μεταφοράς</a>
+            </li>
+            <li>
+              10.7
+              <a href="/book/gr/v2/%CE%95%CF%83%CF%89%CF%84%CE%B5%CF%81%CE%B9%CE%BA%CE%AE-%CE%BB%CE%B5%CE%B9%CF%84%CE%BF%CF%85%CF%81%CE%B3%CE%AF%CE%B1-%CF%84%CE%BF%CF%85-Git-%CE%94%CE%B9%CE%B1%CF%84%CE%AE%CF%81%CE%B7%CF%83%CE%B7-%CE%BA%CE%B1%CE%B9-%CE%B1%CE%BD%CE%AC%CE%BA%CF%84%CE%B7%CF%83%CE%B7-%CE%B4%CE%B5%CE%B4%CE%BF%CE%BC%CE%AD%CE%BD%CF%89%CE%BD">Διατήρηση και ανάκτηση δεδομένων</a>
+            </li>
+            <li>
+              10.8
+              <a href="/book/gr/v2/%CE%95%CF%83%CF%89%CF%84%CE%B5%CF%81%CE%B9%CE%BA%CE%AE-%CE%BB%CE%B5%CE%B9%CF%84%CE%BF%CF%85%CF%81%CE%B3%CE%AF%CE%B1-%CF%84%CE%BF%CF%85-Git-%CE%9C%CE%B5%CF%84%CE%B1%CE%B2%CE%BB%CE%B7%CF%84%CE%AD%CF%82-%CF%80%CE%B5%CF%81%CE%B9%CE%B2%CE%AC%CE%BB%CE%BB%CE%BF%CE%BD%CF%84%CE%BF%CF%82">Μεταβλητές περιβάλλοντος</a>
+            </li>
+            <li>
+              10.9
+              <a href="/book/gr/v2/%CE%95%CF%83%CF%89%CF%84%CE%B5%CF%81%CE%B9%CE%BA%CE%AE-%CE%BB%CE%B5%CE%B9%CF%84%CE%BF%CF%85%CF%81%CE%B3%CE%AF%CE%B1-%CF%84%CE%BF%CF%85-Git-%CE%91%CE%BD%CE%B1%CE%BA%CE%B5%CF%86%CE%B1%CE%BB%CE%B1%CE%AF%CF%89%CF%83%CE%B7">Ανακεφαλαίωση</a>
+            </li>
+      </ol>
+    </li>
+    <li class='chapter'>
+    <h2>A1. <a href="/book/gr/v2/Appendix-A%3A-%CE%A4%CE%BF-Git-%CF%83%CE%B5-%CE%AC%CE%BB%CE%BB%CE%B1-%CF%80%CE%B5%CF%81%CE%B9%CE%B2%CE%AC%CE%BB%CE%BB%CE%BF%CE%BD%CF%84%CE%B1-%CE%93%CF%81%CE%B1%CF%86%CE%B9%CE%BA%CE%AD%CF%82-%CE%B4%CE%B9%CE%B5%CF%80%CE%B1%CF%86%CE%AD%CF%82">Appendix A: Το Git σε άλλα περιβάλλοντα</a></h2>
+      <ol>
+            <li>
+              A1.1
+              <a href="/book/gr/v2/Appendix-A%3A-%CE%A4%CE%BF-Git-%CF%83%CE%B5-%CE%AC%CE%BB%CE%BB%CE%B1-%CF%80%CE%B5%CF%81%CE%B9%CE%B2%CE%AC%CE%BB%CE%BB%CE%BF%CE%BD%CF%84%CE%B1-%CE%93%CF%81%CE%B1%CF%86%CE%B9%CE%BA%CE%AD%CF%82-%CE%B4%CE%B9%CE%B5%CF%80%CE%B1%CF%86%CE%AD%CF%82">Γραφικές διεπαφές</a>
+            </li>
+            <li>
+              A1.2
+              <a href="/book/gr/v2/Appendix-A%3A-%CE%A4%CE%BF-Git-%CF%83%CE%B5-%CE%AC%CE%BB%CE%BB%CE%B1-%CF%80%CE%B5%CF%81%CE%B9%CE%B2%CE%AC%CE%BB%CE%BB%CE%BF%CE%BD%CF%84%CE%B1-%CE%A4%CE%BF-Git-%CF%83%CF%84%CE%BF-Visual-Studio">Το Git στο Visual Studio</a>
+            </li>
+            <li>
+              A1.3
+              <a href="/book/gr/v2/Appendix-A%3A-%CE%A4%CE%BF-Git-%CF%83%CE%B5-%CE%AC%CE%BB%CE%BB%CE%B1-%CF%80%CE%B5%CF%81%CE%B9%CE%B2%CE%AC%CE%BB%CE%BB%CE%BF%CE%BD%CF%84%CE%B1-Git-%CF%83%CF%84%CE%BF-Eclipse">Git στο Eclipse</a>
+            </li>
+            <li>
+              A1.4
+              <a href="/book/gr/v2/Appendix-A%3A-%CE%A4%CE%BF-Git-%CF%83%CE%B5-%CE%AC%CE%BB%CE%BB%CE%B1-%CF%80%CE%B5%CF%81%CE%B9%CE%B2%CE%AC%CE%BB%CE%BB%CE%BF%CE%BD%CF%84%CE%B1-%CE%A4%CE%BF-Git-%CF%83%CF%84%CE%BF-Bash">Το Git στο Bash</a>
+            </li>
+            <li>
+              A1.5
+              <a href="/book/gr/v2/Appendix-A%3A-%CE%A4%CE%BF-Git-%CF%83%CE%B5-%CE%AC%CE%BB%CE%BB%CE%B1-%CF%80%CE%B5%CF%81%CE%B9%CE%B2%CE%AC%CE%BB%CE%BB%CE%BF%CE%BD%CF%84%CE%B1-%CE%A4%CE%BF-Git-%CF%83%CF%84%CE%BF-Zsh">Το Git στο Zsh</a>
+            </li>
+            <li>
+              A1.6
+              <a href="/book/gr/v2/Appendix-A%3A-%CE%A4%CE%BF-Git-%CF%83%CE%B5-%CE%AC%CE%BB%CE%BB%CE%B1-%CF%80%CE%B5%CF%81%CE%B9%CE%B2%CE%AC%CE%BB%CE%BB%CE%BF%CE%BD%CF%84%CE%B1-%CE%A4%CE%BF-Git-%CF%83%CF%84%CE%BF-Powershell">Το Git στο Powershell</a>
+            </li>
+            <li>
+              A1.7
+              <a href="/book/gr/v2/Appendix-A%3A-%CE%A4%CE%BF-Git-%CF%83%CE%B5-%CE%AC%CE%BB%CE%BB%CE%B1-%CF%80%CE%B5%CF%81%CE%B9%CE%B2%CE%AC%CE%BB%CE%BB%CE%BF%CE%BD%CF%84%CE%B1-%CE%91%CE%BD%CE%B1%CE%BA%CE%B5%CF%86%CE%B1%CE%BB%CE%B1%CE%AF%CF%89%CF%83%CE%B7">Ανακεφαλαίωση</a>
+            </li>
+      </ol>
+    </li>
+    <li class='chapter'>
+    <h2>A2. <a href="/book/gr/v2/Appendix-B%3A-%CE%95%CE%BD%CF%83%CF%89%CE%BC%CE%AC%CF%84%CF%89%CF%83%CE%B7-%CF%84%CE%BF%CF%85-Git-%CF%83%CF%84%CE%B9%CF%82-%CE%B5%CF%86%CE%B1%CF%81%CE%BC%CE%BF%CE%B3%CE%AD%CF%82-%CE%BC%CE%B1%CF%82-%CE%93%CF%81%CE%B1%CE%BC%CE%BC%CE%AE-%CE%B5%CE%BD%CF%84%CE%BF%CE%BB%CF%8E%CE%BD-Git">Appendix B: Ενσωμάτωση του Git στις εφαρμογές μας</a></h2>
+      <ol>
+            <li>
+              A2.1
+              <a href="/book/gr/v2/Appendix-B%3A-%CE%95%CE%BD%CF%83%CF%89%CE%BC%CE%AC%CF%84%CF%89%CF%83%CE%B7-%CF%84%CE%BF%CF%85-Git-%CF%83%CF%84%CE%B9%CF%82-%CE%B5%CF%86%CE%B1%CF%81%CE%BC%CE%BF%CE%B3%CE%AD%CF%82-%CE%BC%CE%B1%CF%82-%CE%93%CF%81%CE%B1%CE%BC%CE%BC%CE%AE-%CE%B5%CE%BD%CF%84%CE%BF%CE%BB%CF%8E%CE%BD-Git">Γραμμή εντολών Git</a>
+            </li>
+            <li>
+              A2.2
+              <a href="/book/gr/v2/Appendix-B%3A-%CE%95%CE%BD%CF%83%CF%89%CE%BC%CE%AC%CF%84%CF%89%CF%83%CE%B7-%CF%84%CE%BF%CF%85-Git-%CF%83%CF%84%CE%B9%CF%82-%CE%B5%CF%86%CE%B1%CF%81%CE%BC%CE%BF%CE%B3%CE%AD%CF%82-%CE%BC%CE%B1%CF%82-Libgit2">Libgit2</a>
+            </li>
+            <li>
+              A2.3
+              <a href="/book/gr/v2/Appendix-B%3A-%CE%95%CE%BD%CF%83%CF%89%CE%BC%CE%AC%CF%84%CF%89%CF%83%CE%B7-%CF%84%CE%BF%CF%85-Git-%CF%83%CF%84%CE%B9%CF%82-%CE%B5%CF%86%CE%B1%CF%81%CE%BC%CE%BF%CE%B3%CE%AD%CF%82-%CE%BC%CE%B1%CF%82-JGit">JGit</a>
+            </li>
+      </ol>
+    </li>
+    <li class='chapter'>
+    <h2>A3. <a href="/book/gr/v2/Appendix-C%3A-%CE%95%CE%BD%CF%84%CE%BF%CE%BB%CE%AD%CF%82-Git-%CE%A1%CF%8D%CE%B8%CE%BC%CE%B9%CF%83%CE%B7-%CE%BA%CE%B1%CE%B9-%CE%B4%CE%B9%CE%B1%CE%BC%CF%8C%CF%81%CF%86%CF%89%CF%83%CE%B7">Appendix C: Εντολές Git</a></h2>
+      <ol>
+            <li>
+              A3.1
+              <a href="/book/gr/v2/Appendix-C%3A-%CE%95%CE%BD%CF%84%CE%BF%CE%BB%CE%AD%CF%82-Git-%CE%A1%CF%8D%CE%B8%CE%BC%CE%B9%CF%83%CE%B7-%CE%BA%CE%B1%CE%B9-%CE%B4%CE%B9%CE%B1%CE%BC%CF%8C%CF%81%CF%86%CF%89%CF%83%CE%B7">Ρύθμιση και διαμόρφωση</a>
+            </li>
+            <li>
+              A3.2
+              <a href="/book/gr/v2/Appendix-C%3A-%CE%95%CE%BD%CF%84%CE%BF%CE%BB%CE%AD%CF%82-Git-%CE%9B%CE%AE%CF%88%CE%B7-%CE%BA%CE%B1%CE%B9-%CE%B4%CE%B7%CE%BC%CE%B9%CE%BF%CF%85%CF%81%CE%B3%CE%AF%CE%B1-%CE%AD%CF%81%CE%B3%CF%89%CE%BD">Λήψη και δημιουργία έργων</a>
+            </li>
+            <li>
+              A3.3
+              <a href="/book/gr/v2/Appendix-C%3A-%CE%95%CE%BD%CF%84%CE%BF%CE%BB%CE%AD%CF%82-Git-%CE%92%CE%B1%CF%83%CE%B9%CE%BA%CE%AE-%CE%BB%CE%AE%CF%88%CE%B7-%CF%83%CF%84%CE%B9%CE%B3%CE%BC%CE%B9%CE%BF%CF%84%CF%8D%CF%80%CF%89%CE%BD">Βασική λήψη στιγμιοτύπων</a>
+            </li>
+            <li>
+              A3.4
+              <a href="/book/gr/v2/Appendix-C%3A-%CE%95%CE%BD%CF%84%CE%BF%CE%BB%CE%AD%CF%82-Git-%CE%94%CE%B9%CE%B1%CE%BA%CE%BB%CE%AC%CE%B4%CF%89%CF%83%CE%B7-%CE%BA%CE%B1%CE%B9-%CF%83%CF%85%CE%B3%CF%87%CF%8E%CE%BD%CE%B5%CF%85%CF%83%CE%B7">Διακλάδωση και συγχώνευση</a>
+            </li>
+            <li>
+              A3.5
+              <a href="/book/gr/v2/Appendix-C%3A-%CE%95%CE%BD%CF%84%CE%BF%CE%BB%CE%AD%CF%82-Git-%CE%9A%CE%BF%CE%B9%CE%BD%CE%AE-%CF%87%CF%81%CE%AE%CF%83%CE%B7-%CE%BA%CE%B1%CE%B9-%CE%B5%CE%BD%CE%B7%CE%BC%CE%AD%CF%81%CF%89%CF%83%CE%B7-%CE%AD%CF%81%CE%B3%CF%89%CE%BD">Κοινή χρήση και ενημέρωση έργων</a>
+            </li>
+            <li>
+              A3.6
+              <a href="/book/gr/v2/Appendix-C%3A-%CE%95%CE%BD%CF%84%CE%BF%CE%BB%CE%AD%CF%82-Git-%CE%95%CF%80%CE%B9%CE%B8%CE%B5%CF%8E%CF%81%CE%B7%CF%83%CE%B7-%CE%BA%CE%B1%CE%B9-%CF%83%CF%8D%CE%B3%CE%BA%CF%81%CE%B9%CF%83%CE%B7">Επιθεώρηση και σύγκριση</a>
+            </li>
+            <li>
+              A3.7
+              <a href="/book/gr/v2/Appendix-C%3A-%CE%95%CE%BD%CF%84%CE%BF%CE%BB%CE%AD%CF%82-Git-%CE%91%CF%80%CE%BF%CF%83%CF%86%CE%B1%CE%BB%CE%BC%CE%AC%CF%84%CF%89%CF%83%CE%B7">Αποσφαλμάτωση</a>
+            </li>
+            <li>
+              A3.8
+              <a href="/book/gr/v2/Appendix-C%3A-%CE%95%CE%BD%CF%84%CE%BF%CE%BB%CE%AD%CF%82-Git-%CE%95%CF%80%CE%B9%CE%B8%CE%AD%CE%BC%CE%B1%CF%84%CE%B1">Επιθέματα</a>
+            </li>
+            <li>
+              A3.9
+              <a href="/book/gr/v2/Appendix-C%3A-%CE%95%CE%BD%CF%84%CE%BF%CE%BB%CE%AD%CF%82-Git-%CE%97%CE%BB%CE%B5%CE%BA%CF%84%CF%81%CE%BF%CE%BD%CE%B9%CE%BA%CF%8C-%CF%84%CE%B1%CF%87%CF%85%CE%B4%CF%81%CE%BF%CE%BC%CE%B5%CE%AF%CE%BF">Ηλεκτρονικό ταχυδρομείο</a>
+            </li>
+            <li>
+              A3.10
+              <a href="/book/gr/v2/Appendix-C%3A-%CE%95%CE%BD%CF%84%CE%BF%CE%BB%CE%AD%CF%82-Git-%CE%95%CE%BE%CF%89%CF%84%CE%B5%CF%81%CE%B9%CE%BA%CE%AC-%CE%A3%CF%85%CF%83%CF%84%CE%AE%CE%BC%CE%B1%CF%84%CE%B1">Εξωτερικά Συστήματα</a>
+            </li>
+            <li>
+              A3.11
+              <a href="/book/gr/v2/Appendix-C%3A-%CE%95%CE%BD%CF%84%CE%BF%CE%BB%CE%AD%CF%82-Git-%CE%94%CE%B9%CE%BF%CE%AF%CE%BA%CE%B7%CF%83%CE%B7">Διοίκηση</a>
+            </li>
+            <li>
+              A3.12
+              <a href="/book/gr/v2/Appendix-C%3A-%CE%95%CE%BD%CF%84%CE%BF%CE%BB%CE%AD%CF%82-Git-%CE%95%CE%BD%CF%84%CE%BF%CE%BB%CE%AD%CF%82-%CE%B4%CE%B9%CE%BF%CF%87%CE%AD%CF%84%CE%B5%CF%85%CF%83%CE%B7%CF%82">Εντολές διοχέτευσης</a>
+            </li>
+      </ol>
+    </li>
+  </ol>
+</div>
+
+        </div>
+      </div>
+      <footer>
+  <div class="site-source">
+    <a href="/site">About this site</a><br>
+    Patches, suggestions, and comments are welcome.
+  </div>
+  <div class="sfc-member">
+    Git is a member of <a href="/sfc">Software Freedom Conservancy</a>
+  </div>
+</footer>
+
+<script src="/assets/application-84db8b4799905f9f7cc62292e1a97e206056e492088736595af9c2fe3ee50c4b.js"></script>
+
+    </div>
+
+</body>
+</html>

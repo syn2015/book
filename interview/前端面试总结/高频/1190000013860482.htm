@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+    <meta charset="UTF-8">
+            <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+                <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta content="IE=edge, chrome=1" http-equiv="X-UA-Compatible">
+    <meta content="webkit" name="renderer">
+    <meta content="15317273575564615446375" property="qc:admins">
+    <meta content="LkzCRJ7rPEUwt6fVey2vhxiw1vQ" name="alexaVerifyID">
+    <meta content="app-id=958101793, app-argument=" name="apple-itunes-app">
+                <title>《50道CSS基础面试题（附答案）》中的答案真的就只是答案吗？_“查宿舍”……How To Make Love…… - SegmentFault 思否</title>
+    
+            <meta name="description" content="想想自己为什么要写这个，难道不是因为这篇《50道CSS基础面试题（附答案）》文章最近被转载的多，比较多而凑热闹蹭热点？显然，肯定是因为这样我才打算写的。而且还有就是，我的公众号也很久没有更新了，微信说长期不更新会关掉公众号的，怕……">
+    
+            <meta name="keywords"
+              content="css">
+    
+    <link href="/opensearch.xml" rel="search" title="SegmentFault" type="application/opensearchdescription+xml">
+    <link rel="shortcut icon" href="https://assets.segmentfault.com/v-5fb625e4/global/img/favicon.ico">
+    <link rel="apple-touch-icon" href="https://assets.segmentfault.com/v-5fb625e4/global/img/static/touch-icon.png">
+
+    <meta content="#00965e" name="msapplication-TileColor">
+    <meta name="msapplication-square150x150logo" content="https://assets.segmentfault.com/v-5fb625e4/global/img/static/touch-icon.png">
+    <meta content="bcf7fd80dca60d53d46d5b46e1b990ca" name="baidu_union_verify">
+
+        <meta name="sogou_site_verification" content="MKVKCoIjwL">
+    <meta name="360-site-verification" content="737314c9bf48873a1a0a22295203d9d1">
+    <meta name="msvalidate.01" content="2C018C53297C8388F3E7052F5E9CA6AF">
+
+            <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image"
+          content="https://segmentfault.com/img/bV6ioa?w=1915&amp;amp;h=3096">
+    <meta name="twitter:site" content="@segment_fault">
+    <meta name="twitter:creator" content="@segmentfault">
+    <meta name="twitter:title" content="《50道CSS基础面试题（附答案）》中的答案真的就只是答案吗？">
+        <meta name="og:type" content="article">
+    <meta name="og:image"
+          content="https://segmentfault.com/img/bV6ioa?w=1915&amp;amp;h=3096">
+    <meta name="og:title" content="《50道CSS基础面试题（附答案）》中的答案真的就只是答案吗？">
+    <link href="/feeds/questions" rel="alternate" title="SegmentFault 最新问题" type="application/atom+xml">
+    <link href="/feeds/blogs" rel="alternate" title="SegmentFault 最新文章" type="application/atom+xml">
+    
+    
+    
+    
+    
+            <link rel="stylesheet" href="https://assets.segmentfault.com/v-5fb625e4/css/global.css">
+        <link rel="stylesheet" href="https://assets.segmentfault.com/v-5fb625e4/css/vendors.css">
+    
+            <link rel="stylesheet" href="https://assets.segmentfault.com/v-5fb625e4/css/detail.css">
+    
+    
+    <script>
+var _oa = [], OA_google = true;
+
+function OA_script(src, cb) {
+    var s = document.createElement('script'), m = document.getElementsByTagName('script')[0];
+    
+    if (cb) {
+        s.onload = cb;
+    }
+    
+    s.async = 1;
+    s.defer = 1;
+    s.src = src;
+    m.parentNode.insertBefore(s, m);
+}
+
+function OA_show(name) {
+    _oa.push(name);
+    document.write('<div id="OA_holder_' + name + '"></div>');
+}
+
+OA_script('https://sponsor.segmentfault.com/spcjs.php?id=1&block=1&repu=0&tag=css&v=5fb6244a');
+</script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+                    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-918487-8"></script>
+            <script>
+          window.dataLayer = window.dataLayer || [];
+
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+
+          gtag('js', new Date());
+          gtag('config', 'UA-918487-8');
+                  </script>
+    </head>
+<body >
+
+    <img style="height: 0; width: 0; display: none" src="https://assets.segmentfault.com/v-5fb625e4/global/img/static/touch-icon.png">
+
+<div class="d-none d-lg-block text-center" style="display: none !important;">
+    <script type="text/javascript">
+        OA_show(5);
+    </script>
+</div>
+<div id="gridMapHoverBox" style="position:absolute; border: 1px solid #00965e; z-index: 99; font-size: 10px; background:#fff"></div>
+
+
+<nav id="sf-header" class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+    <div class="container">
+        <a class="navbar-brand text-hide sf-header-logo" href="/">SegmentFault</a>
+
+                    <a class="btn btn-primary d-lg-none ml-auto mr-2" href="/user/login">注册登录</a>
+        
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+                <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav font-weight-bold">
+                <li class="nav-item">
+                    <a href="/" class="nav-link ">首页</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/questions" class="nav-link ">问答</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/blogs" class="nav-link active">专栏</a>
+                </li>
+                 <li class="nav-item">
+                    <a href="/news" class="nav-link ">资讯</a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://ke.sifou.com" class="nav-link ">课程</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/events" class="nav-link ">活动</a>
+                </li>
+                <li class="nav-item dropdown hover-down">
+                    <a href="###" id="navbarDiscover" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link  dropdown-toggle ">发现</a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDiscover">
+                        <a class="dropdown-item" href="/groups">圈子</a>
+                        <a class="dropdown-item" href="/tags">标签</a>
+                        <a class="dropdown-item" href="/groups?tab=jobs">酷工作</a>
+                        <a class="dropdown-item" href="/users">排行榜</a>
+                        <a class="dropdown-item" href="/badges">徽章</a>
+                        <a class="dropdown-item" href="/notes">笔记</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="https://docs.segmentfault.com" target="_blank">开发手册</a>
+                        <a class="dropdown-item" href="https://business.segmentfault.com/ads?utm_source=sf-header" target="_blank">广告投放<i class="ml-2 text-warning fas fa-external-link-square"></i>
+                        </a>
+                    </div>
+                </li>
+            </ul>
+
+            <form class="form-inline my-2 my-lg-0 flex-fill d-none d-xl-block px-4" action="/search">
+                <input class="form-control w-100" id="searchBox" name="q" type="search" value="" placeholder="搜索关键字" aria-label="搜索">
+            </form>
+
+            <ul class="navbar-nav navbar-user ml-auto align-items-lg-center">
+                                    <li class="nav-item d-none d-lg-flex">
+                        <a href="/user/login" class="btn btn-link mr-2 require-login">立即登录</a>
+                    </li>
+                    <li class="nav-item d-none d-lg-flex">
+                        <a href="/user/register" class="btn btn-primary require-login">免费注册</a>
+                    </li>
+                            </ul>
+        </div>
+    </div>
+</nav>
+
+    <input id="articleId" value="1190000013860482" class="hidden"/>
+    <div class="d-none d-xl-flex justify-content-center" style="display: none !important;">
+        <script type="text/javascript">
+          OA_show(2);
+        </script>
+    </div>
+    <div class="position-relative articledetail-wrap">
+        <div class="container my-sm-4 my-1" id="sf-article">
+            <div
+                    class="row">
+                                <div class="col-12 col-xl w-0">
+                    
+                                                            
+                    <div class="card border-0 mb-4">
+                        <div class="card-body p-lg-30">
+                            <div class="d-flex justify-content-between align-items-center mb-3" id="sf-article_author">
+                                <div class="information d-flex align-items-center">
+                                    <a class="d-flex align-items-centers mr-1" href="/u/linxz">
+                                        <picture class="mr-2 d-sm-block d-none">
+                                            <img class="d-inline-block rounded-circle "
+                                                 width="32" src="https://avatar-static.segmentfault.com/286/347/2863479281-1030000000341132_big64" aria-hidden="true"/>
+                                        </picture>
+                                        <strong class="align-self-center">林小志</strong>
+                                    </a>
+                                    <ul class="list-inline mb-0 authentication-info sflex-center font-size-14">
+                                                                                    <li class="list-inline-item" data-toggle="tooltip" data-placement="top"
+                                                title="《CSS那些事儿》作者、前端开发工程师">
+                                                <i class="fas fa-badge-check" style="color:#FFC107"></i>
+                                            </li>
+                                                                                <li class="list-inline-item">
+                                            <i class="fas fa-dice-d8" style="color:#BF7158"></i>
+                                            <span style="color: #BF7158;font-weight:bold">3.2k</span>
+                                        </li>
+                                        
+                                                                            </ul>
+                                </div>
+
+                            </div>
+                            <div class="functional-area-left sticky-top d-none d-xl-flex"></div>
+                            <h1 class="h2 mb-3" id="sf-article_title">
+                                <a class="text-body" href="/a/1190000013860482">《50道CSS基础面试题（附答案）》中的答案真的就只是答案吗？</a>
+                            </h1>
+                            <div class="d-sm-flex d-none flex-wrap align-items-center mb-4" id="sf-article_tags">
+                                <div class="m-n1"><a class="m-1 badge-tag" href="/t/css" data-toggle="popover"
+                                           data-img="https://avatar-static.segmentfault.com/122/960/1229606535-1040000000089434_big64" data-placement="top"
+                                           data-original-title="css" data-id="1040000000089434">
+                                                                                        css
+                                        </a></div>
+                                <div class="font-size-14">
+                                                                            <time datetime="2018-03-20T16:15:18+08:00" itemprop="datePublished"
+                                              class="text-secondary ml-2">发布于
+                                            2018-03-20 </time>
+                                                                                                                                                                                </div>
+                            </div>
+
+                            <script type='text/javascript'>
+                              OA_show(25);
+                            </script>
+
+                            <article class="article fmt article-content" data-id="1190000013860482"
+                                     data-license="sa">
+                                
+<h2>背景</h2>
+<p>想想自己为什么要写这个，难道不是因为这篇《<a href="https://segmentfault.com/a/1190000013325778">50道CSS基础面试题（附答案）</a>》文章最近被转载的多，比较多而凑热闹蹭热点？显然，肯定是因为这样我才打算写的。而且还有就是，我的公众号也很久没有更新了，微信说长期不更新会关掉公众号的，怕……</p>
+<p>对于 CSS 方面的工作以及跟 CSS 有关的东西，我已经有一些时间没有接触了，自从离开上家公司到了目前所在的公司，处理小程序方面的事情以后，有关 CSS 的内容我都只是大概瞄一下，没去过多思考。看了这篇文章后，发觉自己再不思考，真的是要废了。</p>
+<p>根据这篇文章的题目以及答案，再结合自己的一些经历以及想法，稍微理一理，不对的请喷，毕竟我所考虑的点还是很有限的。</p>
+<h2>正文部分</h2>
+<p>问题直接复制过来，那篇文章的答案引用部分，在引用的答案下面附带我个人的一些看法。</p>
+<h3>1、介绍一下标准的CSS的盒子模型？与低版本IE的盒子模型有什么不同的？</h3>
+<blockquote>标准盒子模型：宽度=内容的宽度（content）+ border + padding + margin<br>低版本IE盒子模型：宽度=内容宽度（content+border+padding）+ margin</blockquote>
+<p>首先抛开所谓的标准不说，因为这个标准是 W3C 那边制定后跟各大厂商沟通去做统一的。在这个答案中，如果按照严格来说，首先会问基本怎么计算，就像上面这个答案，不过需要注意一下顺序。</p>
+<ul>
+<li>标准盒模型的宽度 = <code>margin-left</code> + <code>border-left</code> + <code>padding-left</code> + <code>width</code> + <code>padding-right</code> + <code>border-right</code> + <code>margin-right</code>，这样写可能会显得比较长，按照上面的答案来说的话，或许 <code>width</code> + <code>padding</code> + <code>border</code> + <code>margin</code> 就好了，附带说一下除了 <code>width</code> 以外是有左右两边的。</li>
+<li>怪异模式的盒模型宽度 = （<code>width + padding + border</code>） + <code>margin</code> 整体来说跟标准盒模型是相类似的，主要是 <code>width + padding + border</code> 这三者算在一起了。</li>
+</ul>
+<p>标准的盒模型是基于 <code>doctype</code> 正确书写的情况下，并且是高于 IE6 的浏览器才会有的，如果是低于 IE6 的浏览器，就算是正确的 <code>doctype</code> 的书写情况下也是进入怪异模式的；在 IE 浏览器中如果写错了 <code>doctype</code> 或者是 <code>doctype</code> 之前有其他字符，那么可能就让 IE 进入怪异模式，从而导致浏览器解析元素盒模型出现问题，比如：</p>
+<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"&gt;</code></pre>
+<p>这种情况下就会让低版本的 IE 进入怪异模式，导致的可能不仅仅只是盒模型计算问题，还有可能是其他的一些情况，早年之前有不少公司直接利用这种方式对低版本和高版本的浏览器做样式上的区别操作对待。</p>
+<p>附带一条 URL：<a href="http://www.w3help.org/zh-cn/casestudies/002" rel="nofollow noreferrer">DOCTYPE 与浏览器模式分析 http://www.w3help.org/zh-cn/casestudies/002</a> 供参考学习。</p>
+<h4>拓展问题</h4>
+<ul>
+<li>根据以上可以再问一下，当 <code>width: 0; padding: 0 100px; border: 10px solid red; margin: 0 50px;</code> 的时候，这个盒子里有内容跟没内容，在标准盒模型和怪异模式的盒模型中有什么区别？</li>
+<li>根据 <code>box-sizng</code> 改变的盒模型的计算方式，跟这个标准盒模型以及怪异模式的盒模型的计算方式有什么区别？</li>
+</ul>
+<h3>2、box-sizing属性？</h3>
+<blockquote>用来控制元素的盒子模型的解析模式，默认为content-box<br>context-box：W3C的标准盒子模型，设置元素的 height/width 属性指的是content部分的高/宽<br>border-box：IE传统盒子模型。设置元素的height/width属性指的是border + padding + content部分的高/宽</blockquote>
+<p><code>box-sizing</code> 主要是用来计算一个元素中的宽度和高度的总和的值，而具体的计算方式将会根据 <code>box-sizing</code> 的属性值来决定，共有两个属性值：<code>content-box</code> 和 <code>border-box</code>。</p>
+<p>当我们了解一个元素的盒模型之后，其实对于这个的理解就简单很多了，比如我们可以这样理解，然后延伸来说明：</p>
+<ul>
+<li>
+<code>content-box</code>：一个标准模式下的盒模型的计算方式</li>
+<li>
+<code>border-box</code>：一个怪异模式下的盒模型的计算方式</li>
+</ul>
+<h4>附带说明</h4>
+<p>目前来说，低版本的 IE 已经逐渐淡出了大家的视线了，所以，怪异模式和标准模式已经不再有太多人去关注，而且 <code>doctype</code> 也基本上会在各种编辑器中自动添加为 <code>&lt;!doctype html&gt;</code> 了，但这不代表我们不会在意盒模型的计算，只是不在意怪异模式和标准模式的浏览器解析方式。</p>
+<p>在现在移动端中，很多时候为了便于盒子的计算，我们会使用 <code>box-sizing: border-box;</code> 来操作，把 <code>padding</code> 和 <code>border</code> 的值计算在一个整体的宽度内，当然了，如果有 <code>margin</code> 的话，还是会额外去考虑的。</p>
+<h3>3、CSS选择器有哪些？哪些属性可以继承？</h3>
+<p><strong>注：</strong>省略部分原文的答案</p>
+<blockquote>CSS选择符：id选择器(#myid)、类选择器(.myclassname)、标签选择器(div, h1, p)、相邻选择器(h1 + p)、子选择器（ul &gt; li）、后代选择器（li a）、通配符选择器（*）、属性选择器（a[rel="external"]）、伪类选择器（a:hover, li:nth-child）...</blockquote>
+<p>这个问题应该来说是两个问题，分别是选择器和属性的问题，或许可能是考核一个人对 CSS 选择器的了解程序以及对 CSS 属性的掌握程度吧。对于这个问题，个人觉得并不会要求把所有的都回答出来，要真都回答出来了，那就可能是背课文了。</p>
+<p>这是早之前我整理的一份有关选择符的图，大家可以感受一下。</p>
+<p><span class="img-wrap"><img referrerpolicy="no-referrer" data-src="/img/bV6ioa?w=1915&amp;h=3096" src="https://cdn.segmentfault.com/v-5fb6244a/global/img/squares.svg" alt="CSS选择符" title="CSS选择符"></span></p>
+<p>这图已经好久没有更新了，可能有一些新的草案没增加，不过无所谓拉，这么多东西，目前我们能使用到也就那么几个，也就是原文中所提供的答案。</p>
+<p>那么对于哪些属性可以继承这个问题，这又是一个很大的话题了，可能需要对 CSS 的所有属性都进行一次归整才会有一个相对比较完整的结果。这里我就提一个在原文答案中提到的可继承属性中的 <code>font-size</code> 这个属性。</p>
+<p><code>font-size</code> 的确是可继承的，但并不是所有的 HTML 元素都会在 <code>body</code> 定义了 <code>font-size</code> 后，把这个文字大小作用在自身标签上，比如 <code>h1</code>、<code>h2</code> 等一系列标题元素的标签，还有 <code>input</code> 以及 <code>button</code> 之类的控件元素。</p>
+<ul>
+<li>
+<code>h1</code> 系列的标题元素标签在浏览器默认样式中是使用了 <code>em</code> 作为单位的，会根据父级的 <code>font-size</code> 而改变（讲真，这到底算不算继承呢，?）</li>
+<li>
+<code>input</code> 系列的控件元素，是直接有浏览器默认文字大小，并且是 <code>px</code> 作为单位的（这个又是因为已经被定义过了属性，但实际上应该算是继承了吧，只是权重值不够高，无法覆盖了 <code>body</code> 的 <code>font-size</code>）</li>
+</ul>
+<p>在这个问题中，提到了一个优先级：</p>
+<blockquote>优先级（就近原则）：!important &gt; [ id &gt; class &gt; tag ]</blockquote>
+<p>不知道是不是跟下一个问题搞混了，但是这里应该是少了一个 <code>style</code> 属性吧。</p>
+<pre><code>!important &gt; style 属性 &gt; id &gt; class &gt; tag</code></pre>
+<p>并且我没看懂为什么原文的答案这里有一个中括号，是想说代表这个是可选的呢，还是怎么样呢。</p>
+<h3>4、CSS优先级算法如何计算？</h3>
+<blockquote>元素选择符： 1<br>class选择符： 10<br>id选择符：100<br>元素标签：1000</blockquote>
+<p>这个我觉得吧，并没有任何问题，不过在面试的时候，提到了这个之后，可能会被问其他相关的问题。</p>
+<h4>选择符优先级的拓展问题：</h4>
+<ul>
+<li>有 11 个元素选择符的优先级跟 1 个 class 选择符优先级哪个高呢？</li>
+<li>如果有 256 个 class 选择符，比如 <code>.class001</code>......<code>.class256 {}</code> 那么这个时候是否会大于 一个 id 选择符呢？</li>
+</ul>
+<blockquote><ol>
+<li>!important声明的样式优先级最高，如果冲突再进行计算。</li>
+<li>如果优先级相同，则选择最后出现的样式。</li>
+<li>继承得到的样式的优先级最低。</li>
+</ol></blockquote>
+<p>这三点概括的并不是十分全面吧，在面试的过程中，如果面试官提到了有关选择符优先级的问题，那么可能会给几个 demo 来让你想一下哪个文字是什么颜色之类的，最后再问原理。</p>
+<p>众所周知，<code>!important</code> 的优先级是最高，那么如果可能会延伸的问题会有：<code>&lt;div style="width: 100px !important;"&gt;&lt;/div&gt;</code> 这里的这个 <code>width</code> 样式如何去覆盖。</p>
+<h3>5、CSS3新增伪类有那些?</h3>
+<blockquote>p:first-of-type 选择属于其父元素的首个元素<br>p:last-of-type 选择属于其父元素的最后元素<br>p:only-of-type 选择属于其父元素唯一的元素<br>p:only-child 选择属于其父元素的唯一子元素<br>p:nth-child(2) 选择属于其父元素的第二个子元素<br>:enabled :disabled 表单控件的禁用状态。<br>:checked 单选框或复选框被选中。</blockquote>
+<p>这个可以说的内容其实也挺多的，还是可以参考之前那张图，具体的哪些是伪元素选择符哪些是伪类选择符，根据图中的所列的情况可以一目了然看到。</p>
+<p><span class="img-wrap"><img referrerpolicy="no-referrer" data-src="/img/bV6ioa?w=1915&amp;h=3096" src="https://cdn.segmentfault.com/v-5fb6244a/global/img/squares.svg" alt="CSS选择符" title="CSS选择符"></span></p>
+<h4>拓展出来的问题；</h4>
+<ul>
+<li>隔行换色的实现方式；</li>
+<li>
+<code>:nth-child(an+b)</code> 可以做的 XXX 事情，我们应该怎么实现（具体可能会根据不同面试官给出不同的题目而定）；</li>
+<li>
+<code>::after</code> 和 <code>:after</code> 一个冒号和两个冒号有什么区别；</li>
+</ul>
+<p>诸如此类的问题很多，在 CSS3 中对于选择符可以玩的情况太多了，就看怎么去想这个问题，但只要掌握了原理，无论面试官怎么去改变，最终原理是差不多的，万变不离其宗嘛，对吧。</p>
+<h3>6、如何居中div？如何居中一个浮动元素？如何让绝对定位的div居中？</h3>
+<p>看到这个问题，我能想到的是，果然水平垂直居中的题目会出现啊。</p>
+<h4>如何居中div？</h4>
+<p>一个 <code>div</code> 元素的居中，这里并没有提到说这个 <code>div</code> 标签使用的是什么类型的 <code>display</code> 值，那么对于我们来说可以拓展的方式就非常非常多了。</p>
+<p>在原文答案中提到了：</p>
+<pre><code>border: 1px solid red;
+margin: 0 auto; 
+height: 50px;
+width: 80px;</code></pre>
+<p>这里的关键点是 <code>width</code> 和 <code>margin</code>，当一个 <code>display: block</code> 的块级元素有了宽度之后，就可以使用 <code>margin: 0 auto;</code> 的方式让其水平居中。</p>
+<p>那么这里提到的是块级元素，那么我们可以假设一下，如果我们把 <code>display: block;</code> 换成了：</p>
+<ul>
+<li><code>display: inline;</code></li>
+<li><code>display: inline-block;</code></li>
+<li><code>display: table-cell;</code></li>
+</ul>
+<p>在不同的 <code>display</code> 属性存在的时候，我们还是用 <code>margin: 0 auto;</code> 的方式来居中吗？</p>
+<p>接着就可以通过这个问题延伸出第二个问题：<strong>如何居中一个浮动元素</strong>。</p>
+<h4>如何居中一个浮动元素</h4>
+<p>这里提到的一个点是，居中一个浮动元素，并没有说是水平居中还是垂直居中，或者是两者并存，也并没有说这个浮动元素是否有子元素或者是父元素，那么可操作的方式又有很多了。</p>
+<p>如果只是水平居中的话，前提是浮动了，当设置了 <code>float</code> 之后，使用 <code>margin: 0 auto;</code> 方式居中是不可能的了，如果只有一个元素的话，那就只能通过原文答案中提到的通过 <code>position: absolute</code> 和 <code>margin</code> 的结合来处理，当然，这里的 <code>margin</code> 可以换成 <code>transform</code>，当如果换成 <code>transform</code> 的话，可能又会被面试官提到另外一个问题了——性能的问题。</p>
+<p>不过呢，仅仅只是水平居中的一个浮动元素的话，如果存在父级元素，可以考虑使用“<code>float: center;</code>”，嗯，这里是加引号的，并不是真的有这个属性值。</p>
+<pre><code>.float_center {
+  float: right;
+
+  position: relative;
+  left: -50%; /* or right 50% */
+  text-align: left;
+}
+.float_center &gt; .child {
+  position: relative;
+  left: 50%;
+}</code></pre>
+<p>部分代码是这样的，具体的可以看 <a href="https://codepen.io/alexandredees/pen/ojaFr" rel="nofollow noreferrer">https://codepen.io/alexandred...</a> 这里，这个方法在几年前还是用的比较多的，尤其是在水平居中的一个分页数控件。</p>
+<p>反正不管怎么样，这个是带有浮动属性的元素，进行了居中的操作了。如果有垂直居中的话，就按照原文答案的方式来操作就可以了，毕竟浮动了之后 <code>display</code> 的属性值是 <code>block</code>，不会改变的。</p>
+<h4>如何让绝对定位的div居中？</h4>
+<p>这个问题我就没看明白跟上面那个浮动元素中使用了绝对定位方式居中有什么区别了。无非就是 <code>margin</code> 或者 <code>transform</code> 的方式来操作。</p>
+<h4>额外想法</h4>
+<p>对于水平垂直居中的方法，网络上有很多很多的文章了，不同的方式会带来不同的效果情况。在日常使用的过程中，我们是会根据页面的实际需求情况而采用不同的居中方式，原理都差不多，只是实现的方式不同。对于这个题目，总而言之一句话就是：<strong>如何做好一个元素的居中</strong>。</p>
+<p>-----------============ 我是分割线 ============-----------</p>
+<h2>小结</h2>
+<p>小小的结束一下，嗯，不是小小的总结，是小小的结束，写这些东西真累，偷懒花一点时间写一下，回头一看，原来才写 7 点，后面还有那么多，先这样吧，后面看情况再说了。</p>
+<p>而且说实在的，目前这个写的的内容其实也很笼统，并不全面。</p>
+
+                            </article>
+
+                            
+                            <script type='text/javascript'>
+                              OA_show(3);
+                            </script>
+
+                            <div class="text-secondary font-size-14 mt-3 mb-5 d-flex justify-content-between row">
+                                                                    <div class="col-6 text-secondary" id="sf-article_metas"
+                                         data-viewsWord="12164">阅读
+                                        12.2k
+                                        <span class="split-dot"></span>
+                                        <time datetime="2018-03-20T16:15:18+08:00" itemprop="datePublished">发布于
+                                            2018-03-20 </time>
+                                    </div>
+                                                                <div class="operation col-6 text-right">
+                                                                                                                                                                                                                        
+                                                                                                        </div>
+                            </div>
+
+                            <div class="functional-area-bottom"></div>
+
+                            <div class="text-center mb-5 mt-3 text-secondary font-size-14">
+
+                                本作品系原创，
+                                                                            <a target="_blank" class="text-secondary"
+                                           href="https://creativecommons.org/licenses/by-nc-nd/4.0/">采用《署名-非商业性使用-禁止演绎
+                                            4.0
+                                            国际》许可协议</a>
+                                                                                                </div>
+                            <hr class="mb-0"/>
+                            <div class="article-author d-flex flex-sm-row align-items-center pt-4 row">
+                                <div class="d-flex align-items-center flex-grow-1 author-left col-sm-9 col-12">
+                                    <a href="/u/linxz">
+                                        <img class="rounded-circle mr-3" width="64" src="https://avatar-static.segmentfault.com/286/347/2863479281-1030000000341132_big64"
+                                             aria-hidden="true"/>
+                                    </a>
+                                    <div>
+                                        <h5>
+                                            <a class="text-body"
+                                               href="/u/linxz">林小志</a>
+                                        </h5>
+                                        <ul class="list-inline mb-0 authentication-info">
+                                                                                            <li class="list-inline-item">
+                                                    <i class="fas fa-badge-check" style="color:#FFC107"></i>
+                                                    《CSS那些事儿》作者、前端开发工程师
+                                                </li>
+                                                                                        <li class="list-inline-item">
+                                                <i class="fas fa-dice-d8" style="color:#BF7158"></i>
+                                                <span style="color: #BF7158; font-size:16px; font-weight:bold">3.2k</span>
+                                            </li>
+                                                                                    </ul>
+                                    </div>
+                                </div>
+                                <div class="author-right flex-shrink-0 col-sm-3 col-12 text-sm-right text-left mt-sm-0 mt-3">
+                                                                                                                <button type="button" class="btn btn-primary follow-user sf_do"
+                                                data-doType="post" data-content="{&quot;type&quot;:&quot;state&quot;,&quot;state&quot;:false,&quot;true&quot;:&quot;\u5173\u6ce8\u4f5c\u8005&quot;,&quot;false&quot;:&quot;\u5df2\u7ecf\u5173\u6ce8&quot;}"
+                                                data-api="/iteration/api/user/1030000000341132/follow">关注作者
+                                        </button>
+                                                                    </div>
+                            </div>
+                        </div>
+                    </div>
+
+                                                            <div id="comment-area" class="my-4" data-type="article" data-id="1190000013860482" data-page="1"
+                         data-user="null"></div>
+                                        <h5 class="mt-4">推荐阅读</h5>
+                    <div class="card border-0 mb-4">
+                        <div class="list-group list-group-flush" id="paradigm-article-related"></div>
+                    </div>
+
+                </div>
+
+                                <div class="col-12 col-xl-auto">
+                    <div class="w-xl-300">
+                                                    <div class="blog card mb-4 border-0">
+                            <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="media-avatar rounded mr-3" aria-hidden="true"></div>
+                                <div style="flex:1">
+                                    <h5>
+                                        <a class="text-body" href="/blog/linxz">“查宿舍”……How To Make Love……</a>
+                                    </h5>
+                                    <span class="badge badge-primary" style="background-color: #007bff">用户专栏</span>
+                                </div>
+                            </div>
+                            <p class="text-secondary text-truncate-2">现在博客变专栏了……感觉专栏好像要写很专业的连载的感觉……好怕怕……写的都是很随意的东西，那就选择“转载...</p>
+                            <div class="d-flex mb-3">
+                                <div class="mr-4">
+                                    <strong id="blog-followers-count"
+                                            class="followNum">14</strong>
+                                    <span class="text-secondary">人关注</span>
+                                </div>
+                                <div>
+                                    <strong>9</strong>
+                                    <span class="text-secondary">篇文章</span>
+                                </div>
+                            </div>
+                                                    <div class="d-flex">
+                                                                    <button type="button" class="btn btn-primary mr-2 sf_do"
+                                            data-number-tag-class="followNum" data-doType="post"
+                                            data-content="{&quot;type&quot;:&quot;state&quot;,&quot;state&quot;:false,&quot;true&quot;:&quot;\u5173\u6ce8\u4e13\u680f&quot;,&quot;false&quot;:&quot;\u5df2\u7ecf\u5173\u6ce8&quot;}"
+                                            data-api="/iteration/api/blog/1200000000380102/follow">关注专栏
+
+                                    </button>
+                                
+                                <a class="btn btn-outline-primary" href="/blog/linxz">专栏主页</a>
+                            </div>
+                            </div>
+                            </div>
+                            <!-- / 专栏信息 -->
+                        
+                        <div id="first-ad"
+                             class="card border-0 overflow-hidden d-none d-xl-flex justify-content-center align-items-center float-ads mb-4">
+                            <script type='text/javascript'>
+                              OA_show(1);
+                            </script>
+                        </div>
+                        <!-- / 矩形广告位 -->
+
+                        <div class="card border-0 d-none d-xl-flex mb-4">
+                            <div class="card-body">
+                                <div class="text-center mb-3">
+                                    <div class="mb25 hidden-md hidden-sm hidden-xs">
+    <img src="https://cdn.segmentfault.com/sponsor/20201119.png" alt="Planets" usemap ="#gridsMap" width=255 height=136>
+    <map name="gridsMap" id="gridsMap"></map>
+    <div style="text-align: center;"><a style="color:#9E9E9E; font-size:12px" href="/sponsor">广告位促销，月曝光三千万，10 元/天</a></div>
+        <script async src="https://cdn.segmentfault.com/sponsor/20201119.js"></script>
+</div>
+                                </div>
+
+                                <div class="side-promote-link">
+                                    <script type='text/javascript'>
+                                      OA_show(7);
+                                      OA_show(9);
+                                      OA_show(10);
+                                      OA_show(15);
+                                      OA_show(16);
+                                    </script>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- / 格子广告、链接广告 -->
+
+                        <div class="card border-0 overflow-hidden d-none d-xl-flex mb-4" data-article-nav>
+                            <div class="card-body py-3">
+                                <h6 class="nav-header py-1 mb-0 position-relative bg-white" style=""
+                                    for="collapseTarget" data-toggle="collapse" href="#collapseTarget"
+                                    aria-expanded="false" aria-controls="collapseTarget">
+                                    <span class="right">▶</span>
+                                    <span class="down hidden">▼</span>
+                                    目录
+                                </h6>
+                                <div class="collapse" id="collapseTarget">
+                                    <nav id="article-nav-list" data-article-nav-list class="font-size-14"></nav>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- / 目录 -->
+                        <div id="second-ad"
+                             class="card border-0 overflow-hidden d-none d-xl-flex justify-content-center align-items-center">
+                            <script type='text/javascript'>
+                              OA_show(31);
+                            </script>
+                        </div>
+                        <!-- / 公众号广告位 -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+      var ARTICLE = {
+        articleId: 1190000013860482,
+        title: "《50道CSS基础面试题（附答案）》中的答案真的就只是答案吗？",
+        isLiked: false,
+        votes: 87,
+        isBookmarked: false,
+        bookmarks: 187,
+        canReward: true
+      };
+    </script>
+
+                        
+
+
+
+
+
+
+
+<script type="text/javascript">
+  OA_show(4);
+</script>
+
+<footer id="footer" class="bg-white py-5 font-size-14">
+    <div class="container">
+        <div class="row">
+            <dl class="col-4 col-md-2">
+                <dt class="h6">产品</dt>
+                                <dd class="my-1"><a class="text-secondary" href="/questions/hottest?utm_source=sf-footer" target="_blank">热门问答</a></dd>
+                                <dd class="my-1"><a class="text-secondary" href="/blogs/hottest?utm_source=sf-footer" target="_blank">热门专栏</a></dd>
+                                <dd class="my-1"><a class="text-secondary" href="/lives?utm_source=sf-footer" target="_blank">热门课程</a></dd>
+                                <dd class="my-1"><a class="text-secondary" href="/events?utm_source=sf-footer" target="_blank">最新活动</a></dd>
+                                <dd class="my-1"><a class="text-secondary" href="/groups?utm_source=sf-footer" target="_blank">技术圈</a></dd>
+                                <dd class="my-1"><a class="text-secondary" href="/groups?tab=jobs&amp;utm_source=sf-footer" target="_blank">酷工作</a></dd>
+                                <dd class="my-1"><a class="text-secondary" href="/app?utm_source=sf-footer" target="_blank">移动客户端</a></dd>
+                            </dl>
+
+            <dl class="col-4 col-md-2">
+                <dt class="h6">课程</dt>
+                                <dd class="my-1"><a class="text-secondary" href="/lives/edu?tag=java&amp;sort=hottest&amp;utm_source=sf-footer" target="_blank">Java 开发课程</a></dd>
+                                <dd class="my-1"><a class="text-secondary" href="/lives/edu?tag=php&amp;sort=hottest&amp;utm_source=sf-footer" target="_blank">PHP 开发课程</a></dd>
+                                <dd class="my-1"><a class="text-secondary" href="/lives/edu?tag=python&amp;sort=hottest&amp;utm_source=sf-footer" target="_blank">Python 开发课程</a></dd>
+                                <dd class="my-1"><a class="text-secondary" href="/lives/edu?category=1&amp;sort=hottest&amp;utm_source=sf-footer" target="_blank">前端开发课程</a></dd>
+                                <dd class="my-1"><a class="text-secondary" href="/lives/study?category=3&amp;sort=hottest&amp;utm_source=sf-footer" target="_blank">移动开发课程</a></dd>
+                            </dl>
+
+            <dl class="col-4 col-md-2 ">
+                <dt class="h6">资源</dt>
+                                <dd class="my-1"><a class="text-secondary" href="/weekly?utm_source=sf-footer" target="_blank">每周精选</a></dd>
+                                <dd class="my-1"><a class="text-secondary" href="/users?utm_source=sf-footer" target="_blank">用户排行榜</a></dd>
+                                <dd class="my-1"><a class="text-secondary" href="/badges?utm_source=sf-footer" target="_blank">徽章</a></dd>
+                                <dd class="my-1"><a class="text-secondary" href="/faq?utm_source=sf-footer" target="_blank">帮助中心</a></dd>
+                                <dd class="my-1"><a class="text-secondary" href="/repu?utm_source=sf-footer" target="_blank">声望与权限</a></dd>
+                                <dd class="my-1"><a class="text-secondary" href="/community?utm_source=sf-footer" target="_blank">社区服务中心</a></dd>
+                            </dl>
+
+            <dl class="col-4 col-md-2">
+                <dt class="h6">合作</dt>
+                                <dd class="my-1"><a class="text-secondary" href="https://about.segmentfault.com/?utm_source=sf-footer" target="_blank">关于我们</a></dd>
+                                <dd class="my-1"><a class="text-secondary" href="https://business.segmentfault.com/ads?utm_source=sf-footer" target="_blank">广告投放</a></dd>
+                                <dd class="my-1"><a class="text-secondary" href="/groups?tab=jobs&amp;utm_source=sf-footer" target="_blank">职位发布</a></dd>
+                                <dd class="my-1"><a class="text-secondary" href="https://jinshuju.net/f/HK5r9K?utm_source=sf-footer" target="_blank">讲师招募</a></dd>
+                                <dd class="my-1"><a class="text-secondary" href="https://about.segmentfault.com/contact.html?utm_source=sf-footer" target="_blank">联系我们</a></dd>
+                                <dd class="my-1"><a class="text-secondary" href="/link?utm_source=sf-footer" target="_blank">合作伙伴</a></dd>
+                            </dl>
+
+            <dl class="col-4 col-md-2">
+                <dt class="h6">关注</dt>
+                                <dd class="my-1"><a class="text-secondary" href="/blog/segmentfault?utm_source=sf-footer" target="_blank">产品技术日志</a></dd>
+                                <dd class="my-1"><a class="text-secondary" href="/blog/community_admin?utm_source=sf-footer" target="_blank">社区运营日志</a></dd>
+                                <dd class="my-1"><a class="text-secondary" href="/blog/segmentfault_news?utm_source=sf-footer" target="_blank">市场运营日志</a></dd>
+                                <dd class="my-1"><a class="text-secondary" href="/blog/segmentfault_team?utm_source=sf-footer" target="_blank">团队日志</a></dd>
+                                <dd class="my-1"><a class="text-secondary" href="/blog/interview?utm_source=sf-footer" target="_blank">社区访谈</a></dd>
+                            </dl>
+
+            <dl class="col-4 col-md-2" id="license">
+                <dt class="h6">条款</dt>
+                                <dd class="my-1"><a class="text-secondary" href="/tos?utm_source=sf-footer" target="_blank">服务条款</a></dd>
+                                <dd class="my-1"><a class="text-secondary" href="/privacy?utm_source=sf-footer" target="_blank">隐私政策</a></dd>
+                                <dd class="my-1">
+                    <a class="text-secondary" href="/app?utm_source=sf-footer">下载 App</a>
+                </dd>
+                <dd class="my-1">
+                    <div class="weixin-qrcode ml-n1" title="微信公众号"></div>
+                </dd>
+            </dl>
+        </div>
+        <hr class="mt-2 mb-4">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="text-secondary">
+                    <p class="mb-1">Copyright &copy; 2011-2020 SegmentFault.</p>
+                    <p class="mb-1">
+                        <a class="text-secondary mr-2" target="_blank" href="http://beian.miit.gov.cn" rel="nofollow">浙ICP备15005796号-2</a>
+                        <a class="text-secondary mr-2" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33010602002000" rel="nofollow">浙公网安备33010602002000号</a>
+                        杭州堆栈科技有限公司版权所有
+                    </p>
+                    <div style="width: 100px">
+                        <a id="seal_knowsafe" href="https://www.knowsafe.com" sid="fa5bfd40493bf2d889a06f32db929207" slang="zh" sdomain="https://seal.knowsafe.com" target="_blank">iTrust</a><script src="https://seal.knowsafe.com/static/js/itrustcert.js" charset="utf-8" type="text/javascript"></script>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 text-right">
+                <div class="shareContent ">
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+                    
+<script>
+  window.serverTime = 1605793349000;
+</script>
+
+<script>
+  (function (w) {
+    w.SF = {
+      staticUrl: "https://assets.segmentfault.com/v-5fb625e4/"
+    };
+    w.SF.token = (function () {
+    var _DH7F3 = /* '6'//'6' */''+//'tr'
+'c'+'db9'//'DH'
++//'Mgr'
+'5'+''///*'Vx'*/'Vx'
++'E'//'E'
++//'I0o'
+'e'+'7'//'aR'
++'7a4'//'gQ'
++//'W'
+'c7'+'a4'//'4'
++/* 'l'//'l' */''+''///*'a'*/'a'
++//'xej'
+'11'+//'ND'
+'ND'+//'q'
+'9b'+//'iX'
+'c0'+/* '3n'//'3n' */''+'96'//'H'
++//'Gog'
+'cc'+//'8z'
+'8z'+//'Pv'
+'c'+//'8'
+'1'+'4mp'//'4mp'
++''///*'SBi'*/'SBi'
++'be4'//'Zg'
++'Zh'//'Zh'
++'TZ'//'TZ'
++'11d'//'m8'
+, _r32X = [[5,6],[16,18],[24,26],[26,29],[29,31],[29,31]];
+
+    for (var i = 0; i < _r32X.length; i ++) {
+        _DH7F3 = _DH7F3.substring(0, _r32X[i][0]) + _DH7F3.substring(_r32X[i][1]);
+    }
+
+    return _DH7F3;
+})();;
+
+        })(window);
+
+        var lock = {
+    type: "",
+    text: '',
+    table: {"ban_post":[1,"\u4f60\u5df2\u7ecf\u88ab\u7981\u8a00, \u65e0\u6cd5\u8fdb\u884c\u6b64\u64cd\u4f5c, \u5982\u6709\u7591\u4e49\u8bf7\u63d0\u4ea4\u7533\u8bc9, \u6216\u8005\u53d1\u90ae\u4ef6\u5230pr@segmentfault.com"]}
+  };
+
+    var ddosMode = false;
+  
+    (function (currentUrl) {
+    if (typeof URL != 'undefined') {
+      var baseUrl = new URL('https://segmentfault.com');
+
+      if (baseUrl.protocol != currentUrl.protocol || baseUrl.host != currentUrl.host) {
+        window.location.href = baseUrl.protocol + '//' + baseUrl.host
+          + currentUrl.pathname + currentUrl.search + currentUrl.hash;
+      }
+    }
+  })(window.location);
+  </script>
+
+<script src="https://assets.segmentfault.com/v-5fb625e4/js/jquery.js"></script>
+<script src="https://assets.segmentfault.com/v-5fb625e4/js/vendors.js"></script>
+  <script src="https://assets.segmentfault.com/v-5fb625e4/js/detail.bundle.js"></script>
+
+    <script>
+      if (!!navigator.userAgent.match(/MicroMessenger/i)) {
+        $.getScript(`https://res.wx.qq.com/open/js/jweixin-1.2.0.js`, function () {
+          var share = {"title":"\u300a50\u9053CSS\u57fa\u7840\u9762\u8bd5\u9898\uff08\u9644\u7b54\u6848\uff09\u300b\u4e2d\u7684\u7b54\u6848\u771f\u7684\u5c31\u53ea\u662f\u7b54\u6848\u5417\uff1f","desc":"\u60f3\u60f3\u81ea\u5df1\u4e3a\u4ec0\u4e48\u8981\u5199\u8fd9\u4e2a\uff0c\u96be\u9053\u4e0d\u662f\u56e0\u4e3a\u8fd9\u7bc7\u300a50\u9053CSS\u57fa\u7840\u9762\u8bd5\u9898\uff08\u9644\u7b54\u6848\uff09\u300b\u6587\u7ae0\u6700\u8fd1\u88ab\u8f6c\u8f7d\u7684\u591a\uff0c\u6bd4\u8f83\u591a\u800c\u51d1\u70ed\u95f9\u8e6d\u70ed\u70b9\uff1f\u663e\u7136\uff0c\u80af\u5b9a\u662f\u56e0\u4e3a\u8fd9\u6837\u6211\u624d\u6253\u7b97\u5199\u7684\u3002\u800c\u4e14\u8fd8\u6709\u5c31\u662f\uff0c\u6211\u7684\u516c\u4f17\u53f7\u4e5f\u5f88\u4e45\u6ca1\u6709\u66f4\u65b0\u4e86\uff0c\u5fae\u4fe1\u8bf4\u957f\u671f\u4e0d\u66f4\u65b0\u4f1a\u5173\u6389\u516c\u4f17\u53f7\u7684\uff0c\u6015\u2026\u2026","link":"https:\/\/segmentfault.com\/a\/1190000013860482","imgUrl":"https:\/\/segmentfault.com\/img\/bV6ioa?w=1915&amp;h=3096"};
+          share.title += ' - SegmentFault 思否';
+          share.imgUrl = "https://assets.segmentfault.com/v-5fb625e4/global/img/static/touch-icon.png";
+          $.getJSON('/api/util/weixin/jsapi', function (o) {
+            methods = o.data.jsApiList.slice();
+
+            wx.config(o.data);
+            wx.error(console.error);
+            wx.ready(function () {
+              methods.forEach(function (method) {
+                wx[method](share);
+              });
+            });
+          });
+        })
+      }
+    </script>
+
+<script>
+  var _hmt = _hmt || [];
+  (function () {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?e23800c454aa573c0ccb16b52665ac26";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+</body>
+</html>
+

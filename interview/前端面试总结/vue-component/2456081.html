@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <meta name="description" content="Div与table的区别1：速度和加载方式方面的区别div 和 table 的差异不是速度，而是加载方式，速度只能是指网络速度，如果速度足够快，是没有差异的：div 的加载方式是即读即加载，遇到 &amp;l" />
+    <meta property="og:description" content="Div与table的区别1：速度和加载方式方面的区别div 和 table 的差异不是速度，而是加载方式，速度只能是指网络速度，如果速度足够快，是没有差异的：div 的加载方式是即读即加载，遇到 &amp;l" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Div和Table的区别 - 呼啦啦bear - 博客园</title>
+    <link id="favicon" rel="shortcut icon" href="//common.cnblogs.com/favicon.svg" type="image/svg+xml" />
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=6JQ5RoSW47wdSknXXH8GKp7Dudlx3LJTMZSly7f9Sb8" />
+    <link id="MainCss" rel="stylesheet" href="/skins/classicblue/bundle-classicblue.min.css?v=GVa7XLoQ-BmrCtX-h-nB0gfS6B6kfyNpyGgXXWsx5TM" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/classicblue/bundle-classicblue-mobile.min.css?v=4r7b1P5kPEUH8g0NXQHL92vpJDp3n3kpQT2emwVxcZc" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/lovebear/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/lovebear/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/lovebear/wlwmanifest.xml" />
+    <script>
+        var currentBlogId = 70304;
+        var currentBlogApp = 'lovebear';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var isBlogOwner = false;
+        var skinName = 'ClassicBlue';
+        var visitorUserId = '';
+    </script>
+        <script>
+            var currentPostDateAdded = '2012-04-18 10:29';
+        </script>
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=axatFUhM5xrj94lhxXsErZO3taWT5cDvo4CrfxgVV7A"></script>
+    
+    
+    
+</head>
+<body class="has-navbar">
+    <a name="top"></a>
+        <div id="bannerbar" class="formobile">
+            <a href="https://brands.cnblogs.com/aws/free?source=mobile-banner" target="_blank" onclick="ga('send', 'event', 'Link', 'click', 'aws-mobile-bannerbar')"><img src="https://img2020.cnblogs.com/blog/35695/202011/35695-20201104135303888-13496776.png" alt="" /></a>
+        </div>
+    <div id="top_nav" class="navbar">
+        <nav id="nav_main" class="navbar-main">
+            <ul id="nav_left" class="navbar-list navbar-left">
+                <li class="navbar-branding"><a href="https://www.cnblogs.com/" title="开发者的网上家园"><img src="/images/logo.svg?v=R9M0WmLAIPVydmdzE2keuvnjl-bPR7_35oHqtiBzGsM" alt="博客园Logo" /></a></li>
+                <li><a href="/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-sitehome')">首页</a></li>
+                <li><a href="https://news.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-news')">新闻</a></li>
+                <li><a href="https://q.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-q')">博问</a></li>
+                <li><a id="nav_brandzone" href="https://brands.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-brands')">专区</a></li>
+                <li><a href="https://ing.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-ing')">闪存</a></li>
+                    <li><a href="https://edu.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-edu')">班级</a></li>
+            </ul>
+            <ul id="nav_right" class="navbar-list navbar-right">
+                <li>
+                    <form id="zzk_search" class="navbar-search" action="https://zzk.cnblogs.com/s" method="get">
+                        <input name="w" id="zzk_search_input" placeholder="代码改变世界" type="text" tabindex="3" />
+                        <button type="submit" id="zzk_search_button">
+                            <img src="/images/aggsite/search.svg" alt="搜索" />
+                        </button>
+                    </form>
+                </li>
+                <li id="navbar_login_status" class="navbar-list">
+                    <a id="navblog-myblog-icon" class="navbar-user-info navbar-blog" href="https://passport.cnblogs.com/GetBlogApplyStatus.aspx" alt="我的博客" title="我的博客">
+                        <img id="myblog_icon" class="navbar-icon" src="/images/aggsite/myblog.svg" alt="我的博客" />
+                    </a>
+                    <a class="navbar-user-info navbar-message navbar-icon-wrapper" href="https://msg.cnblogs.com/" alt="短消息" title="短消息">
+                        <img id="msg_icon" class="navbar-icon" src="/images/aggsite/message.svg?v=oS4PkibyMjZ9rGD5XAcLt99uW_s76Javy2up4dbnZNY" alt="短消息" />
+                        <span id="msg_count" style="display: none"></span>
+                    </a>
+                    <div id="user_info" class="navbar-user-info dropdown">
+                        <a class="dropdown-button" href="https://home.cnblogs.com/">
+                            <img id="user_icon" class="navbar-avatar" src="/images/aggsite/avatar-default.svg" alt="用户头像" />
+                        </a>
+                        <div class="dropdown-menu">
+                            <a id="navblog-myblog-text" href="https://passport.cnblogs.com/GetBlogApplyStatus.aspx">我的博客</a>
+                            <a href="https://home.cnblogs.com/">我的园子</a>
+                            <a href="https://account.cnblogs.com/settings/account">账号设置</a>
+                            <a href="javascript:void(0)" onclick="logout();">退出登录</a>
+                        </div>
+                    </div>
+                    <a class="navbar-anonymous" href="https://account.cnblogs.com/signup/">注册</a>
+                    <a class="navbar-anonymous" href="javascript:void(0);" onclick="login()">登录</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    
+    <!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/lovebear/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/lovebear/">呼啦啦bear</a>
+</h1>
+<h2>
+
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/lovebear/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E5%91%BC%E5%95%A6%E5%95%A6bear">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="javascript:void(0)" data-rss="https://www.cnblogs.com/lovebear/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			<span id="stats_post_count">随笔 - 
+25&nbsp; </span>
+<span id="stats_article_count">文章 - 
+5&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+0</span>
+
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2 vertical-middle" href="https://www.cnblogs.com/lovebear/archive/2012/04/18/2456081.html">
+    <span>Div和Table的区别</span>
+    
+
+
+</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+<div id="cnblogs_post_body" class="blogpost-body">
+    <p align="center"><strong>Div</strong><strong>与table的区别</strong></p>
+<p><strong>1</strong><strong>：速度和加载方式方面的区别</strong></p>
+<p>div 和 table 的差异不是速度，而是加载方式，速度只能是指网络速度，如果速度足够快，是没有差异的：</p>
+<p>div 的加载方式是即读即加载，遇到 &lt;div&gt; 没有遇到 &lt;/div&gt; 的时候一样加载 div 中的内容，读多少加载多少；table 的加载方式是完成后加载，遇到 &lt;table&gt; 后，在读到 &lt;/table&gt; 之前，table 中的内容不加载，或者传输中断了(document.onload()事件)的时候加载，这是因为TABLE牵涉到多行多列问题,所以只有当TABLE所有内容加载完毕,IE才知道该怎么显示</p>
+<p><strong>2</strong><strong>：在网页应用中的差别</strong></p>
+<p>如果页面首尾加 table ，那么必须等整个页面读完了才加载</p>
+<p>如果页面首尾加 div ，无任何影响</p>
+<p>&nbsp;</p>
+<p><strong>3</strong><strong>：<a href="http://www.cnblogs.com/titer666/articles/1353128.html" target="_blank">DIV与Table布局在大型网站的可用性比较</a></strong></p>
+<p>DIV与TABLE本身并不存在什么优缺点，所谓web标准只是推荐的是正确的使用标签，好比说:DIV用于布局，而TABLE则本来就是转二维数据的。让TABLE做该做的事，并不是说页面里不出现TABLE就是多么多么牛。</p>
+<p>用DIV进行排版的优势就是我不说，大家应该都比较清楚。DIV是标准，是大势所趋，但并不意味着所有的页面都适合用它来做。</p>
+<p>中国的门户和国外的有很大的区别，中国网民并不喜欢信息量少的页面，YAHOO到了中国页面上的内容就多了不少，而上次改为简洁的页面后访问量下降的厉害以至于没过几天就又改了回来。正式由于中国的国情造就了搜狐、新浪这样门户。</p>
+<p>为什么DIV不适合他们?下面我从几个方面来逐一说明:</p>
+<p>精简代码:</p>
+<p>大家都说DIV的布局精简代码，但是用DIV替代TABLE所节约的代码又被CSS(样式)所占用，而这些样式大多用于控制DIV的排版布局。那你会说了，CSS可以放在外部重用啊，要想得到这个问题的答案请往下看。</p>
+<p>重用性与下载量:</p>
+<p>统一使用一个.css的样式表文件，可以实现修改一次，全站修改的效果，这样使得维护的成本更低。但是请大家换一个角度想，如果所有页面在加载时都要访问一个文件，那这个文件每天的下载量，特别时在搜狐、新浪的网站平台上将达到几亿次，这就需要后面有很多台前端web服务器在做支撑，那后台的成本无形中也提高了很多。如果后台支撑没有做好，那么页面就会出现花屏，之前所作的工作也是白费。很多人会问，这样的几率太小了。我们所作的工作就是为了避 免这一两次意外的发生，如果意外发生了，对于门户后果将是不堪设想的。</p>
+<p>HTTP通讯:</p>
+<p>统一的样式表文件采用外部调用的形式，这样每次加载单个页面都会多一次对服务器的http请求服务器都会增加一次响应，这样对前端web服务器 会是很大的消耗。而原来很长时间都是将css和js写在页面前端(大家可以看看sohu和sina的页面，大多都是采用这样的形式)，而不是作为外部调用 的形式，也是为了尽量避免给服务器增加消耗。</p>
+<p>页面缓存:</p>
+<p>每次用户访问的页面，都会在浏览器缓存中保存一定时间，以保证用户下次再访问该页面时能够大大提高页面显示速度。而每次修改都会使页面重新下载，对于每个外部导入的样式文件也是如此，如果CSS文件修改，那么访问网站的每一个页面都会重新下载，而以往的将样式写在页面中的方式，只是修改的页面需要重新下载。</p>
+<p>兼容性:</p>
+<p>对于CSS(样式表)并不是所有浏览器的所有版本都支持的很好，比如IE5以前的浏览器对于CSS的支持就不是很好。而现在使用IE5以前版本 浏览器的用户不在少数，这样就使得在页面制作的过程中需要针对不同浏览器版本进行测试，以保证兼容性，无形中也增加很多工作量(至少我接触的开发人员制作 div页面比table页面的标准时间要长一些)。</p>
+<p>横切与延展性:</p>
+<p>横切<span style="font-family: Calibri">——</span>传统的布局方式为了使页面下载的更快，把页面自上而下分成若干个块，但是往往采用DIV进行布局的页面都会出现这样的情况，由于每块中间栏或者其他栏内容条数不固定导致两边栏目没有同时自适应，而出现留白。</p>
+<p>以上我们只是讨论某一技术在某一领域的可用性，而非技术本身。</p>
+<p>说了这么多并不是说DIV这种布局方式不好，而是说我们应该正确的看待Table在以内容为基础的大型门户中的作用，而不是人云亦云。之所以 DIV的布局方式没有在大型网站应用，不是说门户没有用DIV是技术落后，是里面的人没有前瞻性，而是多种原因决定的。网易之所以全部采用DIV的方式是因为内容并不是他们主攻方向。而对于其他门户来说，这样的决策是要靠时间来验证的。只是现在这个时机还不成熟而已。</p>
+<p>&nbsp;</p>
+<p><strong>4:DIV+CSS</strong></p>
+<p>而现在我认为DIV +CSS并不是字面上的含义那么简单，而有两重内在含义：</p>
+<p><strong>1</strong><strong>、结构与表现分离</strong>，用DIV完成结构，用CSS控制表现，这样带来的好处非常多，DIV精简了页面，提高了灵活性。而精通CSS的设计师能避免DIV的重复嵌套，从而大大提高页面加载速度，以及站点的可以维护性。</p>
+<p><strong>2</strong><strong>、选用DIV 来配合CSS的原因</strong>，CSS 的核心是 <span style="font-family: Calibri">“</span>盒子模型<span style="font-family: Calibri">”</span>，而没有哪个标签能比DIV更好的诠释<span style="font-family: Calibri">“</span>盒子模型<span style="font-family: Calibri">”</span>的精髓，TABLE的结构过于复杂，并不能很好的做到这一点，虽然TABLE+CSS也是一种选择，但别忘了DIV还有另外一个优势，浮动层叠，而且用TABLE进行布局的网站是不能通过W3C验证的。</p>
+<p>其实DIV的好处还远远不止这些，例如弹性布局，用户自定义布局，DIV都展现出不可思议的灵活性，而富有语义的结构对搜索引擎的友好度也比TABLE要来的高，更不用说跨平台的应用。DIV+CSS为我们提供了一个优雅而规范的技术框架，让我们能用最少的重复劳动，完成更多更美观的页面，从而提升整个团队的效率，甚至改变长期以来网页设计师与网页程序员无法同步工作的问题。</p>
+<p>在我亲身经验中，使用DIV+CSS的团队，与使用TABLE+CSS的团队相比，工期缩短30%-50%。</p>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2012-04-18 22:29</span>&nbsp;
+<a href="https://www.cnblogs.com/lovebear/">呼啦啦bear</a>&nbsp;
+阅读(<span id="post_view_count">19279</span>)&nbsp;
+评论(<span id="post_comment_count">0</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=2456081" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(2456081);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/10.3.1/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 70304, cb_blogApp = 'lovebear', cb_blogUserGuid = '8c8fb2d1-b758-df11-ba8f-001cf0cd104b';
+    var cb_entryId = 2456081, cb_entryCreatedDate = '2012-04-18 22:29', cb_postType = 1;
+    updatePostStats(
+        [cb_entryId],
+        function(id, count) { $("#post_view_count").text(count) },
+        function(id, count) { $("#post_comment_count").text(count) })
+</script>
+<a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id='div-gpt-ad-1592365906576-0' style='width: 300px; height: 250px;'></div>
+    </div>
+    <div id="under_post_news"></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id='div-gpt-ad-1592366332455-0' style='width: 468px; height: 60px;'></div>
+    </div>
+    <div id="under_post_kb"></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+       var commentManager = new blogCommentManager();
+       commentManager.renderComments(0);
+       fixPostBody();
+       deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);       deliverT2();
+       deliverC1C2();
+       loadNewsAndKb();
+       loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);       LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+       GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+       loadOptUnderPost();
+       GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+   </script>
+</div>
+
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+	<div id="sideBar">
+		<div id="sideBarMain">
+			<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+<div id="sidebar_c3"></div>
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2020 呼啦啦bear
+<br /><span id="poweredby">Powered by .NET 5.0.0 on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    
+</body>
+</html>

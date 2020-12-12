@@ -1,0 +1,472 @@
+<!DOCTYPE html> <html lang=zh-Hans class="fontawesome-i2svg-active fontawesome-i2svg-complete" style><!--
+ Page saved with SingleFile 
+ url: https://segmentfault.com/a/1190000013396601 
+ saved date: Sun Nov 29 2020 22:06:41 GMT+0800 (中国标准时间)
+--><meta charset=utf-8>
+<meta name=viewport content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta content="IE=edge, chrome=1" http-equiv=X-UA-Compatible>
+<meta content=webkit name=renderer>
+<meta content=15317273575564615446375 property=qc:admins>
+<meta content=LkzCRJ7rPEUwt6fVey2vhxiw1vQ name=alexaVerifyID>
+<meta content="app-id=958101793, app-argument=" name=apple-itunes-app>
+<title>Promise实现原理_麦乐 - SegmentFault 思否</title>
+<meta name=description content=在Promise没有出现之前，异步编程需要通过回调的方式进行完成，当回调函数嵌套过多时，会使代码丑化，也降低了代码的可理解性，后期维护起来会相对困难，Promise是异步编程的一种解决方案，比传统的解决方案——回调函数和事件——更合理和更强大。它由社区最早提出和实现，ES6将其写进了语言标准，统一了用法，原生提供了Pr...>
+<meta name=keywords content=promise>
+<style>:root{--sf-img-2:url("data:image/jpeg;base64,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")}svg:not(:root).svg-inline--fa{overflow:visible}.svg-inline--fa{display:inline-block;font-size:inherit;height:1em;overflow:visible;vertical-align:-0.125em}.svg-inline--fa.fa-w-12{width:0.75em}.svg-inline--fa.fa-w-14{width:0.875em}.svg-inline--fa.fa-w-16{width:1em}.svg-inline--fa.fa-fw{width:1.25em}.fa-fw{text-align:center}@-webkit-keyframes fa-spin{0%{-webkit-transform:rotate(0deg);transform:rotate(0deg)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}@keyframes fa-spin{0%{-webkit-transform:rotate(0deg);transform:rotate(0deg)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}</style><link href=https://segmentfault.com/opensearch.xml rel=search title=SegmentFault type=application/opensearchdescription+xml>
+<meta content=#00965e name=msapplication-TileColor>
+<meta name=msapplication-square150x150logo content=https://assets.segmentfault.com/v-5fbcbd41/global/img/static/touch-icon.png>
+<meta content=bcf7fd80dca60d53d46d5b46e1b990ca name=baidu_union_verify>
+<meta name=sogou_site_verification content=MKVKCoIjwL>
+<meta name=360-site-verification content=737314c9bf48873a1a0a22295203d9d1>
+<meta name=msvalidate.01 content=2C018C53297C8388F3E7052F5E9CA6AF>
+<meta name=userId value=1030000020012030 id=SFUserId>
+<meta name=userRank value=1 id=SFUserRank>
+<meta name=twitter:card content=summary>
+<meta name=twitter:image content=https://assets.segmentfault.com/v-5fbcbd41/global/img/static/touch-icon.png>
+<meta name=twitter:site content=@segment_fault>
+<meta name=twitter:creator content=@segmentfault>
+<meta name=twitter:title content=Promise实现原理>
+<meta name=og:type content=article>
+<meta name=og:image content=https://assets.segmentfault.com/v-5fbcbd41/global/img/static/touch-icon.png>
+<meta name=og:title content=Promise实现原理>
+<link href=https://segmentfault.com/feeds/questions rel=alternate title="SegmentFault 最新问题" type=application/atom+xml>
+<link href=https://segmentfault.com/feeds/blogs rel=alternate title="SegmentFault 最新文章" type=application/atom+xml>
+<style>:root{--blue:#007bff;--indigo:#6610f2;--purple:#6f42c1;--pink:#e83e8c;--red:#dc3545;--orange:#fd7e14;--yellow:#ffc107;--green:#28a745;--teal:#20c997;--cyan:#17a2b8;--white:#fff;--gray:#6c757d;--gray-dark:#343a40;--primary:#00965e;--secondary:#6c757d;--success:#28a745;--info:#17a2b8;--warning:#ffc107;--danger:#dc3545;--light:#f8f9fa;--dark:#343a40;--breakpoint-xs:0;--breakpoint-sm:576px;--breakpoint-md:768px;--breakpoint-lg:992px;--breakpoint-xl:1200px;--font-family-sans-serif:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";--font-family-monospace:SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}*,:after,:before{box-sizing:border-box}html{font-family:sans-serif;line-height:1.15;-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:rgba(0,0,0,0)}article{display:block}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;font-size:1rem;font-weight:400;line-height:1.5;color:#212529;text-align:left}hr{box-sizing:content-box;height:0;overflow:visible}h1,h2,h3,h5{margin-top:0}p{margin-top:0}ol,ul{margin-top:0}strong{font-weight:bolder}a{color:#00965e;background-color:transparent}a,a:hover{text-decoration:none}a:hover{color:#004a2e}a:not([href]),a:not([href]):hover{color:inherit;text-decoration:none}code,pre{font-family:SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace}img{border-style:none}img,svg{vertical-align:middle}svg{overflow:hidden}button:focus{outline:1px dotted;outline:5px auto -webkit-focus-ring-color}button{margin:0;font-family:inherit}button{overflow:visible}button{text-transform:none}[type=button],button{-webkit-appearance:button}[type=button]:not(:disabled),[type=reset]:not(:disabled),[type=submit]:not(:disabled),button:not(:disabled){cursor:pointer}::-webkit-file-upload-button{font:inherit;-webkit-appearance:button}.h2,h2,h3,h5{margin-bottom:.5rem;font-weight:600;line-height:1.2}.h2{font-size:2rem}h5{font-size:1.25rem}hr{margin-top:1rem;border:0;border-top:1px solid rgba(0,0,0,.1)}.list-inline{padding-left:0;list-style:none}.list-inline-item{display:inline-block}.list-inline-item:not(:last-child){margin-right:.5rem}code{font-size:87.5%;color:#e83e8c;word-wrap:break-word}pre{font-size:87.5%}pre code{font-size:inherit;color:inherit;word-break:normal}.container{width:100%;padding-right:12px;padding-left:12px;margin-right:auto;margin-left:auto}@media (min-width:576px){.container{max-width:540px}}@media (min-width:768px){.container{max-width:720px}}@media (min-width:992px){.container{max-width:960px}}@media (min-width:1200px){.container{max-width:1140px}}@media (min-width:576px){.container{max-width:540px}}@media (min-width:768px){.container{max-width:720px}}@media (min-width:992px){.container{max-width:960px}}@media (min-width:1200px){.container{max-width:1140px}}.row{display:flex;flex-wrap:wrap;margin-right:-12px;margin-left:-12px}.col-6,.col-sm-3,.col-sm-9,.col-xl{position:relative;width:100%;padding-right:12px;padding-left:12px}.col-6{flex:0 0 50%;max-width:50%}.col-12{flex:0 0 100%;max-width:100%}@media (min-width:576px){.col-sm-3{flex:0 0 25%;max-width:25%}.col-sm-9{flex:0 0 75%;max-width:75%}}@media (min-width:1200px){.col-xl{flex-basis:0;flex-grow:1;max-width:100%}}.btn{display:inline-block;font-weight:400;text-align:center;vertical-align:middle;cursor:pointer;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;background-color:transparent;border:1px solid transparent;padding:.375rem .75rem;font-size:1rem;line-height:1.5;border-radius:.25rem;transition:color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out}@media (prefers-reduced-motion:reduce){.btn{transition:none}}.btn:hover{color:#212529;text-decoration:none}.btn.focus,.btn:focus{outline:0;box-shadow:0 0 0 .2rem rgba(0,150,94,.25)}.btn.disabled,.btn:disabled{opacity:.65}.btn-primary{color:#fff;background-color:#00965e;border-color:#00965e}.btn-primary.focus,.btn-primary:focus,.btn-primary:hover{color:#fff;background-color:#007046;border-color:#00633e}.btn-primary.focus,.btn-primary:focus{box-shadow:0 0 0 .2rem rgba(38,166,118,.5)}.btn-primary.disabled,.btn-primary:disabled{color:#fff;background-color:#00965e;border-color:#00965e}.btn-primary:not(:disabled):not(.disabled).active,.btn-primary:not(:disabled):not(.disabled):active,.show>.btn-primary.dropdown-toggle{color:#fff;background-color:#00633e;border-color:#005636}.btn-primary:not(:disabled):not(.disabled).active:focus,.btn-primary:not(:disabled):not(.disabled):active:focus,.show>.btn-primary.dropdown-toggle:focus{box-shadow:0 0 0 .2rem rgba(38,166,118,.5)}.btn-outline-primary{color:#00965e;border-color:#00965e}.btn-outline-primary:hover{color:#fff;background-color:#00965e;border-color:#00965e}.btn-outline-primary.focus,.btn-outline-primary:focus{box-shadow:0 0 0 .2rem rgba(0,150,94,.5)}.btn-outline-primary.disabled,.btn-outline-primary:disabled{color:#00965e;background-color:transparent}.btn-outline-primary:not(:disabled):not(.disabled).active,.btn-outline-primary:not(:disabled):not(.disabled):active,.show>.btn-outline-primary.dropdown-toggle{color:#fff;background-color:#00965e;border-color:#00965e}.btn-outline-primary:not(:disabled):not(.disabled).active:focus,.btn-outline-primary:not(:disabled):not(.disabled):active:focus,.show>.btn-outline-primary.dropdown-toggle:focus{box-shadow:0 0 0 .2rem rgba(0,150,94,.5)}.btn-outline-secondary{color:#6c757d;border-color:#6c757d}.btn-outline-secondary:hover{color:#fff;background-color:#6c757d;border-color:#6c757d}.btn-outline-secondary.focus,.btn-outline-secondary:focus{box-shadow:0 0 0 .2rem rgba(108,117,125,.5)}.btn-outline-secondary.disabled,.btn-outline-secondary:disabled{color:#6c757d;background-color:transparent}.btn-outline-secondary:not(:disabled):not(.disabled).active,.btn-outline-secondary:not(:disabled):not(.disabled):active,.show>.btn-outline-secondary.dropdown-toggle{color:#fff;background-color:#6c757d;border-color:#6c757d}.btn-outline-secondary:not(:disabled):not(.disabled).active:focus,.btn-outline-secondary:not(:disabled):not(.disabled):active:focus,.show>.btn-outline-secondary.dropdown-toggle:focus{box-shadow:0 0 0 .2rem rgba(108,117,125,.5)}.dropup{position:relative}.btn-group{position:relative;display:inline-flex;vertical-align:middle}.btn-group>.btn{position:relative;flex:1 1 auto}.btn-group-vertical>.btn.active,.btn-group-vertical>.btn:active,.btn-group-vertical>.btn:focus,.btn-group-vertical>.btn:hover,.btn-group>.btn.active,.btn-group>.btn:active,.btn-group>.btn:focus,.btn-group>.btn:hover{z-index:1}.btn-group>.btn-group:not(:first-child),.btn-group>.btn:not(:first-child){margin-left:-1px}.btn-group>.btn-group:not(:last-child)>.btn,.btn-group>.btn:not(:last-child):not(.dropdown-toggle){border-top-right-radius:0;border-bottom-right-radius:0}.btn-group>.btn-group:not(:first-child)>.btn,.btn-group>.btn:not(:first-child){border-top-left-radius:0;border-bottom-left-radius:0}.card{position:relative;display:flex;flex-direction:column;min-width:0;word-wrap:break-word;background-color:#fff;background-clip:border-box;border-radius:.25rem}.card-body{flex:1 1 auto;min-height:1px;padding:1.25rem}@-webkit-keyframes progress-bar-stripes{0%{background-position:1rem 0}to{background-position:0 0}}@keyframes progress-bar-stripes{0%{background-position:1rem 0}to{background-position:0 0}}@-webkit-keyframes spinner-border{to{transform:rotate(1turn)}}@keyframes spinner-border{to{transform:rotate(1turn)}}@-webkit-keyframes spinner-grow{0%{transform:scale(0)}50%{opacity:1}}@keyframes spinner-grow{0%{transform:scale(0)}50%{opacity:1}}.border-0{border:0!important}.rounded-circle{border-radius:50%!important}.d-none{display:none!important}.d-inline-block{display:inline-block!important}.d-flex{display:flex!important}@media (min-width:576px){.d-sm-block{display:block!important}.d-sm-flex{display:flex!important}}@media (min-width:1200px){.d-xl-flex{display:flex!important}}.flex-wrap{flex-wrap:wrap!important}.flex-grow-1{flex-grow:1!important}.flex-shrink-0{flex-shrink:0!important}.justify-content-between{justify-content:space-between!important}.align-items-center{align-items:center!important}.align-self-center{align-self:center!important}@media (min-width:576px){.flex-sm-row{flex-direction:row!important}}.position-relative{position:relative!important}@supports ((position:-webkit-sticky) or (position:sticky)){.sticky-top{position:-webkit-sticky;position:sticky;top:0;z-index:1020}}.mb-0{margin-bottom:0!important}.m-1{margin:.25rem!important}.my-1{margin-top:.25rem!important}.mr-1{margin-right:.25rem!important}.my-1{margin-bottom:.25rem!important}.ml-1{margin-left:.25rem!important}.mr-2{margin-right:.5rem!important}.ml-2{margin-left:.5rem!important}.mt-3{margin-top:1rem!important}.mr-3{margin-right:1rem!important}.mb-3{margin-bottom:1rem!important}.mb-4{margin-bottom:1.5rem!important}.mb-5{margin-bottom:3rem!important}.pt-4{padding-top:1.5rem!important}.m-n1{margin:-.25rem!important}@media (min-width:576px){.mt-sm-0{margin-top:0!important}.my-sm-4{margin-top:1.5rem!important}.my-sm-4{margin-bottom:1.5rem!important}}.text-left{text-align:left!important}.text-right{text-align:right!important}.text-center{text-align:center!important}@media (min-width:576px){.text-sm-right{text-align:right!important}}.text-secondary{color:#6c757d!important}a.text-secondary:focus,a.text-secondary:hover{color:#494f54!important}.text-body{color:#212529!important}.fmt{line-height:1.6}.fmt ol,.fmt p,.fmt pre,.fmt ul{margin-bottom:1.25rem}.fmt h2{font-size:1.75rem;margin:2.5rem 0 1rem;padding-bottom:.5rem;border-bottom:1px double rgba(0,0,0,.1)}.fmt h3{font-size:1.5rem;margin:2.25rem 0 1rem}.fmt pre{padding:1rem;max-height:35rem;line-height:1.5;background-color:#e9ecef;overflow:auto}.fmt pre code{overflow-wrap:normal;white-space:inherit}body{background-color:#e9ecef;-webkit-font-smoothing:antialiased}.sflex-center{display:flex;justify-content:center;align-items:center}@media (min-width:992px){.p-lg-30{padding:1.875rem}}.font-size-14{font-size:.875rem!important}.split-dot:before{content:" \2022 ";color:#ced4da}.w-0{width:0;min-width:0}@media (min-width:992px){#sf-header .navbar-user [class*=fa-]{transform:scale(1.125)}}.badge-tag{display:inline-block;font-size:.875rem;padding:0 .375rem;height:1.5rem;line-height:1.5rem;border-radius:.1875rem;background-color:rgba(0,150,94,.1)}.badge-tag:hover{text-decoration:none;background-color:rgba(0,150,94,.2)}@-webkit-keyframes tag-input-warning{0%{background-color:#ffc107;border-color:#ffc107}to{background-color:#f8f9fa}}@keyframes tag-input-warning{0%{background-color:#ffc107;border-color:#ffc107}to{background-color:#f8f9fa}}.functional-area-left{float:left;margin-left:-98px;padding-right:0!important;width:48px;top:8rem}.functional-area-left .func-btn{margin-bottom:.5rem;border-radius:50%;padding:0;text-align:center;width:32px;height:32px;line-height:32px;font-size:1rem;border-color:transparent;background-color:#fff}.functional-area-left .func-btn:hover{color:#fff}.functional-area-left .func-btn.btn-outline-primary:hover{background-color:#00965e}.functional-area-left .func-btn.btn-outline-secondary:hover{background-color:#6c757d}.functional-area-left .func-btn.mainLike{position:relative;width:48px;height:48px;line-height:48px;margin-bottom:1rem;font-size:1.25rem;border-color:#00965e}.functional-area-left .func-btn .mainLikeNum{position:absolute;top:-40px;left:0;font-size:1rem;font-weight:700;display:block;width:48px;color:#6c757d}@media (max-width:767.98px){.func-btn{margin-bottom:.5rem}}@-webkit-keyframes scroll-warning{0%{background-color:#ffc107;border-color:#ffc107}to{background-color:#f8f9fa}}@keyframes scroll-warning{0%{background-color:#ffc107;border-color:#ffc107}to{background-color:#f8f9fa}}.widget-codetool{position:relative;margin-top:0}.widget-codetool+.hljs{margin-top:0!important}.hljs{display:block;overflow-x:auto;color:#333;background:#f8f8f8}.hljs-comment{color:#998;font-style:italic}.hljs-keyword{color:#333;font-weight:700}.hljs-literal,.hljs-number{color:teal}.hljs-string{color:#d14}.hljs-title{color:#900;font-weight:700}.hljs-built_in{color:#0086b3}@media (max-width:767.98px){.article>pre{margin-left:-1rem;margin-right:-1rem}}</style>
+<link rel="shortcut icon" href="data:image/x-icon;base64,AAABAAEAICAAAAEAIACoEAAAFgAAACgAAAAgAAAAQAAAAAEAIAAAAAAAABAAABILAAASCwAAAAAAAAAAAABemgBJYZoA42GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgDjXpoASWGaAONhmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgDjYZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoB/4y2R/+605H/1+W//+Hs0P/X5sD/xdqi/6LDaf9nnQr/YZoA/2GaAP9hmgD/YZoA/2GaAP+Crzb/osNq/6LDav+iw2r/osNq/2SbBf9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/4eyPv/k7tX///////////////////////////////////////P37P+QuE3/YZoA/2GaAP9hmgD/YZoA/7HNgv//////////////////////aJ4M/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/8vfr//////////////////////////////////////////////////j69P9+rTD/YZoA/2GaAP9hmgD/sMyA//////////////////////9nngv/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP+nxnH///////r8+P+50o//iLNA/4KvNv+ty3z/+/36/////////////////83fr/9hmgD/YZoA/2GaAP+vy37//////////////////////2eeC/9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2ScBv/M3q7/fKss/2GaAP9hmgD/YZoA/2GaAP/F2qP/////////////////7fPj/2GaAP9hmgD/YZoA/63LfP//////////////////////Z54L/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/ZJsF/93pyf/////////////////u9OT/YZoA/2GaAP9hmgD/rMp6//////////////////////9nnQr/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/ZJsF/5W7Vf/f6sz//////////////////////9Tku/9hmgD/YZoA/2GaAP+ryXj//////////////////////2adCf9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/Zp0J/6jHdP/w9ef/////////////////////////////////jLZH/2GaAP9hmgD/YZoA/6rIdv//////////////////////ZZ0I/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/3ipJv/l7tb/////////////////////////////////+vz4/6DCZ/9hmgD/YZoA/2GaAP9hmgD/qMd0//////////////////////9knAb/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9lnAf/5u/X////////////////////////////9vnx/7vTkv90piD/YZoA/2GaAP9hmgD/YZoA/2GaAP+nx3L//////////////////////2SbBf9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/5S6U///////////////////////5+/Z/5u/Xv9mnQn/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/6bGcP//////////////////////YpsD/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/r8t+//////////////////n79v9qoBD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/pcVu//////////////////////9hmgH/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP+synr/////////////////9/rz/2qfD/9hmgD/YZoA/2GaAf+Vu1T/j7dL/2GaAP9hmgD/ap8P/3SmIP+ty3z//////////////////f79/3KlHf91pyH/dqci/2GaAf9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/4ayPf//////////////////////8fbp/8ncqf/P4LL/7PPh///////m79j/YpoC/2GaAP+lxW//////////////////////////////////////////////////Z50K/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/8LYnv////////////////////////////////////////////////+YvVn/YZoA/6TFbf////////////////////////////////////////////////9pnw3/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/ZJsF/7zUlP/5+/b////////////////////////////9/v3/zuCx/3+tMv9hmgD/osNq/////////////////////////////////////////////////2qfD/9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/26iFf+avl3/rct8/7rTkP+qyXf/l7xY/3SmH/9hmgD/YZoA/2GaAP9roBH/eqop/7XQif//////////////////////eako/3qqKf97qyv/YpoC/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/rMp6//////////////////7+/v9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP+wzID//////////////////f79/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/6fHcv//////////////////////b6MX/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/jrdK///////////////////////E2aH/iLNA/6bGcP90ph//YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9voxf/+Pv1/////////////////////////////////63LfP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP+nxnH/////////////////////////////////5e7W/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAf+YvVr/6PDa/////////////////+705P++1Zf/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/Z50K/3WnIf9pnw7/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgDjYZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA416aAElhmgDjYZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAP9hmgD/YZoA/2GaAONemgBJAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="><style>.sf-hidden{display:none!important}</style><link rel=canonical href=https://segmentfault.com/a/1190000013396601></head>
+<body class=vsc-initialized><div class="custome-alert alert alert-warning topframe text-center my-0 sticky-top d-none rounded-0" style=display:none!important>
+ 
+ 
+ </div>
+ <img style=height:0px;width:0px;display:none!important src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+<div class="d-none d-lg-block text-center" style=display:none!important>
+ 
+</div>
+<div id=gridMapHoverBox style="position:absolute;border:1px solid #00965e;z-index:99;font-size:10px;background:#ffffff;display:none!important"></div>
+<nav id=sf-header class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top" style=display:none!important>
+ <div class=container style=display:none!important>
+ 
+ 
+ 
+ <div class="collapse navbar-collapse" id=navbarNavDropdown style=display:none!important>
+ <ul class="navbar-nav font-weight-bold" style=display:none!important>
+ 
+ 
+ 
+ 
+ 
+ 
+ <li class="nav-item dropdown hover-down" style=display:none!important>
+ 
+ <div class=dropdown-menu aria-labelledby=navbarDiscover style=display:none!important>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ </div>
+ </li>
+ </ul>
+ 
+ <ul class="navbar-nav navbar-user ml-auto align-items-lg-center" style=display:none!important>
+ <li class="nav-item dropdown" style=display:none!important>
+ <a class=nav-link href=https://segmentfault.com/ask id=navbarEdit role=button data-toggle=dropdown aria-haspopup=true aria-expanded=false style=display:none!important>
+ <svg class="svg-inline--fa fa-edit fa-w-18 fa-fw" aria-hidden=true focusable=false data-prefix=far data-icon=edit role=img xmlns=http://www.w3.org/2000/svg viewBox="0 0 576 512" data-fa-i2svg><path fill=currentColor d="M402.3 344.9l32-32c5-5 13.7-1.5 13.7 5.7V464c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h273.5c7.1 0 10.7 8.6 5.7 13.7l-32 32c-1.5 1.5-3.5 2.3-5.7 2.3H48v352h352V350.5c0-2.1.8-4.1 2.3-5.6zm156.6-201.8L296.3 405.7l-90.4 10c-26.2 2.9-48.5-19.2-45.6-45.6l10-90.4L432.9 17.1c22.9-22.9 59.9-22.9 82.7 0l43.2 43.2c22.9 22.9 22.9 60 .1 82.8zM460.1 174L402 115.9 216.2 301.8l-7.3 65.3 65.3-7.3L460.1 174zm64.8-79.7l-43.2-43.2c-4.1-4.1-10.8-4.1-14.8 0L436 82l58.1 58.1 30.9-30.9c4-4.2 4-10.8-.1-14.9z"></path></svg>
+ 
+ </a>
+ 
+ </li>
+ <li class="message nav-item dropdown position-relative" style=display:none!important>
+ <a class=nav-link href=https://segmentfault.com/user/notifications id=messageBox role=button data-toggle=dropdown aria-haspopup=true aria-expanded=false style=display:none!important>
+ <svg class="svg-inline--fa fa-bell fa-w-14 fa-fw" aria-hidden=true focusable=false data-prefix=far data-icon=bell role=img xmlns=http://www.w3.org/2000/svg viewBox="0 0 448 512" data-fa-i2svg><path fill=currentColor d="M439.39 362.29c-19.32-20.76-55.47-51.99-55.47-154.29 0-77.7-54.48-139.9-127.94-155.16V32c0-17.67-14.32-32-31.98-32s-31.98 14.33-31.98 32v20.84C118.56 68.1 64.08 130.3 64.08 208c0 102.3-36.15 133.53-55.47 154.29-6 6.45-8.66 14.16-8.61 21.71.11 16.4 12.98 32 32.1 32h383.8c19.12 0 32-15.6 32.1-32 .05-7.55-2.61-15.27-8.61-21.71zM67.53 368c21.22-27.97 44.42-74.33 44.53-159.42 0-.2-.06-.38-.06-.58 0-61.86 50.14-112 112-112s112 50.14 112 112c0 .2-.06.38-.06.58.11 85.1 23.31 131.46 44.53 159.42H67.53zM224 512c35.32 0 63.97-28.65 63.97-64H160.03c0 35.35 28.65 64 63.97 64z"></path></svg>
+ 
+ </a>
+ <div class="dropdown-menu dropdown-menu-right p-0" aria-labelledby=messageBox style=display:none!important>
+ 
+ </div>
+ </li>
+ <li class="letter nav-item dropdown position-relative" style=display:none!important>
+ <a class=nav-link href=https://segmentfault.com/user/messages id=letterBox role=button data-toggle=dropdown aria-haspopup=true aria-expanded=false style=display:none!important>
+ <svg class="svg-inline--fa fa-envelope fa-w-16 fa-fw" aria-hidden=true focusable=false data-prefix=far data-icon=envelope role=img xmlns=http://www.w3.org/2000/svg viewBox="0 0 512 512" data-fa-i2svg><path fill=currentColor d="M464 64H48C21.49 64 0 85.49 0 112v288c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V112c0-26.51-21.49-48-48-48zm0 48v40.805c-22.422 18.259-58.168 46.651-134.587 106.49-16.841 13.247-50.201 45.072-73.413 44.701-23.208.375-56.579-31.459-73.413-44.701C106.18 199.465 70.425 171.067 48 152.805V112h416zM48 400V214.398c22.914 18.251 55.409 43.862 104.938 82.646 21.857 17.205 60.134 55.186 103.062 54.955 42.717.231 80.509-37.199 103.053-54.947 49.528-38.783 82.032-64.401 104.947-82.653V400H48z"></path></svg>
+ 
+ </a>
+ <div class="dropdown-menu dropdown-menu-right p-0" aria-labelledby=letterBox style=display:none!important>
+ 
+ </div>
+ </li>
+ <li class="nav-item dropdown" style=display:none!important>
+ 
+ <div class="dropdown-menu dropdown-menu-right" aria-labelledby=navbarMy style=width:316px;display:none!important>
+ 
+ 
+ 
+ 
+ 
+ </div>
+ </li>
+ </ul>
+ </div>
+ </div>
+</nav>
+ <input id=articleId value=1190000013396601 class=hidden style=display:none!important>
+ <div class="d-none d-xl-flex justify-content-center" style=display:none!important>
+ 
+ </div>
+ <div class="position-relative articledetail-wrap">
+ <div class="container my-sm-4 my-1" id=sf-article>
+ <div class=row>
+ <div class="col-12 col-xl w-0">
+ 
+ 
+ <div class="card border-0 mb-4">
+ <div class="card-body p-lg-30">
+ <div class="d-flex justify-content-between align-items-center mb-3" id=sf-article_author>
+ <div class="information d-flex align-items-center">
+ <a class="d-flex align-items-centers mr-1" href=https://segmentfault.com/u/_yangliuliu>
+ <picture class="mr-2 d-sm-block d-none">
+ <img class="d-inline-block rounded-circle" width=32 src='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64"><rect fill-opacity="0"/></svg>' aria-hidden=true style="background-blend-mode:normal!important;background-clip:content-box!important;background-position:50% 50%!important;background-color:rgba(0,0,0,0)!important;background-image:var(--sf-img-2)!important;background-size:100% 100%!important;background-origin:content-box!important;background-repeat:no-repeat!important" srcset sizes>
+ </picture>
+ <strong class=align-self-center>_杨溜溜</strong>
+ </a>
+ <ul class="list-inline mb-0 authentication-info sflex-center font-size-14">
+ <li class=list-inline-item>
+ <svg class="svg-inline--fa fa-dice-d8 fa-w-16" style=color:#BF7158 aria-hidden=true focusable=false data-prefix=fas data-icon=dice-d8 role=img xmlns=http://www.w3.org/2000/svg viewBox="0 0 512 512" data-fa-i2svg><path fill=currentColor d="M225.53 2.52L2.36 233.83c-4.21 4.37-2.56 11.71 3.1 13.77l234.13 85.06V8.39c-.01-7.49-8.91-11.21-14.06-5.87zm284.11 231.31L286.47 2.52C281.32-2.82 272.41.9 272.41 8.4v324.27l234.13-85.06c5.66-2.07 7.31-9.42 3.1-13.78zM33.53 310.38l192 199.1c5.15 5.34 14.06 1.62 14.06-5.88V368.29L42.13 296.61c-8.21-2.98-14.72 7.43-8.6 13.77zm436.34-13.77l-197.46 71.68V503.6c0 7.5 8.91 11.22 14.06 5.88l192-199.1c6.12-6.34-.39-16.75-8.6-13.77z"></path></svg>
+ <span style=color:#BF7158;font-weight:bold>3.5k</span>
+ </li>
+ <li class=list-inline-item>
+ <a class=text-body href=https://github.com/yacan8 target=_blank>
+ <svg class="svg-inline--fa fa-github fa-w-16" aria-hidden=true focusable=false data-prefix=fab data-icon=github role=img xmlns=http://www.w3.org/2000/svg viewBox="0 0 496 512" data-fa-i2svg><path fill=currentColor d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg>
+ </a>
+ </li>
+ 
+ </ul>
+ </div>
+ </div><div></div>
+ <div class="functional-area-left sticky-top d-none d-xl-flex"><div class=text-center><div class="btn-group like-group" role=group>
+ <button data-type=question class="func-btn mainLike like-btn btn btn-outline-primary" data-id=1190000013396601>
+ <svg class="svg-inline--fa fa-thumbs-up fa-w-16" aria-hidden=true focusable=false data-prefix=far data-icon=thumbs-up role=img xmlns=http://www.w3.org/2000/svg viewBox="0 0 512 512" data-fa-i2svg><path fill=currentColor d="M466.27 286.69C475.04 271.84 480 256 480 236.85c0-44.015-37.218-85.58-85.82-85.58H357.7c4.92-12.81 8.85-28.13 8.85-46.54C366.55 31.936 328.86 0 271.28 0c-61.607 0-58.093 94.933-71.76 108.6-22.747 22.747-49.615 66.447-68.76 83.4H32c-17.673 0-32 14.327-32 32v240c0 17.673 14.327 32 32 32h64c14.893 0 27.408-10.174 30.978-23.95 44.509 1.001 75.06 39.94 177.802 39.94 7.22 0 15.22.01 22.22.01 77.117 0 111.986-39.423 112.94-95.33 13.319-18.425 20.299-43.122 17.34-66.99 9.854-18.452 13.664-40.343 8.99-62.99zm-61.75 53.83c12.56 21.13 1.26 49.41-13.94 57.57 7.7 48.78-17.608 65.9-53.12 65.9h-37.82c-71.639 0-118.029-37.82-171.64-37.82V240h10.92c28.36 0 67.98-70.89 94.54-97.46 28.36-28.36 18.91-75.63 37.82-94.54 47.27 0 47.27 32.98 47.27 56.73 0 39.17-28.36 56.72-28.36 94.54h103.99c21.11 0 37.73 18.91 37.82 37.82.09 18.9-12.82 37.81-22.27 37.81 13.489 14.555 16.371 45.236-5.21 65.62zM88 432c0 13.255-10.745 24-24 24s-24-10.745-24-24 10.745-24 24-24 24 10.745 24 24z"></path></svg>
+ <span class=mainLikeNum>36</span>
+ </button></div><button class="func-btn mainBookmark btn btn-outline-secondary" data-id=1190000013396601>
+ <svg class="svg-inline--fa fa-bookmark fa-w-12" aria-hidden=true focusable=false data-prefix=far data-icon=bookmark role=img xmlns=http://www.w3.org/2000/svg viewBox="0 0 384 512" data-fa-i2svg><path fill=currentColor d="M336 0H48C21.49 0 0 21.49 0 48v464l192-112 192 112V48c0-26.51-21.49-48-48-48zm0 428.43l-144-84-144 84V54a6 6 0 0 1 6-6h276c3.314 0 6 2.683 6 5.996V428.43z"></path></svg>
+ 
+ </button><a class="func-btn show-column btn btn-outline-secondary" href=#comment-area>
+ <svg class="svg-inline--fa fa-comment-alt-lines fa-w-16" aria-hidden=true focusable=false data-prefix=far data-icon=comment-alt-lines role=img xmlns=http://www.w3.org/2000/svg viewBox="0 0 512 512" data-fa-i2svg><path fill=currentColor d="M448 0H64C28.7 0 0 28.7 0 64v288c0 35.3 28.7 64 64 64h96v84c0 7.1 5.8 12 12 12 2.4 0 4.9-.7 7.1-2.4L304 416h144c35.3 0 64-28.7 64-64V64c0-35.3-28.7-64-64-64zm16 352c0 8.8-7.2 16-16 16H288l-12.8 9.6L208 428v-60H64c-8.8 0-16-7.2-16-16V64c0-8.8 7.2-16 16-16h384c8.8 0 16 7.2 16 16v288zm-96-216H144c-8.8 0-16 7.2-16 16v16c0 8.8 7.2 16 16 16h224c8.8 0 16-7.2 16-16v-16c0-8.8-7.2-16-16-16zm-96 96H144c-8.8 0-16 7.2-16 16v16c0 8.8 7.2 16 16 16h128c8.8 0 16-7.2 16-16v-16c0-8.8-7.2-16-16-16z"></path></svg>
+ 
+ </a><div class="dropdown dropup d-inline-block">
+ <button class="func-btn btn btn-outline-secondary" id=func_share data-toggle=dropdown>
+ <svg class="svg-inline--fa fa-share-alt fa-w-14" aria-hidden=true focusable=false data-prefix=far data-icon=share-alt role=img xmlns=http://www.w3.org/2000/svg viewBox="0 0 448 512" data-fa-i2svg><path fill=currentColor d="M352 320c-25.6 0-48.9 10-66.1 26.4l-98.3-61.5c5.9-18.8 5.9-39.1 0-57.8l98.3-61.5C303.1 182 326.4 192 352 192c53 0 96-43 96-96S405 0 352 0s-96 43-96 96c0 9.8 1.5 19.6 4.4 28.9l-98.3 61.5C144.9 170 121.6 160 96 160c-53 0-96 43-96 96s43 96 96 96c25.6 0 48.9-10 66.1-26.4l98.3 61.5c-2.9 9.4-4.4 19.1-4.4 28.9 0 53 43 96 96 96s96-43 96-96-43-96-96-96zm0-272c26.5 0 48 21.5 48 48s-21.5 48-48 48-48-21.5-48-48 21.5-48 48-48zM96 304c-26.5 0-48-21.5-48-48s21.5-48 48-48 48 21.5 48 48-21.5 48-48 48zm256 160c-26.5 0-48-21.5-48-48s21.5-48 48-48 48 21.5 48 48-21.5 48-48 48z"></path></svg>
+ 
+ </button>
+ <div class="dropdown-menu shareContent sf-hidden" aria-labelledby=func_share>
+ 
+ 
+ </div>
+ </div></div></div>
+ <h1 class="h2 mb-3" id=sf-article_title>
+ <a class=text-body href=https://segmentfault.com/a/1190000013396601>Promise实现原理</a>
+ </h1>
+ <div class="d-sm-flex d-none flex-wrap align-items-center mb-4" id=sf-article_tags>
+ <div class=m-n1><a class="m-1 badge-tag" href=https://segmentfault.com/t/promise data-toggle=popover data-img data-placement=top data-original-title=promise data-id=1040000000356342>
+ promise
+ </a></div>
+ <div class=font-size-14>
+ <time datetime=2018-02-26T19:04:18+08:00 itemprop=datePublished class="text-secondary ml-2">发布于
+ 2018-02-26 </time>
+ </div>
+ </div>
+ <div id=OA_holder_25></div>
+ <article class="article fmt article-content" data-id=1190000013396601 data-license=cc>
+ 
+<h2 id=item-1>前言</h2>
+<p>在Promise没有出现之前，异步编程需要通过回调的方式进行完成，当回调函数嵌套过多时，会使代码丑化，也降低了代码的可理解性，后期维护起来会相对困难，Promise是异步编程的一种解决方案，比传统的解决方案——回调函数和事件——更合理和更强大。它由社区最早提出和实现，ES6将其写进了语言标准，统一了用法，原生提供了Promise对象，本文主要针对Promise/A+规范，实现一个小型的Promise对象。</p>
+<h2 id=item-2>Promise/A+ 规范</h2>
+<p>Promise规范有很多，如Promise/A，Promise/B，Promise/D 以及 Promise/A 的升级版Promise/A+，因为ES6主要用的是Promise/A+规范，该规范内容也比较多，我们挑几个简单的说明下:</p>
+<ol>
+<li>Promise本身是一个状态机，每一个Promise实例只能有三个状态，<code>pending</code>、<code>fulfilled</code>、<code>reject</code>，状态之间的转化只能是<code>pending-&gt;fulfilled</code>、<code>pending-&gt;reject</code>，状态变化不可逆。</li>
+<li>Promise有一个<code>then</code>方法，该方法可以被调用多次，并且返回一个Promise对象（返回新的Promise还是老的Promise对象，规范没有提）。</li>
+<li>支持链式调用。</li>
+<li>内部保存有一个value值，用来保存上次执行的结果值，如果报错，则保存的是异常信息。</li>
+</ol>
+<p>具体规范可参考:</p>
+<ul>
+<li>英文版：<a href=https://promisesaplus.com/ rel="nofollow noreferrer" target=_blank>promisesaplus.com/</a>
+</li>
+<li>中文版：<a href=http://www.ituring.com.cn/article/66566 rel="nofollow noreferrer" target=_blank>【翻译】Promises/A+规范</a>
+</li>
+</ul>
+<h2 id=item-3>实现</h2>
+<p>由于Promise为状态机，我们需先定义状态</p>
+<div class=widget-codetool style=display:none>
+ 
+ </div><pre class="javascript hljs"><code class=js><span class=hljs-keyword>var</span> PENDING = <span class=hljs-number>0</span>; <span class=hljs-comment>// 进行中</span>
+<span class=hljs-keyword>var</span> FULFILLED = <span class=hljs-number>1</span>; <span class=hljs-comment>// 成功</span>
+<span class=hljs-keyword>var</span> REJECTED = <span class=hljs-number>2</span>; <span class=hljs-comment>// 失败</span></code></pre>
+<h3 id=item-3-1>基本代码</h3>
+<div class=widget-codetool style=display:none>
+ 
+ </div><pre class="javascript hljs"><code class=js><span class=hljs-function><span class=hljs-keyword>function</span> <span class=hljs-title>Promise</span>(<span class=hljs-params>fn</span>) </span>{
+  <span class=hljs-keyword>var</span> state = PENDING;  <span class=hljs-comment>// 存储PENDING, FULFILLED或者REJECTED的状态</span>
+  <span class=hljs-keyword>var</span> value = <span class=hljs-literal>null</span>;  <span class=hljs-comment>// 存储成功或失败的结果值</span>
+  <span class=hljs-keyword>var</span> handlers = []; <span class=hljs-comment>// 存储成功或失败的处理程序，通过调用`.then`或者`.done`方法</span>
+
+  <span class=hljs-comment>// 成功状态变化</span>
+  <span class=hljs-function><span class=hljs-keyword>function</span> <span class=hljs-title>fulfill</span>(<span class=hljs-params>result</span>) </span>{
+      state = FULFILLED;
+      value = result;
+      handlers.forEach(handle); <span class=hljs-comment>// 处理函数，下文会提到</span>
+      handlers = <span class=hljs-literal>null</span>;
+   }
+
+  <span class=hljs-comment>// 失败状态变化</span>
+  <span class=hljs-function><span class=hljs-keyword>function</span> <span class=hljs-title>reject</span>(<span class=hljs-params>error</span>) </span>{
+      state = REJECTED;
+      value = error;
+      handlers.forEach(handle); <span class=hljs-comment>// 处理函数，下文会提到</span>
+      handlers = <span class=hljs-literal>null</span>;
+  }
+}</code></pre>
+<h3 id=item-3-2>实现resolve方法</h3>
+<p>resolve方法可以接受两种参数，一种为普通的值/对象，另外一种为一个Promise对象，如果是普通的值/对象，则直接把结果传递到下一个对象；<br>如果是一个 Promise 对象，则必须先等待这个子任务序列完成。</p>
+<div class=widget-codetool style=display:none>
+ 
+ </div><pre class="javascript hljs"><code class=js><span class=hljs-function><span class=hljs-keyword>function</span> <span class=hljs-title>Promise</span>(<span class=hljs-params>fn</span>) </span>{
+  ...
+  function resolve(result) {
+      <span class=hljs-keyword>try</span> {
+        <span class=hljs-keyword>var</span> then = getThen(result);
+        <span class=hljs-keyword>if</span> (then) {
+          doResolve(then.bind(result), resolve, reject)
+          <span class=hljs-keyword>return</span>;
+        }
+        fulfill(result);
+      } <span class=hljs-keyword>catch</span> (e) {
+        reject(e);
+      }
+  }
+  ...
+}</code></pre>
+<p>resolve需要两个辅助方法<code>getThen</code>、和<code>doResolve</code>。</p>
+<div class=widget-codetool style=display:none>
+ 
+ </div><pre class="javascript hljs"><code class=js><span class=hljs-comment>// getThen 检查如果value是一个Promise对象，则返回then方法等待执行完成。</span>
+<span class=hljs-function><span class=hljs-keyword>function</span> <span class=hljs-title>getThen</span>(<span class=hljs-params>value</span>) </span>{
+  <span class=hljs-keyword>var</span> t = <span class=hljs-keyword>typeof</span> value;
+  <span class=hljs-keyword>if</span> (value &amp;&amp; (t === <span class=hljs-string>'object'</span> || t === <span class=hljs-string>'function'</span>)) {
+    <span class=hljs-keyword>var</span> then = value.then;
+    <span class=hljs-keyword>if</span> (<span class=hljs-keyword>typeof</span> then === <span class=hljs-string>'function'</span>) {
+      <span class=hljs-keyword>return</span> then;
+    }
+  }
+  <span class=hljs-keyword>return</span> <span class=hljs-literal>null</span>;
+}
+<span class=hljs-comment>// 异常参数检查函数，确保onFulfilled和onRejected两个函数中只执行一个且只执行一次，但是不保证异步。</span>
+<span class=hljs-function><span class=hljs-keyword>function</span> <span class=hljs-title>doResolve</span>(<span class=hljs-params>fn, onFulfilled, onRejected</span>) </span>{
+  <span class=hljs-keyword>var</span> done = <span class=hljs-literal>false</span>;
+  <span class=hljs-keyword>try</span> {
+    fn(
+      <span class=hljs-function><span class=hljs-keyword>function</span>(<span class=hljs-params>value</span>) </span>{
+        <span class=hljs-keyword>if</span> (done) <span class=hljs-keyword>return</span>;
+        done = <span class=hljs-literal>true</span>;
+        onFulfilled(value);
+      },
+      <span class=hljs-function><span class=hljs-keyword>function</span>(<span class=hljs-params>reason</span>) </span>{
+        <span class=hljs-keyword>if</span> (done) <span class=hljs-keyword>return</span>;
+        done = <span class=hljs-literal>true</span>;
+        onRejected(reason);
+      }
+    );
+  } <span class=hljs-keyword>catch</span>(ex) {
+    <span class=hljs-keyword>if</span> (done) <span class=hljs-keyword>return</span>;
+    done = <span class=hljs-literal>true</span>;
+    onRejected(ex);
+  }
+}</code></pre>
+<p>上面已经完成了一个完整的内部状态机，但我们并没有暴露一个方法去解析或则观察 Promise 。现在让我们开始解析 Promise ：</p>
+<div class=widget-codetool style=display:none>
+ 
+ </div><pre class="javascript hljs"><code class=js><span class=hljs-function><span class=hljs-keyword>function</span> <span class=hljs-title>Promise</span>(<span class=hljs-params>fn</span>) </span>{
+  ...
+  doResolve(fn, resolve, reject);
+}</code></pre>
+<p>如你所见，我们复用了doResolve，因为对于初始化的fn也要对其进行控制。fn允许调用resolve或则reject多次，甚至抛出异常。这完全取决于我们去保证promise对象仅被resolved或则rejected一次，且状态不能随意改变。</p>
+<h3 id=item-3-3>then方法实现</h3>
+<p>在实现<code>then</code>方法之前，我们这里实现了一个执行方法done，该方法用来处理执行then方法的回调函数，一下为promise.done(onFullfilled, onRejected)方法的几个点。</p>
+<ul>
+<li>onFulfilled 和 onRejected 两者只能有一个被执行，且执行次数为一</li>
+<li>该方法仅能被调用一次, 一旦调用了该方法，则 promise 链式调用结束</li>
+<li>无论是否 promise 已经被解析，都可以调用该方法</li>
+</ul>
+<div class=widget-codetool style=display:none>
+ 
+ </div><pre class="javascript hljs"><code class=js><span class=hljs-function><span class=hljs-keyword>function</span> <span class=hljs-title>Promise</span>(<span class=hljs-params>fn</span>) </span>{
+  ...
+  <span class=hljs-comment>// 不同状态，进行不同的处理</span>
+  <span class=hljs-function><span class=hljs-keyword>function</span> <span class=hljs-title>handle</span>(<span class=hljs-params>handler</span>) </span>{
+    <span class=hljs-keyword>if</span> (state === PENDING) {
+      handlers.push(handler);
+    } <span class=hljs-keyword>else</span> {
+      <span class=hljs-keyword>if</span> (state === FULFILLED &amp;&amp; <span class=hljs-keyword>typeof</span> handler.onFulfilled === <span class=hljs-string>'function'</span>) {
+        handler.onFulfilled(value);
+      }
+      <span class=hljs-keyword>if</span> (state === REJECTED &amp;&amp; <span class=hljs-keyword>typeof</span> handler.onRejected === <span class=hljs-string>'function'</span>) {
+        handler.onRejected(value);
+      }
+    }
+  }
+
+  <span class=hljs-keyword>this</span>.done = <span class=hljs-function><span class=hljs-keyword>function</span> (<span class=hljs-params>onFulfilled, onRejected</span>) </span>{
+    <span class=hljs-comment>// 保证异步</span>
+    setTimeout(<span class=hljs-function><span class=hljs-keyword>function</span> (<span class=hljs-params></span>) </span>{
+      handle({<span class=hljs-attr>onFulfilled</span>: onFulfilled, <span class=hljs-attr>onRejected</span>: onRejected});
+    }, <span class=hljs-number>0</span>);
+  }
+}</code></pre>
+<p>当 Promise 被 resolved 或者 rejected 时，我们保证 handlers 将被通知。<br>then方法</p>
+<div class=widget-codetool style=display:none>
+ 
+ </div><pre class="javascript hljs"><code class=js><span class=hljs-function><span class=hljs-keyword>function</span> <span class=hljs-title>Promise</span>(<span class=hljs-params>fn</span>) </span>{
+  ...
+  this.then = <span class=hljs-function><span class=hljs-keyword>function</span>(<span class=hljs-params>onFulfilled, onRejected</span>) </span>{
+    <span class=hljs-keyword>var</span> self = <span class=hljs-keyword>this</span>;
+    <span class=hljs-keyword>return</span> <span class=hljs-keyword>new</span> <span class=hljs-built_in>Promise</span>(<span class=hljs-function><span class=hljs-keyword>function</span> (<span class=hljs-params>resolve, reject</span>) </span>{
+      self.done(<span class=hljs-function><span class=hljs-keyword>function</span> (<span class=hljs-params>result</span>) </span>{
+        <span class=hljs-keyword>if</span> (<span class=hljs-keyword>typeof</span> onFulfilled === <span class=hljs-string>'function'</span>) {
+          <span class=hljs-keyword>try</span> {
+            <span class=hljs-comment>// onFulfilled方法要有返回值！</span>
+            <span class=hljs-keyword>return</span> resolve(onFulfilled(result));
+          } <span class=hljs-keyword>catch</span> (ex) {
+            <span class=hljs-keyword>return</span> reject(ex);
+          }
+        } <span class=hljs-keyword>else</span> {
+          <span class=hljs-keyword>return</span> resolve(result);
+        }
+      }, <span class=hljs-function><span class=hljs-keyword>function</span> (<span class=hljs-params>error</span>) </span>{
+        <span class=hljs-keyword>if</span> (<span class=hljs-keyword>typeof</span> onRejected === <span class=hljs-string>'function'</span>) {
+          <span class=hljs-keyword>try</span> {
+            <span class=hljs-keyword>return</span> resolve(onRejected(error));
+          } <span class=hljs-keyword>catch</span> (ex) {
+            <span class=hljs-keyword>return</span> reject(ex);
+          }
+        } <span class=hljs-keyword>else</span> {
+          <span class=hljs-keyword>return</span> reject(error);
+        }
+      });
+    });
+  }
+}</code></pre>
+<p>catch方法，我们直接调用then处理异常</p>
+<div class=widget-codetool style=display:none>
+ 
+ </div><pre class="javascript hljs"><code class=js><span class=hljs-keyword>this</span>.catch = <span class=hljs-function><span class=hljs-keyword>function</span>(<span class=hljs-params>errorHandle</span>) </span>{
+  <span class=hljs-keyword>return</span> <span class=hljs-keyword>this</span>.then(<span class=hljs-literal>null</span>, errorHandle);
+}</code></pre>
+<p>以上为promise实现原理~</p>
+ </article>
+ 
+ <div id=OA_holder_3></div>
+ <div class="text-secondary font-size-14 mt-3 mb-5 d-flex justify-content-between row">
+ <div class="col-6 text-secondary" id=sf-article_metas data-viewsword=8928>阅读
+ 8.9k
+ <span class=split-dot></span>
+ <time datetime=2018-02-26T19:04:18+08:00 itemprop=datePublished>发布于
+ 2018-02-26 </time>
+ </div>
+ <div class="operation col-6 text-right">
+ 
+ <a class="text-secondary sf_do" href=https://segmentfault.com/a/1190000013396601 data-dotype=modal data-content='{"type":"form","asyncUrl":"\/iteration\/api\/reason\/article\/report?id=1190000013396601","data":null}' data-api=/iteration/api/article/1190000013396601/report>
+ <span>举报</span>
+ </a>
+ </div>
+ </div>
+ <div class=functional-area-bottom><div class=text-center><div class="btn-group like-group mr-2" role=group>
+ <button data-type=question class="func-btn mainLike like-btn btn btn-outline-primary" data-id=1190000013396601>
+ <svg class="svg-inline--fa fa-thumbs-up fa-w-16" aria-hidden=true focusable=false data-prefix=far data-icon=thumbs-up role=img xmlns=http://www.w3.org/2000/svg viewBox="0 0 512 512" data-fa-i2svg><path fill=currentColor d="M466.27 286.69C475.04 271.84 480 256 480 236.85c0-44.015-37.218-85.58-85.82-85.58H357.7c4.92-12.81 8.85-28.13 8.85-46.54C366.55 31.936 328.86 0 271.28 0c-61.607 0-58.093 94.933-71.76 108.6-22.747 22.747-49.615 66.447-68.76 83.4H32c-17.673 0-32 14.327-32 32v240c0 17.673 14.327 32 32 32h64c14.893 0 27.408-10.174 30.978-23.95 44.509 1.001 75.06 39.94 177.802 39.94 7.22 0 15.22.01 22.22.01 77.117 0 111.986-39.423 112.94-95.33 13.319-18.425 20.299-43.122 17.34-66.99 9.854-18.452 13.664-40.343 8.99-62.99zm-61.75 53.83c12.56 21.13 1.26 49.41-13.94 57.57 7.7 48.78-17.608 65.9-53.12 65.9h-37.82c-71.639 0-118.029-37.82-171.64-37.82V240h10.92c28.36 0 67.98-70.89 94.54-97.46 28.36-28.36 18.91-75.63 37.82-94.54 47.27 0 47.27 32.98 47.27 56.73 0 39.17-28.36 56.72-28.36 94.54h103.99c21.11 0 37.73 18.91 37.82 37.82.09 18.9-12.82 37.81-22.27 37.81 13.489 14.555 16.371 45.236-5.21 65.62zM88 432c0 13.255-10.745 24-24 24s-24-10.745-24-24 10.745-24 24-24 24 10.745 24 24z"></path></svg>
+ <span class=ml-1>赞</span> <span class=mainLikeNum>36</span>
+ </button></div><button class="func-btn mainBookmark btn btn-outline-secondary mr-2" data-id=1190000013396601>
+ <svg class="svg-inline--fa fa-bookmark fa-w-12" aria-hidden=true focusable=false data-prefix=far data-icon=bookmark role=img xmlns=http://www.w3.org/2000/svg viewBox="0 0 384 512" data-fa-i2svg><path fill=currentColor d="M336 0H48C21.49 0 0 21.49 0 48v464l192-112 192 112V48c0-26.51-21.49-48-48-48zm0 428.43l-144-84-144 84V54a6 6 0 0 1 6-6h276c3.314 0 6 2.683 6 5.996V428.43z"></path></svg>
+ <span class=ml-1>收藏</span> <span class=bookmarkNum>25</span>
+ </button><div class="dropdown dropup d-inline-block">
+ <button class="func-btn btn btn-outline-secondary" id=func_share data-toggle=dropdown>
+ <svg class="svg-inline--fa fa-share-alt fa-w-14" aria-hidden=true focusable=false data-prefix=far data-icon=share-alt role=img xmlns=http://www.w3.org/2000/svg viewBox="0 0 448 512" data-fa-i2svg><path fill=currentColor d="M352 320c-25.6 0-48.9 10-66.1 26.4l-98.3-61.5c5.9-18.8 5.9-39.1 0-57.8l98.3-61.5C303.1 182 326.4 192 352 192c53 0 96-43 96-96S405 0 352 0s-96 43-96 96c0 9.8 1.5 19.6 4.4 28.9l-98.3 61.5C144.9 170 121.6 160 96 160c-53 0-96 43-96 96s43 96 96 96c25.6 0 48.9-10 66.1-26.4l98.3 61.5c-2.9 9.4-4.4 19.1-4.4 28.9 0 53 43 96 96 96s96-43 96-96-43-96-96-96zm0-272c26.5 0 48 21.5 48 48s-21.5 48-48 48-48-21.5-48-48 21.5-48 48-48zM96 304c-26.5 0-48-21.5-48-48s21.5-48 48-48 48 21.5 48 48-21.5 48-48 48zm256 160c-26.5 0-48-21.5-48-48s21.5-48 48-48 48 21.5 48 48-21.5 48-48 48z"></path></svg>
+ <span class="ml-1 show-row">分享</span>
+ </button>
+ <div class="dropdown-menu shareContent sf-hidden" aria-labelledby=func_share>
+ 
+ 
+ </div>
+ </div></div></div>
+ <div class="text-center mb-5 mt-3 text-secondary font-size-14">
+ 本作品系原创，
+ <a target=_blank class=text-secondary href=https://creativecommons.org/licenses/by-nc-nd/4.0/>采用《署名-非商业性使用-禁止演绎
+ 4.0
+ 国际》许可协议</a>
+ </div>
+ <hr class=mb-0>
+ <div class="article-author d-flex flex-sm-row align-items-center pt-4 row">
+ <div class="d-flex align-items-center flex-grow-1 author-left col-sm-9 col-12">
+ <a href=https://segmentfault.com/u/_yangliuliu>
+ <img class="rounded-circle mr-3" width=64 src='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64"><rect fill-opacity="0"/></svg>' aria-hidden=true style="background-blend-mode:normal!important;background-clip:content-box!important;background-position:50% 50%!important;background-color:rgba(0,0,0,0)!important;background-image:var(--sf-img-2)!important;background-size:100% 100%!important;background-origin:content-box!important;background-repeat:no-repeat!important">
+ </a>
+ <div>
+ <h5>
+ <a class=text-body href=https://segmentfault.com/u/_yangliuliu>_杨溜溜</a>
+ </h5>
+ <ul class="list-inline mb-0 authentication-info">
+ <li class=list-inline-item>
+ <svg class="svg-inline--fa fa-dice-d8 fa-w-16" style=color:#BF7158 aria-hidden=true focusable=false data-prefix=fas data-icon=dice-d8 role=img xmlns=http://www.w3.org/2000/svg viewBox="0 0 512 512" data-fa-i2svg><path fill=currentColor d="M225.53 2.52L2.36 233.83c-4.21 4.37-2.56 11.71 3.1 13.77l234.13 85.06V8.39c-.01-7.49-8.91-11.21-14.06-5.87zm284.11 231.31L286.47 2.52C281.32-2.82 272.41.9 272.41 8.4v324.27l234.13-85.06c5.66-2.07 7.31-9.42 3.1-13.78zM33.53 310.38l192 199.1c5.15 5.34 14.06 1.62 14.06-5.88V368.29L42.13 296.61c-8.21-2.98-14.72 7.43-8.6 13.77zm436.34-13.77l-197.46 71.68V503.6c0 7.5 8.91 11.22 14.06 5.88l192-199.1c6.12-6.34-.39-16.75-8.6-13.77z"></path></svg>
+ <span style=color:#BF7158;font-size:16px;font-weight:bold>3.5k</span>
+ </li>
+ <li class=list-inline-item>
+ <a class=text-body href=https://github.com/yacan8 target=_blank>
+ <svg class="svg-inline--fa fa-github fa-w-16" aria-hidden=true focusable=false data-prefix=fab data-icon=github role=img xmlns=http://www.w3.org/2000/svg viewBox="0 0 496 512" data-fa-i2svg><path fill=currentColor d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg>
+ </a>
+ </li>
+ </ul>
+ </div>
+ </div>
+ <div class="author-right flex-shrink-0 col-sm-3 col-12 text-sm-right text-left mt-sm-0 mt-3">
+ <button type=button class="btn btn-primary follow-user sf_do" data-dotype=post data-content='{"type":"state","state":false,"true":"\u5173\u6ce8\u4f5c\u8005","false":"\u5df2\u7ecf\u5173\u6ce8"}' data-api=/iteration/api/user/1030000003761797/follow>关注作者
+ </button>
+ </div>
+ </div>
+ </div>
+ </div>
+ 
+ 
+ 
+ </div>
+ 
+ </div>
+ </div>
+ </div>
+ 
+ 
+<footer id=footer class="bg-white py-5 font-size-14" style=display:none!important>
+ <div class=container style=display:none!important>
+ 
+ 
+ <div class=row style=display:none!important>
+ 
+ <div class="col-md-4 text-right" style=display:none!important>
+ <div class=shareContent style=display:none!important>
+ <a class=share_weixin data-share=weixin href=https://segmentfault.com/a/1190000013396601 data-original-title title style=display:none!important><svg class="svg-inline--fa fa-weixin fa-w-18 fa-fw" aria-hidden=true focusable=false data-prefix=fab data-icon=weixin role=img xmlns=http://www.w3.org/2000/svg viewBox="0 0 576 512" data-fa-i2svg><path fill=currentColor d="M385.2 167.6c6.4 0 12.6.3 18.8 1.1C387.4 90.3 303.3 32 207.7 32 100.5 32 13 104.8 13 197.4c0 53.4 29.3 97.5 77.9 131.6l-19.3 58.6 68-34.1c24.4 4.8 43.8 9.7 68.2 9.7 6.2 0 12.1-.3 18.3-.8-4-12.9-6.2-26.6-6.2-40.8-.1-84.9 72.9-154 165.3-154zm-104.5-52.9c14.5 0 24.2 9.7 24.2 24.4 0 14.5-9.7 24.2-24.2 24.2-14.8 0-29.3-9.7-29.3-24.2.1-14.7 14.6-24.4 29.3-24.4zm-136.4 48.6c-14.5 0-29.3-9.7-29.3-24.2 0-14.8 14.8-24.4 29.3-24.4 14.8 0 24.4 9.7 24.4 24.4 0 14.6-9.6 24.2-24.4 24.2zM563 319.4c0-77.9-77.9-141.3-165.4-141.3-92.7 0-165.4 63.4-165.4 141.3S305 460.7 397.6 460.7c19.3 0 38.9-5.1 58.6-9.9l53.4 29.3-14.8-48.6C534 402.1 563 363.2 563 319.4zm-219.1-24.5c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.8 0 24.4 9.7 24.4 19.3 0 10-9.7 19.6-24.4 19.6zm107.1 0c-9.7 0-19.3-9.7-19.3-19.6 0-9.7 9.7-19.3 19.3-19.3 14.5 0 24.4 9.7 24.4 19.3.1 10-9.9 19.6-24.4 19.6z"></path></svg> </a><a class=share_weibo data-share=weibo href=http://weibo.com/segmentfault target=_blank style=display:none!important><svg class="svg-inline--fa fa-weibo fa-w-16 fa-fw" aria-hidden=true focusable=false data-prefix=fab data-icon=weibo role=img xmlns=http://www.w3.org/2000/svg viewBox="0 0 512 512" data-fa-i2svg><path fill=currentColor d="M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"></path></svg> </a><a class=share_github data-share=github href=https://github.com/SegmentFault target=_blank style=display:none!important><svg class="svg-inline--fa fa-github fa-w-16 fa-fw" aria-hidden=true focusable=false data-prefix=fab data-icon=github role=img xmlns=http://www.w3.org/2000/svg viewBox="0 0 496 512" data-fa-i2svg><path fill=currentColor d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg> </a><a class=share_twitter data-share=twitter href=https://twitter.com/segment_fault target=_blank style=display:none!important><svg class="svg-inline--fa fa-twitter fa-w-16 fa-fw" aria-hidden=true focusable=false data-prefix=fab data-icon=twitter role=img xmlns=http://www.w3.org/2000/svg viewBox="0 0 512 512" data-fa-i2svg><path fill=currentColor d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"></path></svg> </a></div>
+ </div>
+ </div>
+ </div>
+</footer>
+ 
+ 
+ 
+ <div id=fatkun-drop-panel style=display:none!important>
+ 
+ <div id=fatkun-drop-panel-inner style=display:none!important>
+ <div class=fatkun-content style=display:none!important>
+ <svg class=fatkun-icon viewBox="0 0 1024 1024" version=1.1 xmlns=http://www.w3.org/2000/svg p-id=5892><path d="M494.933333 782.933333c2.133333 2.133333 4.266667 4.266667 8.533334 6.4h8.533333c6.4 0 10.666667-2.133333 14.933333-6.4l2.133334-2.133333 275.2-275.2c8.533333-8.533333 8.533333-21.333333 0-29.866667-8.533333-8.533333-21.333333-8.533333-29.866667 0L533.333333 716.8V128c0-12.8-8.533333-21.333333-21.333333-21.333333s-21.333333 8.533333-21.333333 21.333333v588.8L249.6 475.733333c-8.533333-8.533333-21.333333-8.533333-29.866667 0-8.533333 8.533333-8.533333 21.333333 0 29.866667l275.2 277.333333zM853.333333 874.666667H172.8c-12.8 0-21.333333 8.533333-21.333333 21.333333s8.533333 21.333333 21.333333 21.333333H853.333333c12.8 0 21.333333-8.533333 21.333334-21.333333s-10.666667-21.333333-21.333334-21.333333z" p-id=5893></path></svg>
+ 
+ 
+ </div>
+ </div>
+ </div><div id=saladict-saladbowl-root class="saladict-div saladict-external" style=display:none!important><div class=saladict-external style=display:none!important><template shadowmode=open style=display:none!important><div class=isAnimate style=animation:initial;transition:initial;color:initial;color-scheme:initial;font:initial;font-feature-settings:initial;font-kerning:initial;font-optical-sizing:initial;font-variation-settings:initial;text-orientation:initial;text-rendering:initial;-webkit-font-smoothing:initial;-webkit-locale:initial;-webkit-text-orientation:initial;-webkit-writing-mode:initial;writing-mode:initial;zoom:initial;place-content:initial;place-items:initial;place-self:initial;alignment-baseline:initial;appearance:initial;backdrop-filter:initial;backface-visibility:initial;background:initial;background-blend-mode:initial;baseline-shift:initial;block-size:initial;border-block-end:initial;border-block-start:initial;border:initial;border-radius:initial;border-collapse:initial;border-inline-end:initial;border-inline-start:initial;bottom:initial;box-shadow:initial;box-sizing:initial;break-after:initial;break-before:initial;break-inside:initial;buffered-rendering:initial;caption-side:initial;caret-color:initial;clear:initial;clip:initial;clip-path:initial;clip-rule:initial;color-interpolation:initial;color-interpolation-filters:initial;color-rendering:initial;columns:initial;column-fill:initial;gap:initial;column-rule:initial;column-span:initial;contain:initial;contain-intrinsic-size:initial;content:initial;content-visibility:initial;counter-increment:initial;counter-reset:initial;counter-set:initial;cursor:initial;cx:initial;cy:initial;d:initial;display:none!important;dominant-baseline:initial;empty-cells:initial;fill:initial;fill-opacity:initial;fill-rule:initial;filter:initial;flex:initial;flex-flow:initial;float:initial;flood-color:initial;flood-opacity:initial;grid:initial;grid-area:initial;height:initial;hyphens:initial;image-orientation:initial;image-rendering:initial;inline-size:initial;isolation:initial;left:initial;letter-spacing:initial;lighting-color:initial;line-break:initial;list-style:initial;margin-block-end:initial;margin-block-start:initial;margin:initial;margin-inline-end:initial;margin-inline-start:initial;marker:initial;mask:initial;mask-type:initial;max-block-size:initial;max-height:initial;max-inline-size:initial;max-width:initial;min-block-size:initial;min-height:initial;min-inline-size:initial;min-width:initial;mix-blend-mode:initial;object-fit:initial;object-position:initial;offset:initial;opacity:initial;order:initial;origin-trial-test-property:initial;orphans:initial;outline:initial;outline-offset:initial;overflow-anchor:initial;overflow-wrap:initial;overflow:initial;overscroll-behavior-block:initial;overscroll-behavior-inline:initial;overscroll-behavior:initial;padding-block-end:initial;padding-block-start:initial;padding:initial;padding-inline-end:initial;padding-inline-start:initial;page:initial;page-orientation:initial;paint-order:initial;perspective:initial;perspective-origin:initial;pointer-events:initial;position:initial;quotes:initial;r:initial;resize:initial;right:initial;ruby-position:initial;rx:initial;ry:initial;scroll-behavior:initial;scroll-margin-block:initial;scroll-margin:initial;scroll-margin-inline:initial;scroll-padding-block:initial;scroll-padding:initial;scroll-padding-inline:initial;scroll-snap-align:initial;scroll-snap-stop:initial;scroll-snap-type:initial;shape-image-threshold:initial;shape-margin:initial;shape-outside:initial;shape-rendering:initial;size:initial;speak:initial;stop-color:initial;stop-opacity:initial;stroke:initial;stroke-dasharray:initial;stroke-dashoffset:initial;stroke-linecap:initial;stroke-linejoin:initial;stroke-miterlimit:initial;stroke-opacity:initial;stroke-width:initial;tab-size:initial;table-layout:initial;text-align:initial;text-align-last:initial;text-anchor:initial;text-combine-upright:initial;text-decoration:initial;text-decoration-skip-ink:initial;text-indent:initial;text-overflow:initial;text-shadow:initial;text-size-adjust:initial;text-transform:initial;text-underline-position:initial;top:initial;touch-action:initial;transform:initial;transform-box:initial;transform-origin:initial;transform-style:initial;user-select:initial;vector-effect:initial;vertical-align:initial;visibility:initial;-webkit-app-region:initial;border-spacing:initial;-webkit-border-image:initial;-webkit-box-align:initial;-webkit-box-decoration-break:initial;-webkit-box-direction:initial;-webkit-box-flex:initial;-webkit-box-ordinal-group:initial;-webkit-box-orient:initial;-webkit-box-pack:initial;-webkit-box-reflect:initial;-webkit-font-size-delta:initial;-webkit-highlight:initial;-webkit-hyphenate-character:initial;-webkit-line-break:initial;-webkit-line-clamp:initial;-webkit-mask-box-image:initial;-webkit-mask:initial;-webkit-mask-composite:initial;-webkit-perspective-origin-x:initial;-webkit-perspective-origin-y:initial;-webkit-print-color-adjust:initial;-webkit-rtl-ordering:initial;-webkit-ruby-position:initial;-webkit-tap-highlight-color:initial;-webkit-text-combine:initial;-webkit-text-decorations-in-effect:initial;-webkit-text-emphasis:initial;-webkit-text-emphasis-position:initial;-webkit-text-fill-color:initial;-webkit-text-security:initial;-webkit-text-stroke:initial;-webkit-transform-origin-x:initial;-webkit-transform-origin-y:initial;-webkit-transform-origin-z:initial;-webkit-user-drag:initial;-webkit-user-modify:initial;white-space:initial;widows:initial;width:initial;will-change:initial;word-break:initial;word-spacing:initial;x:initial;y:initial;z-index:initial><style class=sf-hidden>.saladbowl{position:fixed;z-index:2147483647;top:0;left:0;width:30px;height:30px;-moz-user-select:none;user-select:none;cursor:pointer}.isAnimate .saladbowl{will-change:transform;transition:transform .3s ease-out}.isAnimate .saladbowl.enableHover:hover .saladbowl-leaf{animation:saladbowl-leaf-shake .7s infinite linear}.isAnimate .saladbowl.enableHover:hover .saladbowl-orange{transform-origin:301.8px 187.4px;animation:saladbowl-orange-spin .7s infinite linear}.isAnimate .saladbowl.enableHover:hover .saladbowl-tomato{transform-origin:297.8px 126.4px;animation:saladbowl-tomato-shake .7s infinite linear}.saladbowl,.saladbowl>svg{background-color:transparent!important}.isAnimate .saladbowl-enter-active>svg{animation:saladbowl-jelly 1s linear}.isAnimate .saladbowl-exit{opacity:1}.isAnimate .saladbowl-exit-active{opacity:0;transition:opacity .1s}.saladbowl-exit-done{display:none}@keyframes saladbowl-jelly{0%{transform:matrix3d(.5,0,0,0,0,.5,0,0,0,0,1,0,0,0,0,1)}3.40%{transform:matrix3d(.658,0,0,0,0,.703,0,0,0,0,1,0,0,0,0,1)}4.70%{transform:matrix3d(.725,0,0,0,0,.8,0,0,0,0,1,0,0,0,0,1)}6.81%{transform:matrix3d(.83,0,0,0,0,.946,0,0,0,0,1,0,0,0,0,1)}9.41%{transform:matrix3d(.942,0,0,0,0,1.084,0,0,0,0,1,0,0,0,0,1)}10.21%{transform:matrix3d(.971,0,0,0,0,1.113,0,0,0,0,1,0,0,0,0,1)}13.61%{transform:matrix3d(1.062,0,0,0,0,1.166,0,0,0,0,1,0,0,0,0,1)}14.11%{transform:matrix3d(1.07,0,0,0,0,1.165,0,0,0,0,1,0,0,0,0,1)}17.52%{transform:matrix3d(1.104,0,0,0,0,1.12,0,0,0,0,1,0,0,0,0,1)}18.72%{transform:matrix3d(1.106,0,0,0,0,1.094,0,0,0,0,1,0,0,0,0,1)}21.32%{transform:matrix3d(1.098,0,0,0,0,1.035,0,0,0,0,1,0,0,0,0,1)}24.32%{transform:matrix3d(1.075,0,0,0,0,.98,0,0,0,0,1,0,0,0,0,1)}25.23%{transform:matrix3d(1.067,0,0,0,0,.969,0,0,0,0,1,0,0,0,0,1)}29.03%{transform:matrix3d(1.031,0,0,0,0,.948,0,0,0,0,1,0,0,0,0,1)}29.93%{transform:matrix3d(1.024,0,0,0,0,.949,0,0,0,0,1,0,0,0,0,1)}35.54%{transform:matrix3d(.99,0,0,0,0,.981,0,0,0,0,1,0,0,0,0,1)}36.74%{transform:matrix3d(.986,0,0,0,0,.989,0,0,0,0,1,0,0,0,0,1)}41.04%{transform:matrix3d(.98,0,0,0,0,1.011,0,0,0,0,1,0,0,0,0,1)}44.44%{transform:matrix3d(.983,0,0,0,0,1.016,0,0,0,0,1,0,0,0,0,1)}52.15%{transform:matrix3d(.996,0,0,0,0,1.003,0,0,0,0,1,0,0,0,0,1)}59.86%{transform:matrix3d(1.003,0,0,0,0,.995,0,0,0,0,1,0,0,0,0,1)}63.26%{transform:matrix3d(1.004,0,0,0,0,.996,0,0,0,0,1,0,0,0,0,1)}75.28%{transform:matrix3d(1.001,0,0,0,0,1.002,0,0,0,0,1,0,0,0,0,1)}85.49%{transform:matrix3d(.999,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)}90.69%{transform:matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)}100%{transform:matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)}}@keyframes saladbowl-leaf-shake{0%{transform:translate(2px,1px) rotate(0)}10%{transform:translate(-1px,-2px) rotate(1deg)}20%{transform:translate(-2px,0) rotate(1deg)}30%{transform:translate(0,2px) rotate(0)}40%{transform:translate(1px,-1px) rotate(1deg)}50%{transform:translate(-1px,2px) rotate(1deg)}60%{transform:translate(-2px,1px) rotate(0)}70%{transform:translate(2px,1px) rotate(1deg)}80%{transform:translate(-1px,-1px) rotate(1deg)}90%{transform:translate(2px,2px) rotate(0)}100%{transform:translate(1px,-2px) rotate(1deg)}}@keyframes saladbowl-orange-spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}@keyframes saladbowl-tomato-shake{0%{transform:rotate(10deg)}30%{transform:rotate(0)}60%{transform:rotate(10deg)}90%{transform:rotate(0)}100%{transform:rotate(5deg)}}</style><div role=img class="saladbowl saladict-external enableHover saladbowl-enter-done" style=transform:translate(754px,205px);display:none!important><svg viewBox="0 0 612 612" width=30 height=30><g class=saladbowl-leaf><path fill=#6bbc57 d="M 577.557 184.258 C 560.417 140.85 519.54 59.214 519.54 59.214 L 519.543 59.204 C 519.543 59.204 436.903 97.626 396.441 120.878 C 366.171 138.274 354.981 169.755 352.221 177.621 C 349.001 186.851 339.891 228.811 358.341 268.481 C 382.271 319.921 409.201 374.521 409.201 374.521 L 409.201 374.531 C 409.201 374.531 464.511 348.701 515.291 323.401 C 554.451 303.891 573.591 265.441 576.821 256.221 C 579.571 248.356 590.398 216.746 577.574 184.271 Z"></path><path fill=#bde9b7 d="M 501.052 102.162 L 507.518 104.425 L 426.69 335.38 L 420.224 333.117 Z"></path></g><g class=saladbowl-orange><circle fill=#ffb30d cx=299.756 cy=198.246 r=178.613></circle><circle fill=#fce29c cx=299.756 cy=198.246 r=155.24></circle><path fill=#fcc329 d="M 299.756 189.873 L 341.269 113.475 C 349.169 82.543 324.349 58.588 299.749 57.891 C 275.149 57.201 248.229 82.781 256.489 113.481 L 299.749 189.881 Z M 307.026 194.757 L 393.974 194.757 C 424.928 187.083 434.124 153.681 422.994 131.737 C 411.864 109.795 376.534 98.357 353.5 120.27 L 307.025 194.757 Z M 308.79 203.444 L 354.885 277.168 C 377.925 299.268 410.995 289.438 423.701 268.368 C 436.411 247.298 427.381 211.276 396.591 203.362 L 308.801 203.442 Z M 300.208 206.618 L 259.628 283.516 C 252.098 314.543 277.214 338.193 301.815 338.591 C 326.415 338.991 353.022 313.081 344.392 282.491 L 300.208 206.631 Z M 292.058 203.3 L 205.108 203.415 C 174.163 211.277 165.014 244.54 176.172 266.468 C 187.33 288.396 226.052 300.541 249.056 278.598 L 292.056 203.301 Z M 292.465 194.83 L 246.497 121.024 C 223.494 98.884 190.409 108.658 177.667 129.706 C 164.925 150.753 173.893 186.791 204.669 194.756 L 292.459 194.829 Z"></path></g><g class=saladbowl-tomato><path fill=#a63131 d="M 71.014 337.344 C 147.291 422.594 278.234 429.866 363.482 353.589 L 87.258 44.87 C 2.01 121.15 -5.262 252.092 71.014 337.342 Z"></path><path fill=#bc5757 d="M 101.447 310.115 C 162.685 378.555 267.811 384.393 336.251 323.155 L 114.49 75.31 C 46.047 136.55 40.21 241.674 101.447 310.115 Z"></path><path fill=#f1d4af d="M 186.412 237.54 L 151.659 245.444 C 139.989 251.384 139.339 265.51 145.779 273.27 C 152.219 281.028 167.379 282.39 174.599 271.538 L 186.399 237.54 Z M 242.062 269.832 L 223.366 300.175 C 219.439 312.658 229.066 323.018 239.116 323.85 C 249.168 324.685 260.756 314.815 258.061 302.065 L 242.061 269.832 Z M 160.202 178.317 L 130.357 158.837 C 117.98 154.585 107.375 163.939 106.277 173.965 C 105.183 183.99 114.747 195.833 127.563 193.471 L 160.203 178.321 Z"></path></g><g class=saladbowl-bowl><path fill=#2d97b7 d="M 30.857 311.46 C 30.857 429.87 105.371 530.8 209.867 569.52 L 209.867 589.2 L 400.987 589.2 L 400.987 568.9 C 503.595 530.114 576.887 431.202 578.31 314.907 L 589.196 295.97 L 22.804 295.97 L 30.867 309.998 C 30.865 310.488 30.857 310.971 30.857 311.458 Z"></path><path fill=#fff d="M 540.565 321.42 C 540.585 322.587 540.595 323.755 540.595 324.927 C 540.595 405.941 497.513 476.884 433.015 516.122 L 437.178 523.317 C 504.152 482.64 548.895 409.009 548.895 324.927 C 548.895 323.755 548.885 322.587 548.865 321.419 Z M 399.885 532.68 C 388.298 537.31 376.237 541.002 363.793 543.654 L 363.793 544.45 L 364.971 551.893 C 378.481 549.049 391.551 545.018 404.081 539.935 Z"></path></g></svg></div></div></template></div></div>
