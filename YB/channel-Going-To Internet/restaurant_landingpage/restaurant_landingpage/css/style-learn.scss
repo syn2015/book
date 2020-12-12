@@ -1,0 +1,290 @@
+*{
+    margin:0;
+    padding:0; 
+}
+//------------------------变量-----------------------
+$Nixie:'Nixie One', cursive;
+$roboto:'Roboto';
+$arvo:'Arvo';
+$yellow:#fece3e;
+$dark_grey:#464952;
+$grey:#545760;
+$white:#fff;
+
+body{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    width:100%;
+    height:100vh;
+    overflow: hidden;    
+    font-family: $roboto;
+}
+// 水平垂直居中.dFlex
+.dFlex{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+// 最大容器
+.container{
+	position: relative;
+	display: block;
+	width: 100%;
+	height: 100%;
+	// 三个背景div
+    .bg_color{
+		width: 33.33%;
+		height: 100%;
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		z-index: -1;
+        &.grey{
+            background-color:$grey;
+            left:0;
+        }
+        &.dark{
+            background-color:$dark_grey;
+            left:33.33%;
+        }
+        &.yellow{
+            background-color:$yellow;
+            left:66.66%;
+        }
+    }//bg_color
+}//container
+
+// 顶部导航
+header{
+   display: flex;
+   justify-content: space-between;
+   padding: 30px 50px;
+   box-sizing: border-box;
+   font-size: 16px;
+   width: 100%;
+    .logo{
+     color: $yellow;
+	 width: 20%;
+    }
+    .navigation{
+		// 继承dFlex
+      @extend .dFlex;
+	  width:60%;
+	  a{
+		  color: $white;
+		  text-decoration: none;
+		  // 选择所有紧接着a元素之后的a元素
+		  +a{
+			  margin-left: 50px;
+		  }
+	  }
+    }//navigation
+    .menu{
+       width: 20%;
+	   @extend  .dFlex;
+	   justify-content: flex-end;
+	   a{
+		   margin-left: 50px;
+		   color: $dark_grey;
+		   text-decoration: none;
+		   font-weight: 500;
+	   }
+	   .fa{
+		   color: $dark_grey;
+	   }
+    }//menu
+}//header
+
+// 主题内容区
+.content_wrapper{
+	@extend  .dFlex;
+	justify-content: space-between;
+	width: 100%;
+	height: calc(100vh - 60px);
+	padding-bottom: 20px;
+	box-sizing: border-box;
+	// 1. item:标题，说明文字，轮播文字区
+	// 2. item: 图片轮播和social信息
+    .item{
+       display: flex;
+	   height: 100%;
+	   flex-direction: column;
+    }
+}//content_wrapper
+
+// 1. item:标题，说明文字，轮播文字区
+.content_wrapper .content_{
+	position: relative;
+	justify-content: center;
+	width: 55%;
+	// 标题信息
+    .info_text{
+       padding-left: 50px;
+	   margin-bottom: 30px;
+        p{
+           font-size: 6vw;
+		   color: $white;
+		   font-family: $arvo;
+            span{
+				font-family: $Nixie;
+            }
+            +p{
+				margin-left: 9vw;
+            }
+        }
+    }//info_text
+	// 解释说明slider区
+    .slider_info{
+        background-color:$white;
+        position:relative;
+        width:60.5%; // 和背景div一致宽度
+        padding:70px 50px;
+        box-sizing:border-box;
+		// 每段文字
+        .slider_text{
+			font-size: 14px;
+			line-height: 2;
+			display: none; // 隐藏
+            &.active{
+              display: block;
+			  animation: fadeIn;
+			  animation-duration: 2s;
+			  animation-fill-mode: both;
+            }
+        }//slider_text
+		// 箭头导航
+        .pagination_{
+          width: 150px;
+		  height: 60px;
+		  position: absolute;
+		  right: -150px;
+		  top: 0;
+		  display: flex;
+		  justify-content: space-between;
+            .next,
+            .prev{
+				width: 50%;
+				@extend  .dFlex;
+				cursor: pointer;
+                &:active{
+                   outline: none;
+				   border: 0;
+                }
+                &:focus{
+                 outline: none;
+				 border: 0;
+                }
+            }
+            .prev{
+              background-color: $grey;
+			  color: $white;
+            }
+            .next{
+                background-color: $yellow;
+                &:hover,
+                &:active{
+					outline: none;
+					border: 0;
+                }
+            }
+        }//pagination_
+		// 1/3页脚区域
+        .slider_indicator{
+            position:absolute;
+            width:150px;
+            right:-150px;
+            bottom:0;
+            left:auto;//swper slider left valye is always 0
+            text-align:right;
+            color:$white;
+            &:before{
+                content:"";
+                position:absolute;
+                left:15%;
+                top:50%;
+                transform:translateY(-50%);
+                width:55%;
+                height:2px;
+                background-color: rgba($white, .3);
+            }
+        }//slider_indicator
+		// 详细了解箭头
+        .knowMore{
+			background-color:$yellow;
+			width:60%;
+			position: absolute;
+			padding:20px 15px;
+			box-sizing: border-box;
+			@extend .dFlex;
+			justify-content: space-between;
+			bottom:-30px;  //垂直一定自身的一半
+			left:50%;
+			transform:translateX(-50%);//水平居中
+            .fa{
+                cursor: pointer;
+            }
+        }//knowMore
+    }//slider_info
+}//content_
+
+// 2. item: 图片轮播和social信息
+.content_wrapper .image_wrapper {
+	position: relative;
+	justify-content: center;
+	width: 45%;
+   // 轮播图片div
+    .slider_image{
+      display: block;
+	  width: 40vw;
+		// 宽度小于1368px
+        @media(max-width:1368px){
+            width:35vw;
+        }
+        img{
+            width:100%;
+            display:block;
+        }
+    }//slider_image
+	// 右侧social信息
+    .social{
+		position: absolute;
+		top: 50%;
+		right: 0;
+		width: 50px;
+		@extend  .dFlex;
+		flex-direction: column;
+		background-color: $white;
+		transform: translateY(-50%); // 垂直居中
+       // social icon信息
+        i{
+          @extend  .dFlex;
+		  height: 60px;
+		  width: 100%;
+		  cursor: pointer;
+		  font-size: 16px;
+		  position: relative;
+            &:after{
+           width:10px;
+           height:1px;
+           background-color: $grey;
+           position:absolute;
+           left:50%;
+           bottom:0;
+           transform:translateX(-50%); //水平垂直
+            }
+            &:nth-last-child(1):after{
+				height: 0;
+            }
+        }//i
+    }
+}//image_wrapper
+
+@keyframes fadeIn{
+    0%{opacity:0;} // 一开始不显示
+    100%{opacity:1;} // 到100%时候显示
+}
+
+
+

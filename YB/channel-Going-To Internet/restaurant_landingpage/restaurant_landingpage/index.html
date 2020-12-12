@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Food website landingpage</title>
+		<link rel="stylesheet" href="css/font.css" />
+		<link rel="stylesheet" href="css/font-awesome.min.css" />
+		<!-- <link rel="stylesheet" href="css/style.css"> -->
+		<link rel="stylesheet" href="css/style-learn.css">
+		<!-- swiper-bundle-css -->
+		<link rel="stylesheet" href="css/swiper-bundle.min.css">
+		<!-- jquery -->
+		<script src="js/jquery.min.js"></script>
+		<!-- gsap -->
+		<script src="js/gsap.min.js"></script>
+		<!-- swiper-bundle -->
+		<script src="js/swiper-bundle.min.js"></script>
+	</head>
+
+	<body>
+		<div class="container">
+			<!-- 三个背景div -->
+			<div class="grey bg_color"></div>
+			<div class="dark bg_color"></div>
+			<div class="yellow bg_color"></div>
+			<!-- header 导航 -->
+			<header>
+				<div class="logo">保健食品</div>
+				<div class="navigation">
+					<a href="#">关于</a>
+					<a href="#">博客</a>
+					<a href="#">联系</a>
+				</div>
+				<!-- 菜单 -->
+				<div class="menu">
+					<i class="fa fa-search"></i>
+					<a href="#">Menu</a>
+				</div>
+			</header>
+
+			<div class="content_wrapper">
+				<div class="item content_">
+					<!-- 标题信息 -->
+					<div class="info_text">
+						<p>Eat <span>Healthy</span></p>
+						<p>Stay <span>Healthy</span></p>
+					</div>
+					<!-- slider-解释说明 -->
+					<div class="slider_info">
+						<p class="slider_text active" data-slider="0">
+							1. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci a praesentium iste id
+							facere molestiae?Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+						</p>
+						<p class="slider_text" data-slider="1">
+							2. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci a praesentium iste id
+							facere molestiae?Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+						</p>
+						<p class="slider_text" data-slider="2">
+							3. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci a praesentium iste id
+							facere molestiae?Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+						</p>
+						<!-- 切换箭头 -->
+						<div class="pagination_">
+							<div class="prev"><i class="fa fa-caret-left"></i></div>
+							<div class="next"><i class="fa fa-caret-right"></i></div>
+						</div>
+						<!-- 详细了解 -->
+						<div class="knowMore">
+							Recipe <i class="fa fa-long-arrow-right"></i>
+						</div>
+						<!-- 1/3页脚 -->
+						<div class="slider_indicator"></div>
+
+					</div>
+				</div>
+				<!-- slider-图片区 -->
+				<div class="item image_wrapper">
+
+					<div class="slider_image">
+						<div class="swiper-container">
+							<div class="swiper-wrapper">
+								<div class="swiper-slide">
+									<img src="images/plate.png">
+								</div>
+								<div class="swiper-slide">
+									<img src="images/plate.png">
+								</div>
+								<div class="swiper-slide">
+									<img src="images/plate.png">
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- 右侧social -->
+					<div class="social">
+						<i class="fa fa-github"></i>
+						<i class="fa fa-codepen"></i>
+						<i class="fa fa-book"></i>
+					</div>
+
+				</div>
+
+			</div>
+		</div>
+
+		<script>
+			// 图片轮播区域
+			let swiper = new Swiper(".swiper-container", {
+				slidesPerView: 1,//设置slider容器能够同时显示的slides数量(carousel模式)。
+
+				loop: true, //循环
+				pagination: { // 分页器
+					el: ".slider_indicator",
+					type: 'fraction',
+				},
+				navigation: { //前进后退
+					nextEl: ".pagination_ .next",
+					prevEl: ".pagination_ .prev",
+				}
+			})
+			// 文本和图片同步轮播
+			// 在当前Slide切换到另一个Slide时执行(activeIndex发生改变)，添加事件回调
+			swiper.on('slideChange', function(swiper) {
+				let swiperIndex = (swiper.realIndex);
+				// 遍历所有的slider_text  文本内容容器
+				$(".slider_text").each(function(item) {
+					let textIndex = $(this).attr("data-slider");
+					if (textIndex == swiperIndex) {
+						// 移除其他的active,添加当前的active
+						$(".slider_text").removeClass("active");
+						$(this).addClass("active");
+					}
+				})
+			})
+
+			// //gsap animation
+			// 添加时间轴
+			let tl = gsap.timeline();
+			// 添加一个TweenLite.from()动画到时间轴
+			tl.from([".bg_color"], { //三个div背景颜色
+					duraiton: 1.2,      //持续时间
+					y: -200, 			//
+					height: 0,			//
+					ease: "power3.inOut",	// 速度曲线
+					stagger: {				// 错开
+						amount: .5
+					}
+				})
+				.from([".logo", ".navigation", ".menu"], { // 头部导航log,菜单
+					delay: -0.4,
+					y: -16,
+					opacity: 0,
+					ease: "power3.inOut",
+					stagger: {
+						amount: .2
+					}
+				})
+				.from([".swiper-slide"], { //图片轮播
+					delay: -0.4,
+					x: -10,
+					opacity: 0,
+					duration: .8,
+					ease: "power3.out",
+					stagger: {
+						amount: .2
+					}
+				})
+				.from([".info_text p"], { // 文本轮播标题
+					delay: -0.4,
+					y: 10,
+					opacity: 0,
+					duration: .8,
+					ease: "power3.out",
+					stagger: {
+						amount: .2
+					}
+				})
+				.from([".slider_info", ".slider_info p"], { // 文本轮播
+					delay: -0.4,
+					y: 10,
+					opacity: 0,
+					duration: .8,
+					ease: "power3.out",
+					stagger: {
+						amount: .2
+					}
+				})
+				.from([".prev", ".next", ".knowMore", ".slider_indicator"], { //前进后退箭头，详情箭头，轮播分页器
+					delay: -0.4,
+					x: -30,
+					opacity: 0,
+					duration: .8,
+					ease: "power3.out",
+					stagger: {
+						amount: .2
+					}
+				})
+				.from([".social", ".social .fa"], { // social信息
+					delay: -0.4,
+					x: 30,
+					opacity: 0,
+					duration: .8,
+					ease: "power3.out",
+					stagger: {
+						amount: .2
+					}
+				})
+
+			//thank you for watching
+		</script>
+
+
+	</body>
+
+</html>
