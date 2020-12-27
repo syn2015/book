@@ -70,5 +70,108 @@ router路由列表的JS文件中：mode:'history'.需要添加默认的页面（
 
 meta字段
 
+```javascript
+
+```
+
+
+
 ## 过渡效果
+
+transition-group组件和transition组件
+
+```javascript
+.router-enter
+.router-enter-active
+.router-enter-top
+.router-leave
+.router-leave-active
+.router-leave-top
+```
+
+# 状态管理
+
+## Bus
+
+bus.js文件
+
+```
+const bus=new Vue();
+export default bus;
+```
+
+main.js
+
+```javascript
+Vue.prototype.$bus=Bus;
+//兄弟组件中分别写
+this.$bus.$on('监听事件')
+this.$bus.$emit('提交事件','传递的数据')
+```
+
+
+
+## vuex-state&getter
+
+
+
+```javascript
+compunted:{
+    ...mapState({
+        userName:state=>state.userName
+    })
+}
+```
+
+
+
+```javascript
+//命名空间 namespace:true
+import {createNamespaceHelpers} from 'vuex'
+const {mapState}=createNamesSpaceHelpers('命名空间的名称')
+//使用
+...mapState({
+    userName:state=>state.userName
+})
+```
+
+
+
+```javascript
+compunted:{
+   inputValueLastLetter(){
+       return this.inputValue.substr(-1,1);
+   }
+}
+```
+
+getters.js
+
+```javascript
+const getters={
+    appNameWithVersion:(state,)=>{
+        return state.appName+'v2.0'
+    }
+}
+//使用
+compunted:{
+   inputValueLastLetter(){
+       return this.inputValue.substr(-1,1);
+   }
+}
+```
+
+
+
+## vuex-mutation&action/module
+
+
+
+
+
+
+
+
+
+## vuex-进阶
 
