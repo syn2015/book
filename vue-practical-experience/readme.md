@@ -209,8 +209,52 @@ const actions={
 
 ## vuex-进阶
 
- ### 插件
+###  插件
+
+持久化存储 saveInlocal
+
+```javascript
+//以下为简单实现
+export default store=>{
+    if(localStorage.state) store.replaceState(JSON.parse(localStorage.state))
+    store.subscribe(mutation,state)=>{
+        localStorage.state=JSON.stringify(state)
+    }
+}
+```
+
+
 
 ### 严格模式
 
+store的index.js文件中
+
+```javascript
+strict:true;// 开启严格模式，直接修改vuex会报错
+strict:process.env.NODE_ENV='development';//开发模式下开启，生产模式下不开启
+```
+
+
+
 ### vuex+双向绑定
+
+```javascript
+computed(){
+    stateValue:{
+        get(){
+            return this.$store.state.stateValue;
+        },
+            // value是新值
+        set(value,oldvalue){
+            //提交mutation
+            this.SET_STATE_VALUE(value)
+        }
+    }
+},
+method:{
+     handleStateValueChange(val){
+        this.SET_STATE_VALUE(val);
+    }
+}
+```
+
