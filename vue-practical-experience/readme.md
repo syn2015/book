@@ -28,10 +28,47 @@ props:true
 
 ## HTML5 History模式
 
-router路由列表的JS文件中：mode:'history'
+router路由列表的JS文件中：mode:'history'.需要添加默认的页面（*）
 
 ## 导航守卫
 
+全局守卫**beforeEach**(to,from,next)
+
+
+
+后置路由afterEach(to,from),beforeResolue(to)
+
+路由独享守卫beforeEnter(to,from,next)
+
+
+
+组件独享守卫beforRouterEnter(to,from,next)  无法获取组件实例this,获取方法next(（vm)=>{})
+
+组件独享守卫beforRouterLeave(to,from,next) 
+
+组件独享守卫beforRouterUpdate(to,from,next) 组件复用时，可以获取组件实例this,
+
+```javascript
+//顺序调用 
+1.导航被触发
+2.在失活的组件中调用离开守卫beforRouterLeave
+3.全局前置守卫beforeEach()
+4.在重用的组件中调用beforeRouterUpdate()
+5.调用路由独享守卫 beforeEnter()
+6.解析一步路由组件
+7.被激活的组件中调用beforeRouterEnter()
+8.调用全局解析守卫 beforeResolve()
+9.导航确认
+10.调用全局的后置守卫afterEach()
+11.触发DOM渲染
+12.用创建好的实例中调用beforeRouterEnter守卫传递next的回调函数
+```
+
+
+
 ## 路由元信息
 
+meta字段
+
 ## 过渡效果
+
