@@ -167,11 +167,50 @@ compunted:{
 
 
 
+```javascript
+this.$store.commit('mutation中的提交事件 SET-APP-NAME','传递数据');
+或者
+this.$store.commit({
+   type: 'mutation中的提交事件 SET-APP-NAME',
+    appName:'传递数据'
+});
+//mutation中的事件
+const mutations={
+    SET-APP-NAME(state,params){
+        state.appName=params.appName
+    },
+    SET-APP-NAME(state){
+        //需要引入import vue from 'vue'
+        vue.set(state,'额外设置的值的名称','额外设置的值的value')；
+    }
+}
 
+```
 
+actions.js
 
+```javascript
+this.$store.dispatch('mutation中的提交事件 SET-APP-NAME','传递数据')//触发mutations事件
+```
+
+子module
+
+user模块中
+
+```javascript
+const actions={
+    updateUserName({commit,state,rootState，dispatch}){
+        rootState.appName; //顶级state中的数据
+    }
+}
+```
 
 
 
 ## vuex-进阶
 
+ ### 插件
+
+### 严格模式
+
+### vuex+双向绑定
