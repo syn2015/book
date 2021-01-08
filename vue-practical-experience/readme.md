@@ -258,3 +258,36 @@ method:{
 }
 ```
 
+# ajax请求
+
+## 解决跨域问题
+
+```javascript
+//vue.config.js
+devServer:{
+    // 请求发起的地址
+    proxy:"http://localhost:4000"
+}
+```
+
+
+
+## 封装axios
+
+### 响应拦截
+
+```javascript
+
+```
+
+
+
+### 请求拦截
+
+```javascript
+
+```
+
+
+
+## 请求实战

@@ -2,8 +2,10 @@ import axios from 'axios'
 import { baseURL } from '@/config'
 import { getToken } from '@/lib/util'
 class HttpRequest {
+  //baseUrl设置默认值
   constructor (baseUrl = baseURL) {
     this.baseUrl = baseUrl
+    //队列
     this.queue = {}
   }
   getInsideConfig () {
@@ -21,6 +23,7 @@ class HttpRequest {
       // Spin.hide()
     }
   }
+  //拦截器
   interceptors (instance, url) {
     instance.interceptors.request.use(config => {
       // 添加全局的loading...
@@ -42,8 +45,10 @@ class HttpRequest {
       return Promise.reject(error.response.data)
     })
   }
+  //request方法传入一个配置
   request (options) {
     const instance = axios.create()
+    //合并配置对象
     options = Object.assign(this.getInsideConfig(), options)
     this.interceptors(instance, options.url)
     return instance(options)
