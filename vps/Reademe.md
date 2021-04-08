@@ -66,3 +66,7 @@ ipconfig /flushdns
 ipconfig /displaydns
 ```
 
+v7.4.5 正式版脚本
+```
+https://file.nmb.show/down.php/28ea66f9e6500c0989e656e056c4ebd7.sh
+```
