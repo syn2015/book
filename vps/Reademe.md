@@ -36,6 +36,17 @@ wget -qO- 86.re/bench.sh | bash
 curl -so- 86.re/bench.sh | bash
 
 
+2021测速
+
+1、一键测速脚本命令改进版：
+
+bash <(curl -Lso- https://git.io/Jlkmw)
+2、如果缺少tar解压缩，请安装tar
+
+3、使用改版的情况下运行
+
+speedtest-cli/speedtest -p no -s 3633 --accept-license
+
 ```
 
 UnixBench
